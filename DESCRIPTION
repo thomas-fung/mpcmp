@@ -2,6 +2,7 @@ Package: mpcmp
 Type: Package
 Title: Mean-parametrized Conway-Maxwell Poisson (COM-Poisson) Regression
 Version: 1.0.0
+Date: 2018-10-30
 Authors@R: as.person(c(
   "Thomas Fung <thomas.fung@mq.edu.au> [aut, cre]",
   "Aya Alwan <aya.alwan@mq.edu.au> [aut]",
