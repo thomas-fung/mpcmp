@@ -2,7 +2,7 @@
 % Please edit documentation in R/comp_distribution.R
 \name{dcomp}
 \alias{dcomp}
-\title{The Conway-Maxwell Poisson (COMP) Distribution.}
+\title{The Conway-Maxwell Poisson (COM-Poisson) Distribution.}
 \usage{
 dcomp(x, mu, nu = 1, lambda, log.p=FALSE, lambdalb = 1e-10, 
       lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)

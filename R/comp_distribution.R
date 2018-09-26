@@ -1,4 +1,4 @@
-#' The Conway-Maxwell Poisson (COMP) Distribution.
+#' The Conway-Maxwell Poisson (COM-Poisson) Distribution.
 #' 
 #' Density, distribution function, quantile function and random generation for the 
 #' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}

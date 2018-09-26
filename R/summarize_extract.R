@@ -1,4 +1,24 @@
+#' Extract COMP Model Residuals
+#' 
+#' \code{residuals} is a generic function which extracts model residuals from objects 
+#' returned by the modelling function \code{glm.comp}. \code{resid} is an alias for 
+#' \code{residuals} . 
+#' 
+#' @usage 
+#' ## S3 method for class 'cmp' 
+#' residuals(object, type = c("deviance","pearson","response"), ...)
+#' 
+#' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
+#' @param type the \code{type} of residuals which should be returned. The alternatives are:
+#' 'deviance' (default), 'pearson' and 'response'. Can be abbreviated. 
+#' @param ... other arguments passed to or from other methods  (currently unused).
 
+#' @return 
+#' Residuals extracted from the object \code{object}.
+#' 
+#' @seealso 
+#' \code{\link{coefficients.cmp}}, \code{\link{fitted.values.cmp}}, \code{\link{glm.cmp}}
+#' 
 residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...){
   type <- match.arg(type)
   y <- object$y
@@ -13,11 +33,15 @@ residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...
 }
 
 logLik.cmp <- function(x,...)
-{ #cat("\n'log Lik. '", x$maxl, "(df=", length(x$coefficients),")")
-  out <- x$maxl
+{ out <- x$maxl
   attr(out, "df") <- length(x$coefficients)+1
   class(out) <- "logLik.cmp"
   return(out)}
+
+print.logLik.cmp <- function(x,...){
+  cat("'log Lik. ' ", x, " (df=", attr(x,"df"),")",sep="")
+}
+
 
 nobs.cmp <- function(x,...)
 { return(length(x$nobs))}
@@ -28,8 +52,14 @@ AIC.cmp = function(x,..., k =2){
   return(aic)
 }
 
-print.logLik.cmp <- function(x,...){
-  cat("'log Lik. ' ", x, " (df=", attr(x,"df"),")",sep="")
+model.frame <- function(formula, ...) 
+{
+  if (is.null(formula$offset)) {
+    as.data.frame(cbind(y = formula$y, formula$X))
+  }
+  else {
+    as.data.frame(cbind(y = formula$y, formula$X, `(offset)` = formula$offset))
+  }
 }
 
 
