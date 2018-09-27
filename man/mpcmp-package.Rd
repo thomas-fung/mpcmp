@@ -3,6 +3,7 @@
 \docType{package}
 \name{mpcmp-package}
 \alias{mpcmp-package}
+\alias{mpcmp}
 \title{Mean-parametrized Conway-Maxwell Poisson Regression}
 \description{
 Mean-parametrized Conway-Maxwell Poisson Regression

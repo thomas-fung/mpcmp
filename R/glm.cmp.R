@@ -30,9 +30,9 @@
 #' The function \code{plot} (i.e., \code{\link{plot.cmp}}) can be used to produce a range 
 #' of diagnostic plots. 
 #' 
-#' The generic assessor functions \code{coefficients} (i.e., \code{\link{coefficients.cmp}}), 
+#' The generic assessor functions \code{coefficients} (i.e., \code{\link{coefficients}}), 
 #' \code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-#' \code{fitted.values} (i.e., \code{\link{fitted.values.cmp}}), 
+#' \code{fitted.values} (i.e., \code{\link{fitted.values}}), 
 #' \code{nobs} (i.e., \code{\link{nobs.cmp}}), 
 #' \code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
 #' \code{residuals} (i.e., \code{\link{residuals.cmp}}) 
@@ -42,8 +42,10 @@
 #' An object class 'glm.cmp' is a list containing at least the following components:
 #'
 #' \item{coefficients}{a named vector of coefficients}
-#' \item{residuals}{the *response* residuals (i.e., observed-fitted)}
-#' \item{fitted values}{the fitted mean values}
+#' \item{se_beta}{approximate standard errors (using observed rather than expected 
+#' information) for coefficients}
+#' \item{residuals}{the \emph{response} residuals (i.e., observed-fitted)}
+#' \item{fitted.values}{the fitted mean values}
 #' \item{rank}{the numeric rank of the fitted linear model}
 #' \item{linear.predictors}{the linear fit on log scale}
 #' \item{df.residuals}{the residuals degrees of freedom}
@@ -67,7 +69,7 @@
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #'   
 #' @seealso 
-#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.values.cmp}} 
+#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
 #' and \code{\link{residuals.cmp}}.
 #' 
 #' @examples
@@ -79,10 +81,10 @@
 #' 
 #' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 #' data(takeoverbids)
-#' M.takeover = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
 #' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' M.takeover
-#' summary(M.takeover)
+#' M.bids
+#' summary(M.bids)
 
 
 glm.cmp <- function(formula, data, offset = NULL,

@@ -1,6 +1,7 @@
 #' Mean-parametrized Conway-Maxwell Poisson Regression
 #'
 #' @name mpcmp-package
+#' @aliases mpcmp
 #' @docType package
 #' @title Mean-parametrized Conway-Maxwell Poisson Regression
 #' @keywords package
@@ -35,62 +36,58 @@ NULL
 #' @usage 
 #' data(attendance)
 #' M.attendance = glm.cmp(daysabs ~ gender+math+prog, data=attendance)
+#' M.attendance
 #' @source \url{http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta}
 NULL
 
 #' Takeover Bids data set
 #'
-#' This data set gives gives the number of bids received by 126 US firms that were successful
+#' This data set gives the number of bids received by 126 US firms that were successful
 #' targets of tender offers during the period 1978--1985, along with some explanatory 
 #' variables on the defensive actions taken by management of target firm, firm-specific
-#' characteristics and any intervention taken by federal regulators. The \code{takeoverbids} 
-#' data frame has 126 observations on 14 variables. 
+#' characteristics and intervention taken by federal regulators. The \code{takeoverbids} 
+#' data frame has 126 observations on 14 variables. The descriptions below are taken from
+#'  Sáez-Castillo and Conde-Sánchez (2013).
 #' 
 #' 
 #' @name takeoverbids
 #' @format A data frame with 126 observations on 14 variables.
 #' \describe{
 #' \item{bidprem}{bid price divided by price 14 working days before bid}
-#' \item{docno}{doc no.}
+#' \item{docno}{doc no}
 #' \item{finrest}{indicator variable for proposed change in ownership structure}
 #' \item{insthold}{percentage of stock held by institutions}
 #' \item{leglrest}{indicator variable for legal defence by lawsuit}
-#' \item{numbids}{number of bids received}
+#' \item{numbids}{number of bids recevied after the initial bid}
 #' \item{obs}{Identifier}
 #' \item{rearest}{indicator variable for proposed changes in asset structure}
 #' \item{regulartn}{indicator variable for Department of Justice intervention}
 #' \item{size}{total book value of assets in billions of dollars}
 #' \item{takeover}{Indicator. 1 if the company was being taken over}
-#' \item{weeks}{}
+#' \item{weeks}{time in weeks between the initial and final offers}
 #' \item{whtknght}{indicator varible for management invitation 
 #' for friendly third-party bid}
+#' \item{sizesq}{book value squared}
 #' }
-#' @details Macropods defaecate randomly as they forage and scat 
-#'   (faecal pellet) surveys are a reliable method for detecting the
-#'   presence of rock-wallabies and other macropods. 
-#'   Scats are used as an indication of spatial foraging patterns 
-#'   of rock-wallabies and sympatric macropods. Scats deposited while
-#'   foraging were not confused with scats deposited while
-#'   resting because the daytime refuge areas of rock-wallabies
-#'   were known in detail for each colony and no samples were
-#'   taken from those areas. Each of the 200 sites were 
-#'   examined separately to
-#'   account for the different levels of predation risk and the
-#'   abundance of rock-wallabies.
 #' @docType data
 #' @keywords datasets
-#' @usage data(wallabies)
+#' @usage 
+#' data(takeoverbids)
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids
 #' @references 
-#'    Tuft KD, Crowther MS, Connell K, Mueller S and McArthur C (2011), 
-#'    Predation risk and competitive interactions affect foraging of 
-#'    an endangered refuge-dependent herbivore. Animal Conservation, 
-#'    14: 447-457. doi: 10.1111/j.1469-1795.2011.00446.x
-#' @examples
-#' data(wallabies)
-#' wdat = data.frame(subset(wallabies,select=-c(lat,long)), 
-#'   EaD = wallabies$edible*wallabies$distance,
-#'   EaS = wallabies$edible*wallabies$shelter,
-#'   DaS = wallabies$distance*wallabies$shelter)
-#' M1 = glm(rw~., family = binomial(link = "logit"), data = wdat)
+#' Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series 
+#' Expansions: with Applications. \emph{Journal of Applied Econometrics} \bold{12} 203--223.
+#' 
+#' Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{http://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.
+#' 
+#' Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1–6.1.
+#' 
+#' Jaggia, S. and Thosar, S. (1993). Multiple Bids as a Consequence of Target Management
+#' Resistance \emph{Review of Quantitative Finance and Accounting} \bold{3}, 447--457.
+#' 
+#' @source
+#' Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/jae/}.
 NULL
 

@@ -3,15 +3,14 @@
 #' Density, distribution function, quantile function and random generation for the 
 #' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
 #'       
-#' @param x vector of quantiles 
-#' @param q vector of quantiles 
+#' @param x,q vector of quantiles 
 #' @param p vector of probabilites 
 #' @param n number of observations. If \code{length(n)} > 1, the length is taken to 
 #' be the number required.
 #' @param lambda an alternative way than mu to parametrized the distribution. 
 #' Must be strictly positive
 #' @param mu,nu mean and dispersion parameters. Must be strictly positive.
-#' @param log,log.p logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
+#' @param log.p logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
 #' \eqn{log(p)}.
 #' @param lower.tail logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
 #' otherwise, \eqn{P(X>x)}.
@@ -41,7 +40,7 @@
 NULL
 
 #' @rdname COM_Poisson_Distribution
-dcomp <- function(x, mu, nu = 1, lambda, log = FALSE, lambdalb = 1e-10, 
+dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
                   lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
   # mu and lambda are linked via "exact" or "approx" mean calculation
@@ -93,7 +92,7 @@ dcomp <- function(x, mu, nu = 1, lambda, log = FALSE, lambdalb = 1e-10,
       }
     }
   }
-  if (log){ pmf = log(pmf)}
+  if (log.p){ pmf = log(pmf)}
   if (warn){warning("NaN(s) produced")}
   return(pmf)
 }

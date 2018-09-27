@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarize_extract.R
 \name{residuals.cmp}
 \alias{residuals.cmp}
-\title{Extract COMP Model Residuals}
+\title{Extract COM-Poisson Model Residuals}
 \usage{
 ## S3 method for class 'cmp' 
 residuals(object, type = c("deviance","pearson","response"), ...)
@@ -23,6 +23,12 @@ Residuals extracted from the object \code{object}.
 returned by the modelling function \code{glm.comp}. \code{resid} is an alias for 
 \code{residuals} .
 }
+\examples{
+data(takeoverbids)
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
++ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+residuals(M.bids)
+}
 \seealso{
-\code{\link{coefficients.cmp}}, \code{\link{fitted.values.cmp}}, \code{\link{glm.cmp}}
+\code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 }

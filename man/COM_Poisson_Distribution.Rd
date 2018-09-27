@@ -23,12 +23,15 @@ rcomp(n, mu, nu = 1, lambda, lambdalb = 1e-10, lambdaub = 1200,
   maxlambdaiter = 1000, tol = 1e-06)
 }
 \arguments{
-\item{x}{vector of quantiles}
+\item{x, q}{vector of quantiles}
 
 \item{mu, nu}{mean and dispersion parameters. Must be strictly positive.}
 
 \item{lambda}{an alternative way than mu to parametrized the distribution. 
 Must be strictly positive}
+
+\item{log.p}{logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
+\eqn{log(p)}.}
 
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s).}
@@ -40,8 +43,6 @@ for lambda(s).}
 mean constraint if the absolute difference between the calculated mean and mu 
 is less than tol.}
 
-\item{q}{vector of quantiles}
-
 \item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
 otherwise, \eqn{P(X>x)}.}
 
@@ -49,9 +50,6 @@ otherwise, \eqn{P(X>x)}.}
 
 \item{n}{number of observations. If \code{length(n)} > 1, the length is taken to 
 be the number required.}
-
-\item{log, log.p}{logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
-\eqn{log(p)}.}
 }
 \value{
 \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 

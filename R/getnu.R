@@ -1,3 +1,22 @@
+#' Parameter Generator
+#' 
+#' A function that use the arguments of a \code{glm.cmp} call to generate a better initial 
+#' \code{nu} estimate. 
+#' 
+#' @param param numeric vector: the model coefficients & the current value of \code{nu}. 
+#' It is assumed that \code{nu} is in the last position of \code{param}.
+#' @param y numeric vector: response variable
+#' @param xx numeric matrix: the explanatory variables
+#' @param offset numeric vector: a vector of lenght equal to the number of cases
+#' @param llstart numeric: current log-likelihood value
+#' @param fsscale numeric: a scaling factor (generally >1) for the 
+#' relaxed fisher scoring algorithm
+#' @return 
+#' List containing the following:
+#' \item{param}{the model coefficients & the updated \code{nu}}
+#' \item{maxl}{the updated log-likelihood}
+#' \item{fsscale}{the final scaling factor used}
+#' 
 getnu <- function(param, y, xx , offset, llstart, fsscale = 1){
   n <- length(y) # sample size
   q <- ncol(xx)  # number of covariates

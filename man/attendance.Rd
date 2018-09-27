@@ -18,6 +18,7 @@
 \usage{
 data(attendance)
 M.attendance = glm.cmp(daysabs ~ gender+math+prog, data=attendance)
+M.attendance
 }
 \description{
 This data set gives the number of days absent 

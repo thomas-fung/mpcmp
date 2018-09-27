@@ -5,22 +5,22 @@
 #' the uniform Q-Q plot for PIT.
 #' 
 #' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
-#' @param bins numeric: the number of bins shown in the PIT histogram or the 
+#' @param bins numeric; the number of bins shown in the PIT histogram or the 
 #' PIT Q-Q plot. 
-#' @param line logical: if \code{TRUE} (default), the line for displaying the standard 
+#' @param line logical; if \code{TRUE} (default), the line for displaying the standard 
 #' uniform distribution will be shown for the purpose of comparison. 
 #' @param colLine	 numeric or charater: the colour of the line for comparison 
 #' in PIT histogram.
-#' @param lwdLine numeric: the line widths for the comparison line in PIT histogram.
-#' @param colHist numeric or character: the colour of the histogram for PIT.
-#' @param col1 numeric or character: the colour of the sample uniform Q-Q plot in PIT.
-#' @param col2 numeric or character: the colour of the theoretical uniform Q-Q plot in PIT.
+#' @param lwdLine numeric; the line widths for the comparison line in PIT histogram.
+#' @param colHist numeric or character; the colour of the histogram for PIT.
+#' @param col1 numeric or character; the colour of the sample uniform Q-Q plot in PIT.
+#' @param col2 numeric or character; the colour of the theoretical uniform Q-Q plot in PIT.
 #' @param lty1 integer or character string: the line types for the sample 
 #' uniform Q-Q plot in PIT, see par(lty = .).
 #' @param lty2 an integer or character string: the line types for the theoretical uniform 
 #' Q-Q plot in PIT, see par(lty = .).
-#' @param type 1-character string: the type of plot for the sample uniform Q-Q plot in PIT.
-#' @param main character string: a main title for the plot. 
+#' @param type 1-character string; the type of plot for the sample uniform Q-Q plot in PIT.
+#' @param main character string; a main title for the plot. 
 #' @param ... other arguments passed to plot.default and plot.ts.
 #' @details 
 #' The histogram and the Q-Q plot are used to compare the fitted profile with a standard
@@ -114,7 +114,25 @@ compnormRandPIT <- function (object) {
   list(rt = rt, rtMid = rtMid)
 }
 
-
+#' Plot Diagnostic for a \code{glm.cmp} Object
+#' 
+#' Eight plots (selectable by which) are currently available: 
+#' a plot of deviance residuals against fitted values, 
+#' a (non-randomized) PIT histogram, 
+#' a uniform Q-Q plot for (non-randomzied) PIT, 
+#' a histogram of the normal randomized residuals, 
+#' a Q-Q plot of the normal randomized residuals, 
+#' a Scale-Location plot of sqrt(| residuals |) against fitted values
+#' a plot of Cook's distances versus row lobels
+#' a plot of pearson residauls against leverages. 
+#' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
+#' 
+#' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
+#' @param which if a subset of plots is required, specify a subset of the numbers 1:8. 
+#' See 'Details' below. 
+#' @param ask logical; if \code{TRUE}, the user is asked before each plot. 
+#' @param bins numeric; the number of bins shown in the PIT histogram or the 
+#' PIT Q-Q plot. 
 plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<length(which)) && dev.interactive(), bins=10){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
