@@ -4,12 +4,6 @@
 #' distributional assumption of the fitted CMP model: the PIT histogram, and 
 #' the uniform Q-Q plot for PIT.
 #' 
-#' @usage 
-#' histcompPIT(object, bins = 10, line = TRUE, colLine = "red", colHist = "royal blue", 
-#' lwdLine = 2, main = NULL, ...)
-#' qqcompPIT(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1, 
-#' lty2 = 2, type = "l", main = NULL, ...)
-#' 
 #' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
 #' @param bins numeric: the number of bins shown in the PIT histogram or the 
 #' PIT Q-Q plot. 
@@ -37,7 +31,10 @@
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 #' @examples 
 #' For examples see example(plot.cmp)
+#' @name PIT
+NULL
 
+#' @rdname PIT
 histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHist = "royal blue", lwdLine = 2, main = NULL, ...)
 {
   PIT <- compPIT(object, bins = bins)$PIT
@@ -63,47 +60,7 @@ histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHis
   box()
 }
 
-#' PIT Plots for a CMP Object
-#' 
-#' Two plots for the non-randomized PIT are currently available for checking the 
-#' distributional assumption of the fitted CMP model: the PIT histogram, and 
-#' the uniform Q-Q plot for PIT.
-#' 
-#' @usage 
-#' histcompPIT(object, bins = 10, line = TRUE, colLine = "red", colHist = "royal blue", 
-#' lwdLine = 2, main = NULL, ...)
-#' qqcompPIT(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1, 
-#' lty2 = 2, type = "l", main = NULL, ...)
-#' 
-#' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
-#' @param bins numeric: the number of bins shown in the PIT histogram or the 
-#' PIT Q-Q plot. 
-#' @param line logical: if \code{TRUE} (default), the line for displaying the standard 
-#' uniform distribution will be shown for the purpose of comparison. 
-#' @param colLine	 numeric or charater: the colour of the line for comparison 
-#' in PIT histogram.
-#' @param lwdLine numeric: the line widths for the comparison line in PIT histogram.
-#' @param colHist numeric or character: the colour of the histogram for PIT.
-#' @param col1 numeric or character: the colour of the sample uniform Q-Q plot in PIT.
-#' @param col2 numeric or character: the colour of the theoretical uniform Q-Q plot in PIT.
-#' @param lty1 integer or character string: the line types for the sample 
-#' uniform Q-Q plot in PIT, see par(lty = .).
-#' @param lty2 an integer or character string: the line types for the theoretical uniform 
-#' Q-Q plot in PIT, see par(lty = .).
-#' @param type 1-character string: the type of plot for the sample uniform Q-Q plot in PIT.
-#' @param main character string: a main title for the plot. 
-#' @param ... other arguments passed to plot.default and plot.ts.
-#' @details 
-#' The histogram and the Q-Q plot are used to compare the fitted profile with a standard
-#' uniform distribution. If they match relatively well, it means the CMP distribution 
-#' is appropriate for the data. 
-#' @references 
-#' Czado, C., Gneiting, T. and Held, L. (2009) Predictive model assessment
-#' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
-#' Jung, R.C and Tremayne, A.R (2011) Useful models for time series of counts or simply wrong ones? \emph{Advances in Statistical Analysis}, \strong{95}, 59–-91.
-#' @examples 
-#' For examples see example(plot.cmp)
-
+#' @rdname PIT
 qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
                       lty2 = 2, type = "l", main = NULL, ...){
   dummy.variable <- seq(0, 1, by = 1/bins)
@@ -117,37 +74,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
   invisible()
 }
 
-#' Non-randomized Probability Integral Transform
-#' 
-#' Functions to produce the non-randomized probability integral transform (PIT) to check the
-#' adequacy of the CMP distribution. 
-#' @usage 
-#' compPIT(object, bins = 10)
-#' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
-#' @param bins numeric: the number of bins used in the PIT. 
-#' @details 
-#' These functions are used for the assessment of predictive distributions 
-#' in discrete data. They obtain the predictive probabilities and the probability 
-#' integral transformation for a fitted CMP model.
-#' @return
-#' compPredProb returns a list with values:
-#' \item{upper}{the predictive cumulative probabilities used as the upper bound for computing the non-randomized PIT.}
-#' \item{lower}{the predictive cumulative probabilities used as the lower bound for computing the non-randomized PIT.}
-#' 
-#' compPIT returns a list with values:
-#' \item{upper}{the predictive cumulative probabilities used as the upper bound for 
-#' computing the non-randomized PIT.}
-#' \item{lower}{the predictive cumulative probabilities used as the lower bound for 
-#' computing the non-randomized PIT.}
-#' \item{conditionalPIT}{the conditional probability integral transformation 
-#' given the observed counts.}
-#' \item{PIT}{the probability integral transformation.}
-#' @references 
-#' Czado, C., Gneiting, T. and Held, L. (2009) Predictive model assessment
-#' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
-#' Jung, R.C and Tremayne, A.R (2011) Useful models for time series of counts or simply wrong ones? \emph{Advances in Statistical Analysis}, \strong{95}, 59–-91.
-#' @examples 
-#' 
+
 compPIT <- function (object, bins = 10)
 {
   dummy.variable <- seq(0, 1, by = 1/bins)
