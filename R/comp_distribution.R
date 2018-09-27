@@ -47,7 +47,10 @@
 #' p <- (1:9)/10
 #' qcomp(p, mu = 2, nu = 0.8)
 #' rcomp(10, mu = 2, nu = 0.7)
+#' @name CompDist
+NULL
 
+#' @rdname CompDist
 dcomp <- function(x, mu, nu = 1, lambda,  log.p=FALSE,
                   lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu

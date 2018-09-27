@@ -73,13 +73,14 @@ generalized linear model with a log-link by using Fisher Scoring iteration.
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
 data(attendance)
-M.attendance = glm.cmp(y~., data=attendance)
+M.attendance = glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attehdance
 summary(M.attendance)
 
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
-data(takeover)
-M.takeover = glm.cmp(numbids~., data=takeover)
+data(takeoverbids)
+M.takeover = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
++ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 M.takeover
 summary(M.takeover)
 }

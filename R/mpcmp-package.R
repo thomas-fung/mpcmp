@@ -17,10 +17,11 @@ NULL
 #' This data set gives the number of days absent 
 #' from high school and the gender, maths score (standardized score out of 100) and 
 #' academic programme (‘General’, ‘Academic’ and ‘Vocational’) of 314 students 
-#' sampled from two urban high schools.
+#' sampled from two urban high schools. The attendance data frame has 314 observations 
+#' on 5 variables.
 #'
 #' @name attendance
-#' @format A data frame 126 observations on 14 variables.
+#' @format A data frame with 314 observations on 5 variables.
 #' \describe{
 #' \item{id}{Identifier}
 #' \item{gender}{gender}
@@ -33,30 +34,36 @@ NULL
 #' @keywords datasets
 #' @usage 
 #' data(attendance)
-#' M.attendance = glm.cmp(daysbs~ gender+math+prog, data=attendance)
+#' M.attendance = glm.cmp(daysabs ~ gender+math+prog, data=attendance)
 #' @source \url{http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta}
 NULL
 
 #' Takeover Bids data set
 #'
-#' On Chalkers Top in the Warrumbungles (NSW, Australia) 200 evenly distributed
-#' one metre squared plots were surveyed. Plots were placed at a density
-#' of 7-13 per hectare. The presence or absence of fresh
-#' (<1 month old) scats of rock-wallabies was recorded for each plot
-#' along with location and a selection of predictor variables.
-#'
-#' @name wallabies
-#' @format A data frame with 200 observations on 9 variables.
+#' This data set gives gives the number of bids received by 126 US firms that were successful
+#' targets of tender offers during the period 1978--1985, along with some explanatory 
+#' variables on the defensive actions taken by management of target firm, firm-specific
+#' characteristics and any intervention taken by federal regulators. The \code{takeoverbids} 
+#' data frame has 126 observations on 14 variables. 
+#' 
+#' 
+#' @name takeoverbids
+#' @format A data frame with 126 observations on 14 variables.
 #' \describe{
-#' \item{rw}{Presence of rock-wallaby scat}
-#' \item{edible}{Percentage cover of edible vegetation}
-#' \item{inedible}{Percentage cover of inedible vegetation}
-#' \item{canopy}{Percentage canopy cover}
-#' \item{distance}{Distance from diurnal refuge}
-#' \item{shelter}{Whether or not a plot occurred within a shelter point (large
-#'                rock or boulder pile)}
-#' \item{lat}{Latitude of the plot location}
-#' \item{long}{Longitude of the plot location}
+#' \item{bidprem}{bid price divided by price 14 working days before bid}
+#' \item{docno}{doc no.}
+#' \item{finrest}{indicator variable for proposed change in ownership structure}
+#' \item{insthold}{percentage of stock held by institutions}
+#' \item{leglrest}{indicator variable for legal defence by lawsuit}
+#' \item{numbids}{number of bids received}
+#' \item{obs}{Identifier}
+#' \item{rearest}{indicator variable for proposed changes in asset structure}
+#' \item{regulartn}{indicator variable for Department of Justice intervention}
+#' \item{size}{total book value of assets in billions of dollars}
+#' \item{takeover}{Indicator. 1 if the company was being taken over}
+#' \item{weeks}{}
+#' \item{whtknght}{indicator varible for management invitation 
+#' for friendly third-party bid}
 #' }
 #' @details Macropods defaecate randomly as they forage and scat 
 #'   (faecal pellet) surveys are a reliable method for detecting the

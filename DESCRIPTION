@@ -9,12 +9,15 @@ Authors@R: as.person(c(
   "Justin Wishart <justin.wishart@mq.edu.au> [aut]",
   "Alan Huang <alan.huang@uq.edu.au> [aut]"
   ))
-URL: https://github.com/thomas-fung/mpcmp
-BugReports: https//github.com/thomas-fung/mpcmp
 Description: This package provides a collection of functions for estimation, testing 
         and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson 
 	(COM-Poisson) regression model. 
 License: GPL-2 | GPL-3
+Imports:
+    graphics,
+    stats
+URL: https://github.com/thomas-fung/mpcmp
+BugReports: https//github.com/thomas-fung/mpcmp
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
