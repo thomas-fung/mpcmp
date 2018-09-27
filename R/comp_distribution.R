@@ -2,16 +2,6 @@
 #' 
 #' Density, distribution function, quantile function and random generation for the 
 #' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
-#' 
-#' @usage 
-#' dcomp(x, mu, nu = 1, lambda, log.p=FALSE, lambdalb = 1e-10, 
-#'       lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' pcomp(q, mu, nu = 1, lambda, lower.tail=TRUE, log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' qcomp(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' rcomp(n, mu, nu=1, lambda, lambdalb = 1e-10, lambdaub = 1200, 
-#'       maxlambdaiter = 1e3, tol = 1e-6)
 #'       
 #' @param x vector of quantiles 
 #' @param q vector of quantiles 
@@ -47,9 +37,12 @@
 #' p <- (1:9)/10
 #' qcomp(p, mu = 2, nu = 0.8)
 #' rcomp(10, mu = 2, nu = 0.7)
+#' @name COM_Poisson_Distribution
+NULL
 
-dcomp <- function(x, mu, nu = 1, lambda,  log.p=FALSE,
-                  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+#' @rdname COM_Poisson_Distribution
+dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
+                  lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
   # mu and lambda are linked via "exact" or "approx" mean calculation
   # x, mu, nu are recycled to match the length of each other.
@@ -105,57 +98,8 @@ dcomp <- function(x, mu, nu = 1, lambda,  log.p=FALSE,
   return(pmf)
 }
 
-#' The Conway-Maxwell Poisson (COMP) Distribution.
-#' 
-#' Density, distribution function, quantile function and random generation for the 
-#' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
-#' 
-#' @usage 
-#' dcomp(x, mu, nu = 1, lambda, log.p=FALSE, lambdalb = 1e-10, 
-#'       lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' pcomp(q, mu, nu = 1, lambda, lower.tail=TRUE, log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' qcomp(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' rcomp(n, mu, nu=1, lambda, lambdalb = 1e-10, lambdaub = 1200, 
-#'       maxlambdaiter = 1e3, tol = 1e-6)
-#'       
-#' @param x vector of quantiles 
-#' @param q vector of quantiles 
-#' @param p vector of probabilites 
-#' @param n number of observations. If \code{length(n)} > 1, the length is taken to 
-#' be the number required.
-#' @param lambda an alternative way than mu to parametrized the distribution. 
-#' Must be strictly positive
-#' @param mu,nu mean and dispersion parameters. Must be strictly positive.
-#' @param log,log.p logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
-#' \eqn{log(p)}.
-#' @param lower.tail logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
-#' otherwise, \eqn{P(X>x)}.
-#' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
-#' searched for lambda(s). 
-#' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve 
-#' for lambda(s).
-#' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
-#' mean constraint if the absolute difference between the calculated mean and mu 
-#' is less than tol.
-#' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
-#' 
-#' Invalid arguemnts will result in return value \code{NaN}, with a warning.
-#' 
-#' The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
-#' of the lengths of the numerical arguments for the other functions.
-#' 
-#' The numerical arguments other than \code{n} are recycled to the length of the results. 
-#' Only the first arugment of the logical arguments are used. 
-#' @examples 
-#' dcomp(0:5, mu = 2, nu = 1.2)
-#' pcomp(5, mu=2, nu =1.2)
-#' p <- (1:9)/10
-#' qcomp(p, mu = 2, nu = 0.8)
-#' rcomp(10, mu = 2, nu = 0.7)
-#' 
-pcomp <- function(q, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE,
+#' @rdname COM_Poisson_Distribution
+pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
                   lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
@@ -207,58 +151,8 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE,
   return(cdf)
 }
 
-#' The Conway-Maxwell Poisson (COMP) Distribution.
-#' 
-#' Density, distribution function, quantile function and random generation for the 
-#' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
-#' 
-#' @usage 
-#' dcomp(x, mu, nu = 1, lambda, log.p=FALSE, lambdalb = 1e-10, 
-#'       lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' pcomp(q, mu, nu = 1, lambda, lower.tail=TRUE, log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' qcomp(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' rcomp(n, mu, nu=1, lambda, lambdalb = 1e-10, lambdaub = 1200, 
-#'       maxlambdaiter = 1e3, tol = 1e-6)
-#'       
-#' @param x vector of quantiles 
-#' @param q vector of quantiles 
-#' @param p vector of probabilites 
-#' @param n number of observations. If \code{length(n)} > 1, the length is taken to 
-#' be the number required.
-#' @param lambda an alternative way than mu to parametrized the distribution. 
-#' Must be strictly positive
-#' @param mu,nu mean and dispersion parameters. Must be strictly positive.
-#' @param log,log.p logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
-#' \eqn{log(p)}.
-#' @param lower.tail logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
-#' otherwise, \eqn{P(X>x)}.
-#' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
-#' searched for lambda(s). 
-#' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve 
-#' for lambda(s).
-#' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
-#' mean constraint if the absolute difference between the calculated mean and mu 
-#' is less than tol.
-#' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
-#' 
-#' Invalid arguemnts will result in return value \code{NaN}, with a warning.
-#' 
-#' The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
-#' of the lengths of the numerical arguments for the other functions.
-#' 
-#' The numerical arguments other than \code{n} are recycled to the length of the results. 
-#' Only the first arugment of the logical arguments are used. 
-#' @examples 
-#' dcomp(0:5, mu = 2, nu = 1.2)
-#' pcomp(5, mu=2, nu =1.2)
-#' p <- (1:9)/10
-#' qcomp(p, mu = 2, nu = 0.8)
-#' rcomp(10, mu = 2, nu = 0.7)
-#' 
-#' 
-qcomp <- function(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE,
+#' @rdname COM_Poisson_Distribution
+qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
                   lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
@@ -311,59 +205,9 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE,
   return(q)
 }
 
-#' The Conway-Maxwell Poisson (COMP) Distribution.
-#' 
-#' Density, distribution function, quantile function and random generation for the 
-#' Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
-#' 
-#' @usage 
-#' dcomp(x, mu, nu = 1, lambda, log.p=FALSE, lambdalb = 1e-10, 
-#'       lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' pcomp(q, mu, nu = 1, lambda, lower.tail=TRUE, log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' qcomp(p, mu, nu = 1, lambda, lower.tail=TRUE,log.p=FALSE, 
-#'       lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6)
-#' rcomp(n, mu, nu=1, lambda, lambdalb = 1e-10, lambdaub = 1200, 
-#'       maxlambdaiter = 1e3, tol = 1e-6)
-#'       
-#' @param x vector of quantiles 
-#' @param q vector of quantiles 
-#' @param p vector of probabilites 
-#' @param n number of observations. If \code{length(n)} > 1, the length is taken to 
-#' be the number required.
-#' @param lambda an alternative way than mu to parametrized the distribution. 
-#' Must be strictly positive
-#' @param mu,nu mean and dispersion parameters. Must be strictly positive.
-#' @param log,log.p logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
-#' \eqn{log(p)}.
-#' @param lower.tail logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
-#' otherwise, \eqn{P(X>x)}.
-#' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
-#' searched for lambda(s). 
-#' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve 
-#' for lambda(s).
-#' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
-#' mean constraint if the absolute difference between the calculated mean and mu 
-#' is less than tol.
-#' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
-#' 
-#' Invalid arguemnts will result in return value \code{NaN}, with a warning.
-#' 
-#' The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
-#' of the lengths of the numerical arguments for the other functions.
-#' 
-#' The numerical arguments other than \code{n} are recycled to the length of the results. 
-#' Only the first arugment of the logical arguments are used. 
-#' @examples 
-#' dcomp(0:5, mu = 2, nu = 1.2)
-#' pcomp(5, mu=2, nu =1.2)
-#' p <- (1:9)/10
-#' qcomp(p, mu = 2, nu = 0.8)
-#' rcomp(10, mu = 2, nu = 0.7)
-#' 
-#' 
-rcomp <- function(n, mu, nu=1, lambda,
-                  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+#' @rdname COM_Poisson_Distribution
+rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10, 
+                  lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # generates random deviates of CMP variables with mean mu and dispersion nu
   # test to see at least one of mu and lambda is missing
   if (length(n)>1){
