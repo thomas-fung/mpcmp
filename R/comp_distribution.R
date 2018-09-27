@@ -41,7 +41,7 @@
 NULL
 
 #' @rdname COM_Poisson_Distribution
-dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
+dcomp <- function(x, mu, nu = 1, lambda, log = FALSE, lambdalb = 1e-10, 
                   lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
   # mu and lambda are linked via "exact" or "approx" mean calculation
@@ -93,7 +93,7 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
       }
     }
   }
-  if (log.p){ pmf = log(pmf)}
+  if (log){ pmf = log(pmf)}
   if (warn){warning("NaN(s) produced")}
   return(pmf)
 }
