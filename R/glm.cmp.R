@@ -70,16 +70,17 @@
 #' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.values.cmp}} 
 #' and \code{\link{residuals.cmp}}.
 #' 
-#' @examples 
+#' @examples
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
 #' data(attendance)
-#' M.attendance = glm.cmp(y~., data=attendance)
+#' M.attendance = glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attehdance
 #' summary(M.attendance)
 #' 
 #' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
-#' data(takeover)
-#' M.takeover = glm.cmp(numbids~., data=takeover)
+#' data(takeoverbids)
+#' M.takeover = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' M.takeover
 #' summary(M.takeover)
 
@@ -93,9 +94,10 @@ glm.cmp <- function(formula, data, offset = NULL,
   if (lambdalb>=lambdaub) {
     stop("lower bound for the search of lambda must be smaller than the upper bound")
   }
-  if (missing(data))
+  if (missing(data)){
     data <- environment(formula)
-  mf <- model.frame(formula, data=data)
+  }
+  mf <- stats::model.frame(formula, data=data)
   mt <- attr(mf, "terms")
   y <- model.response(mf)
   X <- model.matrix(formula,mf)
@@ -104,20 +106,18 @@ glm.cmp <- function(formula, data, offset = NULL,
   } else {
     offset.cmp = offset
   }
+  # use poisson glm to generate initial values for betas
   M0 <- glm(y~-1+X+offset(offset.cmp), family=poisson())
   offset <- M0$offset
-  #y = as.vector(M1$y)
   n <- length(y) # sample size
-  #xx = as.matrix(X)
   q <- ncol(X)  # number of covariates
   #starting values for optimization
-  #dat = data.frame(y,xx)
   beta0 <- coef(M0)
   nu0 <- 1
   nu_lb <- 1e-10
   lambda0 <- fitted.values(M0)
   param <- c(beta0,lambda0,nu0)
-  ll_old <- -comp_mu_loglik_exact(param = param, y=y, xx= X, offset=offset)$objective
+  ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset)
   param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, fsscale=32)
   ll_new <- param_obj$maxl
   param <- param_obj$param
@@ -151,7 +151,7 @@ glm.cmp <- function(formula, data, offset = NULL,
     mu <- exp(eta+offset)
     lambda <- comp_lambdas(mu,nu)
     param <- c(beta, lambda, nu)
-    ll_new <- -comp_mu_loglik_exact(param = param, y=y, xx= X, offset= offset)$objective
+    ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset)
     halfstep <- 0
     while (ll_new < ll_old && halfstep <= 20){
       halfstep <- halfstep + 1
@@ -161,7 +161,7 @@ glm.cmp <- function(formula, data, offset = NULL,
       mu <- exp(eta+offset)
       lambda <- comp_lambdas(mu,nu)
       param <- c(beta, lambda, nu)
-      ll_new <- -comp_mu_loglik_exact(param = param, y=y, xx= X, offset= offset)$objective
+      ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset)
     }
   }
   maxl = ll_new # maximum loglikelihood achieved
