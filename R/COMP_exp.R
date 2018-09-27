@@ -154,7 +154,7 @@ comp_lambda <- function(mu, nu, type = "exact"){
     type = "exact"
   }
   #for given scale mean mu and scalar dispersion nu, solve for the scalar rate lambda
-  f <- function(x,mu,nu,type){ comp_means(x, nu, type)-mu}
+  f <- function(x,mu,nu,type){ comp_means(x, nu) - mu}
   lambda <- uniroot(f, interval = c(1e-10,1), extendInt = "yes", mu=mu,nu= nu, type=type)$root
   return(lambda)
 }
