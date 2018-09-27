@@ -32,6 +32,8 @@ residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...
   return(res)
 }
 
+
+
 logLik.cmp <- function(x,...)
 { out <- x$maxl
   attr(out, "df") <- length(x$coefficients)+1
