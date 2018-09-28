@@ -268,6 +268,7 @@ compnormRandPIT <- function (object) {
 #' 
 #' ## The plots for the non-randomzied PIT 
 #' # plot(M.bids, which = c(2,3))
+#' @export
 plot.cmp <- function(object, which=c(1L,2L,6L,8L), 
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
                      bins=10){
