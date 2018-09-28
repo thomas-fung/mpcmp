@@ -90,10 +90,12 @@
 #' and \code{\link{residuals.cmp}}.
 #' @examples 
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
+#' \dontrun{
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attendance
 #' summary(M.attendance)
+#' }
 #' 
 #' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 #' data(takeoverbids)

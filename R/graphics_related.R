@@ -204,6 +204,7 @@ compPIT <- function (object, bins = 10)
 NULL
 
 #' @rdname rPIT
+#' @export
 compnormRandPIT <- function (object) {
   temp <- compPredProb(object)
   rt <- qnorm(runif(length(temp$lower), temp$lower, temp$upper))
@@ -266,8 +267,10 @@ compnormRandPIT <- function (object) {
 #' plot(M.bids)
 #' 
 #' ## The plots for the non-randomzied PIT 
-#' plot(M.bids, which = c(2,3))
-plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<length(which)) && dev.interactive(), bins=10){
+#' # plot(M.bids, which = c(2,3))
+plot.cmp <- function(object, which=c(1L,2L,6L,8L), 
+                     ask = prod(par("mfcol")) < length(which) && dev.interactive(),
+                     bins=10){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
   # plot 3 q-q plot of non-randomized PIT
@@ -276,7 +279,7 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
   # plot 6 sclae-location plot
   # plot 7 cook's distance vs obs number
   # plot 8 std pearson resid. vs leverage
-  show <- rep(FALSE, 9)
+  show <- rep(FALSE, 8)
   show[which] <- TRUE
   if (ask) {
     oask <- devAskNewPage(TRUE)
@@ -362,6 +365,7 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
          xlim = xlim, ylim = ylim)
     abline(h = 0, v = 0, lty = 3, col = "gray")
     bound <- par("usr")
+    x <- NULL
     curve(sqrt(rk*0.5*(1-x)/x), 0.01, bound[2], add = TRUE, col = "red",lty=2)
     curve(sqrt(rk*(1-x)/x), 0.01, bound[2], add = TRUE, col = "red",lty=2)
     curve(-sqrt(rk*0.5*(1-x)/x), 0.01, bound[2], add = TRUE, col = "red",lty=2)
@@ -376,7 +380,7 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
          mgp = c(0.25, 0.25, 0), las = 2,
          tck = 0, cex.axis = 0.75, col.axis = 2)
     text(h[index.cook], std.pear[index.cook], labels=paste(index.cook), 
-                   cex = 0.7, pos = 4)
+         cex = 0.7, pos = 4)
     dev.flush()
   }
   invisible()

@@ -5,7 +5,7 @@
 \title{Plot Diagnostic for a \code{glm.cmp} Object}
 \usage{
 \method{plot}{cmp}(object, which = c(1L, 2L, 6L, 8L),
-  ask = prod(par("mfcol") < length(which)) && dev.interactive(),
+  ask = prod(par("mfcol")) < length(which) && dev.interactive(),
   bins = 10)
 }
 \arguments{
@@ -62,7 +62,7 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 plot(M.bids)
 
 ## The plots for the non-randomzied PIT 
-plot(M.bids, which = c(2,3))
+# plot(M.bids, which = c(2,3))
 }
 \seealso{
 \code{\link{compPIT}}, \code{\link{compnormRandPIT}}, \code{\link{glm.cmp}}
