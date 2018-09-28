@@ -7,6 +7,7 @@
 #' The following function approximates the corresponding mean by truncation for 
 #' the standard CMP. The lambda and nu values are recycled to match the length 
 #' of the longer one and that would determine the length of the results. 
+#' Notice that 
 #' 
 #' \code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
 #' 

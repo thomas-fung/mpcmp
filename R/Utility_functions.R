@@ -17,11 +17,27 @@ CBIND <- function(..., deparse.level = 1) {
   do.call(cbind, c(dots, deparse.level = deparse.level))
 }
 
+#' 
+#' 
+#' Take a sequence of vector, matrix or data-frame arguments and combine them by columns. 
+#' \code{CBIND} is used within the package over \code{cbind} to recycle the shorter 
+#' arguments so that their number of rows would match. 
+#' 
+#' @param x numeric; 
+#' @param tol numeric; 
+#' 
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   abs(x - round(x)) < tol
 }
 
-
+#' Calculate the Normalizing Constant for COM-Poisson distribution
+#' 
+#' A function to approximates the normalizing constant for COM-Poisson distributions
+#' via truncation. #' The standard COM-Poisson parametrization is being used here. 
+#' Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
+#' bad if the COM-Poisson has a large rate or mean. 
+#' 
+#'  @param lambda  
 Z <- function(lambda, nu){
   # approximates normalizing constant for COMP distributions
   # lambda, nu are recycled to match the length of each other.
