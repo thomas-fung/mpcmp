@@ -1,65 +1,20 @@
-CBIND <- function(..., deparse.level = 1) {
-  dots <- list(...)
-  len <- sapply(dots, length)
-  dots <- lapply(seq_along(dots),
-                 function(i, x, len) rep(x[[i]], length.out = len),
-                 x = dots, len = max(len))
-  do.call(cbind, c(dots, deparse.level = deparse.level))
-}
-
-is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
-  abs(x - round(x)) < tol
-}
-
-
-Z <- function(lambda, nu){
-  # approximates normalizing constant for COMP distributions
-  # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
-  lambda <- df[,1]
-  nu <- df[,2]
-  summax <- 100
-  termlim <- 1e-6
-  # zero vector length of same length as lambda
-  sum1 <- 0
-  for(y in 1:summax) {
-    term <- exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3){
-      if (max(term/sum1,na.rm = TRUE) < termlim) {
-        break
-      }
-    }
-    sum1 <- sum1 + term
-  }
-  return(sum1)
-}
-
-
-comp_mu_loglik <-function(param, y, xx, offset){
-  # compute negative loglikelihood for COMP-mu regression models
-  # y is a n*1 column vector
-  # xx is a n*q design matrix, including intercept
-  # offset is a column vector matching the lenght of y
-  n <- length(y)
-  q <- ncol(xx)
-  # regression coefficients
-  #beta = param(1:q)  # not needed in loglikelihood
-  lambda <- param[(q+1):(q+n)]
-  # dispersion parameter
-  nu <- param[(q+n+1)]
-  # precompute quantities used later
-  logfactorialy <- lgamma(y+1)
-  Zcall <- Z(lambda, nu)
-  meanlogfactorialy <- comp_mean_logfactorialy(lambda, nu)
-  # compute loglikelihood 
-  loglik <- sum(y*log(lambda) - nu*logfactorialy - log(Zcall))
-  # compute gradient of negative loglikelihood (not currently used)
-  #gradl <- -c(rep(0,q), y/lambda-comp_means(lambda,nu)/lambda,
-  #            sum(-logfactorialy+meanlogfactorialy))
-  return(loglik)
-}
-
-
+#' Solve for Lambda for a given pair of mu and nu
+#' 
+#' Given a pair of mu and nu, this function is used to find a lambda that can satisfy the 
+#' mean constraint with a combination of bisection and Newton-Raphson updates. The function is 
+#' also vectorized but will only update that have not converged. 
+#' 
+#' @param mu,nu mean and dispersion parameters. Must be positives. 
+#' @param lambdalb,lambdaub numeric; the lower and upper end points for the interval to be
+#' searched for lambda(s). 
+#' @param maxlambdaiter numeric; the maximum number of iterations allowed to solve 
+#' for lambda(s).
+#' @param tol numeric; the convergence threshold. A lambda is said to satisfy the 
+#' mean constraint if the absolute difference between the calculated mean and the 
+#' corresponding mu values is less than tol. 
+#' @param lambdaint numeric vector; initial gauss for lambda(s).
+#' @return 
+#' The function returns the lambda value(s) that satisfies the mean constraint(s). 
 comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
                          maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1) {
   # for given vector mean mu and vector dispersion nu, solve for the vector rate lambda

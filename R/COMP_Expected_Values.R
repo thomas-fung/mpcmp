@@ -1,14 +1,15 @@
-#' Functions to Compute Various Expected Values
+#' Functions to Compute Various Expected Values for the COM-Poisson Distribution
 #' 
-#' Functions 
-#' @param lambda,nu rate and dispersion parameters. Must be positives. 
-#' 
-#' @return 
-#' The following function approximates the corresponding mean by truncation for 
-#' the standard CMP. The lambda and nu values are recycled to match the length 
+#' Functions to approximate the various expected values for the COM-Poisson distribution
+#' via truncation.  The standard COM-Poisson parametrization is being used here. 
+#' The lambda and nu values are recycled to match the length 
 #' of the longer one and that would determine the length of the results. 
-#' Notice that 
+#' Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
+#' bad if the COM-Poisson has a large rate or mean. 
 #' 
+#' @param lambda,nu rate and dispersion parameters. Must be positives. 
+#' @return 
+
 #' \code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
 #' 
 #' \code{comp_mean_ylogfactorialy} gives the mean of \emph{ylog(Y!)}.

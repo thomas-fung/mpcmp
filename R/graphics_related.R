@@ -225,15 +225,18 @@ compnormRandPIT <- function (object) {
 #' a plot of pearson residauls against leverage. 
 #' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
 #' 
-#' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
+#' @param x an object class 'cmp' object, obtained from a call to \code{glm.cmp}
 #' @param which if a subset of plots is required, specify a subset of the numbers 1:8. 
 #' See 'Details' below. 
 #' @param ask logical; if \code{TRUE}, the user is asked before each plot. 
 #' @param bins numeric; the number of bins shown in the PIT histogram or the 
 #' PIT Q-Q plot. 
+#' @param ... other arguments passed to or from other methods (currently unused).
+#'
 #' @import stats
 #' @import graphics
 #' @import grDevices
+#' @export
 #' @details 
 #' The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
@@ -268,10 +271,10 @@ compnormRandPIT <- function (object) {
 #' 
 #' ## The plots for the non-randomzied PIT 
 #' # plot(M.bids, which = c(2,3))
-#' @export
-plot.cmp <- function(object, which=c(1L,2L,6L,8L), 
+plot.cmp <- function(x, which=c(1L,2L,6L,8L), 
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
-                     bins=10){
+                     bins=10, 
+                     ...){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
   # plot 3 q-q plot of non-randomized PIT
@@ -280,6 +283,7 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L),
   # plot 6 sclae-location plot
   # plot 7 cook's distance vs obs number
   # plot 8 std pearson resid. vs leverage
+  object <- x
   show <- rep(FALSE, 8)
   show[which] <- TRUE
   if (ask) {
