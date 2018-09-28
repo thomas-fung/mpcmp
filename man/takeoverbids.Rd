@@ -14,7 +14,7 @@
 \item{numbids}{number of bids recevied after the initial bid}
 \item{obs}{Identifier}
 \item{rearest}{indicator variable for proposed changes in asset structure}
-\item{regulartn}{indicator variable for Department of Justice intervention}
+\item{regulatn}{indicator variable for Department of Justice intervention}
 \item{size}{total book value of assets in billions of dollars}
 \item{takeover}{Indicator. 1 if the company was being taken over}
 \item{weeks}{time in weeks between the initial and final offers}
@@ -27,9 +27,6 @@ Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/ja
 }
 \usage{
 data(takeoverbids)
-M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-M.bids
 }
 \description{
 This data set gives the number of bids received by 126 US firms that were successful
@@ -38,6 +35,9 @@ variables on the defensive actions taken by management of target firm, firm-spec
 characteristics and intervention taken by federal regulators. The \code{takeoverbids} 
 data frame has 126 observations on 14 variables. The descriptions below are taken from
  Sáez-Castillo and Conde-Sánchez (2013).
+}
+\examples{
+## For examples see example(glm.cmp)
 }
 \references{
 Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series 

@@ -17,8 +17,6 @@
 }
 \usage{
 data(attendance)
-M.attendance = glm.cmp(daysabs ~ gender+math+prog, data=attendance)
-M.attendance
 }
 \description{
 This data set gives the number of days absent 
@@ -26,5 +24,8 @@ from high school and the gender, maths score (standardized score out of 100) and
 academic programme (‘General’, ‘Academic’ and ‘Vocational’) of 314 students 
 sampled from two urban high schools. The attendance data frame has 314 observations 
 on 5 variables.
+}
+\examples{
+## For examples see example(glm.cmp)
 }
 \keyword{datasets}

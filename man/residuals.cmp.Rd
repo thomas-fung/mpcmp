@@ -4,8 +4,8 @@
 \alias{residuals.cmp}
 \title{Extract COM-Poisson Model Residuals}
 \usage{
-## S3 method for class 'cmp' 
-residuals(object, type = c("deviance","pearson","response"), ...)
+\method{residuals}{cmp}(object, type = c("deviance", "pearson",
+  "response"), ...)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}
@@ -22,12 +22,6 @@ Residuals extracted from the object \code{object}.
 \code{residuals} is a generic function which extracts model residuals from objects 
 returned by the modelling function \code{glm.comp}. \code{resid} is an alias for 
 \code{residuals} .
-}
-\examples{
-data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-residuals(M.bids)
 }
 \seealso{
 \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}

@@ -47,8 +47,7 @@ Q-Q plot in PIT, see par(lty = .).}
 \description{
 Two plots for the non-randomized PIT are currently available for checking the 
 distributional assumption of the fitted CMP model: the PIT histogram, and 
-the uniform Q-Q plot for PIT. The majority of the code and descriptions are taken 
-from Dunsmuir and Scott (2015).
+the uniform Q-Q plot for PIT.
 }
 \details{
 The histogram and the Q-Q plot are used to compare the fitted profile with a standard
@@ -56,11 +55,12 @@ uniform distribution. If they match relatively well, it means the CMP distributi
 is appropriate for the data.
 }
 \examples{
-For examples see example(plot.cmp)
+## For examples see example(plot.cmp)
 }
 \references{
 Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
 Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.

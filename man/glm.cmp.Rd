@@ -37,9 +37,9 @@ and print a summary of the results.
 The function \code{plot} (i.e., \code{\link{plot.cmp}}) can be used to produce a range 
 of diagnostic plots. 
 
-The generic assessor functions \code{coefficients} (i.e., \code{\link{coefficients}}), 
+The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
 \code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-\code{fitted.values} (i.e., \code{\link{fitted.values}}), 
+\code{fitted} (i.e., \code{\link{fitted}}), 
 \code{nobs} (i.e., \code{\link{nobs.cmp}}), 
 \code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
 \code{residuals} (i.e., \code{\link{residuals.cmp}}) 
@@ -72,18 +72,35 @@ The null model will include only the intercept.}
 The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Poisson
 generalized linear model with a log-link by using Fisher Scoring iteration.
 }
+\details{
+Fit a mean parametrizied COM-Poisson regression using maximum likelihood estimation 
+via an iterative Fisher Scoring algorithm. 
+
+The COM-Poisson regression model is
+
+Y_i ~ CMP(mu_i, nu), 
+          
+where  
+   
+E(Y_i) = mu_i = exp(x_i^T beta),
+      
+and \emph{nu > 0} is the dispersion parameter. 
+
+The fitted COM-Poisson distribution is over- or under-dispersed 
+if \emph{nu < 1} and \emph{nu > 1} respectively.
+}
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
 data(attendance)
-M.attendance = glm.cmp(daysabs~ gender+math+prog, data=attendance)
-M.attehdance
+M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance
 summary(M.attendance)
 
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 data(takeoverbids)
-M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-M.bids
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+    M.bids
 summary(M.bids)
 }
 \references{

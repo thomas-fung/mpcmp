@@ -4,25 +4,16 @@
 #' returned by the modelling function \code{glm.comp}. \code{resid} is an alias for 
 #' \code{residuals} . 
 #' 
-#' @usage 
-#' ## S3 method for class 'cmp' 
-#' residuals(object, type = c("deviance","pearson","response"), ...)
-#' 
 #' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param type the \code{type} of residuals which should be returned. The alternatives are:
 #' 'deviance' (default), 'pearson' and 'response'. Can be abbreviated. 
 #' @param ... other arguments passed to or from other methods  (currently unused).
-
+#' 
 #' @return 
 #' Residuals extracted from the object \code{object}.
 #' 
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
-#' @examples 
-#' data(takeoverbids)
-#' #' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' residuals(M.bids)
 residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...){
   type <- match.arg(type)
   y <- object$y
@@ -46,12 +37,6 @@ residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 #' 
-#' @examples 
-#' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' logLik(M.bids)
-
 #' @name logLik.cmp
 logLik.cmp <- function(object,...)
 { out <- object$maxl
@@ -74,11 +59,6 @@ print.logLik.cmp <- function(x,...){
 #' The number of observations extracted from the object \code{object}.
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
-#' @examples 
-#' data(takeoverbids)
-#' #' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' nobs(M.bids)
 nobs.cmp <- function(object, ...)
 { return(length(object$nobs))}
 
@@ -101,13 +81,8 @@ nobs.cmp <- function(object, ...)
 #' A numeric value with the corresponding AIC (or BIC, or ..., depends on k).
 #' @seealso 
 #' \code{\link{logLik.cmp}}, \code{\link{nobs.cmp}}, \code{\link{glm.cmp}}
-#' @examples 
-#' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' AIC(M.bids)
-AIC.cmp = function(object, ..., k = 2){
-  temp <- logLik(object)
+AIC.cmp <- function(object, ..., k = 2){
+  temp <- logLik.cmp(object)
   aic <- -2*as.numeric(temp)+k*attr(temp,"df")
   return(aic)
 }
@@ -123,12 +98,7 @@ AIC.cmp = function(object, ..., k = 2){
 #' Fitted values \code{mu} extracted from the object \code{object}.
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
-#' #' @examples 
-#' data(takeoverbids)
-#' #' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' fitted(M.bids)
-fitted.cmp = function(object, ...){
+fitted.cmp <- function(object, ...){
   return(object$fitted.values)
 }
 
@@ -145,12 +115,7 @@ fitted.cmp = function(object, ...){
 #' @seealso 
 #' \code{\link{fitted.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 #' 
-#' @examples 
-#' data(takeoverbids)
-#' #' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' coef(M.bids)
-coef.cmp = function(object, ...){
+coef.cmp <- function(object, ...){
   return(object$coefficients)
 }
 
@@ -168,17 +133,13 @@ coef.cmp = function(object, ...){
 #' and gives 'signifiance starts'. The \code{coefficients} component of the result gives the 
 #' estimated coefficients and their estimated standard errors, together with their ratio. This 
 #' third column is labelled as \code{Z value} as the dispersion is fixed for this family. A
-#' forth column gives the two-tailed p-value corresponding to Z value based on the asymptotic 
-#' Normal reference distribuiton. 
+#' forth column gives the two-tailed p-value corresponding to \code{Z value} based on 
+#' the asymptotic Normal reference distribuiton. 
 #' 
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}.
 #' @examples 
-#' data(takeoverbids)
-#' #' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' M.bids
-#' summary(M.bids)
+#' ## For examples see example(glm.cmp)
 #' @name summary.cmp
 summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
 {
@@ -219,4 +180,70 @@ print.cmp <- function(object,...)
       object$df.residuals, "Residual")
   cat("\nNull Deviance:", object$null.deviance, "\nResidual Deviance:",
       object$residuals.deviance, "\nAIC:", format(AIC(object)), "\n\n")
+}
+
+# can use generic update
+update <- function (object, ...) {
+  UseMethod("update")}
+
+#' Model Predicitons for a \code{glm.cmp} Object
+#' 
+#' This is a function for obtaining predictions and optionally estimates standard 
+#' errors of those prediction from a fitted COM-Poisson regression object. 
+#' 
+#' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
+#' @param newdata optionally, a data frame in which to look for variables with which to 
+#' predict. If omitted, the fitted linear predictors are used.
+#' @param se.fit logical; indicating if standard errors are required. 
+#' @param type the type of prediction required. The default is 'link' which is the scale 
+#' of the linear predictor i.e., a log scale; the alternative 'response' is on the scale 
+#' of the response variable. The value of this argument can be abbreviated.
+#' @param ... other arguments passed to or from other methods  (currently unused).
+#' @import stats
+#' @export
+#' @details 
+#' If newdata is omitted the predictions are based on the data used for the fit. 
+#' @return 
+#' If \code{se.fit = FALSE}, a vector of predictions. 
+#' 
+#' If \code{se.fit = TRUE}, a list with components
+#' \item{fit}{Predictions, as for se.fit = FALSE.}
+#' \item{se.fit}{Estimated standard errors.}
+#' @examples 
+#' data(takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#'
+#' predict(M.bids)
+#' predict(M.bids, type= "response")
+#' predict(M.bids, se.fit=TRUE, type="response")
+#' 
+#' newdataframe <- data.frame(bidprem = 1, finrest = 0, insthold = 0.05,
+#'     leglrest = 0, rearest = 1, regulatn = 0, size = 0.1, whtknght = 1, 
+#'     sizesq = .1^2)
+#' predict(M.bids, se.fit=TRUE, newdata = newdataframe, type="response")
+predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link", "response"),
+                        ...){
+  type <- match.arg(type)
+  if (is.null(newdata)){
+    pred <- switch(type, link = object$linear.predictors,
+                   response = object$fitted.values)
+    if (se.fit){
+      se <- switch(type, link = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x))),
+                   response = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x)))*
+                     object$fitted.values)
+      pred <- list(fit = pred, se.fit = se)
+    }
+  } else {
+    mf <- model.frame(delete.response(terms(object)), data=newdata)
+    X <- model.matrix(delete.response(terms(object)), mf)
+    pred <- switch(type, link = X%*%object$coefficients,
+                   response = exp(X%*%object$coefficients))
+    if (se.fit){
+      se <- switch(type, link = sqrt(diag(X%*%object$variance_beta%*%X)),
+                   response = sqrt(diag(X%*%object$variance_beta%*%t(X)))*pred)
+      pred <- list(fit = pred, se.fit = se)
+    }
+  }
+  return(pred)
 }

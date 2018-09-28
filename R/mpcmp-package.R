@@ -35,9 +35,9 @@ NULL
 #' @keywords datasets
 #' @usage 
 #' data(attendance)
-#' M.attendance = glm.cmp(daysabs ~ gender+math+prog, data=attendance)
-#' M.attendance
 #' @source \url{http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta}
+#' @examples 
+#' ## For examples see example(glm.cmp)
 NULL
 
 #' Takeover Bids data set
@@ -61,7 +61,7 @@ NULL
 #' \item{numbids}{number of bids recevied after the initial bid}
 #' \item{obs}{Identifier}
 #' \item{rearest}{indicator variable for proposed changes in asset structure}
-#' \item{regulartn}{indicator variable for Department of Justice intervention}
+#' \item{regulatn}{indicator variable for Department of Justice intervention}
 #' \item{size}{total book value of assets in billions of dollars}
 #' \item{takeover}{Indicator. 1 if the company was being taken over}
 #' \item{weeks}{time in weeks between the initial and final offers}
@@ -73,9 +73,6 @@ NULL
 #' @keywords datasets
 #' @usage 
 #' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' M.bids
 #' @references 
 #' Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series 
 #' Expansions: with Applications. \emph{Journal of Applied Econometrics} \bold{12} 203--223.
@@ -89,5 +86,7 @@ NULL
 #' 
 #' @source
 #' Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/jae/}.
+#' @examples 
+#' ## For examples see example(glm.cmp)
 NULL
 

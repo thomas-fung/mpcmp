@@ -18,12 +18,6 @@ Coefficients extracted from the object \code{object}.
 An accessor function used to extract model coefficients from a 'cmp' object.
 \code{coefficients} is an alias for \code{coef}.
 }
-\examples{
-data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-coef(M.bids)
-}
 \seealso{
 \code{\link{fitted.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 }

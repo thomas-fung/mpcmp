@@ -22,6 +22,7 @@
 #' @param type 1-character string; the type of plot for the sample uniform Q-Q plot in PIT.
 #' @param main character string; a main title for the plot. 
 #' @param ... other arguments passed to plot.default and plot.ts.
+#' @import graphics
 #' @details 
 #' The histogram and the Q-Q plot are used to compare the fitted profile with a standard
 #' uniform distribution. If they match relatively well, it means the CMP distribution 
@@ -29,11 +30,12 @@
 #' @references 
 #' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+#' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
 #' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @examples 
-#' For examples see example(plot.cmp)
+#' ## For examples see example(plot.cmp)
 #' @name PIT_Plot
 NULL
 
@@ -104,19 +106,21 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #' @references 
 #' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+#' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
 #' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @examples 
 #' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' compPredProb(M.bids)
 #' compPIT(M.bids)
 #' @name nrPIT
 NULL
 
 #' @rdname nrPIT
+#' @export
 compPredProb <- function (object) {
   lower <- pcomp(object$y-1, nu = object$nu, lambda = object$lambda)
   upper <- lower + dcomp(object$y, nu = object$nu, lambda = object$lambda)
@@ -124,6 +128,7 @@ compPredProb <- function (object) {
 }
 
 #' @rdname nrPIT
+#' @export
 compPIT <- function (object, bins = 10)
 {
   dummy.variable <- seq(0, 1, by = 1/bins)
@@ -155,6 +160,7 @@ compPIT <- function (object, bins = 10)
 #' The majority of the code and descriptions are taken from Dunsmuir and Scott (2015).
 #' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
 #' 
+#' @import stats
 #' @details 
 #' The function \code{compPredProb} produces the non-randomized probability integral 
 #' transform(PIT). It returns estimates of the cumulative predictive probabilities as 
@@ -191,8 +197,8 @@ compPIT <- function (object, bins = 10)
 #' \strong{67}, 1--36. 
 #' @examples 
 #' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' compnormRandPIT(M.bids)
 #' @name rPIT
 NULL
@@ -224,6 +230,9 @@ compnormRandPIT <- function (object) {
 #' @param ask logical; if \code{TRUE}, the user is asked before each plot. 
 #' @param bins numeric; the number of bins shown in the PIT histogram or the 
 #' PIT Q-Q plot. 
+#' @import stats
+#' @import graphics
+#' @import grDevices
 #' @details 
 #' The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
@@ -242,23 +251,22 @@ compnormRandPIT <- function (object) {
 #' from a uniform distribution. 
 #' 
 #' There are also two plots based on the normal randomzied residuals calculated 
-#' using \code{\link{compRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
+#' using \code{\link{compnormRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
 #' assumption is appropriate, these plots should reflect a sample obtained from a normal
 #' distribuiton. 
 #'
 #' @seealso 
-#' \code{\link{compPIT}}, \code{\link{compRandPIT}}, \code{\link{glm.cmp}}
+#' \code{\link{compPIT}}, \code{\link{compnormRandPIT}}, \code{\link{glm.cmp}}
 #' @examples 
 #' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' 
 #' ## The default plots are shown
 #' plot(M.bids)
 #' 
 #' ## The plots for the non-randomzied PIT 
-#' plot(M.Bids, which = c(2,3))
-#' 
+#' plot(M.bids, which = c(2,3))
 plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<length(which)) && dev.interactive(), bins=10){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
@@ -332,7 +340,7 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
   if (any(show[7L:8L] == TRUE)) {
     rk <- dim(object$x)[2]
     h <- object$leverage
-    pear <- residuals(object,type="pearson")
+    pear <- residuals.cmp(object,type="pearson")
     std.pear <- pear/sqrt(1 - h)
     cook <- (h * std.pear^2)/((1 - h) * rk)
     n <- length(cook)
@@ -367,38 +375,9 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
     axis(4, at = c(-rev(aty), aty), labels = paste(c(rev(cook.levels), cook.levels)),
          mgp = c(0.25, 0.25, 0), las = 2,
          tck = 0, cex.axis = 0.75, col.axis = 2)
-    text(h[index.cook], std.pear[index.cook], labels=paste(index.cook), cex = 0.7, pos = 4)
+    text(h[index.cook], std.pear[index.cook], labels=paste(index.cook), 
+                   cex = 0.7, pos = 4)
     dev.flush()
   }
   invisible()
-}
-
-
-# can use generic update
-update <- function (object, ...) {
-  UseMethod("update")}
-
-predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link", "response")){
-  type <- match.arg(type)
-  if (is.null(newdata)){
-    pred <- switch(type, link = object$linear.predictors,
-                   response = object$fitted.values)
-    if (se.fit){
-      se <- switch(type, link = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x))),
-                   response = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x)))*
-                     object$fitted.values)
-      pred <- list(fit = pred, se.fit = se)
-    }
-  } else {
-    mf <- model.frame(delete.response(terms(object)), data=newdata)
-    X <- model.matrix(delete.response(terms(object)), mf)
-    pred <- switch(type, link = X%*%object$coefficients,
-                   response = exp(X%*%object$coefficients))
-    if (se.fit){
-      se <- switch(type, link = sqrt(diag(X%*%object$variance_beta%*%X)),
-                   response = sqrt(diag(X%*%object$variance_beta%*%t(X)))*pred)
-      pred <- list(fit = pred, se.fit = se)
-    }
-  }
-  return(pred)
 }

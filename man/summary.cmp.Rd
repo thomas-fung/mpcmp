@@ -25,15 +25,11 @@
 and gives 'signifiance starts'. The \code{coefficients} component of the result gives the 
 estimated coefficients and their estimated standard errors, together with their ratio. This 
 third column is labelled as \code{Z value} as the dispersion is fixed for this family. A
-forth column gives the two-tailed p-value corresponding to Z value based on the asymptotic 
-Normal reference distribuiton.
+forth column gives the two-tailed p-value corresponding to \code{Z value} based on 
+the asymptotic Normal reference distribuiton.
 }
 \examples{
-data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-M.bids
-summary(M.bids)
+## For examples see example(glm.cmp)
 }
 \seealso{
 \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}.

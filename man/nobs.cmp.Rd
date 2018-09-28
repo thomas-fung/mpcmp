@@ -17,12 +17,6 @@ The number of observations extracted from the object \code{object}.
 \description{
 An accessor function used to extract the number of observation from a 'cmp' object.
 }
-\examples{
-data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-nobs(M.bids)
-}
 \seealso{
 \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 }

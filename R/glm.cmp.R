@@ -19,7 +19,24 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
+#' @export
+#' @import stats
+#' @details 
+#' Fit a mean parametrizied COM-Poisson regression using maximum likelihood estimation 
+#' via an iterative Fisher Scoring algorithm. 
 #' 
+#' The COM-Poisson regression model is
+#' 
+#' Y_i ~ CMP(mu_i, nu), 
+#'           
+#' where  
+#'    
+#' E(Y_i) = mu_i = exp(x_i^T beta),
+#'       
+#' and \emph{nu > 0} is the dispersion parameter. 
+#' 
+#' The fitted COM-Poisson distribution is over- or under-dispersed 
+#' if \emph{nu < 1} and \emph{nu > 1} respectively.
 #' @return 
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
 #' or \code{glm.nb}.
@@ -30,9 +47,9 @@
 #' The function \code{plot} (i.e., \code{\link{plot.cmp}}) can be used to produce a range 
 #' of diagnostic plots. 
 #' 
-#' The generic assessor functions \code{coefficients} (i.e., \code{\link{coefficients}}), 
+#' The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
 #' \code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-#' \code{fitted.values} (i.e., \code{\link{fitted.values}}), 
+#' \code{fitted} (i.e., \code{\link{fitted}}), 
 #' \code{nobs} (i.e., \code{\link{nobs.cmp}}), 
 #' \code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
 #' \code{residuals} (i.e., \code{\link{residuals.cmp}}) 
@@ -71,22 +88,19 @@
 #' @seealso 
 #' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
 #' and \code{\link{residuals.cmp}}.
-#' 
-#' @examples
+#' @examples 
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
 #' data(attendance)
-#' M.attendance = glm.cmp(daysabs~ gender+math+prog, data=attendance)
-#' M.attehdance
+#' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+#' M.attendance
 #' summary(M.attendance)
 #' 
 #' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 #' data(takeoverbids)
-#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' M.bids
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#'     M.bids
 #' summary(M.bids)
-
-
 glm.cmp <- function(formula, data, offset = NULL,
                     lambdalb = 1e-10, lambdaub = 1299, maxlambdaiter = 1e3, tol = 1e-6){
   call <- match.call()
@@ -109,15 +123,15 @@ glm.cmp <- function(formula, data, offset = NULL,
     offset.cmp = offset
   }
   # use poisson glm to generate initial values for betas
-  M0 <- glm(y~-1+X+offset(offset.cmp), family=poisson())
+  M0 <- stats::glm(y~-1+X+offset(offset.cmp), family=stats::poisson())
   offset <- M0$offset
   n <- length(y) # sample size
   q <- ncol(X)  # number of covariates
   #starting values for optimization
-  beta0 <- coef(M0)
+  beta0 <- stats::coef(M0)
   nu0 <- 1
   nu_lb <- 1e-10
-  lambda0 <- fitted.values(M0)
+  lambda0 <- stats::fitted(M0)
   param <- c(beta0,lambda0,nu0)
   ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset)
   param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, fsscale=32)

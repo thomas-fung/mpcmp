@@ -40,14 +40,15 @@ descriptions are taken from Dunsmuir and Scott (2015).
 }
 \examples{
 data(takeoverbids)
-M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 compPredProb(M.bids)
 compPIT(M.bids)
 }
 \references{
 Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
 Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.

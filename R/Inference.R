@@ -1,3 +1,35 @@
+#' Likelihood Ratio Test for nested COM-Poisson models
+#' 
+#' Perform a likelihood ratio chi-sqaured test between nested COM-Poisson models. 
+#' The test statistics is calculated as \emph{2*(llik- llik_0)}. The test statistics 
+#' has degrees of freedom \emph{r} where \emph{r} is the difference in the number of 
+#' parameters between the full and null models. 
+#' 
+#' Obviously the comparison between two models will only be valid if they are fitted 
+#' to the same data set. 
+#' 
+#' @param object1 an object class 'cmp', obtained from a call to \code{glm.cmp}
+#' @param object2 an object class 'cmp', obtained from a call to \code{glm.cmp}
+#' @param digits numeric; minimum number of significant digits to be used for most numbers.
+#' @import stats
+#' @export
+#' @references 
+#' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+#' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
+#' @examples 
+#' data(takeoverbids)
+#'
+#' ## Fit full model 
+#' M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#'     
+#' ## Fit null model; without whtknght
+#' M.bids.null <- glm.cmp(numbids ~ leglrest + rearest + finrest 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)     
+#'     
+#' ## Likelihood ratio test for the nested models
+#' cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
+#' 
 cmplrtest = function(object1,object2, digits=3) {
   if (class(object1) != "cmp") {
     stop("object1 must be an S3 object of class cmp.")
@@ -27,12 +59,32 @@ cmplrtest = function(object1,object2, digits=3) {
   } else {
     pval <- signif(pval, digits)
   }
-  cat("\nLikelihood ratio test for testing both CMP models are equivalent\n")
+  cat("\nLikelihood ratio test for testing both COP-Poisson models are equivalent\n")
   cat("LRT-statistic: ", signif(ttest, digits), "\n")
   cat("Chi-sq degrees of freedom: ", df, "\n")
   cat("P-value: ", pval, "\n")
 }
 
+#' Likelihood Ratio Test for nu = 1 of a COM-Poisson model
+#' 
+#' Perform a likelihood ratio chi-sqaured test for nu = 1 of a COM-Poisson model. 
+#' The test statistics is calculated as \emph{2*(llik- llik_0)} where \emph{llik} and 
+#' \emph{llik_0} are the log-likelihood of a COM-Poisson and Poisson model respectively.  
+#' The test statistic has 1 degrees of freedom. 
+#' 
+#' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}
+#' @param digits numeric; minimum number of significant digits to be used for most numbers.
+#' 
+#' @import stats
+#' @export
+#' @references 
+#' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+#' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
+#' @examples 
+#' data(takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' LRTnu(M.bids)
 LRTnu <- function(object, digits = 3){
   L1 <- object$maxl
   L2 <- as.vector(logLik(glm(object$formula, data = object$data,

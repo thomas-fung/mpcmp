@@ -28,12 +28,6 @@ the number of observations) for the so-called BIC (Bayesian Information Criterio
 When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or 
 BIC, the better the fit.
 }
-\examples{
-data(takeoverbids)
-M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-AIC(M.bids)
-}
 \seealso{
 \code{\link{logLik.cmp}}, \code{\link{nobs.cmp}}, \code{\link{glm.cmp}}
 }

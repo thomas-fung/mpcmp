@@ -12,9 +12,11 @@ Authors@R: as.person(c(
 Description: This package provides a collection of functions for estimation, testing 
         and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson 
 	(COM-Poisson) regression model. 
-License: GPL-2 | GPL-3
+Depends: R (>= 2.10)
+License: GPL (>= 2)
 Imports:
     graphics,
+    grDevices,
     stats
 URL: https://github.com/thomas-fung/mpcmp
 BugReports: https//github.com/thomas-fung/mpcmp

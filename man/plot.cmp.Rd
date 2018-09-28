@@ -20,10 +20,10 @@ See 'Details' below.}
 PIT Q-Q plot.}
 }
 \description{
-Eight plots (selectable by which) are currently available: 
+Eight plots (selectable by \code{which}) are currently available: 
 a plot of deviance residuals against fitted values, 
-a (non-randomized) PIT histogram, 
-a uniform Q-Q plot for (non-randomzied) PIT, 
+a non-randomized PIT histogram, 
+a uniform Q-Q plot for non-randomzied PIT, 
 a histogram of the normal randomized residuals, 
 a Q-Q plot of the normal randomized residuals, 
 a Scale-Location plot of sqrt(| residuals |) against fitted values
@@ -43,26 +43,27 @@ Residual-Leverage plot uses the standardized pearson residuals. They are given a
 The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
 and 1. 
 
-There are two plots based on the normal randomzied residuals calculated 
-using \code{\link{compRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
-assumption is appropriate, these plots should reflect a sample obtained from a normal
-distribuiton. 
 There are two plots based on the non-randomized probability integral transformation (PIT) 
-using \code{}. These are a histogram and a uniform Q-Q plot. If the model assumption is 
-appropriate, these plots should reflect a sample obtained from a uniform distribution.
+using \code{\link{compPIT}}. These are a histogram and a uniform Q-Q plot. If the 
+model assumption is appropriate, these plots should reflect a sample obtained 
+from a uniform distribution. 
+
+There are also two plots based on the normal randomzied residuals calculated 
+using \code{\link{compnormRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
+assumption is appropriate, these plots should reflect a sample obtained from a normal
+distribuiton.
 }
 \examples{
 data(takeoverbids)
-M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-+ bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 
 ## The default plots are shown
 plot(M.bids)
 
 ## The plots for the non-randomzied PIT 
-plot(M.Bids, which = c(2,3))
-
+plot(M.bids, which = c(2,3))
 }
 \seealso{
-\code{\link{compPIT}}, \code{\link{compRandPIT}}, \code{\link{glm.cmp}}
+\code{\link{compPIT}}, \code{\link{compnormRandPIT}}, \code{\link{glm.cmp}}
 }
