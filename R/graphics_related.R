@@ -2,7 +2,7 @@
 #' 
 #' Two plots for the non-randomized PIT are currently available for checking the 
 #' distributional assumption of the fitted CMP model: the PIT histogram, and 
-#' the uniform Q-Q plot for PIT.
+#' the uniform Q-Q plot for PIT. 
 #' 
 #' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
 #' @param bins numeric; the number of bins shown in the PIT histogram or the 
@@ -27,14 +27,17 @@
 #' uniform distribution. If they match relatively well, it means the CMP distribution 
 #' is appropriate for the data. 
 #' @references 
-#' Czado, C., Gneiting, T. and Held, L. (2009) Predictive model assessment
+#' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+#' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
+#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' \strong{67}, 1--36. 
 #' @examples 
 #' For examples see example(plot.cmp)
-#' @name PIT
+#' @name PIT_Plot
 NULL
 
-#' @rdname PIT
+#' @rdname PIT_Plot
 histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHist = "royal blue", lwdLine = 2, main = NULL, ...)
 {
   PIT <- compPIT(object, bins = bins)$PIT
@@ -60,7 +63,7 @@ histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHis
   box()
 }
 
-#' @rdname PIT
+#' @rdname PIT_Plot
 qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
                       lty2 = 2, type = "l", main = NULL, ...){
   dummy.variable <- seq(0, 1, by = 1/bins)
@@ -74,7 +77,53 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
   invisible()
 }
 
+#' Non-randomized Probability Integral Transform 
+#' 
+#' Functions to produce the non-randomzied probability integral transform (PIT) to check the 
+#' adequacy of the distributional assumption of the COM-Poisson model. The majority of the 
+#' code and descriptions are taken from Dunsmuir and Scott (2015).
+#' 
+#' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
+#' @param bins numeric; the number of bins shown in the PIT histogram or the 
+#' PIT Q-Q plot. 
+#' @details 
+#' These functions are used to obtain the predictive probabilities and the probability 
+#' integral transform for a fitted COM-Poisson model. The majority of the code and 
+#' descriptions are taken from Dunsmuir and Scott (2015).
+#' @return 
+#' \code{compPredprob} returns a list with values: 
+#' \item{upper}{the predictive cumulative probabilities used as the upper bound for 
+#' computing the non-randomzied PIT.}
+#' \item{lower}{the predictive cumulative probabilities used as the upper bound for 
+#' computing the non-randomzied PIT.}
+#' 
+#' \code{compPIT} returns a list with values:
+#' \item{conditionalPIT}{the conditional probability integral transoformation given the 
+#' observed counts.}
+#' \item{PIT}{the probability integral transformation.}
+#' @references 
+#' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
+#' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
+#' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
+#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' \strong{67}, 1--36. 
+#' @examples 
+#' data(takeoverbids)
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' compPredProb(M.bids)
+#' compPIT(M.bids)
+#' @name nrPIT
+NULL
 
+#' @rdname nrPIT
+compPredProb <- function (object) {
+  lower <- pcomp(object$y-1, nu = object$nu, lambda = object$lambda)
+  upper <- lower + dcomp(object$y, nu = object$nu, lambda = object$lambda)
+  list(lower = lower, upper = upper)
+}
+
+#' @rdname nrPIT
 compPIT <- function (object, bins = 10)
 {
   dummy.variable <- seq(0, 1, by = 1/bins)
@@ -100,13 +149,55 @@ compPIT <- function (object, bins = 10)
   list(ConditionalPIT = con.PIT, PIT = PIT)
 }
 
-compPredProb <- function (object) {
-  lower <- pcomp(object$y-1, nu = object$nu, lambda = object$lambda)
-  upper <- lower + dcomp(object$y, nu = object$nu, lambda = object$lambda)
-  list(lower = lower, upper = upper)
-}
+#' Random Normal Probability Integral Transform
+#' 
+#' A function to create the normal conditional (randomized) quantile residuals. 
+#' The majority of the code and descriptions are taken from Dunsmuir and Scott (2015).
+#' @param object an object class "cmp", obtained from a call to \code{glm.cmp}.
+#' 
+#' @details 
+#' The function \code{compPredProb} produces the non-randomized probability integral 
+#' transform(PIT). It returns estimates of the cumulative predictive probabilities as 
+#' upper and lower bounds of a collection of intervals. If the model is correct, a 
+#' histogram drawn using these estimated probabilities should resemble a histogram 
+#' obtained from a sample from the uniform distribution. 
+#' 
+#' This function aims to produce observations which instead resemble a sample from 
+#' a normal distribution. Such a sample can then be examined by the usual tools for 
+#' checking normality, such as histograms and normal Q-Q plots.
+#' 
+#' For each of the intervals produced by \code{compPredProb}, a random uniform observation 
+#' is generated, which is then converted to a normal observation by applying the inverse
+#' standard normal distribution function (using \code{qnorm}). The vector of these values 
+#' is returned by the function in the list element \code{rt}. In addition non-random 
+#' observations which should appear similar to a sample from a normal distribution 
+#' are obtained by applying \code{qnorm} to the mid-points of the predictive distribution
+#' intervals. The vector of these values is returned by the function in the list element 
+#' \code{rtMid}.
 
+#' @return 
+#' A list consisting of two elements:
+#' \item{rt}{the normal conditioanl randomized quantile residuals}
+#' \item{rdMid}{the midpoints of the predictive probability intervals}
+#' @references 
+#' Berkowitz, J. (2001). Testing density forecasts, with applications to risk management.
+#' \emph{Journal of Business \& Economic Statistics}, \bold{19}, 465--474.
+#' 
+#' Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journal of
+#' Computational and Graphical Statistics}, \bold{5}, 236--244.
+#' 
+#' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
+#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' \strong{67}, 1--36. 
+#' @examples 
+#' data(takeoverbids)
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' compnormRandPIT(M.bids)
+#' @name rPIT
+NULL
 
+#' @rdname rPIT
 compnormRandPIT <- function (object) {
   temp <- compPredProb(object)
   rt <- qnorm(runif(length(temp$lower), temp$lower, temp$upper))
@@ -116,15 +207,15 @@ compnormRandPIT <- function (object) {
 
 #' Plot Diagnostic for a \code{glm.cmp} Object
 #' 
-#' Eight plots (selectable by which) are currently available: 
+#' Eight plots (selectable by \code{which}) are currently available: 
 #' a plot of deviance residuals against fitted values, 
-#' a (non-randomized) PIT histogram, 
-#' a uniform Q-Q plot for (non-randomzied) PIT, 
+#' a non-randomized PIT histogram, 
+#' a uniform Q-Q plot for non-randomzied PIT, 
 #' a histogram of the normal randomized residuals, 
 #' a Q-Q plot of the normal randomized residuals, 
 #' a Scale-Location plot of sqrt(| residuals |) against fitted values
 #' a plot of Cook's distances versus row lobels
-#' a plot of pearson residauls against leverages. 
+#' a plot of pearson residauls against leverage. 
 #' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
 #' 
 #' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
@@ -133,6 +224,41 @@ compnormRandPIT <- function (object) {
 #' @param ask logical; if \code{TRUE}, the user is asked before each plot. 
 #' @param bins numeric; the number of bins shown in the PIT histogram or the 
 #' PIT Q-Q plot. 
+#' @details 
+#' The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
+#' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
+#' skewness is much less skewed than than \emph{|E|} for Gaussian zero-mean E. 
+#' 
+#' The 'Scale-Location' plot uses the standardized deviance residuals while the 
+#' Residual-Leverage plot uses the standardized pearson residuals. They are given as 
+#' \emph{R[i]/sqrt(1-h.ii)} where h_ii are the diagonal entries of the hat matrix.  
+#' 
+#' The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
+#' and 1. 
+#' 
+#' There are two plots based on the non-randomized probability integral transformation (PIT) 
+#' using \code{\link{compPIT}}. These are a histogram and a uniform Q-Q plot. If the 
+#' model assumption is appropriate, these plots should reflect a sample obtained 
+#' from a uniform distribution. 
+#' 
+#' There are also two plots based on the normal randomzied residuals calculated 
+#' using \code{\link{compRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
+#' assumption is appropriate, these plots should reflect a sample obtained from a normal
+#' distribuiton. 
+#'
+#' @seealso 
+#' \code{\link{compPIT}}, \code{\link{compRandPIT}}, \code{\link{glm.cmp}}
+#' @examples 
+#' data(takeoverbids)
+#' M.bids = glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#' + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' 
+#' ## The default plots are shown
+#' plot(M.bids)
+#' 
+#' ## The plots for the non-randomzied PIT 
+#' plot(M.Bids, which = c(2,3))
+#' 
 plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<length(which)) && dev.interactive(), bins=10){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
@@ -247,60 +373,6 @@ plot.cmp <- function(object, which=c(1L,2L,6L,8L), ask = prod(par("mfcol")<lengt
   invisible()
 }
 
-cmplrtest = function(object1,object2, digits=3) {
-  if (class(object1) != "cmp") {
-    stop("object1 must be an S3 object of class cmp.")
-  }
-  if (class(object2) != "cmp") {
-    stop("object2 must be an S3 object of class cmp.")
-  }
-  if ( !(all(names(object1$coefficients) %in% names(object2$coefficients))) &&
-       !all(names(object2$coefficients) %in% names(object1$coefficients))) {
-    warning(paste0("Neither models' coefficient names are subset of the other. ",
-                   "Please make sure the models are nested."))
-  }
-  if (object1$nobs != object2$nobs) {
-    stop("The models have a different number of observations.")
-  }
-  L1 <- object1$maxl
-  L2 <- object2$maxl
-  df <- length(object1$coefficients) - length(object2$coefficients)
-  ttest <- 2*(L1 - L2)
-  if (df<0){
-    ttest <- -ttest
-    df <- -df
-  }
-  pval <- 1-pchisq(ttest,df)
-  if (pval < 2e-16) {
-    pval <- "< 2e-16"
-  } else {
-    pval <- signif(pval, digits)
-  }
-  cat("\nLikelihood ratio test for testing both CMP models are equivalent\n")
-  cat("LRT-statistic: ", signif(ttest, digits), "\n")
-  cat("Chi-sq degrees of freedom: ", df, "\n")
-  cat("P-value: ", pval, "\n")
-}
-
-LRTnu <- function(object, digits = 3){
-  L1 <- object$maxl
-  L2 <- as.vector(logLik(glm(object$formula, data = object$data,
-                             family = poisson())))
-  ttest <- 2*(L1 - L2)
-  pval <- 1-pchisq(ttest,1)
-  if (pval < 2e-16) {
-    pval <- "< 2e-16"
-  }
-  else {
-    pval <- signif(pval, digits)
-  }
-  cat("\nLikelihood ratio test for testing nu=1:\n\n")
-  cat("Log-Likelihood for Mean-CMP: ", signif(L1, digits), "\n")
-  cat("Log-Likelihood for Poisson: ", signif(L2, digits), "\n")
-  cat("LRT-statistic: ", signif(ttest, digits), "\n")
-  cat("Chi-sq degrees of freedom: ", 1, "\n")
-  cat("P-value: ", pval, "\n")
-}
 
 # can use generic update
 update <- function (object, ...) {
