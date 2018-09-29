@@ -3,12 +3,14 @@ Type: Package
 Title: Mean-parametrized Conway-Maxwell Poisson (COM-Poisson) Regression
 Version: 1.0.0
 Date: 2018-10-30
-Authors@R: as.person(c(
-  "Thomas Fung <thomas.fung@mq.edu.au> [aut, cre]",
-  "Aya Alwan <aya.alwan@mq.edu.au> [aut]",
-  "Justin Wishart <justin.wishart@mq.edu.au> [aut]",
-  "Alan Huang <alan.huang@uq.edu.au> [aut]"
-  ))
+Authors@R: c(person("Thomas", "Fung", role = c("aut", "cre"),
+         email = "thomas.fung@mq.edu.au"),
+  person("Aya", "Alwan", role = "aut",
+         email = "aya.alwan@mq.edu.au"),
+  person("Justin", "Wishart", role = "aut",
+         email = "justin.wishart@mq.edu.au"),
+  person("Alan", "Huang", role = "aut",
+         email = "alan.huang@uq.edu.au"))
 Description: This package provides a collection of functions for estimation, testing 
         and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson 
 	(COM-Poisson) regression model. 
