@@ -39,7 +39,7 @@ of diagnostic plots.
 
 The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
 \code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-\code{fitted} (i.e., \code{\link{fitted}}), 
+\code{fitted} (i.e., \code{\link{fitted.cmp}}), 
 \code{nobs} (i.e., \code{\link{nobs.cmp}}), 
 \code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
 \code{residuals} (i.e., \code{\link{residuals.cmp}}) 
@@ -64,7 +64,7 @@ The null model will include only the intercept.}
 \item{model}{the model frame}
 \item{call}{the matched call}
 \item{formula}{the formula supplied}
-\item{terms}{the \code{\link{terms}} object used}
+\item{terms}{the \code{terms} object used}
 \item{data}{the \code{data} argument}
 \item{offset}{the \code{offset} vector used}
 }
