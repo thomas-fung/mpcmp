@@ -4,12 +4,12 @@
 \alias{plot.cmp}
 \title{Plot Diagnostic for a \code{glm.cmp} Object}
 \usage{
-\method{plot}{cmp}(object, which = c(1L, 2L, 6L, 8L),
+\method{plot}{cmp}(x, which = c(1L, 2L, 6L, 8L),
   ask = prod(par("mfcol")) < length(which) && dev.interactive(),
-  bins = 10)
+  bins = 10, ...)
 }
 \arguments{
-\item{object}{an object class 'cmp' object, obtained from a call to \code{glm.cmp}}
+\item{x}{an object class 'cmp' object, obtained from a call to \code{glm.cmp}}
 
 \item{which}{if a subset of plots is required, specify a subset of the numbers 1:8. 
 See 'Details' below.}
@@ -18,6 +18,8 @@ See 'Details' below.}
 
 \item{bins}{numeric; the number of bins shown in the PIT histogram or the 
 PIT Q-Q plot.}
+
+\item{...}{other arguments passed to or from other methods (currently unused).}
 }
 \description{
 Eight plots (selectable by \code{which}) are currently available: 
