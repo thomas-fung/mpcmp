@@ -1,5 +1,5 @@
 bibentry(bibtype = "Article",
-  title        = "The mpcmp Package for Mean-Parametrizied Conway-Maxwell Poisson Regression",
+  title        = "The mpcmp Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression",
   author       = c(person(given = "Thomas",
                           family = "Fung",
                           email = "thomas.fung@mq.edu.au"),
