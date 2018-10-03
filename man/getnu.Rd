@@ -2,7 +2,7 @@
 % Please edit documentation in R/getnu.R
 \name{getnu}
 \alias{getnu}
-\title{Parameter Generator}
+\title{Parameter Generator for nu}
 \usage{
 getnu(param, y, xx, offset, llstart, fsscale = 1)
 }

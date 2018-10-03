@@ -1,4 +1,4 @@
-#' Parameter Generator
+#' Parameter Generator for nu
 #' 
 #' A function that use the arguments of a \code{glm.cmp} call to generate a better initial 
 #' \code{nu} estimate. 

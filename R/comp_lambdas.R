@@ -1,10 +1,11 @@
-#' Solve for Lambda for a given pair of mu and nu
+#' Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution
 #' 
-#' Given a pair of mu and nu, this function is used to find a lambda that can satisfy the 
-#' mean constraint with a combination of bisection and Newton-Raphson updates. The function is 
-#' also vectorized but will only update that have not converged. 
+#' Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
+#' this function is used to find a lambda that can satisfy the mean constraint with a 
+#' combination of bisection and Newton-Raphson updates. The function is also vectorized but
+#' will only update those that have not converged. 
 #' 
-#' @param mu,nu mean and dispersion parameters. Must be positives. 
+#' @param mu,nu mean and dispersion parameters. Must be straightly positive. 
 #' @param lambdalb,lambdaub numeric; the lower and upper end points for the interval to be
 #' searched for lambda(s). 
 #' @param maxlambdaiter numeric; the maximum number of iterations allowed to solve 

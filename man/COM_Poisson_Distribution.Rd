@@ -6,7 +6,7 @@
 \alias{pcomp}
 \alias{qcomp}
 \alias{rcomp}
-\title{The Conway-Maxwell Poisson (COM-Poisson) Distribution.}
+\title{The Conway-Maxwell-Poisson (COM-Poisson) Distribution.}
 \usage{
 dcomp(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
   lambdaub = 1200, maxlambdaiter = 1000, tol = 1e-06)
@@ -64,7 +64,7 @@ Only the first arugment of the logical arguments are used.
 }
 \description{
 Density, distribution function, quantile function and random generation for the 
-Conway-Maxwell Poisson distribution with parameter \code{mu} and \code{nu}
+Conway-Maxwell-Poisson distribution with parameter \code{mu} and \code{nu}
 }
 \examples{
 dcomp(0:5, mu = 2, nu = 1.2)

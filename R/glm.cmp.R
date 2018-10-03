@@ -1,6 +1,6 @@
-#' Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model
+#' Fit a Mean Parametrized Conway-Maxwell-Poisson Generalized Linear Model
 #' 
-#' The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Poisson
+#' The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell-Poisson
 #' generalized linear model with a log-link by using Fisher Scoring iteration. 
 #' 
 #' @usage 
@@ -80,7 +80,7 @@
 #' 
 #' @references 
 #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). The \code{mpcmp} package for 
-#' Mean-parametrized Conway-Maxwell Poisson Regression. 
+#' Mean-parametrized Conway-Maxwell-Poisson Regression. 
 #' 
 #' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.

@@ -16,6 +16,7 @@
 #' @references 
 #' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
+#' @seealso \code{\link{glm.cmp}}, \code{\link{update.cmp}}
 #' @examples 
 #' data(takeoverbids)
 #'
@@ -24,8 +25,7 @@
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #'     
 #' ## Fit null model; without whtknght
-#' M.bids.null <- glm.cmp(numbids ~ leglrest + rearest + finrest 
-#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)     
+#' M.bids.null <- update(M.bids.full, .~.-whtknght)     
 #'     
 #' ## Likelihood ratio test for the nested models
 #' cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
@@ -104,3 +104,51 @@ LRTnu <- function(object, digits = 3){
   cat("Chi-sq degrees of freedom: ", 1, "\n")
   cat("P-value: ", pval, "\n")
 }
+
+
+#' Update and Re-fit a COM-Poisson Model
+#' 
+#' \code{update} (i.e., \code{update.cmp}) will upate and (by-default) re-fit a model. It is
+#' identical to \code{update} in the \code{stats} package. 
+#' 
+#' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
+#' @param formula. changes to the existing formula in \code{object} -- see \code{update.formula}
+#' for details
+#' @param ... other arguments passed to or from other methods  (currently unused).
+#' @param evaluate logical; if \code{TRUE} evaluate the new call otherwise simply ruturn 
+#' the call
+#' @import stats
+#' @export
+#' @seealso \code{\link{glm.cmp}}, \code{\link{update.formula}}, \code{\link{cmplrtest}}.
+#' 
+#' @examples 
+#' data(takeoverbids)
+#'
+#' ## Fit full model 
+#' M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids.full
+#'         
+#' ## Dropping whtknght
+#' M.bids.null <- update(M.bids.full, .~.-whtknght)
+#' M.bids.null
+#' 
+update.cmp <- function(object, formula., ..., evaluate = TRUE) {
+  if (is.null(call <- getCall(object))) 
+    stop("need an object with call component")
+  extras <- match.call(expand.dots = FALSE)$...
+  if (!missing(formula.)) 
+    call$formula <- update.formula(formula(object), formula.)
+  if (length(extras)) {
+    existing <- !is.na(match(names(extras), names(call)))
+    for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+    if (any(!existing)) {
+      call <- c(as.list(call), extras[!existing])
+      call <- as.call(call)
+    }
+  }
+  if (evaluate) 
+    eval(call, parent.frame())
+  else call
+}
+

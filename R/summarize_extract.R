@@ -182,9 +182,6 @@ print.cmp <- function(object,...)
       object$residuals.deviance, "\nAIC:", format(AIC(object)), "\n\n")
 }
 
-# can use generic update
-update <- function (object, ...) {
-  UseMethod("update")}
 
 #' Model Predicitons for a \code{glm.cmp} Object
 #' 

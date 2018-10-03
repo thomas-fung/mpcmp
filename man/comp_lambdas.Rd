@@ -2,13 +2,13 @@
 % Please edit documentation in R/comp_lambdas.R
 \name{comp_lambdas}
 \alias{comp_lambdas}
-\title{Solve for Lambda for a given pair of mu and nu}
+\title{Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution}
 \usage{
 comp_lambdas(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
   maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1)
 }
 \arguments{
-\item{mu, nu}{mean and dispersion parameters. Must be positives.}
+\item{mu, nu}{mean and dispersion parameters. Must be straightly positive.}
 
 \item{lambdalb, lambdaub}{numeric; the lower and upper end points for the interval to be
 searched for lambda(s).}
@@ -26,7 +26,8 @@ corresponding mu values is less than tol.}
 The function returns the lambda value(s) that satisfies the mean constraint(s).
 }
 \description{
-Given a pair of mu and nu, this function is used to find a lambda that can satisfy the 
-mean constraint with a combination of bisection and Newton-Raphson updates. The function is 
-also vectorized but will only update that have not converged.
+Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
+this function is used to find a lambda that can satisfy the mean constraint with a 
+combination of bisection and Newton-Raphson updates. The function is also vectorized but
+will only update those that have not converged.
 }

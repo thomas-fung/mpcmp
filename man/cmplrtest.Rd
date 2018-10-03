@@ -31,8 +31,7 @@ M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
     
 ## Fit null model; without whtknght
-M.bids.null <- glm.cmp(numbids ~ leglrest + rearest + finrest 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)     
+M.bids.null <- update(M.bids.full, .~.-whtknght)     
     
 ## Likelihood ratio test for the nested models
 cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
@@ -41,4 +40,7 @@ cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
 \references{
 Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
+}
+\seealso{
+\code{\link{glm.cmp}}, \code{\link{update.cmp}}
 }

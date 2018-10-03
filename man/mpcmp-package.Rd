@@ -4,13 +4,13 @@
 \name{mpcmp-package}
 \alias{mpcmp-package}
 \alias{mpcmp}
-\title{Mean-parametrized Conway-Maxwell Poisson Regression}
+\title{Mean-parametrized Conway-Maxwell-Poisson Regression}
 \description{
-Mean-parametrized Conway-Maxwell Poisson Regression
+Mean-parametrized Conway-Maxwell-Poisson Regression
 }
 \references{
 #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). The \code{mpcmp} package for 
-Mean-parametrized Conway-Maxwell Poisson Regression. 
+Mean-parametrized Conway-Maxwell-Poisson Regression. 
 
 Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.

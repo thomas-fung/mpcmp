@@ -1,10 +1,10 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "The \tt{mpcmp} Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression"
+author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{The \tt{mpcmp} Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,6 +15,13 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+We review the theory and application of a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data and describe the estimation of these models using the R package mpcmp. Prediction, inference, diagnostic and graphical methods are also illustrated by several examples. 
+
+## Introduction 
+
+Conway–Maxwell–Poisson (COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., Shmueli et al., 2005; Lord et al., 2008, 2010; Sellers and Shmueli, 2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. COM-Poisson distributions are also full probability models, making them particularly useful for predictions and estimation of event probabilities. 
+
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
 
