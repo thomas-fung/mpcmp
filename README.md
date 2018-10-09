@@ -27,7 +27,7 @@ library(mpcmp)
 
 ## Usage
 
-A reference manual is available at [thomas-fung.github.io/mpcmp](thomas-fung.github.io/mpcmp)
+A reference manual is available at [thomas-fung.github.io/mpcmp](https://thomas-fung.github.io/mpcmp/)
 
 ## Citation
 
