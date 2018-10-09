@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarize COM-Poisson Model Fit — summary.cmp • mpcmp</title>
+<title>Update and Re-fit a COM-Poisson Model — update.cmp • mpcmp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Summarize COM-Poisson Model Fit — summary.cmp" />
+<meta property="og:title" content="Update and Re-fit a COM-Poisson Model — update.cmp" />
 
-<meta property="og:description" content="summary and print method for class cmp." />
+<meta property="og:description" content="update (i.e., update.cmp) will upate and (by-default) re-fit a model. It is
+identical to update in the stats package." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,23 +101,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summarize COM-Poisson Model Fit</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>summary.cmp.Rd</code></div>
+    <h1>Update and Re-fit a COM-Poisson Model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/Inference.R'><code>R/Inference.R</code></a></small>
+    <div class="hidden name"><code>update.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>summary</code> and <code>print</code> method for class <code>cmp</code>.</p>
+    <p><code>update</code> (i.e., <code>update.cmp</code>) will upate and (by-default) re-fit a model. It is
+identical to <code>update</code> in the <code>stats</code> package.</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'>summary</span>(<span class='no'>object</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'>max</span>(<span class='fl'>3L</span>, <span class='fu'>getOption</span>(<span class='st'>"digits"</span>) - <span class='fl'>3L</span>),
-  <span class='no'>...</span>)
-
-<span class='co'># S3 method for cmp</span>
-<span class='fu'>print</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>update</span>(<span class='no'>object</span>, <span class='no'>formula.</span>, <span class='no'>...</span>, <span class='kw'>evaluate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,31 +124,66 @@
       <td><p>an object class 'cmp', obtained from a call to <code>glm.cmp</code>.</p></td>
     </tr>
     <tr>
-      <th>digits</th>
-      <td><p>numeric; minimum number of significant digits to be used for most numbers.</p></td>
+      <th>formula.</th>
+      <td><p>changes to the existing formula in <code>object</code> -- see <code>update.formula</code>
+for details</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
     </tr>
+    <tr>
+      <th>evaluate</th>
+      <td><p>logical; if <code>TRUE</code> evaluate the new call otherwise simply ruturn 
+the call</p></td>
+    </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>summary.glm</code> tries to be smart about formatting the coefficients, standard errors 
-and gives 'signifiance starts'. The <code>coefficients</code> component of the result gives the 
-estimated coefficients and their estimated standard errors, together with their ratio. This 
-third column is labelled as <code>Z value</code> as the dispersion is fixed for this family. A
-forth column gives the two-tailed p-value corresponding to <code>Z value</code> based on 
-the asymptotic Normal reference distribuiton.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='glm.cmp.html'>glm.cmp</a></code>, <code>update.formula</code>, <code><a href='cmplrtest.html'>cmplrtest</a></code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>takeoverbids</span>)
+
+<span class='co'>## Fit full model </span>
+<span class='no'>M.bids.full</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
+    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
+<span class='no'>M.bids.full</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
+#&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
+#&gt;     0.99000      0.26800     -0.17300      0.06770      0.48100     -0.68500  
+#&gt;    insthold         size       sizesq     regulatn  
+#&gt;    -0.36800      0.17900     -0.00758     -0.03760  
+#&gt; 
+#&gt; Dispersion (nu): 1.757228
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
+#&gt; Null Deviance: 182.8135 
+#&gt; Residual Deviance: 131.4979 
+#&gt; AIC: 382.1754 
+#&gt; </div><div class='input'>
+<span class='co'>## Dropping whtknght</span>
+<span class='no'>M.bids.null</span> <span class='kw'>&lt;-</span> <span class='fu'>update</span>(<span class='no'>M.bids.full</span>, <span class='no'>.</span>~<span class='no'>.</span>-<span class='no'>whtknght</span>)
+<span class='no'>M.bids.null</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + bidprem + 
+#&gt;     insthold + size + sizesq + regulatn, data = takeoverbids)
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt; (Intercept)     leglrest      rearest      finrest      bidprem     insthold  
+#&gt;     1.33000      0.39100     -0.14600      0.13400     -0.74800     -0.44100  
+#&gt;        size       sizesq     regulatn  
+#&gt;     0.18800     -0.00794     -0.04450  
+#&gt; 
+#&gt; Dispersion (nu): 1.536924
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
+#&gt; Null Deviance: 164.6426 
+#&gt; Residual Deviance: 131.7765 
+#&gt; AIC: 393.88 
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -158,8 +191,6 @@ the asymptotic Normal reference distribuiton.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
