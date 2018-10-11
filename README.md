@@ -6,15 +6,6 @@ The `mpcmp` currently only supports log-lienar mean models, however work is prog
 
 ## Installation
 
-### Stable release on CRAN
-
-The mpcmp package has been on [CRAN](https://cran.r-project.org/package=mpcmp) since xxx 2018. You can install it from CRAN in the usual way:
-
-```s
-install.packages("mpcmp")
-library("mpcmp")
-```
-
 ### Development version on Github
 
 You can use the **devtools** package to install the development version of **mpcmp** from [GitHub](https://github.com/thomas-fung/mpcmp):
