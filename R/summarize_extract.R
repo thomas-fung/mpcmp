@@ -127,6 +127,7 @@ coef.cmp <- function(object, ...){
 #' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param digits numeric; minimum number of significant digits to be used for most numbers.
 #' @param ... other arguments passed to or from other methods  (currently unused).
+#' @export
 
 #' @details  
 #' \code{summary.glm} tries to be smart about formatting the coefficients, standard errors 
@@ -169,6 +170,7 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
 }
 
 #' @rdname summary.cmp
+#' @export
 print.cmp <- function(object,...)
 {
   cat("\nCall: ", paste(deparse(object$call), sep = "\n", collapse = "\n"),

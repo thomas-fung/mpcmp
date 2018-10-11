@@ -1,10 +1,12 @@
 ---
-title: "The \tt{mpcmp} Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression"
+title: "The `mpcmp` Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression (under construction)"
 author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: library.bib
+fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{The \tt{mpcmp} Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression}
+  %\VignetteIndexEntry{The <tt>`glm.cmp`</tt> Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,7 +22,31 @@ We review the theory and application of a mean-parametrized Conway-Maxwell-Poiss
 
 ## Introduction 
 
-Conway–Maxwell–Poisson (COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., Shmueli et al., 2005; Lord et al., 2008, 2010; Sellers and Shmueli, 2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. COM-Poisson distributions are also full probability models, making them particularly useful for predictions and estimation of event probabilities. 
+Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008, -@Lord2010; @Sellers2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. COM-Poisson distributions are also full probability models, making them particularly useful for predictions and estimation of event probabilities. See @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
+
+One of the major limitations of CMP distributions is that it is not directly parametrized via the mean. 
+The `R` `mpcmp` 
+
+@Huang2017b 
+
+The outline of the remainder of the paper is as follows. Section \@ref(mpcmpintro)
+
+## Mean-Parametrized Conway-Maxwell-Poisson Regression {#mpcmpintro}
+
+## Estimation 
+
+## Distribution theory for likelihood estimation {#dist_theory}
+
+For inference, @Huang2017b showed that the central limit theory for the likelihood estimates hold so that 
+$$\binom{\widehat{\beta}}{\widehat{\nu}} \overset{d}{\approx} N\left(\binom{\beta}{\nu}, \widehat{\Omega}\right),$$
+where the approximate covariance matrix is estimated by 
+$$\widehat{\Omega} = -\left(D_{FS}(\widehat{\beta},\widehat{\nu})\right)^{-1}.$$ Thus a standard error for the maximum likelihood estimates of the *i*th component of $\beta$ is computed using $\widehat{\Omega}_{ii}^{\frac{1}{2}}$. 
+
+
+
+## Modelling function in mpcmp 
+
+The main modelling function for fitting mean-parametrized CMP models is `glm.cmp`. 
 
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
@@ -29,7 +55,28 @@ Vignettes are long form documentation commonly included in packages. Because the
 - Has a smaller default figure size
 - Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
 
-## Vignette Info
+## Diagnostics 
+
+### Likelihood ratio test 
+
+### Probability integral transformation 
+
+### Plots 
+
+## Examples 
+
+There are two examples datasets included in the `mpcmp` package which over over- and under-dispersed counts. Sample analyses for these datsets are provided in either the help page for the datasets or for the `glm.cmp()` function. 
+
+### Overdispersed attendance data
+```{r} 
+library("mpcmp")
+data("attendance")
+M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+print(M.attendance)
+summary(M.attendance)
+```
+
+### Underdispersed takeover bids data 
 
 Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
@@ -45,7 +92,7 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
 
 The figure sizes have been customised so that you can easily put two images side-by-side. 
 
-```{r, fig.show='hold'}
+```{r, fig.show='hold', fig.cap='test'}
 plot(1:10)
 plot(10:1)
 ```
@@ -60,7 +107,7 @@ Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr*
 
 ## More Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+You can write math expressions, e.g. $$Y = X\beta + \epsilon$$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(head(mtcars, 10))
@@ -68,5 +115,6 @@ knitr::kable(head(mtcars, 10))
 
 Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+## References
+

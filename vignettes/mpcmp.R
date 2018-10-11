@@ -4,7 +4,14 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- fig.show='hold'----------------------------------------------------
+## ------------------------------------------------------------------------
+library("mpcmp")
+data("attendance", package="mpcmp")
+M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance
+summary(M.attendance)
+
+## ---- fig.show='hold', fig.cap='test'------------------------------------
 plot(1:10)
 plot(10:1)
 
