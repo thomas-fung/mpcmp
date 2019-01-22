@@ -90,3 +90,36 @@ NULL
 #' ## For examples see example(glm.cmp)
 NULL
 
+#' Cotton Bolls data set
+#'
+#' This data set gives the observed number of bolls produced on by the cotton 
+#' plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
+#' to examine the effect of five defoliation levels (0%, 25%, 50%, 75% and 100%). The data
+#' was first studied in Zeviani et al. (2014). 
+#' 
+#' 
+#' @name cottonbolls
+#' @format A data frame with 125 observations on 4 variables.
+#' \describe{
+#' \item{nc}{number of bolls produced by two cotton plants at harvest}
+#' \item{stages}{growth stage}
+#' \item{def}{artificial defoliation level}
+#' \item{def2}{square of def}
+#' }
+#' @docType data
+#' @keywords datasets
+#' @usage 
+#' data(cottonbolls)
+#' @references 
+#' Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014). 
+#' The Gamma-count distribution in the analysis of experimental underdispersed data. 
+#' \emph{Journal of Applied Statistics} \bold{41}, 2616--26.
+#' 
+#' @source
+#' Supplementary Content of Zevini et al. (2014): 
+#' \url{http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014}
+#' 
+#' @examples 
+#' ## For examples see example(glm.cmp)
+NULL
+

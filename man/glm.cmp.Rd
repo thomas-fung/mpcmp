@@ -18,7 +18,9 @@ in the linear predictor during fitting. This should be \code{NULL} or a numeric 
 of length equal to the number of cases.}
 
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
-searched for lambda(s).}
+searched for lambda(s). The default value for lambdaub should be sufficient for small to
+moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
+will scale up \code{lambdaub} accordingly.}
 
 \item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
 for lambda(s).}
@@ -67,6 +69,7 @@ The null model will include only the intercept.}
 \item{terms}{the \code{terms} object used}
 \item{data}{the \code{data} argument}
 \item{offset}{the \code{offset} vector used}
+\item{lambdaub}{the final \code{lambdaub} used}
 }
 \description{
 The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell-Poisson
@@ -104,6 +107,15 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
     M.bids
 summary(M.bids)
+
+### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
+### Model fitting for predictor V 
+\dontrun{
+data(cottonbolls)
+M.bolls <- glm.cmp(nc~ nc~1+stages:def+stages:def2, data= cottonbolls)
+M.bolls
+summary(M.bolls)
+}
 }
 \references{
 Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). The \code{mpcmp} package for 

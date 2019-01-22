@@ -4,7 +4,8 @@
 \alias{getnu}
 \title{Parameter Generator for nu}
 \usage{
-getnu(param, y, xx, offset, llstart, fsscale = 1)
+getnu(param, y, xx, offset, llstart, fsscale = 1, lambdalb = 1e-10,
+  lambdaub = 1900, maxlambdaiter = 1000, tol = 1e-06)
 }
 \arguments{
 \item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 
@@ -20,6 +21,16 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 
 \item{fsscale}{numeric: a scaling factor (generally >1) for the 
 relaxed fisher scoring algorithm}
+
+\item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
+searched for lambda(s).}
+
+\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
+for lambda(s).}
+
+\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
+mean constraint if the absolute difference between the calculated mean and a fitted
+values is less than tol.}
 }
 \value{
 List containing the following:

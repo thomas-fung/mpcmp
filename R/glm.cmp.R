@@ -13,7 +13,9 @@
 #' in the linear predictor during fitting. This should be \code{NULL} or a numeric vector 
 #' of length equal to the number of cases.  
 #' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
-#' searched for lambda(s). 
+#' searched for lambda(s). The default value for lambdaub should be sufficient for small to
+#' moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
+#' will scale up \code{lambdaub} accordingly.  
 #' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve 
 #' for lambda(s).
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
@@ -77,6 +79,7 @@
 #' \item{terms}{the \code{terms} object used}
 #' \item{data}{the \code{data} argument}
 #' \item{offset}{the \code{offset} vector used}
+#' \item{lambdaub}{the final \code{lambdaub} used}
 #' 
 #' @references 
 #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). The \code{mpcmp} package for 
@@ -103,8 +106,18 @@
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #'     M.bids
 #' summary(M.bids)
+#' 
+#' ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
+#' ### Model fitting for predictor V 
+#' \dontrun{
+#' data(cottonbolls)
+#' M.bolls <- glm.cmp(nc~ nc~1+stages:def+stages:def2, data= cottonbolls)
+#' M.bolls
+#' summary(M.bolls)
+#' }
+
 glm.cmp <- function(formula, data, offset = NULL,
-                    lambdalb = 1e-10, lambdaub = 1299, maxlambdaiter = 1e3, tol = 1e-6){
+                    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
   call <- match.call()
   if (is.null(formula)) {
     stop("formula must be specified (can not be NULL)")
@@ -136,12 +149,15 @@ glm.cmp <- function(formula, data, offset = NULL,
   lambda0 <- stats::fitted(M0)
   param <- c(beta0,lambda0,nu0)
   ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset)
-  param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, fsscale=32)
+  param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, 
+                    fsscale=32, lambdalb = lambdalb, lambdaub = lambdaub, 
+                    maxlambdaiter = maxlambdaiter, tol = tol)
+  lambdaub <- param_obj$lambdaub 
   ll_new <- param_obj$maxl
   param <- param_obj$param
   fsscale <- param_obj$fsscale
   iter <- 0
-  while (abs((ll_new-ll_old)/ll_new)>1e-6 && iter<=100){
+  while (abs((ll_new-ll_old)/ll_new) > tol && iter <= 100){
     iter <- iter +1
     ll_old <- ll_new
     paramold <- param
@@ -167,7 +183,60 @@ glm.cmp <- function(formula, data, offset = NULL,
     }
     eta <- t(X%*%beta)[1,]
     mu <- exp(eta+offset)
-    lambda <- comp_lambdas(mu,nu)
+    lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                               maxlambdaiter = maxlambdaiter, tol = tol))
+    if (class(lambda) =='try-error'){
+      while (class(lambda) =='try-error') {
+        lambdaubold <- lambdaub
+        lambdaub <- 0.8*lambdaub
+        lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                   maxlambdaiter = maxlambdaiter, tol = tol))
+      }
+      lastworking_lambdaub <- lambdaub
+      sub_iter1 <- 1 
+      while (max(lambda)/lambdaub >= 1-tol && sub_iter1 <= 20){
+        lambdaubnew <- lambdaub
+        lambdaub <- (lambdaubnew+lambdaubold)/2
+        sub_iter1 <- sub_iter1 + 1
+        lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                   maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter2 <- 1
+        while (class(lambda) =='try-error' && sub_iter2 <= 20) {
+          lambdaubold <- lambdaub
+          lambdaub <- (lambdaubnew+lambdaubold)/2
+          sub_iter2 <- sub_iter2 + 1
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+        }
+        if (sub_iter2 >= 21){
+          lambdaub <- lastworking_lambdaub
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+          break
+        }
+      }
+    } else if (max(lambda)/lambdaub >= 1-tol){
+      lastworking_lambdaub <- lambdaub
+      while (max(lambda)/lambdaub >= 1-tol){ 
+        lambdaubold <- lambdaub
+        lambdaub <- lambdaubnew <- 1.2*lambdaub
+        lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                   maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter1 <- 1
+        while (class(lambda) =='try-error' && sub_iter1 <= 20) {
+          lambdanew <- lambdaub <- (lambdanew + lambdaold)/2
+          sub_iter1 <- sub_iter1 + 1
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+        }
+        if (sub_iter1 >=21){
+          lambdaub <- lastworking_lambdaub
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+          break
+        } 
+      }
+    }
     param <- c(beta, lambda, nu)
     ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset)
     halfstep <- 0
@@ -177,7 +246,60 @@ glm.cmp <- function(formula, data, offset = NULL,
       nu <- (nu+nuold)/2
       eta <- t(X%*%beta)[1,]
       mu <- exp(eta+offset)
-      lambda <- comp_lambdas(mu,nu)
+      lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                 maxlambdaiter = maxlambdaiter, tol = tol))
+      if (class(lambda) =='try-error'){
+        while (class(lambda) =='try-error') {
+          lambdaubold <- lambdaub
+          lambdaub <- 0.8*lambdaub
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+        }
+        lastworking_lambdaub <- lambdaub
+        sub_iter1 <- 1 
+        while (max(lambda)/lambdaub >= 1-tol && sub_iter1 <= 20){
+          lambdaubnew <- lambdaub
+          lambdaub <- (lambdaubnew+lambdaubold)/2
+          sub_iter1 <- sub_iter1 + 1
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+          sub_iter2 <- 1
+          while (class(lambda) =='try-error' && sub_iter2 <= 20) {
+            lambdaubold <- lambdaub
+            lambdaub <- (lambdaubnew+lambdaubold)/2
+            sub_iter2 <- sub_iter2 + 1
+            lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                       maxlambdaiter = maxlambdaiter, tol = tol))
+          }
+          if (sub_iter2 >= 21){
+            lambdaub <- lastworking_lambdaub
+            lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                       maxlambdaiter = maxlambdaiter, tol = tol))
+            break
+          }
+        }
+      } else if (max(lambda)/lambdaub >= 1-tol){
+        lastworking_lambdaub <- lambdaub
+        while (max(lambda)/lambdaub >= 1-tol){ 
+          lambdaubold <- lambdaub
+          lambdaub <- lambdaubnew <- 1.2*lambdaub
+          lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                     maxlambdaiter = maxlambdaiter, tol = tol))
+          sub_iter1 <- 1
+          while (class(lambda) =='try-error' && sub_iter1 <= 20) {
+            lambdanew <- lambdaub <- (lambdanew + lambdaold)/2
+            sub_iter1 <- sub_iter1 + 1
+            lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                       maxlambdaiter = maxlambdaiter, tol = tol))
+          }
+          if (sub_iter1 >=21){
+            lambdaub <- lastworking_lambdaub
+            lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                                       maxlambdaiter = maxlambdaiter, tol = tol))
+            break
+          } 
+        }
+      }
       param <- c(beta, lambda, nu)
       ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset)
     }
@@ -224,6 +346,7 @@ glm.cmp <- function(formula, data, offset = NULL,
   out$nu <- nu
   out$terms <- mt
   out$model <- mf
+  out$lambdaub <- lambdaub
   out$linear.predictors <- eta
   out$maxl <- maxl
   out$fitted.values <- fitted
