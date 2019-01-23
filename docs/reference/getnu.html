@@ -62,7 +62,7 @@ nu estimate." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -73,9 +73,6 @@ nu estimate." />
     <span class="fa fa-home fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="../articles/mpcmp.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -113,7 +110,8 @@ nu estimate." />
     
     </div>
 
-    <pre class="usage"><span class='fu'>getnu</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>llstart</span>, <span class='kw'>fsscale</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>getnu</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>llstart</span>, <span class='kw'>fsscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1900</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +141,22 @@ It is assumed that <code>nu</code> is in the last position of <code>param</code>
       <th>fsscale</th>
       <td><p>numeric: a scaling factor (generally &gt;1) for the 
 relaxed fisher scoring algorithm</p></td>
+    </tr>
+    <tr>
+      <th>lambdalb, lambdaub</th>
+      <td><p>numeric: the lower and upper end points for the interval to be
+searched for lambda(s).</p></td>
+    </tr>
+    <tr>
+      <th>maxlambdaiter</th>
+      <td><p>numeric: the maximum number of iterations allowed to solve 
+for lambda(s).</p></td>
+    </tr>
+    <tr>
+      <th>tol</th>
+      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the 
+mean constraint if the absolute difference between the calculated mean and a fitted
+values is less than tol.</p></td>
     </tr>
     </table>
     

@@ -120,9 +120,9 @@ coef.cmp <- function(object, ...){
 }
 
 
-#' Summarize COM-Poisson Model Fit
+#' Summary of COM-Poisson Model Fit
 #' 
-#' \code{summary} and \code{print} method for class \code{cmp}.  
+#' \code{summary} method for class \code{cmp}.  
 #' 
 #' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param digits numeric; minimum number of significant digits to be used for most numbers.
@@ -169,19 +169,32 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
   cat("\nAIC:", format(AIC(object)), "\n\n")
 }
 
-#' @rdname summary.cmp
-#' @export
-print.cmp <- function(object,...)
+#' Print Values of COM-Poisson Model 
+#' 
+#' \code{print} method for class \code{cmp}.  
+#' 
+#' @param x an object class 'cmp', obtained from a call to \code{glm.cmp}.
+#' @param ... other arguments passed to or from other methods  (currently unused).
+
+#' @details  
+#' \code{print.cmp} can be used to print a short summary of object class 'cmp'.
+#' 
+#' @seealso 
+#' \code{\link{summary.cmp}}, \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}.
+#' @examples 
+#' ## For examples see example(glm.cmp)
+
+print.cmp <- function(x,...)
 {
-  cat("\nCall: ", paste(deparse(object$call), sep = "\n", collapse = "\n"),
+  cat("\nCall: ", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n", sep = "")
   cat("\nLinear Model Coefficients:\n")
-  print.default(format(signif(object$coefficients,3)), print.gap = 2,quote = FALSE)
-  cat("\nDispersion (nu):", object$nu)
-  cat("\nDegrees of Freedom:", object$df.null, "Total (i.e. Null); ",
-      object$df.residuals, "Residual")
-  cat("\nNull Deviance:", object$null.deviance, "\nResidual Deviance:",
-      object$residuals.deviance, "\nAIC:", format(AIC(object)), "\n\n")
+  print.default(format(signif(x$coefficients,3)), print.gap = 2,quote = FALSE)
+  cat("\nDispersion (nu):", x$nu)
+  cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
+      x$df.residuals, "Residual")
+  cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",
+      x$residuals.deviance, "\nAIC:", format(AIC(x)), "\n\n")
 }
 
 

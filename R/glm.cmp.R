@@ -5,7 +5,7 @@
 #' 
 #' @usage 
 #' glm.cmp(formula, data, offset = NULL,
-#'    lambdalb = 1e-10, lambdaub = 1299, maxlambdaiter = 1e3, tol = 1e-6)
+#'    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6)
 #' @param formula an object of class 'formula': a symblic desciption of the model to be 
 #' fitted. 
 #' @param data an optional data frame containing the variables in the model

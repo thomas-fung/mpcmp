@@ -2,13 +2,10 @@
 % Please edit documentation in R/summarize_extract.R
 \name{summary.cmp}
 \alias{summary.cmp}
-\alias{print.cmp}
-\title{Summarize COM-Poisson Model Fit}
+\title{Summary of COM-Poisson Model Fit}
 \usage{
 \method{summary}{cmp}(object, digits = max(3L, getOption("digits") - 3L),
   ...)
-
-\method{print}{cmp}(object, ...)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}
@@ -18,7 +15,7 @@
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 }
 \description{
-\code{summary} and \code{print} method for class \code{cmp}.
+\code{summary} method for class \code{cmp}.
 }
 \details{
 \code{summary.glm} tries to be smart about formatting the coefficients, standard errors 

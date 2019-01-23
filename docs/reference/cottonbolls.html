@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract COM-Poisson Model Residuals — residuals.cmp • mpcmp</title>
+<title>Cotton Bolls data set — cottonbolls • mpcmp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,11 @@
 
 
 
-<meta property="og:title" content="Extract COM-Poisson Model Residuals — residuals.cmp" />
+<meta property="og:title" content="Cotton Bolls data set — cottonbolls" />
 
-<meta property="og:description" content="residuals is a generic function which extracts model residuals from objects 
-returned by the modelling function glm.comp. resid is an alias for 
-residuals ." />
+<meta property="og:description" content="This data set gives the observed number of bolls produced by the cotton 
+plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
+to examine the effect of five defoliation levels (0" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,60 +99,58 @@ residuals ." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract COM-Poisson Model Residuals</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>residuals.cmp.Rd</code></div>
+    <h1>Cotton Bolls data set</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/mpcmp-package.R'><code>R/mpcmp-package.R</code></a></small>
+    <div class="hidden name"><code>cottonbolls.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>residuals</code> is a generic function which extracts model residuals from objects 
-returned by the modelling function <code>glm.comp</code>. <code>resid</code> is an alias for 
-<code>residuals</code> .</p>
+    <p>This data set gives the observed number of bolls produced by the cotton 
+plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
+to examine the effect of five defoliation levels (0<!-- %, 25%, 50%, 75% and 100%). --></p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'>residuals</span>(<span class='no'>object</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"deviance"</span>, <span class='st'>"pearson"</span>,
-  <span class='st'>"response"</span>), <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>an object class 'cmp', obtained from a call to <code>glm.cmp</code>.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>the <code>type</code> of residuals which should be returned. The alternatives are:
-'deviance' (default), 'pearson' and 'response'. Can be abbreviated.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='fu'>data</span>(<span class='no'>cottonbolls</span>)</pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>Residuals extracted from the object <code>object</code>.</p>
+    <p>A data frame with 125 observations on 4 variables.</p><dl class='dl-horizontal'>
+<dt>nc</dt><dd><p>number of bolls produced by two cotton plants at harvest</p></dd>
+<dt>stages</dt><dd><p>growth stage</p></dd>
+<dt>def</dt><dd><p>artificial defoliation level</p></dd>
+<dt>def2</dt><dd><p>square of def</p></dd>
+</dl>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code></p></div>
+    <p>Supplementary Content of Zevini et al. (2014): 
+<a href='http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014'>http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014</a></p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014). 
+The Gamma-count distribution in the analysis of experimental underdispersed data. 
+<em>Journal of Applied Statistics</em> <b>41</b>, 2616--26.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#references">References</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

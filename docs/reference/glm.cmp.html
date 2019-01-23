@@ -62,7 +62,7 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -73,9 +73,6 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
     <span class="fa fa-home fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="../articles/mpcmp.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -114,7 +111,7 @@ generalized linear model with a log-link by using Fisher Scoring iteration.</p>
     </div>
 
     <pre class="usage"><span class='fu'>glm.cmp</span>(<span class='no'>formula</span>, <span class='no'>data</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-   <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1299</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1e3</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-6</span>)</pre>
+   <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1900</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1e3</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-6</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,7 +134,9 @@ of length equal to the number of cases.</p></td>
     <tr>
       <th>lambdalb, lambdaub</th>
       <td><p>numeric: the lower and upper end points for the interval to be
-searched for lambda(s).</p></td>
+searched for lambda(s). The default value for lambdaub should be sufficient for small to
+moderate size nu. If nu is large and required a larger <code>lambdaub</code>, the algorithm
+will scale up <code>lambdaub</code> accordingly.</p></td>
     </tr>
     <tr>
       <th>maxlambdaiter</th>
@@ -188,6 +187,7 @@ The null model will include only the intercept.</p></dd>
 <dt>terms</dt><dd><p>the <code>terms</code> object used</p></dd>
 <dt>data</dt><dd><p>the <code>data</code> argument</p></dd>
 <dt>offset</dt><dd><p>the <code>offset</code> vector used</p></dd>
+<dt>lambdaub</dt><dd><p>the final <code>lambdaub</code> used</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -271,7 +271,15 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; Residual deviance: 131.50  on 116 degrees of freedom
 #&gt; 
 #&gt; AIC: 382.1754 
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
+### Model fitting for predictor V 
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>data</span>(<span class='no'>cottonbolls</span>)
+<span class='no'>M.bolls</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>nc</span>~ <span class='no'>nc</span>~<span class='fl'>1</span>+<span class='no'>stages</span>:<span class='no'>def</span>+<span class='no'>stages</span>:<span class='no'>def2</span>, <span class='kw'>data</span><span class='kw'>=</span> <span class='no'>cottonbolls</span>)
+<span class='no'>M.bolls</span>
+<span class='fu'>summary</span>(<span class='no'>M.bolls</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

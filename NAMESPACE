@@ -2,7 +2,6 @@
 
 S3method(plot,cmp)
 S3method(predict,cmp)
-S3method(print,cmp)
 S3method(summary,cmp)
 S3method(update,cmp)
 export(LRTnu)

@@ -52,6 +52,7 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
                          maxlambdaiter = maxlambdaiter, tol = tol))
   if (class(lambda) =='try-error'){
     while (class(lambda) =='try-error') {
+      lambdaold <- NULL
       lambdaubold <- lambdaub
       lambdaub <- 0.8*lambdaub
       lambda <- try(comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
