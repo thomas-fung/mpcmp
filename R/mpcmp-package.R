@@ -6,7 +6,7 @@
 #' @title Mean-parametrized Conway-Maxwell-Poisson Regression
 #' @keywords package
 #' @references 
-#' #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). The \code{mpcmp} package for 
+#' #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). The \code{mpcmp} package for 
 #' Mean-parametrized Conway-Maxwell-Poisson Regression. 
 #' 
 #' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 

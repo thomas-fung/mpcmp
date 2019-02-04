@@ -102,6 +102,23 @@ fitted.cmp <- function(object, ...){
   return(object$fitted.values)
 }
 
+#' Extract the Model Frame from a COM-Poisson Model Fit
+#' 
+#' An accessor function used to extract the model frame from a 'cmp' object.
+#' 
+#' @param formula an object class 'cmp' object, obtained from a call to \code{glm.cmp}
+#' @param ... other arguments passed to or from other methods  (currently unused).
+#' @return 
+#' The method will return the saved \code{\link{data.frame}} used when fitting the cmp model.
+#' @seealso 
+#' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
+model.frame.cmp <- function(formula, ...){
+  return(formula$model)
+}
+
+
+
+
 #' Extract Model Coefficients from a COM-Poisson Model Fit
 #' 
 #' An accessor function used to extract model coefficients from a 'cmp' object.

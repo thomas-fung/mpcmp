@@ -93,7 +93,7 @@
 #' and \code{\link{residuals.cmp}}.
 #' @examples 
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
-#' \dontrun{
+#' \donttest{
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attendance
@@ -109,9 +109,9 @@
 #' 
 #' ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
 #' ### Model fitting for predictor V 
-#' \dontrun{
+#' \donttest{
 #' data(cottonbolls)
-#' M.bolls <- glm.cmp(nc~ nc~1+stages:def+stages:def2, data= cottonbolls)
+#' M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
 #' M.bolls
 #' summary(M.bolls)
 #' }
