@@ -176,7 +176,8 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
   cmat <- cbind(cmat, 2*pnorm(-abs(cmat[,3])))
   colnames(cmat) <- c("Estimate", "Std.Err", "Z value", "Pr(>|z|)")
   printCoefmat(cmat, digits = 3, P.values = TRUE)
-  cat("\n(Dispersion parameter for Mean-CMP(", signif(object$nu, digits), ") family taken to be 1)\n\n",
+  cat("\n(Dispersion parameter for Mean-CMP estimated to be ", 
+      signif(object$nu, digits), ")\n\n", 
       apply(cbind(paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
                   format(unlist(object[c("null.deviance","residuals.deviance")]),
                          digits = max(5L, digits + 1L)), " on",
