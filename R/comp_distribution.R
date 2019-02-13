@@ -42,10 +42,11 @@ NULL
 #' @rdname COM_Poisson_Distribution
 #' @export
 dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
-                  lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+                   lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
-  # mu and lambda are linked via "exact" or "approx" mean calculation
   # x, mu, nu are recycled to match the length of each other.
+  # lambdaub will be scaled up if there is severe underdispersion so that 
+  # the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
   }
@@ -69,11 +70,26 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda[mu.ok.ind] <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind],
-                                        lambdalb = lambdalb,
-                                        lambdaub = lambdaub,
-                                        maxlambdaiter = maxlambdaiter, tol = tol)
-    }
+      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                 lambdalb = lambdalb, lambdaub = lambdaub, 
+                                 maxlambdaiter = maxlambdaiter, tol = tol))
+      if (class(lambda.ok) =='try-error'){
+        stop("lambdaub is probably too large for at least one of the nu. Reduce 
+             lambdaub and try again.")}
+      lambda[mu.ok.ind] <- lambda.ok
+      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      sub_iter1 <- 1 
+      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
+        lambdaubold <- lambdaub
+        lambdaub <- 2*lambdaub
+        lambda[lambdaub.err.ind] <- 
+          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                           lambdalb = lambdalb, lambdaub = lambdaub, 
+                           maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter1 <- sub_iter1+1
+        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      }      
+      }
   }
   # at a vector of yvalues
   pmf <- rep(0,length(x))
@@ -89,7 +105,10 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
         pmf[i] <- 0
       } else {
         if (x[i]<0){pmf[i]=0} else{
-          pmf[i] <- (lambda[i]^x[i])/(factorial(x[i])^nu[i])/Z(lambda[i], nu[i])}
+          # pmf <- exp(log(density))
+          pmf[i] <- exp(x[i]*log(lambda[i])-(nu[i]*lfactorial(x[i]))-
+                          log(Z(lambda[i], nu[i])))
+        }
       }
     }
   }
@@ -101,9 +120,11 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
 #' @rdname COM_Poisson_Distribution
 #' @export
 pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
+  # lambdaub will be scaled up if there is severe underdispersion so that 
+  # the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
   }
@@ -128,10 +149,26 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda[mu.ok.ind] <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind],
-                                        lambdalb = lambdalb,
-                                        lambdaub = lambdaub,
-                                        maxlambdaiter = maxlambdaiter, tol = tol)}
+      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                    lambdalb = lambdalb, lambdaub = lambdaub, 
+                                    maxlambdaiter = maxlambdaiter, tol = tol))
+      if (class(lambda.ok) =='try-error'){
+        stop("lambdaub is probably too large for at least one of the nu. Reduce 
+             lambdaub and try again.")}
+      lambda[mu.ok.ind] <- lambda.ok
+      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      sub_iter1 <- 1 
+      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
+        lambdaubold <- lambdaub
+        lambdaub <- 2*lambdaub
+        lambda[lambdaub.err.ind] <- 
+          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                           lambdalb = lambdalb, lambdaub = lambdaub, 
+                           maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter1 <- sub_iter1+1
+        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      }      
+      }
   }
   for (i in 1:length(q)) {
     if ( (mu[i] == 0 | lambda[i] ==0) && q[i]>=0){
@@ -155,9 +192,11 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
+  # lambdaub will be scaled up if there is severe underdispersion so that 
+  # the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
   }
@@ -182,7 +221,26 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda[mu.ok.ind] <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind])}
+      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                    lambdalb = lambdalb, lambdaub = lambdaub, 
+                                    maxlambdaiter = maxlambdaiter, tol = tol))
+      if (class(lambda.ok) =='try-error'){
+        stop("lambdaub is probably too large for at least one of the nu. Reduce 
+             lambdaub and try again.")}
+      lambda[mu.ok.ind] <- lambda.ok
+      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      sub_iter1 <- 1 
+      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
+        lambdaubold <- lambdaub
+        lambdaub <- 2*lambdaub
+        lambda[lambdaub.err.ind] <- 
+          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                           lambdalb = lambdalb, lambdaub = lambdaub, 
+                           maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter1 <- sub_iter1+1
+        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      }      
+      }
   }
   if (!lower.tail){ p <- 1-p}
   if (log.p){ p <- exp(p)}
@@ -210,9 +268,12 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10, 
-                  lambdaub = 1200, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
   # generates random deviates of CMP variables with mean mu and dispersion nu
   # test to see at least one of mu and lambda is missing
+  # mu, nu, lambda are recycled to give vectors length n
+  # lambdaub will be scaled up if there is severe underdispersion so that 
+  # the correct lambda can be found 
   if (length(n)>1){
     n <- length(n)
   }
@@ -230,7 +291,6 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
   if (n < max(length(mu), length(nu), length(lambda))){
     stop("unused argument in mu or nu or lambda")
   }
-  # mu, nu, lambda are recycled to give vectors length n
   df <- CBIND(x = rep(0,n), mu=mu, nu=nu, lambda = lambda)
   x <- df[,1]
   mu <- df[,2]
@@ -244,11 +304,26 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda[mu.ok.ind] <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind],
-                                        lambdalb = lambdalb,
-                                        lambdaub = lambdaub,
-                                        maxlambdaiter = maxlambdaiter, tol = tol)
-    }
+      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                    lambdalb = lambdalb, lambdaub = lambdaub, 
+                                    maxlambdaiter = maxlambdaiter, tol = tol))
+      if (class(lambda.ok) =='try-error'){
+        stop("lambdaub is probably too large for at least one of the nu. Reduce 
+             lambdaub and try again.")}
+      lambda[mu.ok.ind] <- lambda.ok
+      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      sub_iter1 <- 1 
+      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
+        lambdaubold <- lambdaub
+        lambdaub <- 2*lambdaub
+        lambda[lambdaub.err.ind] <- 
+          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                           lambdalb = lambdalb, lambdaub = lambdaub, 
+                           maxlambdaiter = maxlambdaiter, tol = tol))
+        sub_iter1 <- sub_iter1+1
+        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
+      }      
+      }
   }
   for (i in 1:n){
     if (mu[i] ==0 | lambda[i] == 0){

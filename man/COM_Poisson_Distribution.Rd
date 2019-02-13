@@ -9,17 +9,17 @@
 \title{The Conway-Maxwell-Poisson (COM-Poisson) Distribution.}
 \usage{
 dcomp(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
-  lambdaub = 1200, maxlambdaiter = 1000, tol = 1e-06)
+  lambdaub = 1900, maxlambdaiter = 1000, tol = 1e-06)
 
 pcomp(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1000,
+  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1000,
   tol = 1e-06)
 
 qcomp(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-  lambdalb = 1e-10, lambdaub = 1200, maxlambdaiter = 1000,
+  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1000,
   tol = 1e-06)
 
-rcomp(n, mu, nu = 1, lambda, lambdalb = 1e-10, lambdaub = 1200,
+rcomp(n, mu, nu = 1, lambda, lambdalb = 1e-10, lambdaub = 1900,
   maxlambdaiter = 1000, tol = 1e-06)
 }
 \arguments{

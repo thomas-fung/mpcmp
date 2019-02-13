@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution — comp_lambdas • mpcmp</title>
+<title>Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp • mpcmp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
 
 
-<meta property="og:title" content="Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution — comp_lambdas" />
+<meta property="og:title" content="Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp" />
 
-<meta property="og:description" content="Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
-this function is used to find a lambda that can satisfy the mean constraint with a 
-combination of bisection and Newton-Raphson updates. The function is also vectorized but
-will only update those that have not converged." />
+<meta property="og:description" content="An accessor function used to extract the model frame from a 'cmp' object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,55 +97,40 @@ will only update those that have not converged." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/comp_lambdas.R'><code>R/comp_lambdas.R</code></a></small>
-    <div class="hidden name"><code>comp_lambdas.Rd</code></div>
+    <h1>Extract the Model Frame from a COM-Poisson Model Fit</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
+    <div class="hidden name"><code>model.frame.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
-this function is used to find a lambda that can satisfy the mean constraint with a 
-combination of bisection and Newton-Raphson updates. The function is also vectorized but
-will only update those that have not converged.</p>
+    <p>An accessor function used to extract the model frame from a 'cmp' object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>comp_lambdas</span>(<span class='no'>mu</span>, <span class='no'>nu</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1900</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for cmp</span>
+<span class='fu'>model.frame</span>(<span class='no'>formula</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mu, nu</th>
-      <td><p>mean and dispersion parameters. Must be straightly positive.</p></td>
+      <th>formula</th>
+      <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
     </tr>
     <tr>
-      <th>lambdalb, lambdaub</th>
-      <td><p>numeric; the lower and upper end points for the interval to be
-searched for lambda(s).</p></td>
-    </tr>
-    <tr>
-      <th>maxlambdaiter</th>
-      <td><p>numeric; the maximum number of iterations allowed to solve 
-for lambda(s).</p></td>
-    </tr>
-    <tr>
-      <th>tol</th>
-      <td><p>numeric; the convergence threshold. A lambda is said to satisfy the 
-mean constraint if the absolute difference between the calculated mean and the 
-corresponding mu values is less than tol.</p></td>
-    </tr>
-    <tr>
-      <th>lambdaint</th>
-      <td><p>numeric vector; initial gauss for lambda(s).</p></td>
+      <th>...</th>
+      <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function returns the lambda value(s) that satisfies the mean constraint(s).</p>
+    <p>The method will return the saved <code>data.frame</code> used when fitting the cmp model.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='residuals.cmp.html'>residuals.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
     
 
   </div>
@@ -158,6 +140,8 @@ corresponding mu values is less than tol.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
