@@ -24,7 +24,7 @@ A reference manual is available at [thomas-fung.github.io/mpcmp](https://thomas-
 
 If you use this package to analyse your data, please use the following citation:
 
-- Fung, T., Alwan, A., Wishart, J. and Huang, A. (2018). "The mpcmp package for Mean-parametrized Conway-Maxwell Poisson Regression."
+- Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). "The mpcmp package for Mean-parametrized Conway-Maxwell Poisson Regression."
 
 From R you can use:
 
