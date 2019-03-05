@@ -1,10 +1,21 @@
 # mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)
+
 The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177%2F1471082X17697749).
 
 The `mpcmp` currently only supports log-lienar mean models, however work is progressing to incorporate regression being linked to the dispersion parameter and a zero-inflated Conway-Maxwell Poisson model. 
 
 ## Installation
+
+### Stable release on CRAN
+
+The ***mpcmp*** package has been on [CRAN](https://cran.r-project.org/package=mpcmp) since March 2019.  You can install it from CRAN in the usual way:
+
+```s
+install.packages("mpcmp")
+library("mpcmp")
+```
 
 ### Development version on Github
 
