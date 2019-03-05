@@ -6,10 +6,10 @@
 #' @title Mean-parametrized Conway-Maxwell-Poisson Regression
 #' @keywords package
 #' @references 
-#' #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). The \code{mpcmp} package for 
+#' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). The \code{mpcmp} package for 
 #' Mean-parametrized Conway-Maxwell-Poisson Regression. 
 #' 
-#' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+#' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 NULL
 
@@ -17,7 +17,7 @@ NULL
 #'
 #' This data set gives the number of days absent 
 #' from high school and the gender, maths score (standardized score out of 100) and 
-#' academic programme (‘General’, ‘Academic’ and ‘Vocational’) of 314 students 
+#' academic programme ('General', 'Academic' and 'Vocational') of 314 students 
 #' sampled from two urban high schools. The attendance data frame has 314 observations 
 #' on 5 variables.
 #'
@@ -28,7 +28,7 @@ NULL
 #' \item{gender}{gender}
 #' \item{math}{standardized math score out of 100}
 #' \item{daysabs}{number of days absent from high school}
-#' \item{prog}{academic programme (‘General’, ‘Academic’ and ‘Vocational’)}
+#' \item{prog}{academic programme ('General', 'Academic' and 'Vocational')}
 #' }
 #' 
 #' @docType data
@@ -79,7 +79,7 @@ NULL
 #' 
 #' Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{http://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.
 #' 
-#' Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1–6.1.
+#' Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1-6.1.
 #' 
 #' Jaggia, S. and Thosar, S. (1993). Multiple Bids as a Consequence of Target Management
 #' Resistance \emph{Review of Quantitative Finance and Accounting} \bold{3}, 447--457.

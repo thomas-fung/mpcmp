@@ -14,7 +14,7 @@
 #' @import stats
 #' @export
 #' @references 
-#' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+#' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #' @seealso \code{\link{glm.cmp}}, \code{\link{update.cmp}}
 #' @examples 
@@ -78,7 +78,7 @@ cmplrtest = function(object1,object2, digits=3) {
 #' @import stats
 #' @export
 #' @references 
-#' Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+#' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #' @examples 
 #' data(takeoverbids)
