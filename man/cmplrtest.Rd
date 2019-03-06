@@ -38,7 +38,7 @@ cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
 
 }
 \references{
-Huang, A. (2017). Mean-parametrized Conway–Maxwell–Poisson regression models for 
+Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }
 \seealso{

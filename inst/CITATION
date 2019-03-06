@@ -1,5 +1,5 @@
-bibentry(bibtype = "Article",
-  title        = "The mpcmp Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression",
+bibentry(bibtype = "Manual",
+  title        = "mpcmp: Mean-Parametrizied Conway-Maxwell Poisson Regression",
   author       = c(person(given = "Thomas",
                           family = "Fung",
                           email = "thomas.fung@mq.edu.au"),
@@ -12,12 +12,7 @@ bibentry(bibtype = "Article",
 		   person(given = c("Alan"),
                           family = "Huang",
                           email = "alan.huang@uq.edu.au")),
-  journal      = "Arxiv",
   year         = "2019",
-  volume       = "",
-  number       = "",
-  pages        = "",
-  doi          = "",
-
-  header       = "To cite mpcmp in publications use:"
+  note         = "R package version 0.1.3",
+  header       = "To cite the mpcmp package in publications use:"
 )

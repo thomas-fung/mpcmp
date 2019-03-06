@@ -10,7 +10,7 @@
 \item{gender}{gender}
 \item{math}{standardized math score out of 100}
 \item{daysabs}{number of days absent from high school}
-\item{prog}{academic programme (‘General’, ‘Academic’ and ‘Vocational’)}
+\item{prog}{academic programme ('General', 'Academic' and 'Vocational')}
 }}
 \source{
 \url{http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta}
@@ -21,7 +21,7 @@ data(attendance)
 \description{
 This data set gives the number of days absent 
 from high school and the gender, maths score (standardized score out of 100) and 
-academic programme (‘General’, ‘Academic’ and ‘Vocational’) of 314 students 
+academic programme ('General', 'Academic' and 'Vocational') of 314 students 
 sampled from two urban high schools. The attendance data frame has 314 observations 
 on 5 variables.
 }

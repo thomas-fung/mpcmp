@@ -45,7 +45,7 @@ Expansions: with Applications. \emph{Journal of Applied Econometrics} \bold{12} 
 
 Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{http://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.
 
-Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1–6.1.
+Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1-6.1.
 
 Jaggia, S. and Thosar, S. (1993). Multiple Bids as a Consequence of Target Management
 Resistance \emph{Review of Quantitative Finance and Accounting} \bold{3}, 447--457.
