@@ -4,14 +4,22 @@
 #' generalized linear model with a log-link by using Fisher Scoring iteration. 
 #' 
 #' @usage 
-#' glm.cmp(formula, data, offset = NULL,
-#'    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6)
+#' glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL
+#'    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6, 
+#'    contrasts = NULL)
 #' @param formula an object of class 'formula': a symblic desciption of the model to be 
 #' fitted. 
 #' @param data an optional data frame containing the variables in the model
 #' @param offset this can be used to specify an *a priori* known component to be included 
 #' in the linear predictor during fitting. This should be \code{NULL} or a numeric vector 
 #' of length equal to the number of cases.  
+#' @param subset an optional vector specifying a subset of observations to be used in the 
+#' fitting process.
+#' @param na.action a function which indicates what should happen when the data contain 
+#' NAs. The default is set by the na.action setting of options, and is na.fail if that 
+#' is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
+#' no action. Value na.exclude can be useful.
+#' @param betastart starting values for the parameters in the linear predictor for mu.
 #' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
 #' searched for lambda(s). The default value for lambdaub should be sufficient for small to
 #' moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
@@ -21,6 +29,7 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
+#' @param contrasts an optional list. See the contrasts.arg of model.matrix.default.
 #' @export
 #' @import stats
 #' @details 
@@ -117,28 +126,26 @@
 #' }
 
 glm.cmp <- function(formula, data, offset = NULL,
-                    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
-  call <- match.call()
-  if (is.null(formula)) {
-    stop("formula must be specified (can not be NULL)")
-  }
-  if (lambdalb>=lambdaub) {
-    stop("lower bound for the search of lambda must be smaller than the upper bound")
-  }
-  if (missing(data)){
-    data <- environment(formula)
-  }
-  mf <- stats::model.frame(formula, data=data)
+                    subset, na.action, betastart = NULL, 
+                    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6,
+                    contrasts = NULL){
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula", "data", "subset", "na.action", 
+               "offset"), names(mf), 0L)
+  mf <- mf[c(1L, m)]
+  mf$drop.unused.levels <- TRUE
+  mf[[1L]] <- as.name("model.frame")
+  mf <- eval(mf, parent.frame())
   mt <- attr(mf, "terms")
   y <- model.response(mf)
-  X <- model.matrix(formula,mf)
+  X <- model.matrix(formula,mf,contrasts)
   if (is.null(offset)){
     offset.cmp = rep(0,length(y))
   } else {
     offset.cmp = offset
   }
   # use poisson glm to generate initial values for betas
-  M0 <- stats::glm(y~-1+X+offset(offset.cmp), family=stats::poisson())
+  M0 <- stats::glm(y~-1+X+offset(offset.cmp), start = betastart, family=stats::poisson())
   offset <- M0$offset
   n <- length(y) # sample size
   q <- ncol(X)  # number of covariates
@@ -346,6 +353,8 @@ glm.cmp <- function(formula, data, offset = NULL,
   out$nu <- nu
   out$terms <- mt
   out$model <- mf
+  out$contrasts <- attr(X, "contrasts")
+  out$na.action <- attr(mf, "na.action")
   out$lambdaub <- lambdaub
   out$linear.predictors <- eta
   out$maxl <- maxl

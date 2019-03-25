@@ -4,7 +4,7 @@
 \alias{glm.cmp}
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model}
 \usage{
-glm.cmp(formula, data, offset = NULL,
+glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL
    lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6)
 }
 \arguments{
@@ -17,6 +17,14 @@ fitted.}
 in the linear predictor during fitting. This should be \code{NULL} or a numeric vector 
 of length equal to the number of cases.}
 
+\item{subset}{an optional vector specifying a subset of observations to be used in the 
+fitting process.}
+
+\item{na.action}{a function which indicates what should happen when the data contain 
+NAs. The default is set by the na.action setting of options, and is na.fail if that 
+is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
+no action. Value na.exclude can be useful.}
+
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s). The default value for lambdaub should be sufficient for small to
 moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
@@ -28,6 +36,10 @@ for lambda(s).}
 \item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
+
+\item{contrasts}{an optional list. See the contrasts.arg of model.matrix.default.}
+
+\item{betastart}{starting values for the parameters in the linear predictor for mu.}
 }
 \value{
 A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
