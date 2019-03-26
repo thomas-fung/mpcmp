@@ -129,9 +129,19 @@ glm.cmp <- function(formula, data, offset = NULL,
                     subset, na.action, betastart = NULL, 
                     lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6,
                     contrasts = NULL){
+  call <- match.call()
   mf <- match.call(expand.dots = FALSE)
   m <- match(c("formula", "data", "subset", "na.action", 
                "offset"), names(mf), 0L)
+  if (is.null(formula)) {
+    stop("formula must be specified (can not be NULL)")
+  }
+  if (lambdalb>=lambdaub) {
+    stop("lower bound for the search of lambda must be smaller than the upper bound")
+  }
+  if (missing(data)){
+    data <- environment(formula)
+  }
   mf <- mf[c(1L, m)]
   mf$drop.unused.levels <- TRUE
   mf[[1L]] <- as.name("model.frame")
