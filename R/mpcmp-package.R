@@ -123,3 +123,31 @@ NULL
 #' ## For examples see example(glm.cmp)
 NULL
 
+
+#' Fish  data set
+#'
+#' This data set gives the the number of fish species in lakes of the world; to examine the
+#' effect of the surface area of the lakes. The latitude of the lakes are also recorded. 
+#' 
+#' This data set is also used to illustrate that the fitting algorithm can handle some
+#' larger count data. 
+#' 
+#' @name fish
+#' @format A data frame with 70 observations on 4 variables.
+#' \describe{
+#' \item{lake}{name of the lakes}
+#' \item{species}{number of fish species in lakes}
+#' \item{area}{surface area (km squared) }
+#' \item{latitude}{latitude of the lakes}
+#' }
+#' @docType data
+#' @keywords datasets
+#' @usage 
+#' data(fish)
+#' @references 
+#' Barbour, C. D. and Brown, J. H. (1974). Fish species diversity in lakes. \emph{The
+#' American Naturalist}, \bold{108}, 473--488.
+#' 
+#' @examples 
+#' ## For examples see example(glm.cmp)
+NULL

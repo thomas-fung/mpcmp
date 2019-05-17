@@ -1,14 +1,16 @@
 Package: mpcmp
 Type: Package
 Title: Mean-Parametrized Conway-Maxwell Poisson (COM-Poisson) Regression
-Version: 0.1.4
-Date: 2019-03-6
+Version: 0.2.0
+Date: 2019-05-06
 Authors@R: c(person("Thomas", "Fung", role = c("aut", "cre"),
-         email = "thomas.fung@mq.edu.au"),
+         email = "thomas.fung@mq.edu.au",
+         comment =c(ORCID = "0000-0003-2601-0728")),
   person("Aya", "Alwan", role = "aut",
          email = "aya.alwan@mq.edu.au"),
   person("Justin", "Wishart", role = "aut",
-         email = "justin.wishart@mq.edu.au"),
+         email = "justin.wishart@mq.edu.au",
+         comment = c(ORCID = "0000-0002-8235-1845")),
   person("Alan", "Huang", role = "aut",
          email = "alan.huang@uq.edu.au"))
 Description: A collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell-Poisson (COM-Poisson) regression model of Huang (2017) <doi:10.1177/1471082X17697749>.
@@ -22,5 +24,8 @@ URL: https://github.com/thomas-fung/mpcmp
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: knitr,
-    rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+BugReports: https://github.com/thomas-fung/mpcmp/issues

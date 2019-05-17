@@ -4,8 +4,9 @@
 \alias{glm.cmp}
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model}
 \usage{
-glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL
-   lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6)
+glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL,
+   lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6, 
+   contrasts = NULL)
 }
 \arguments{
 \item{formula}{an object of class 'formula': a symblic desciption of the model to be 
@@ -25,6 +26,8 @@ NAs. The default is set by the na.action setting of options, and is na.fail if t
 is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
 no action. Value na.exclude can be useful.}
 
+\item{betastart}{starting values for the parameters in the linear predictor for mu.}
+
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s). The default value for lambdaub should be sufficient for small to
 moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
@@ -38,8 +41,6 @@ mean constraint if the absolute difference between the calculated mean and a fit
 values is less than tol.}
 
 \item{contrasts}{an optional list. See the contrasts.arg of model.matrix.default.}
-
-\item{betastart}{starting values for the parameters in the linear predictor for mu.}
 }
 \value{
 A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
@@ -106,19 +107,26 @@ if \emph{nu < 1} and \emph{nu > 1} respectively.
 }
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
-\donttest{
 data(attendance)
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attendance
 summary(M.attendance)
-}
+
+### Barbour & Brown (1974): Overdispersed Fish data
+\donttest{
+data(fish)
+M.fish <- glm.cmp(species~ 1+log(area), data=fish)
+M.fish
+summary(M.fish)}
 
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 data(takeoverbids)
 M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-    M.bids
+M.bids
 summary(M.bids)
+par(mfrow=c(2,2))
+plot(M.bids)
 
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
 ### Model fitting for predictor V 

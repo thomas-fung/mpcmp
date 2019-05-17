@@ -2,10 +2,14 @@
 % Please edit documentation in R/comp_lambdas.R
 \name{comp_lambdas}
 \alias{comp_lambdas}
+\alias{comp_lambdas_fixed_ub}
 \title{Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution}
 \usage{
-comp_lambdas(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
-  maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1)
+comp_lambdas(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
+  maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1, summax = 100)
+
+comp_lambdas_fixed_ub(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
+  maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1, summax = 100)
 }
 \arguments{
 \item{mu, nu}{mean and dispersion parameters. Must be straightly positive.}
@@ -21,9 +25,16 @@ mean constraint if the absolute difference between the calculated mean and the
 corresponding mu values is less than tol.}
 
 \item{lambdaint}{numeric vector; initial gauss for lambda(s).}
+
+\item{summax}{maximum number of terms to be considered in the truncated sum}
 }
 \value{
-The function returns the lambda value(s) that satisfies the mean constraint(s).
+Both \code{comp_lambdas} and \code{comp_lambdas_fixed_ub} returns the lambda value(s)
+that satisfies the mean constraint(s) as well as the current lambdaub value. 
+lambda value(s) returns by \code{comp_lambdas_fixed_ub} is bounded by the lambdaub 
+value. 
+\code{comp_lambdas} has the extra ability to scale up/down lambdaub to find most 
+appropriate correct lambda values.
 }
 \description{
 Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 

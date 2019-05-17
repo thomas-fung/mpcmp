@@ -14,76 +14,118 @@
 #' mean constraint if the absolute difference between the calculated mean and the 
 #' corresponding mu values is less than tol. 
 #' @param lambdaint numeric vector; initial gauss for lambda(s).
+#' @param summax maximum number of terms to be considered in the truncated sum
 #' @return 
-#' The function returns the lambda value(s) that satisfies the mean constraint(s). 
-comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
-                         maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1) {
-  # for given vector mean mu and vector dispersion nu, solve for the vector rate lambda
+#' Both \code{comp_lambdas} and \code{comp_lambdas_fixed_ub} returns the lambda value(s)
+#' that satisfies the mean constraint(s) as well as the current lambdaub value. 
+#' lambda value(s) returns by \code{comp_lambdas_fixed_ub} is bounded by the lambdaub 
+#' value. 
+#' \code{comp_lambdas} has the extra ability to scale up/down lambdaub to find most 
+#' appropriate correct lambda values. 
+#'  
+#' @name comp_lambdas
+NULL
+
+#' @rdname comp_lambdas
+comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000, 
+                         maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1, summax = 100){
   df <- CBIND(mu=mu, nu=nu, lambda = lambdaint, lb = lambdalb, ub = lambdaub)
   mu <- df[,1]
   nu <- df[,2]
   lambda <- df[,3]
-  lb <- df[,4]
-  ub <- df[,5]
-  # basically the contecnt of comp_means so that we don't have to
-  # recalculate Z within an iteration
-  summax <- 100
-  termlim <- 1e-6
-  iter <- 1
-  Zcurrent <- Z(lambda, nu)
-  sum1 <- 0
-  for (y in 1:summax) {
-    term <- (y-1)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if (max(term/sum1,na.rm = TRUE) < termlim){
-        break
-      }
-    }
-    sum1 <- sum1 + term
+  lambdalb <- df[,4]
+  lambdaub <- df[,5]
+  lambda.ok <- 
+    comp_lambdas_fixed_ub(mu, nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+                          maxlambdaiter = maxlambdaiter, tol = tol, 
+                          lambdaint = lambda, summax = summax)
+  lambda <- lambda.ok$lambda
+  lambdaub <- lambda.ok$lambdaub
+  lambdaub.err.ind <- which(is.nan(lambda))
+  sub_iter1 <- 1
+  while (length(lambdaub.err.ind)>0 && sub_iter1 <=100){
+    lambdaub[lambdaub.err.ind] <- 0.5*lambdaub[lambdaub.err.ind]
+    lambda.ok <- 
+      comp_lambdas_fixed_ub(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                            lambdalb = lambdalb[lambdaub.err.ind], 
+                            lambdaub = lambdaub[lambdaub.err.ind], 
+                            maxlambdaiter = maxlambdaiter, tol = tol, 
+                            lambdaint = lambda[lambdaub.err.ind], summax = summax)
+    lambda[lambdaub.err.ind] <- lambda.ok$lambda
+    lambdaub[lambdaub.err.ind] <- lambda.ok$lambdaub
+    sub_iter1 <- sub_iter1+1
+    lambdaub.err.ind <-  which(is.nan(lambda))
   }
-  mean1 <- sum1/Zcurrent
-  ### end of comp_means function
+  lambdaub.err.ind <- which(lambda/lambdaub >= 1-tol)
+  sub_iter1 <- 1 
+  while (length(lambdaub.err.ind)>0 && sub_iter1 <= 100){
+    lambdaub[lambdaub.err.ind] <- 2^(sub_iter1)*lambdaub[lambdaub.err.ind]
+    lambda.ok <- 
+      comp_lambdas_fixed_ub(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
+                            lambdalb = lambdalb[lambdaub.err.ind], 
+                            lambdaub = lambdaub[lambdaub.err.ind], 
+                            maxlambdaiter = maxlambdaiter, tol = tol, 
+                            lambdaint = lambda[lambdaub.err.ind],
+                            summax = summax)
+    lambda[lambdaub.err.ind] <- lambda.ok$lambda
+    lambdaub[lambdaub.err.ind] <- lambda.ok$lambdaub
+    sub_iter1 <- sub_iter1+1
+    lambdaub.err.ind <- which(lambda/lambdaub >= 1-tol)
+  }
+  out <- list()
+  out$lambda <- lambda
+  out$lambdaub <- max(lambdaub)
+  return(out)
+}
+
+#' @rdname comp_lambdas
+comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000, 
+                                  maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1, 
+                                  summax = 100) {
+  #df <- CBIND(mu=mu, nu=nu, lambda = lambdaint, lb = lambdalb, ub = lambdaub)
+  #mu <- df[,1]
+  #nu <- df[,2]
+  #lambda <- df[,3]
+  #lb <- df[,4]
+  #ub <- df[,5]
+  lambda = lambdaint
+  lb = lambdalb
+  ub = lambdaub
+  iter <- 1
+  log.Z <- Z(lambda, nu, log.z = TRUE, summax = summax)
+  mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
   not.converge.ind = which(abs(mean1-mu)>tol)
   while (length(not.converge.ind)>0 && iter <200){
-    still.above.target.ind = which(mean1[not.converge.ind]
-                                   >mu[not.converge.ind])
-    still.below.target.ind = which(mean1[not.converge.ind]<mu[not.converge.ind])
+    still.above.target.ind = which((mean1[not.converge.ind]
+                                    >mu[not.converge.ind]))
+    still.below.target.ind = which(mean1[not.converge.ind] < mu[not.converge.ind])
     lb[not.converge.ind[still.below.target.ind]] =
       lambda[not.converge.ind[still.below.target.ind]]
     ub[not.converge.ind[still.above.target.ind]] =
       lambda[not.converge.ind[still.above.target.ind]]
     lambda = (lb+ub)/2
-    Zcurrent <- Z(lambda, nu)
-    sum1 <- 0
-    for (y in 1:summax) {
-      term <- (y-1)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-      if (y > 3) {
-        if (max(term/sum1,na.rm = TRUE) < termlim){
-          break
-        }
-      }
-      sum1 <- sum1 + term
+    log.Z <- Z(lambda, nu, log.z = TRUE, summax = summax)
+    mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
+    while (sum(mean1==0)>0){
+      ub[not.converge.ind[mean1==0]] = ub[not.converge.ind[mean1==0]]/2
+      lambdaub = lambdaub/2
+      lambda = (lb+ub)/2
+      log.Z <- Z(lambda, nu, log.z=TRUE, summax = summax)
+      mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     }
-    mean1 <- sum1/Zcurrent
     not.converge.ind <- which(abs(mean1-mu)>tol)
     iter <- iter+1
   }
   while (length(not.converge.ind)>0 && iter <maxlambdaiter){
-    # basically the content of comp_variances without recalculating Z
-    sum2 <- 0;
+    # basically the content of comp_variances without recalculating Z and mean1
+    term <- matrix(0, nrow = length(mu), ncol=summax)
     for (y in 1:summax){
-      term <- (y-1)^2*exp(log(lambda^(y-1)) - nu*lgamma(y))
-      if (y > 3) {
-        if (max(term/sum2,na.rm = TRUE) < termlim) {
-          break
-        }
-      }
-      sum2 <- sum2 + term
+      term[,y] <- exp(2*log(y-1)+(y-1)*log(lambda) - nu*lgamma(y)-log.Z)
     }
-    var1 <- sum2/Zcurrent - mean1^2
+    var1 <- apply(term,1,sum) - mean1^2
     ## newton raphson update
-    newtonsteps <- - lambda[not.converge.ind]*mean1[not.converge.ind]/(var1[not.converge.ind])^2*
-      (log(mean1[not.converge.ind])-log(mu[not.converge.ind]))
+    newtonsteps <- - lambda[not.converge.ind]*mean1[not.converge.ind]/
+      (var1[not.converge.ind])^2*(log(mean1[not.converge.ind])-log(mu[not.converge.ind]))
     lambda.new <- lambda[not.converge.ind] + newtonsteps
     ## if newton raphson steps out of bound, use bisection method
     out.of.bound.ind = which((lambda.new< lb[not.converge.ind])
@@ -94,18 +136,12 @@ comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
       # any out of bound updates are replaced with mid-point of ub and lb
     }
     lambda[not.converge.ind] <- lambda.new
-    Zcurrent <- Z(lambda, nu)
-    sum1 <- 0
+    log.Z <- Z(lambda, nu, log.z=TRUE, summax)
+    term <- matrix(0, nrow = length(mu), ncol=summax)
     for (y in 1:summax) {
-      term <- (y-1)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-      if (y > 3) {
-        if (max(term/sum1,na.rm = TRUE) < termlim){
-          break
-        }
-      }
-      sum1 <- sum1 + term
+      term[,y] <- exp(log(y-1)+(y-1)*log(lambda) - nu*lgamma(y)-log.Z)
     }
-    mean1 <- sum1/Zcurrent
+    mean1 <- apply(term,1,sum)
     if (length(out.of.bound.ind)>0){
       still.above.target.ind = which(mean1[not.converge.ind[out.of.bound.ind]]
                                      >mu[not.converge.ind[out.of.bound.ind]])
@@ -120,8 +156,13 @@ comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1900,
         # any out of bound updates are replaced with mid-point of ub and lb
       }
     }
-    not.converge.ind <- which(((abs(mean1-mu)>tol)+ (lambda != lb)+ (lambda!=ub)) >= 1)
+    not.converge.ind <- which(((abs(mean1-mu)>tol)+ (lambda == lb)+ (lambda==ub)) >= 1)
     iter <- iter+1
   }
-  return(lambda)
+  out <- list()
+  out$lambda <- lambda
+  out$lambdaub <- lambdaub
+  return(out)
 }
+
+

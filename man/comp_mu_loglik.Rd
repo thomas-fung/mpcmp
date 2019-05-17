@@ -2,9 +2,12 @@
 % Please edit documentation in R/comp_mu_loglik.R
 \name{comp_mu_loglik}
 \alias{comp_mu_loglik}
+\alias{comp_mu_loglik_log_nu_only}
 \title{Calculate the Log-Likelihood of the COM-Poisson model}
 \usage{
-comp_mu_loglik(param, y, xx, offset)
+comp_mu_loglik(param, y, xx, offset, summax)
+
+comp_mu_loglik_log_nu_only(log_nu, mu, y, summax)
 }
 \arguments{
 \item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 
@@ -15,9 +18,16 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 \item{xx}{numeric matrix: the explanatory variables}
 
 \item{offset}{numeric vector: a vector of lenght equal to the number of cases}
+
+\item{summax}{maximum number of terms to be considered in the truncated sum}
+
+\item{log_nu}{numeric: nu in log-scale}
+
+\item{mu}{numeric vector: fitted mean parameters}
 }
 \value{
-The log-likelihood value of the COM-Poisson model.
+\code{comp_mu_loglik} returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
+\code{comp_mu_loglik_log_nu_only} returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with \code{optim}.
 }
 \description{
 A function to compute the log-likelihood of the COM-Poisson model.

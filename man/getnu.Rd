@@ -5,7 +5,7 @@
 \title{Parameter Generator for nu}
 \usage{
 getnu(param, y, xx, offset, llstart, fsscale = 1, lambdalb = 1e-10,
-  lambdaub = 1900, maxlambdaiter = 1000, tol = 1e-06)
+  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06, summax = 100)
 }
 \arguments{
 \item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 
@@ -31,6 +31,8 @@ for lambda(s).}
 \item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
+
+\item{summax}{maximum number of terms to be considered in the truncated sum}
 }
 \value{
 List containing the following:

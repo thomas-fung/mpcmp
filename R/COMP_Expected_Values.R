@@ -7,7 +7,9 @@
 #' Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
 #' bad if the COM-Poisson has a large rate or mean. 
 #' 
-#' @param lambda,nu rate and dispersion parameters. Must be positives. 
+#' @param lambda,nu, rate and dispersion  parameters. Must be positives. 
+#' @param log.Z, an optional vector specifying normalizing constant Z in log sacle. 
+#' @param summax maximum number of terms to be considered in the truncated sum
 #' @return 
 
 #' \code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
@@ -20,122 +22,101 @@
 #' 
 #' \code{comp_variances_logfactorialy} gives the variance of \emph{log(Y!)}.
 #' 
-#' @name COMP_Expected_Values
+#' @name comp_expected_values
 NULL
 
-#' @rdname COMP_Expected_Values
-comp_mean_logfactorialy = function(lambda, nu){
+#' @rdname comp_expected_values
+comp_mean_logfactorialy = function(lambda, nu, log.Z, summax=100){
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
+  if (missing(log.Z)){
+    log.Z <- Z(lambda,nu,log.z= TRUE, summax)
+  }
+  df <- CBIND(lambda=lambda, nu=nu, log.Z = log.Z)
   lambda <- df[,1]
   nu <- df[,2]
-  if (length(lambda)>1 && length(nu>1) && length(lambda)!= length(nu)){
-    stop("lambda, nu must be scalars or vectors of the same length")}
-  summax <- 100
-  termlim <- 1e-6
-  sum1 <- 0
+  log.Z <- df[,3]
+  term <- matrix(0, nrow = length(lambda), ncol=summax)
   for (y in 1:summax){
-    term <- lgamma(y)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if (max(term/sum1, na.rm = TRUE) < termlim){
-        break
-      }
-    }
-    sum1 <- sum1 + term
+    term[,y] <- lgamma(y)*exp((y-1)*log(lambda) - nu*lgamma(y)-log.Z)
   }
-  mean1 <- sum1/Z(lambda, nu)
+  mean1 <- apply(term,1,sum)
   return(mean1)
 }
 
-#' @rdname COMP_Expected_Values
-comp_mean_ylogfactorialy <- function(lambda, nu){
+#' @rdname comp_expected_values
+comp_mean_ylogfactorialy <- function(lambda, nu, log.Z, summax=100){
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
+    if (missing(log.Z)){
+    log.Z <- Z(lambda,nu, log.z=TRUE, summax)
+  }
+  df <- CBIND(lambda=lambda, nu=nu, log.Z = log.Z)
   lambda <- df[,1]
   nu <- df[,2]
-  summax <- 100
-  termlim <- 1e-6
-  sum1 <- 0
+  log.Z <- df[,3]
+  term <- matrix(0, nrow = length(lambda), ncol=summax)
   for (y in 1:summax) {
-    term <- (y-1)*lgamma(y)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if ( max(term/sum1,na.rm = TRUE) < termlim){
-        break
-      }
-    }
-    sum1 <- sum1 + term
+    term[,y] <- exp(log(y-1)+log(lgamma(y))+ (y-1)*log(lambda) - nu*lgamma(y)-log.Z)
   }
-  mean1 <- sum1/Z(lambda, nu)
+  mean1 <- apply(term,1,sum)
   return(mean1)
 }
 
-#' @rdname COMP_Expected_Values
-comp_means <- function(lambda, nu) {
+#' @rdname comp_expected_values
+comp_means <- function(lambda, nu, log.Z, summax=100) {
   # approximates mean by truncation of COMP distributions
-  # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
+  # lambda, nu, mu.bd are recycled to match the length of each other.
+  if (missing(log.Z)){
+    log.Z <- Z(lambda,nu, log.z=TRUE, summax)
+  }
+  df <- CBIND(lambda=lambda, nu=nu, log.Z = log.Z)
   lambda <- df[,1]
   nu <- df[,2]
-  summax <- 100
-  termlim <- 1e-6
-  sum1 <- 0
+  log.Z <- df[,3]
+  term <- matrix(0, nrow = length(lambda), ncol=summax)
   for (y in 1:summax) {
-    term <- (y-1)*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if (max(term/sum1,na.rm = TRUE) < termlim){
-        break
-      }
-    }
-    sum1 <- sum1 + term
-    mean1 <- sum1/Z(lambda, nu)
+    term[,y] <- exp(log(y-1)+(y-1)*log(lambda) - nu*lgamma(y)-log.Z)
   }
+  mean1 <- apply(term,1,sum)
   return(mean1)
 }
 
-#' @rdname COMP_Expected_Values
-comp_variances <- function(lambda, nu) {
+
+#' @rdname comp_expected_values
+comp_variances <- function(lambda, nu, log.Z, summax=100) {
   # approximates normalizing constant by truncation for COMP distributions
-  # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
+  # lambda, nu, mu.bd are recycled to match the length of each other.
+  if (missing(log.Z)){
+    log.Z <- Z(lambda,nu, log.z = TRUE, summax)
+  }
+  df <- CBIND(lambda=lambda, nu=nu, log.Z = log.Z)
   lambda <- df[,1]
   nu <- df[,2]
-  summax <- 100
-  termlim <- 1e-6
-  sum2 <- 0
+  log.Z <- df[,3]
+  term <- matrix(0, nrow = length(lambda), ncol=summax)
   for (y in 1:summax){
-    term <- (y-1)^2*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if (max(term/sum2,na.rm = TRUE) < termlim) {
-        break
-      }
-    }
-    sum2 <- sum2 + term
+    term[,y] <- exp(2*log(y-1) + (y-1)*log(lambda) - nu*lgamma(y)-log.Z)
   }
-  var1 <- sum2/Z(lambda,nu) - (comp_means(lambda,nu))^2
+  var1 <- apply(term,1,sum)- (comp_means(lambda, nu, log.Z, summax))^2
   return(var1)
 }
 
-#' @rdname COMP_Expected_Values
-comp_variances_logfactorialy <- function(lambda, nu) {
+#' @rdname comp_expected_values
+comp_variances_logfactorialy <- function(lambda, nu, log.Z, summax = 100) {
   # approximates normalizing constant by truncation for COMP distributions
-  # lambda, nu are recycled to match the length of each other.
-  df <- CBIND(lambda=lambda, nu=nu)
+  # lambda, nu, mu.bd are recycled to match the length of each other.
+  if (missing(log.Z)){
+    log.Z <- Z(lambda,nu,log.z = TRUE, summax)
+  }
+  df <- CBIND(lambda=lambda, nu=nu, log.Z = log.Z)
   lambda <- df[,1]
   nu <- df[,2]
-  summax <- 100
-  termlim <- 1e-6
-  sum2 <- 0
+  log.Z <- df[,3]
+  term <- matrix(0, nrow = length(lambda), ncol=summax)
   for (y in 1:summax){
-    term <- (lgamma(y))^2*exp(log(lambda^(y-1)) - nu*lgamma(y))
-    if (y > 3) {
-      if (max(term/sum2,na.rm = TRUE) < termlim) {
-        break
-      }
-    }
-    sum2 <- sum2 + term
+    term[,y] <- lgamma(y)^2*exp((y-1)*log(lambda) - nu*lgamma(y)- log.Z)
   }
-  var1 <- sum2/Z(lambda,nu) - (comp_mean_logfactorialy(lambda,nu))^2
+  var1 <- apply(term,1,sum) - (comp_mean_logfactorialy(lambda, nu, log.Z, summax))^2
   return(var1)
 }
