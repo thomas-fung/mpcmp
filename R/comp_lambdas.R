@@ -113,7 +113,8 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
       log.Z <- Z(lambda, nu, log.z=TRUE, summax = summax)
       mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     }
-    not.converge.ind <- which(abs(mean1-mu)>tol)
+    not.converge.ind <- which((1-(((abs(mean1-mu) <=tol) + (lambda == lb) + (lambda == ub)
+                                   + (ub == lb)) >= 1))==1)
     iter <- iter+1
   }
   while (length(not.converge.ind)>0 && iter <maxlambdaiter){
@@ -126,6 +127,8 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
     ## newton raphson update
     newtonsteps <- - lambda[not.converge.ind]*mean1[not.converge.ind]/
       (var1[not.converge.ind])^2*(log(mean1[not.converge.ind])-log(mu[not.converge.ind]))
+    
+    
     lambda.new <- lambda[not.converge.ind] + newtonsteps
     ## if newton raphson steps out of bound, use bisection method
     out.of.bound.ind = which((lambda.new< lb[not.converge.ind])
@@ -156,7 +159,8 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
         # any out of bound updates are replaced with mid-point of ub and lb
       }
     }
-    not.converge.ind <- which(((abs(mean1-mu)>tol)+ (lambda == lb)+ (lambda==ub)) >= 1)
+    not.converge.ind <- which((1-(((abs(mean1-mu) <=tol) + (lambda == lb) + (lambda == ub)
+                               + (ub ==lb)) >= 1))==1)
     iter <- iter+1
   }
   out <- list()

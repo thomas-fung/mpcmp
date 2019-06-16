@@ -21,6 +21,7 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and mu 
 #' is less than tol.
+#' @param summax numeric; maximum number of terms to be considered in the truncated sum.
 #' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
 #' 
 #' Invalid arguemnts will result in return value \code{NaN}, with a warning.
@@ -42,7 +43,7 @@ NULL
 #' @rdname COM_Poisson_Distribution
 #' @export
 dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
-                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6, summax){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
   # x, mu, nu are recycled to match the length of each other.
   # lambdaub will be scaled down/up  if there is 
@@ -64,13 +65,17 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
   lambda <- df[,4]
   warn <- FALSE
   if (not.miss.mu) {
-    summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
       lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
-                                lambdalb = lambdalb, lambdaub = lambdaub, 
+                                lambdalb = lambdalb, 
+                                lambdaub = lambdaub,
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
                                 maxlambdaiter = maxlambdaiter, tol = tol, 
                                 summax = summax)
       lambda[mu.ok.ind] <- lambda.ok$lambda
@@ -82,7 +87,18 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
     D <- 1+(nu-1)*(A+B)
     mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
               length(lambda))
-    summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    mu_error <- sum(is.nan(mu))>0
+    mu[is.nan(mu)] <- 500
+      if (missing(summax)){
+        summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+        if (mu_error){
+          cat("At least one of the estimated mu returns Inf.\n")
+          cat("Possibly caused by large lambda and/or small nu.\n")
+          cat("Those undefined mu will now reset to 500.\n")
+          cat("Due to the resetting of mu, summax would also be affected.\n")
+          cat("You may want to specify summax instead.\n")
+        }
+      }
   }
   # at a vector of yvalues
   pmf <- rep(0,length(x))
@@ -114,7 +130,8 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
 #' @rdname COM_Poisson_Distribution
 #' @export
 pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
   # lambdaub will be scaled down/up if there is 
@@ -138,13 +155,16 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   cdf <- rep(0,length(q))
   warn <- FALSE
   if (not.miss.mu) {
-    summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
       lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
                                 lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
                                 maxlambdaiter = maxlambdaiter, tol = tol, 
                                 summax = summax)
       lambda[mu.ok.ind] <- lambda.ok$lambda
@@ -160,7 +180,8 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       warn <- TRUE
     } else {
       if (q[i] >= 0){
-        cdf[i] <- sum(dcomp(0:floor(q[i]), nu = nu[i], lambda = lambda[i]))
+        cdf[i] <- sum(dcomp(0:floor(q[i]), nu = nu[i], lambda = lambda[i],
+                            summax = summax))
       }
     }
   }
@@ -173,7 +194,8 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
   # lambdaub will be halved/doubled if there is over-/under-dispersion so that 
@@ -196,13 +218,16 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   q <- rep(0,length(p))
   warn <- FALSE
   if (not.miss.mu) {
-    summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
       lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
                                 lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
                                 maxlambdaiter = maxlambdaiter, tol = tol, 
                                 summax = summax)
       lambda[mu.ok.ind] <- lambda.ok$lambda
@@ -235,7 +260,8 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10, 
-                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # generates random deviates of CMP variables with mean mu and dispersion nu
   # test to see at least one of mu and lambda is missing
   # mu, nu, lambda are recycled to give vectors length n
@@ -265,13 +291,16 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
   unif <- runif(n)
   warn <- FALSE
   if (not.miss.mu) {
-    summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
       lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
                                 lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
                                 maxlambdaiter = maxlambdaiter, tol = tol,
                                 summax = summax)
       lambda[mu.ok.ind] <- lambda.ok$lambda
@@ -286,10 +315,10 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
       warn <- TRUE
     } else {
       y <- 0
-      py <- dcomp(y, nu = nu[i], lambda = lambda[i])
+      py <- dcomp(y, nu = nu[i], lambda = lambda[i], summax=summax)
       while (py <= unif[i]){
         y <- y+1
-        py <- py + dcomp(y, nu = nu[i], lambda= lambda[i])
+        py <- py + dcomp(y, nu = nu[i], lambda= lambda[i], summax=summax)
       }
       x[i] <- y
     }

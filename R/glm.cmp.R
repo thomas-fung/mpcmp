@@ -171,13 +171,16 @@ glm.cmp <- function(formula, data, offset = NULL,
   mu0 <- M0$fitted.values
   nu_lb <- 1e-10
   summax <- ceiling(max(c(max(y)+20*sqrt(var(y)),100)))
+  #summax <- 100
   nu0 <- exp(optimize(f= comp_mu_loglik_log_nu_only, 
                       interval = c(max(-log(1+2*mu0)), 5), mu=mu0, y=y, 
                       summax = summax)$minimum)
   lambda0 <- (mu0+(nu0-1)/(2*nu0))^(nu0)
   summax <- ceiling(max(c(mu0+20*sqrt(mu0/nu0),100)))
-  lambdaub <- min(lambdaub, 2*max(lambda0))
-  lambda.ok <- comp_lambdas(mu0, nu0, lambdalb = lambdalb, lambdaub = lambdaub, 
+  #lambdaub <- min(lambdaub, 2*max(lambda0))
+  lambda.ok <- comp_lambdas(mu0, nu0, lambdalb = lambdalb, 
+                            #lambdaub = lambdaub,
+                            lambdaub = min(lambdaub,2*max(lambda0)), 
                             maxlambdaiter = maxlambdaiter, tol = tol, summax = summax, 
                             lambdaint = lambda0)
   lambda0 <- lambda.ok$lambda
@@ -219,7 +222,9 @@ glm.cmp <- function(formula, data, offset = NULL,
     while (nu < nu_lb){
       nu <- (nu+nuold)/2
     }
-    lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+    lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
+                              #lambdaub = lambdaub,
+                              lambdaub = min(lambdaub,2*max(lambdaold)), 
                               maxlambdaiter = maxlambdaiter, tol = tol,
                               lambdaint = lambdaold, summax = summax)
     lambda <- lambda.ok$lambda
@@ -227,14 +232,16 @@ glm.cmp <- function(formula, data, offset = NULL,
     param <- c(beta, lambda, nu)
     ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset, summax = summax)
     halfstep <- 0
-    while (ll_new < ll_old && halfstep <= 20){
+    while (ll_new < ll_old && halfstep <= 20 && abs((ll_new-ll_old)/ll_new)>tol){
       halfstep <- halfstep + 1
       beta <- (beta+betaold)/2
       nu <- (nu+nuold)/2
       eta <- t(X%*%beta)[1,]
       mu <- exp(eta+offset)
       lambdaold <- lambda
-      lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+      lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
+                                #lambdaub = lambdaub,
+                                lambdaub = min(lambdaub,2*max(lambdaold)), 
                                 maxlambdaiter = maxlambdaiter, tol = tol,
                                 lambdaint = lambda, summax = summax)
       lambda <- lambda.ok$lambda
@@ -266,10 +273,10 @@ glm.cmp <- function(formula, data, offset = NULL,
   df.residuals <- length(y)-length(beta)
   if (df.residuals > 0){
     indsat.deviance = dcomp(y, mu = y, nu = nu, log.p=TRUE, lambdalb = min(lambdalb),
-                            lambdaub = 2*lambdaub, maxlambdaiter = maxlambdaiter, 
-                            tol = tol)
+                            lambdaub = lambdaub, maxlambdaiter = maxlambdaiter, 
+                            tol = tol, summax =summax)
     indred.deviance = 2*(indsat.deviance - dcomp(y, nu=nu, lambda= lambda,
-                                                 log.p=TRUE))
+                                                 log.p=TRUE, summax=summax))
     d.res = sign(y-fitted)*sqrt(abs(indred.deviance))
   } else { d.res = rep(0,length(y))
   }
@@ -304,18 +311,13 @@ glm.cmp <- function(formula, data, offset = NULL,
   out$df.residuals <- df.residuals
   out$df.null <- n-1
   out$null.deviance <- 2*(sum(indsat.deviance) -
-                            sum(dcomp(y, lambda =
-                                        comp_lambdas(mean(y), nu,
-                                                     lambdalb = min(lambdalb),
-                                                     lambdaub = max(lambdaub),
-                                                     maxlambdaiter = maxlambdaiter,
-                                                     tol = tol, summax = summax)$lambda,
-                                      nu = nu, log.p = TRUE)))
+                            sum(dcomp(y, mu = mean(y), nu = nu, log.p = TRUE, 
+                                      summax=summax, lambdalb = min(lambdalb),
+                                      lambdaub = max(lambdaub))))
   out$residuals.deviance <- 2*(sum(indsat.deviance) -
-                                 sum(dcomp(y, lambda = lambda,
-                                           nu = nu,log.p = TRUE)))
+                                 sum(dcomp(y, lambda = lambda, nu = nu, 
+                                           log.p = TRUE, summax=summax)))
   names(out$coefficients) = labels(X)[[2]]
   class(out) <- "cmp"
   return(out)
 }
-

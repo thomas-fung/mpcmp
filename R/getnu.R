@@ -51,23 +51,29 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
     nu <- (nu+nu_old)/2
   }
   lambdaold <- lambda
-  lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, lambdaub = lambdaub,
+  lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, 
+                            #lambdaub = lambdaub,
+                            lambdaub = min(lambdaub,2*max(lambdaold)),
                             maxlambdaiter = maxlambdaiter, tol = tol, 
                             lambdaint = lambdaold, summax = summax)
   lambda <- lambda.ok$lambda
   lambdaub <- lambda.ok$lambdaub
   param <- c(beta, lambda, nu)
   ll_new <- comp_mu_loglik(param = param, y=y, xx= xx, offset= offset, summax= summax)
-  while (ll_new < ll_old){
+  sub_iter <- 1
+  while (ll_new < ll_old && sub_iter < 20 && abs((ll_new-ll_old)/ll_new)>tol){
     nu <- (nu+nu_old)/2
     fsscale <- max(fsscale/2,1)
-    lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+    lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, 
+                              #lambdaub = lambdaub,
+                              lambdaub = min(lambdaub,max(2*lambdaold)), 
                               maxlambdaiter = maxlambdaiter, tol = tol, 
                               lambdaint=lambda, summax =summax)
     lambda <- lambda.ok$lambda
     lambdaub<- lambda.ok$lambdaub
     param <- c(beta, lambda, nu)
     ll_new <- comp_mu_loglik(param = param, y=y, xx= xx, offset= offset, summax= summax)
+    sub_iter <- sub_iter + 1
   }
   iter = iter+1
   while ((abs((ll_new-ll_old)/ll_new)>1e-6) && abs(nu-nu_old)>1e-6 && iter <=100){
@@ -89,24 +95,30 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
       break
     }
     lambdaold <- lambda
-    lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+    lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb, 
+                              #lambdaub = lambdaub,
+                              lambdaub = min(lambdaub,2*max(lambdaold)), 
                               maxlambdaiter = maxlambdaiter, tol = tol, 
                               lambdaint= lambda, summax= summax)
     lambda <- lambda.ok$lambda
     lambdaub <- lambda.ok$lambdaub
     param <- c(beta, lambda, nu)
     ll_new <- comp_mu_loglik(param = param, y=y, xx= xx, offset= offset, summax = summax)
-    while (ll_new < ll_old){
+    sub_iter <- 1
+    while (ll_new < ll_old && sub_iter < 20 && abs((ll_new-ll_old)/ll_new)>tol){
       nu <- (nu+nu_old)/2
       fsscale <- max(fsscale/2,1)
       lambdaold <- lambda
-      lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, lambdaub = lambdaub, 
+      lambda.ok <- comp_lambdas(mu, nu, lambdalb = lambdalb, 
+                                #lambdaub = lambdaub, 
+                                lambdaub = min(lambdaub,2*max(lambdaold)), 
                                 maxlambdaiter = maxlambdaiter, tol = tol, 
                                 lambdaint = lambda, summax = summax)
       lambda <- lambda.ok$lambda
       lambdaub <- lambda.ok$lambdaub
       param <- c(beta, lambda, nu)
       ll_new <- comp_mu_loglik(param = param, y=y, xx= xx, offset= offset, summax=summax)
+      sub_iter <- sub_iter+1
     }
     iter = iter+1
   }
