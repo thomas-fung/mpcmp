@@ -9,18 +9,18 @@
 \title{The Conway-Maxwell-Poisson (COM-Poisson) Distribution.}
 \usage{
 dcomp(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
-  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06)
+  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06, summax)
 
 pcomp(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1000,
-  tol = 1e-06)
+  tol = 1e-06, summax)
 
 qcomp(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1000,
-  tol = 1e-06)
+  tol = 1e-06, summax)
 
 rcomp(n, mu, nu = 1, lambda, lambdalb = 1e-10, lambdaub = 1000,
-  maxlambdaiter = 1000, tol = 1e-06)
+  maxlambdaiter = 1000, tol = 1e-06, summax)
 }
 \arguments{
 \item{x, q}{vector of quantiles}
@@ -42,6 +42,8 @@ for lambda(s).}
 \item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
 mean constraint if the absolute difference between the calculated mean and mu 
 is less than tol.}
+
+\item{summax}{numeric; maximum number of terms to be considered in the truncated sum.}
 
 \item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
 otherwise, \eqn{P(X>x)}.}
