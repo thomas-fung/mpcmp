@@ -151,3 +151,8 @@ NULL
 #' @examples 
 #' ## For examples see example(glm.cmp)
 NULL
+
+## usethis namespace: start
+#' @useDynLib mpcmp, .registration = TRUE
+## usethis namespace: end
+NULL
