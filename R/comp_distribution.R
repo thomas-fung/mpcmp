@@ -116,7 +116,7 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
         if (x[i]<0){pmf[i]= -Inf } else{ #log(0)
           # pmf <- log(density)
           pmf[i] <- x[i]*log(lambda[i])-(nu[i]*lfactorial(x[i]))-
-            Z(lambda[i], nu[i], log.z=TRUE, summax)
+            logZ(log(lambda[i]), nu[i], summax)
         }
       }
     }

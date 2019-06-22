@@ -33,10 +33,11 @@ comp_mu_loglik <-function(param, y, xx, offset, summax){
   nu <- param[(q+n+1)]
   # precompute quantities used later
   logfactorialy <- lgamma(y+1)
-  log.Z <- Z(lambda, nu, log.z = TRUE, summax = summax)
+  log_lambda <- log(lambda)
+  log.Z <- logZ(log_lambda, nu, summax = summax)
   #meanlogfactorialy <- comp_mean_logfactorialy(lambda, nu, mu)
   # compute loglikelihood 
-  loglik <- sum(y*log(lambda) - nu*logfactorialy - log.Z)
+  loglik <- sum(y*log_lambda - nu*logfactorialy - log.Z)
   # compute gradient of negative loglikelihood (not currently used)
   #gradl <- -c(rep(0,q), y/lambda-comp_means(lambda,nu)/lambda,
   #            sum(-logfactorialy+meanlogfactorialy))
@@ -50,10 +51,11 @@ comp_mu_loglik_log_nu_only <-function(log_nu, mu, y, summax){
   nu = exp(log_nu)
   logfactorialy <- lgamma(y+1)
   lambda <- (mu+(nu-1)/(2*nu))^(nu)
-  log.Z <- Z(lambda, nu, log.z = TRUE, summax)
+  log_lambda <- log(lambda)
+  log.Z <- logZ(log_lambda, nu, summax)
   #meanlogfactorialy <- comp_mean_logfactorialy(lambda, nu, mu)
   # compute loglikelihood 
-  nloglik <- -sum(y*log(lambda) - nu*logfactorialy - log.Z)
+  nloglik <- -sum(y*log_lambda - nu*logfactorialy - log.Z)
   # compute gradient of negative loglikelihood (not currently used)
   #gradl <- -c(rep(0,q), y/lambda-comp_means(lambda,nu)/lambda,
   #            sum(-logfactorialy+meanlogfactorialy))

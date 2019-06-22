@@ -5,22 +5,22 @@
 
 using namespace Rcpp;
 
-// compute_log_constant
-NumericVector compute_log_constant(NumericVector log_lambda, NumericVector nu, int maxiter);
-RcppExport SEXP _mpcmp_compute_log_constant(SEXP log_lambdaSEXP, SEXP nuSEXP, SEXP maxiterSEXP) {
+// logZ_c
+NumericVector logZ_c(NumericVector log_lambda, NumericVector nu, int summax);
+RcppExport SEXP _mpcmp_logZ_c(SEXP log_lambdaSEXP, SEXP nuSEXP, SEXP summaxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type log_lambda(log_lambdaSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type nu(nuSEXP);
-    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_log_constant(log_lambda, nu, maxiter));
+    Rcpp::traits::input_parameter< int >::type summax(summaxSEXP);
+    rcpp_result_gen = Rcpp::wrap(logZ_c(log_lambda, nu, summax));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mpcmp_compute_log_constant", (DL_FUNC) &_mpcmp_compute_log_constant, 3},
+    {"_mpcmp_logZ_c", (DL_FUNC) &_mpcmp_logZ_c, 3},
     {NULL, NULL, 0}
 };
 

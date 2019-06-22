@@ -211,7 +211,7 @@ print.cmp <- function(x,...)
       "\n", sep = "")
   cat("\nLinear Model Coefficients:\n")
   print.default(format(signif(x$coefficients,3)), print.gap = 2,quote = FALSE)
-  cat("\nDispersion (nu):", x$nu)
+  cat("\nDispersion (nu):", signif(x$nu, 3))
   cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
       x$df.residuals, "Residual")
   cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",

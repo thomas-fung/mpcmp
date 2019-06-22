@@ -49,3 +49,35 @@ Z <- function(lambda, nu, log.z = FALSE, summax){
     sum1 <- exp(sum1)}
   return(sum1)
 }
+
+
+
+#' Calculate the Normalizing Constant in log scale for COM-Poisson distribution
+#' 
+#' A function to approximate the normalizing constant for COM-Poisson distributions via 
+#' truncation. The standard COM-Poisson parametrization is being used here. 
+#' 
+#' As of version 0.2.0 of this package, \code{logZ} will supersede \code{Z} for calculating
+#' the normalizing constant. \code{logZ} calculate \code{log(exp(logx) + exp(logy))} in a 
+#' somewhat numerically stable way. 
+#' 
+#' This function was originally purposed in the \code{cmpreg} package of Ribeiro Jr, 
+#' Zeviani & Demétrio (2019).
+#' 
+#' @param log_lambda rate parameter in log scale.
+#' @param nu diepsersoin parameter, straightly positive.
+#' @param summax maximum number of terms to be considered in the truncated sum.
+#' 
+#' @references 
+#'  Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
+#'  Reparametrized COM-Poisson Regression Models. R package version 0.0.1.
+
+logZ <- function(log_lambda, nu, summax = 100){
+  # approximates normalizing constant for COMP distributions
+  # lambda, nu are recycled to match the length of each other.
+  df <- CBIND(log_lambda=log_lambda, nu=nu)
+  log_lambda <- df[,1]
+  nu <- df[,2]
+  return(logZ_c(log_lambda,nu,summax=summax))
+  }
+

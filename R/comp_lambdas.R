@@ -92,7 +92,7 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
   lb = lambdalb
   ub = lambdaub
   iter <- 1
-  log.Z <- Z(lambda, nu, log.z = TRUE, summax = summax)
+  log.Z <- logZ(log(lambda), nu, summax = summax)
   mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
   not.converge.ind = which(abs(mean1-mu)>tol)
   while (length(not.converge.ind)>0 && iter <200){
@@ -104,13 +104,13 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
     ub[not.converge.ind[still.above.target.ind]] =
       lambda[not.converge.ind[still.above.target.ind]]
     lambda = (lb+ub)/2
-    log.Z <- Z(lambda, nu, log.z = TRUE, summax = summax)
+    log.Z <- logZ(log(lambda), nu, summax = summax)
     mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     while (sum(mean1==0)>0){
       ub[not.converge.ind[mean1==0]] = ub[not.converge.ind[mean1==0]]/2
       lambdaub = lambdaub/2
       lambda = (lb+ub)/2
-      log.Z <- Z(lambda, nu, log.z=TRUE, summax = summax)
+      log.Z <- logZ(log(lambda), nu, summax = summax)
       mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     }
     not.converge.ind <- which((1-(((abs(mean1-mu) <=tol) + (lambda == lb) + (lambda == ub)
@@ -139,7 +139,7 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
       # any out of bound updates are replaced with mid-point of ub and lb
     }
     lambda[not.converge.ind] <- lambda.new
-    log.Z <- Z(lambda, nu, log.z=TRUE, summax)
+    log.Z <- logZ(log(lambda), nu, summax)
     term <- matrix(0, nrow = length(mu), ncol=summax)
     for (y in 1:summax) {
       term[,y] <- exp(log(y-1)+(y-1)*log(lambda) - nu*lgamma(y)-log.Z)

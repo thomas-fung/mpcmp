@@ -3,11 +3,11 @@
   * Added a `NEWS.md` file to track changes to the package. 
   * Added a draft logo to the package.
   * Ribeiro Jr et al. (2018) specification of the CMP model is utilised to provide a better initial estimate for the dispersion parameter. Added `comp_mu_loglik_log_nu_only()` to facilitate the optimisation. 
-  * `Z()`, the normalizing constant function, approximates its true value via (a fixed) truncation. This means the approximation would fail if the mean is large. The followings are implemented as a fix:
+  * `Z()`, the normalizing constant function, approximates its true value via (a fixed) truncation. This means the approximation would fail if the mean is large. 
+  The followings are implemented as a fix:
+    - A new function `logZ()` is created, based on a similar function in the `cmpreg` package of Ribeiro Jr, Zeviani & Demétrio (2019), and will supercede `Z()` due to its superior numerical stability.
     - A Chebyshev's inequality type argument is now implemented to have a more flexible upper truncation point. 
-    - `Z()` gains an argument to return values in log-scale. 
-    - If the new truncated sum is too large for `R` to handle (i.e. returning `Inf`), the (log-scaled version) of the higher order approximation as stated in Simsek \& Iyengar (2016), Gaunt et al. (2016) and Chatla \& Shmueli (2018) will be utilised.  
-  
+
     `glm.cmp()`, `dcomp()`, `pcomp()`, `qcomp()`, `rcomp()` and functions that calculate expected values are updated to take advantage of these changes. 
 
 ```R

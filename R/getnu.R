@@ -38,7 +38,7 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
   lambda <- param[(q+1):(q+n)]
   nu_old <- param[q+n+1]
   ll_old <- llstart
-  log.Z <- Z(lambda, nu_old, log.z=TRUE, summax = summax)
+  log.Z <- logZ(log(lambda), nu_old, summax = summax)
   ylogfactorialy <- comp_mean_ylogfactorialy(lambda, nu_old, log.Z, summax)
   logfactorialy <- comp_mean_logfactorialy(lambda, nu_old, log.Z, summax)
   variances <- comp_variances(lambda, nu_old, log.Z, summax)
@@ -79,7 +79,7 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
   while ((abs((ll_new-ll_old)/ll_new)>1e-6) && abs(nu-nu_old)>1e-6 && iter <=100){
     ll_old <- ll_new
     nu_old <- nu
-    log.Z = Z(lambda,nu_old, log.z=TRUE, summax = summax)
+    log.Z = logZ(log(lambda),nu_old, summax = summax)
     ylogfactorialy <- comp_mean_ylogfactorialy(lambda,nu_old, log.Z, summax)
     logfactorialy <- comp_mean_logfactorialy(lambda,nu_old, log.Z, summax)
     variances <- comp_variances(lambda,nu_old, log.Z, summax)

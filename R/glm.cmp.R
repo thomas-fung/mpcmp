@@ -92,7 +92,7 @@
 #' 
 #' @references 
 #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: Mean-parametrized
-#' Conway-Maxwell Poisson Regression. R package version 0.1.4.
+#' Conway-Maxwell Poisson Regression. R package version 0.2.0.
 #' 
 #' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
@@ -204,7 +204,7 @@ glm.cmp <- function(formula, data, offset = NULL,
     muold <-  exp(etaold+offset)
     lambdaold <- param[(q+1):(q+n)]
     nuold <- param[q+n+1]
-    log.Z <- Z(lambdaold, nuold, log.z=TRUE, summax = summax)
+    log.Z <- logZ(log(lambdaold), nuold, summax = summax)
     ylogfactorialy <- comp_mean_ylogfactorialy(lambdaold, nuold, log.Z, summax)
     logfactorialy <- comp_mean_logfactorialy(lambdaold, nuold, log.Z, summax)
     variances <- comp_variances(lambdaold, nuold, log.Z, summax)
@@ -261,7 +261,7 @@ glm.cmp <- function(formula, data, offset = NULL,
   } else {
     fitted <- exp(eta+offset)
   }
-  log.Z <- Z(lambda, nu, log.z=TRUE, summax = summax)
+  log.Z <- logZ(log(lambda), nu, summax = summax)
   variances <- comp_variances(lambda, nu, log.Z = log.Z, summax = summax)
   for (i in 1:n){
     precision_beta = precision_beta + fitted[i]^2*X[i,]%*%t(X[i,])/variances[i]
