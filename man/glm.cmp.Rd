@@ -113,11 +113,10 @@ M.attendance
 summary(M.attendance)
 
 ### Barbour & Brown (1974): Overdispersed Fish data
-\donttest{
 data(fish)
 M.fish <- glm.cmp(species~ 1+log(area), data=fish)
 M.fish
-summary(M.fish)}
+summary(M.fish)
 
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 data(takeoverbids)
