@@ -67,7 +67,6 @@ Z <- function(lambda, nu, log.z = FALSE, summax){
 #' @param log_lambda rate parameter in log scale.
 #' @param nu diepsersoin parameter, straightly positive.
 #' @param summax maximum number of terms to be considered in the truncated sum.
-#' 
 #' @references 
 #'  Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
 #'  Reparametrized COM-Poisson Regression Models. R package version 0.0.1.
