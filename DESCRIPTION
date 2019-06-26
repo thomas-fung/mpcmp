@@ -17,10 +17,10 @@ Description: A collection of functions for estimation, testing and diagnostic ch
 Depends: R (>= 2.10)
 License: GPL (>= 2)
 Imports:
+    Rcpp,
     graphics,
     grDevices,
-    stats,
-    Rcpp
+    stats
 URL: https://github.com/thomas-fung/mpcmp
 Encoding: UTF-8
 LazyData: true

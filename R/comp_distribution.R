@@ -82,24 +82,22 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
       lambdaub <- lambda.ok$lambdaub
     }
   } else {
-    A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
-    B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
-    D <- 1+(nu-1)*(A+B)
-    mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
-              length(lambda))
-    mu_error <- sum(is.nan(mu))>0
-    mu[is.nan(mu)] <- 500
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+              #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    mu  <- comp_means(lambda, nu, summax = 500)
       if (missing(summax)){
         summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
-        if (mu_error){
-          cat("At least one of the estimated mu returns Inf.\n")
-          cat("Possibly caused by large lambda and/or small nu.\n")
-          cat("Those undefined mu will now reset to 500.\n")
-          cat("Due to the resetting of mu, summax would also be affected.\n")
-          cat("You may want to specify summax instead.\n")
+          cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+          cat("mu which is calcualted by truncated sum at 500.\n")
+          cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+          cat("you may want to do some experiment with the comp_means() and\n")
+          cat("specify summax instead to improve the accuracy.\n")
         }
       }
-  }
   # at a vector of yvalues
   pmf <- rep(0,length(x))
   for (i in 1:length(x)) {
@@ -170,6 +168,22 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       lambda[mu.ok.ind] <- lambda.ok$lambda
       lambdaub <- lambda.ok$lambdaub
     }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
   }
   for (i in 1:length(q)) {
     if ( (mu[i] == 0 | lambda[i] ==0) && q[i]>=0){
@@ -233,6 +247,22 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       lambda[mu.ok.ind] <- lambda.ok$lambda
       lambdaub <- lambda.ok$lambdaub
     }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
   }
   if (!lower.tail){ p <- 1-p}
   if (log.p){ p <- exp(p)}
@@ -245,10 +275,10 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       warn <- TRUE
     } else {
       y <- 0
-      py <- dcomp(y, nu = nu[i], lambda = lambda[i])
+      py <- dcomp(y, nu = nu[i], lambda = lambda[i], summax=summax)
       while (py <= p[i]){
         y = y+1
-        py <- py + dcomp(y, nu = nu[i], lambda = lambda[i])
+        py <- py + dcomp(y, nu = nu[i], lambda = lambda[i], summax = summax)
       }
       q[i] = y
     }
@@ -305,6 +335,22 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
                                 summax = summax)
       lambda[mu.ok.ind] <- lambda.ok$lambda
       lambdaub <- lambda.ok$lambdaub
+    }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
     }
   }
   for (i in 1:n){

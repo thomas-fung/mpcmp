@@ -111,6 +111,7 @@ data(attendance)
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attendance
 summary(M.attendance)
+plot(M.attendance)
 
 ### Barbour & Brown (1974): Overdispersed Fish data
 data(fish)

@@ -106,6 +106,7 @@
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attendance
 #' summary(M.attendance)
+#' plot(M.attendance)
 #' 
 #' ### Barbour & Brown (1974): Overdispersed Fish data
 #' data(fish)
@@ -187,7 +188,7 @@ glm.cmp <- function(formula, data, offset = NULL,
   param <- c(beta0,lambda0,nu0)
   ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset, summax = summax)
   param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, 
-                    fsscale=32, lambdalb = lambdalb, lambdaub = lambdaub, 
+                    fsscale = 1, lambdalb = lambdalb, lambdaub = lambdaub, 
                     maxlambdaiter = maxlambdaiter, tol = tol,summax = summax)
   lambdaub <- param_obj$lambdaub 
   ll_new <- param_obj$maxl
@@ -208,7 +209,7 @@ glm.cmp <- function(formula, data, offset = NULL,
     logfactorialy <- comp_mean_logfactorialy(lambdaold, nuold, log.Z, summax)
     variances <- comp_variances(lambdaold, nuold, log.Z, summax)
     variances_logfactorialy <- 
-      comp_variances_logfactorialy(lambdaold,nuold, log.Z, summax)
+      comp_variances_logfactorialy(lambdaold, nuold, log.Z, summax)
     W <- diag(muold^2/variances)
     z <- etaold + (y-muold)/muold
     beta <- solve(t(X)%*%W%*%X)%*%t(X)%*%W%*%z
@@ -216,7 +217,10 @@ glm.cmp <- function(formula, data, offset = NULL,
     mu <- exp(eta+offset)
     Aterm <- (ylogfactorialy- mu*logfactorialy)
     update_score <- sum(Aterm*(y-mu)/variances -(lgamma(y+1)-logfactorialy))
-    update_info_matrix <- sum(Aterm/variances+ variances_logfactorialy)
+    update_info_matrix <- sum(-Aterm^2/variances+ variances_logfactorialy)
+    if (update_info_matrix < 0){
+      update_info_matrix <- sum(variances_logfactorialy)
+    }
     nu <- nuold + update_score/update_info_matrix
     while (nu < nu_lb){
       nu <- (nu+nuold)/2

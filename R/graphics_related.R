@@ -122,8 +122,10 @@ NULL
 #' @rdname nrPIT
 #' @export
 compPredProb <- function (object) {
-  lower <- pcomp(object$y-1, nu = object$nu, lambda = object$lambda)
-  upper <- lower + dcomp(object$y, nu = object$nu, lambda = object$lambda)
+  lower <- pcomp(object$y-1, nu = object$nu, lambda = object$lambda, 
+                 summax = object$summax)
+  upper <- lower + dcomp(object$y, nu = object$nu, lambda = object$lambda, 
+                         summax = object$summax)
   list(lower = lower, upper = upper)
 }
 

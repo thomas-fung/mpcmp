@@ -45,7 +45,7 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
   variances_logfactorialy <- comp_variances_logfactorialy(lambda,nu_old, log.Z, summax)
   Aterm <- (ylogfactorialy- mu*logfactorialy)
   update_score <- sum(Aterm*(y-mu)/variances -(lgamma(y+1)-logfactorialy))
-  update_info_matrix <- sum(Aterm/variances+ variances_logfactorialy)
+  update_info_matrix <- sum(-Aterm^2/variances+ variances_logfactorialy)
   nu <- nu_old + fsscale*update_score/update_info_matrix
   while (nu < nu_lb){
     nu <- (nu+nu_old)/2
@@ -86,7 +86,7 @@ getnu <- function(param, y, xx , offset, llstart, fsscale = 1,
     variances_logfactorialy <- comp_variances_logfactorialy(lambda,nu_old, log.Z, summax)
     Aterm <- (ylogfactorialy- mu*logfactorialy)
     update_score <- sum(Aterm*(y-mu)/variances -(lgamma(y+1)-logfactorialy))
-    update_info_matrix <- sum(Aterm/variances+ variances_logfactorialy)
+    update_info_matrix <- sum(-Aterm^2/variances+ variances_logfactorialy)
     nu <- nu_old + fsscale*update_score/update_info_matrix
     while (nu < nu_lb){
       nu <- (nu + nu_old)/2
