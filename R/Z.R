@@ -58,8 +58,8 @@ Z <- function(lambda, nu, log.z = FALSE, summax){
 #' truncation. The standard COM-Poisson parametrization is being used here. 
 #' 
 #' As of version 0.2.0 of this package, \code{logZ} will supersede \code{Z} for calculating
-#' the normalizing constant. \code{logZ} calculate \code{log(exp(logx) + exp(logy))} in a 
-#' somewhat numerically stable way. 
+#' the normalizing constant. \code{logZ} utilised a method that can calculate
+#'  \code{log(exp(logx) + exp(logy))} in a somewhat numerically stable way. 
 #' 
 #' This function was originally purposed in the \code{cmpreg} package of Ribeiro Jr, 
 #' Zeviani & Demétrio (2019).

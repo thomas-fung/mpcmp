@@ -156,10 +156,11 @@ glm.cmp <- function(formula, data, offset = NULL,
   mt <- attr(mf, "terms")
   y <- model.response(mf)
   X <- model.matrix(formula,mf,contrasts)
+  offset <- as.vector(model.offset(mf))
   if (is.null(offset)){
     offset.cmp = rep(0,length(y))
   } else {
-    offset.cmp = offset
+    offset.cmp = model.extract(mf,"offset")
   }
   # use poisson glm to generate initial values for betas
   M0 <- stats::glm(y~-1+X+offset(offset.cmp), start = betastart, family=stats::poisson())
