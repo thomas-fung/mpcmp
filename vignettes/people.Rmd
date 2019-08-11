@@ -1,0 +1,25 @@
+---
+title: mpcmp contributors
+keywords: authors, mpcmp, contributors
+bibliography: 
+csl: apa-old-doi-prefix.csl
+output: 
+  github_document:
+    toc_dept: 1
+---
+
+> Details of those who have contributed to the mpcmp project.
+Core development team:
+
+- Dr Thomas Fung (Macquarie Unviersity)
+- Aya Alwan (Macquarie University)
+- Justin Wishart (Macquarie University)
+- Alan Huang (University of Queensland)
+
+#### Citation
+
+If you use this package to inform your model selection choices, please use the following citation:
+
+```{r, comment=NA}
+citation("mpcmp")
+```

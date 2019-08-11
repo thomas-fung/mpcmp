@@ -21,6 +21,7 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and mu 
 #' is less than tol.
+#' @param summax numeric; maximum number of terms to be considered in the truncated sum.
 #' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
 #' 
 #' Invalid arguemnts will result in return value \code{NaN}, with a warning.
@@ -42,11 +43,11 @@ NULL
 #' @rdname COM_Poisson_Distribution
 #' @export
 dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10, 
-                   lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6, summax){
   # compute the pmf/density for COMP distirbution with mean mu and dispersion nu
   # x, mu, nu are recycled to match the length of each other.
-  # lambdaub will be scaled up if there is severe underdispersion so that 
-  # the correct lambda can be found 
+  # lambdaub will be scaled down/up  if there is 
+  # over-/under-dispersion so that the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
   }
@@ -55,9 +56,8 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
     mu <- Inf
   }
   if (missing(lambda)) {
-    lambda <- Inf
+    lambda <- Inf 
   }
-  not.miss.lambda <- !missing(lambda)
   df <- CBIND(x = x, mu=mu, nu=nu, lambda = lambda)
   x <- df[,1]
   mu <- df[,2]
@@ -65,66 +65,75 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
   lambda <- df[,4]
   warn <- FALSE
   if (not.miss.mu) {
-    lambda <- rep(0,length(mu))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
-                                 lambdalb = lambdalb, lambdaub = lambdaub, 
-                                 maxlambdaiter = maxlambdaiter, tol = tol))
-      if (class(lambda.ok) =='try-error'){
-        stop("lambdaub is probably too large for at least one of the nu. Reduce 
-             lambdaub and try again.")}
-      lambda[mu.ok.ind] <- lambda.ok
-      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      sub_iter1 <- 1 
-      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
-        lambdaubold <- lambdaub
-        lambdaub <- 2*lambdaub
-        lambda[lambdaub.err.ind] <- 
-          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
-                           lambdalb = lambdalb, lambdaub = lambdaub, 
-                           maxlambdaiter = maxlambdaiter, tol = tol))
-        sub_iter1 <- sub_iter1+1
-        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      }      
+      lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                lambdalb = lambdalb, 
+                                lambdaub = lambdaub,
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
+                                maxlambdaiter = maxlambdaiter, tol = tol, 
+                                summax = summax)
+      lambda[mu.ok.ind] <- lambda.ok$lambda
+      lambdaub <- lambda.ok$lambdaub
+    }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+              #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    mu  <- comp_means(lambda, nu, summax = 500)
+      if (missing(summax)){
+        summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+          cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+          cat("mu which is calcualted by truncated sum at 500.\n")
+          cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+          cat("you may want to do some experiment with the comp_means() and\n")
+          cat("specify summax instead to improve the accuracy.\n")
+        }
       }
-  }
   # at a vector of yvalues
   pmf <- rep(0,length(x))
   for (i in 1:length(x)) {
     if ((mu[i] == 0 || lambda[i] == 0) && x[i]==0) {
-      pmf[i] = 1
+      pmf[i] = 0 # log(1), 1 as the distribution is degenerated at 0 
     } else if (mu[i]< 0 | lambda[i] <0 | nu[i] <=0) {
       pmf[i] <- NaN
       warn <- TRUE
     } else {
       if (!is.wholenumber(x[i])) {
         warning(paste("non-integer x =", x[i]))
-        pmf[i] <- 0
+        pmf[i] <- -Inf # log(0)
       } else {
-        if (x[i]<0){pmf[i]=0} else{
-          # pmf <- exp(log(density))
-          pmf[i] <- exp(x[i]*log(lambda[i])-(nu[i]*lfactorial(x[i]))-
-                          log(Z(lambda[i], nu[i])))
+        if (x[i]<0){pmf[i]= -Inf } else{ #log(0)
+          # pmf <- log(density)
+          pmf[i] <- x[i]*log(lambda[i])-(nu[i]*lfactorial(x[i]))-
+            logZ(log(lambda[i]), nu[i], summax)
         }
       }
     }
   }
-  if (log.p){ pmf = log(pmf)}
+  if (!log.p){ pmf = exp(pmf)}
   if (warn){warning("NaN(s) produced")}
   return(pmf)
 }
 
+
 #' @rdname COM_Poisson_Distribution
 #' @export
 pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
-  # lambdaub will be scaled up if there is severe underdispersion so that 
-  # the correct lambda can be found 
+  # lambdaub will be scaled down/up if there is 
+  # over-/under-dispersion so that the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
   }
@@ -135,7 +144,7 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   if (missing(lambda)) {
     lambda <- Inf
   }
-  not.miss.lambda <- !missing(lambda)
+  
   df <- CBIND(q = q, mu=mu, nu=nu, lambda = lambda)
   q <- df[,1]
   mu <- df[,2]
@@ -144,31 +153,37 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   cdf <- rep(0,length(q))
   warn <- FALSE
   if (not.miss.mu) {
-    lambda <- rep(0,length(mu))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
-                                    lambdalb = lambdalb, lambdaub = lambdaub, 
-                                    maxlambdaiter = maxlambdaiter, tol = tol))
-      if (class(lambda.ok) =='try-error'){
-        stop("lambdaub is probably too large for at least one of the nu. Reduce 
-             lambdaub and try again.")}
-      lambda[mu.ok.ind] <- lambda.ok
-      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      sub_iter1 <- 1 
-      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
-        lambdaubold <- lambdaub
-        lambdaub <- 2*lambdaub
-        lambda[lambdaub.err.ind] <- 
-          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
-                           lambdalb = lambdalb, lambdaub = lambdaub, 
-                           maxlambdaiter = maxlambdaiter, tol = tol))
-        sub_iter1 <- sub_iter1+1
-        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      }      
-      }
+      lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
+                                maxlambdaiter = maxlambdaiter, tol = tol, 
+                                summax = summax)
+      lambda[mu.ok.ind] <- lambda.ok$lambda
+      lambdaub <- lambda.ok$lambdaub
+    }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
   }
   for (i in 1:length(q)) {
     if ( (mu[i] == 0 | lambda[i] ==0) && q[i]>=0){
@@ -179,7 +194,8 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       warn <- TRUE
     } else {
       if (q[i] >= 0){
-        cdf[i] <- sum(dcomp(0:floor(q[i]), nu = nu[i], lambda = lambda[i], log.p = log.p))
+        cdf[i] <- sum(dcomp(0:floor(q[i]), nu = nu[i], lambda = lambda[i],
+                            summax = summax))
       }
     }
   }
@@ -192,10 +208,11 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-                  lambdalb = 1e-10, lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # compute the distribution function for COMP distirbution with mean mu and dispersion nu
   # q, mu, nu are recycled to match the length of each other;
-  # lambdaub will be scaled up if there is severe underdispersion so that 
+  # lambdaub will be halved/doubled if there is over-/under-dispersion so that 
   # the correct lambda can be found 
   if (!missing(mu) && !missing(lambda)) {
     stop("specify 'mu' or 'lambda' but not both")
@@ -207,7 +224,6 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   if (missing(lambda)) {
     lambda = Inf
   }
-  not.miss.lambda <- !missing(lambda)
   df <- CBIND(p = p, mu=mu, nu=nu, lambda = lambda)
   p <- df[,1]
   mu <- df[,2]
@@ -216,31 +232,37 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   q <- rep(0,length(p))
   warn <- FALSE
   if (not.miss.mu) {
-    lambda <- rep(0,length(mu))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
-                                    lambdalb = lambdalb, lambdaub = lambdaub, 
-                                    maxlambdaiter = maxlambdaiter, tol = tol))
-      if (class(lambda.ok) =='try-error'){
-        stop("lambdaub is probably too large for at least one of the nu. Reduce 
-             lambdaub and try again.")}
-      lambda[mu.ok.ind] <- lambda.ok
-      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      sub_iter1 <- 1 
-      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
-        lambdaubold <- lambdaub
-        lambdaub <- 2*lambdaub
-        lambda[lambdaub.err.ind] <- 
-          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
-                           lambdalb = lambdalb, lambdaub = lambdaub, 
-                           maxlambdaiter = maxlambdaiter, tol = tol))
-        sub_iter1 <- sub_iter1+1
-        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      }      
-      }
+      lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
+                                maxlambdaiter = maxlambdaiter, tol = tol, 
+                                summax = summax)
+      lambda[mu.ok.ind] <- lambda.ok$lambda
+      lambdaub <- lambda.ok$lambdaub
+    }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
   }
   if (!lower.tail){ p <- 1-p}
   if (log.p){ p <- exp(p)}
@@ -253,10 +275,10 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
       warn <- TRUE
     } else {
       y <- 0
-      py <- dcomp(y, nu = nu[i], lambda = lambda[i], log.p = log.p)
+      py <- dcomp(y, nu = nu[i], lambda = lambda[i], summax=summax)
       while (py <= p[i]){
         y = y+1
-        py <- py + dcomp(y, nu = nu[i], lambda = lambda[i], log.p = log.p)
+        py <- py + dcomp(y, nu = nu[i], lambda = lambda[i], summax = summax)
       }
       q[i] = y
     }
@@ -268,12 +290,13 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
 #' @rdname COM_Poisson_Distribution
 #' @export
 rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10, 
-                  lambdaub = 1900, maxlambdaiter = 1e3, tol = 1e-6){
+                  lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
+                  summax){
   # generates random deviates of CMP variables with mean mu and dispersion nu
   # test to see at least one of mu and lambda is missing
   # mu, nu, lambda are recycled to give vectors length n
-  # lambdaub will be scaled up if there is severe underdispersion so that 
-  # the correct lambda can be found 
+  # lambdaub will be scaled down/up if there is 
+  # over-/under-dispersion so that the correct lambda can be found 
   if (length(n)>1){
     n <- length(n)
   }
@@ -287,7 +310,6 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
   if (missing(lambda)) {
     lambda = Inf
   }
-  not.miss.lambda <- !missing(lambda)
   if (n < max(length(mu), length(nu), length(lambda))){
     stop("unused argument in mu or nu or lambda")
   }
@@ -299,31 +321,37 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
   unif <- runif(n)
   warn <- FALSE
   if (not.miss.mu) {
-    lambda <- rep(0,length(mu))
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+    }
     mu.ok.ind <- which(mu>0)
     mu.err.ind <- which(mu <= 0)
     if (length(mu.err.ind)>0){ lambda[mu.err.ind] <- mu[mu.err.ind]}
     if (length(mu.ok.ind)>0){
-      lambda.ok <- try(comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
-                                    lambdalb = lambdalb, lambdaub = lambdaub, 
-                                    maxlambdaiter = maxlambdaiter, tol = tol))
-      if (class(lambda.ok) =='try-error'){
-        stop("lambdaub is probably too large for at least one of the nu. Reduce 
-             lambdaub and try again.")}
-      lambda[mu.ok.ind] <- lambda.ok
-      lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      sub_iter1 <- 1 
-      while (sum(lambdaub.err.ind)>0 && sub_iter1 <= 100){
-        lambdaubold <- lambdaub
-        lambdaub <- 2*lambdaub
-        lambda[lambdaub.err.ind] <- 
-          try(comp_lambdas(mu[lambdaub.err.ind], nu[lambdaub.err.ind], 
-                           lambdalb = lambdalb, lambdaub = lambdaub, 
-                           maxlambdaiter = maxlambdaiter, tol = tol))
-        sub_iter1 <- sub_iter1+1
-        lambdaub.err.ind <- lambda/lambdaub >= 1-tol
-      }      
-      }
+      lambda.ok <- comp_lambdas(mu[mu.ok.ind], nu[mu.ok.ind], 
+                                lambdalb = lambdalb, lambdaub = lambdaub, 
+                                #lambdaub = min(lambdaub,2*max(lambdaold))
+                                maxlambdaiter = maxlambdaiter, tol = tol,
+                                summax = summax)
+      lambda[mu.ok.ind] <- lambda.ok$lambda
+      lambdaub <- lambda.ok$lambdaub
+    }
+  } else {
+    #A <- (8*nu^2+12*nu+3)/(96*nu^2*lambda^(1/nu))
+    #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
+    #D <- 1+(nu-1)*(A+B)
+    #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
+    #length(lambda))
+    #mu_error <- which(is.nan(mu)>0 | mu< 0)
+    if (missing(summax)){
+      mu  <- comp_means(lambda, nu, summax = 500)
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
   }
   for (i in 1:n){
     if (mu[i] ==0 | lambda[i] == 0){
@@ -333,10 +361,10 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
       warn <- TRUE
     } else {
       y <- 0
-      py <- dcomp(y, nu = nu[i], lambda = lambda[i])
+      py <- dcomp(y, nu = nu[i], lambda = lambda[i], summax=summax)
       while (py <= unif[i]){
         y <- y+1
-        py <- py + dcomp(y, nu = nu[i], lambda= lambda[i])
+        py <- py + dcomp(y, nu = nu[i], lambda= lambda[i], summax=summax)
       }
       x[i] <- y
     }

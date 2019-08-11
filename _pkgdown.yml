@@ -1,0 +1,64 @@
+template:
+  params:
+    bootswatch: lumen
+    toc_depth: 3
+
+reference:
+  - title: "Core functions"
+    contents:
+      - glm.cmp
+      - cmplrtest
+      - LRTnu
+      - COM_Poisson_Distribution
+  - title: "Data sets"
+    contents:
+      - attendance
+      - fish
+      - takeoverbids
+      - cottonbolls
+  - title: "Generic extract, plot, print and summary methods"
+    contents:
+      - AIC.cmp
+      - coef.cmp
+      - print.cmp
+      - plot.cmp
+      - summary.cmp
+      - residuals.cmp
+      - model.frame.cmp
+      - nobs.cmp
+      - fitted.cmp
+      - logLik.cmp
+      - predict.cmp
+      - update.cmp
+  - exclude:
+    contents:
+      - mpcmp-package
+      - is.wholenumber
+      - CBIND
+      - Z
+      - COMP_Expected_Values
+      - comp_lambdas
+      - comp_mu_loglik
+      - getnu
+      - PIT_Plot
+      - nrPIT
+      - rPIT
+      
+      
+
+
+navbar:
+  title: "mpcmp"
+  type: default
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Reference"
+      href: reference/index.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/thomas-fung/mpcmp
+    - icon: fa-info-circle fa-lg
+      href: articles/people.html
+      
+

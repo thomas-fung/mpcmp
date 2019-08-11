@@ -4,12 +4,17 @@
 \alias{Z}
 \title{Calculate the Normalizing Constant for COM-Poisson distribution}
 \usage{
-Z(lambda, nu)
+Z(lambda, nu, log.z = FALSE, summax)
 }
 \arguments{
 \item{lambda}{rate parameter, straightly positive}
 
 \item{nu}{diepsersoin parameter, straightly positive}
+
+\item{log.z}{logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as 
+\eqn{log(Z)}.}
+
+\item{summax}{maximum number of terms to be considered in the truncated sum}
 }
 \description{
 A function to approximate the normalizing constant for COM-Poisson distributions

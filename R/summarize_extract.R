@@ -20,8 +20,10 @@ residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...
   mu <- object$fitted.values
   nu <- object$nu
   lambda <- object$lambda
+  log.Z <- object$log.Z
+  summax <- object$summax
   res <- switch(type, deviance = object$d.res,
-                pearson = (y-mu)/sqrt(comp_variances(lambda, nu)),
+                pearson = (y-mu)/sqrt(comp_variances(lambda, nu, log.Z, summax)),
                 response = y - mu
   )
   return(res)
@@ -193,7 +195,8 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
 #' 
 #' @param x an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param ... other arguments passed to or from other methods  (currently unused).
-
+#' @export
+#' 
 #' @details  
 #' \code{print.cmp} can be used to print a short summary of object class 'cmp'.
 #' 
@@ -208,7 +211,7 @@ print.cmp <- function(x,...)
       "\n", sep = "")
   cat("\nLinear Model Coefficients:\n")
   print.default(format(signif(x$coefficients,3)), print.gap = 2,quote = FALSE)
-  cat("\nDispersion (nu):", x$nu)
+  cat("\nDispersion (nu):", signif(x$nu, 3))
   cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
       x$df.residuals, "Residual")
   cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",
