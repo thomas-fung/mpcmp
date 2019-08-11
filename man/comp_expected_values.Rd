@@ -24,7 +24,8 @@ comp_variances_logfactorialy(lambda, nu, log.Z, summax = 100)
 
 \item{log.Z, }{an optional vector specifying normalizing constant Z in log sacle.}
 
-\item{summax}{maximum number of terms to be considered in the truncated sum}
+\item{summax}{maximum number of terms to be considered in the truncated sum. The
+default is to sum to 100.}
 }
 \value{
 \code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
@@ -41,7 +42,5 @@ comp_variances_logfactorialy(lambda, nu, log.Z, summax = 100)
 Functions to approximate the various expected values for the COM-Poisson distribution
 via truncation.  The standard COM-Poisson parametrization is being used here. 
 The lambda and nu values are recycled to match the length 
-of the longer one and that would determine the length of the results. 
-Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
-bad if the COM-Poisson has a large rate or mean.
+of the longer one and that would determine the length of the results.
 }

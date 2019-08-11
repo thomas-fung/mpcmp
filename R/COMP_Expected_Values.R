@@ -4,12 +4,10 @@
 #' via truncation.  The standard COM-Poisson parametrization is being used here. 
 #' The lambda and nu values are recycled to match the length 
 #' of the longer one and that would determine the length of the results. 
-#' Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
-#' bad if the COM-Poisson has a large rate or mean. 
-#' 
 #' @param lambda,nu, rate and dispersion  parameters. Must be positives. 
 #' @param log.Z, an optional vector specifying normalizing constant Z in log sacle. 
-#' @param summax maximum number of terms to be considered in the truncated sum
+#' @param summax maximum number of terms to be considered in the truncated sum. The
+#' default is to sum to 100. 
 #' @return 
 
 #' \code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
@@ -46,6 +44,7 @@ comp_mean_logfactorialy = function(lambda, nu, log.Z, summax=100){
 }
 
 #' @rdname comp_expected_values
+#' @export
 comp_mean_ylogfactorialy <- function(lambda, nu, log.Z, summax=100){
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.
@@ -66,6 +65,7 @@ comp_mean_ylogfactorialy <- function(lambda, nu, log.Z, summax=100){
 }
 
 #' @rdname comp_expected_values
+#' @export
 comp_means <- function(lambda, nu, log.Z, summax=100) {
   # approximates mean by truncation of COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.
@@ -87,6 +87,7 @@ comp_means <- function(lambda, nu, log.Z, summax=100) {
 
 
 #' @rdname comp_expected_values
+#' @export
 comp_variances <- function(lambda, nu, log.Z, summax=100) {
   # approximates normalizing constant by truncation for COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.
@@ -107,6 +108,7 @@ comp_variances <- function(lambda, nu, log.Z, summax=100) {
 }
 
 #' @rdname comp_expected_values
+#' @export
 comp_variances_logfactorialy <- function(lambda, nu, log.Z, summax = 100) {
   # approximates normalizing constant by truncation for COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.
