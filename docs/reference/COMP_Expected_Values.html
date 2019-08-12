@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Functions to Compute Various Expected Values for the COM-Poisson Distribution — COMP_Expected_Values • mpcmp</title>
+<title>Functions to Compute Various Expected Values for the COM-Poisson Distribution — comp_expected_values • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,14 +37,12 @@
 
 
 
-<meta property="og:title" content="Functions to Compute Various Expected Values for the COM-Poisson Distribution — COMP_Expected_Values" />
+<meta property="og:title" content="Functions to Compute Various Expected Values for the COM-Poisson Distribution — comp_expected_values" />
 
 <meta property="og:description" content="Functions to approximate the various expected values for the COM-Poisson distribution
 via truncation.  The standard COM-Poisson parametrization is being used here. 
 The lambda and nu values are recycled to match the length 
-of the longer one and that would determine the length of the results. 
-Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
-bad if the COM-Poisson has a large rate or mean." />
+of the longer one and that would determine the length of the results." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -121,7 +119,7 @@ bad if the COM-Poisson has a large rate or mean." />
     <div class="page-header">
     <h1>Functions to Compute Various Expected Values for the COM-Poisson Distribution</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/COMP_Expected_Values.R'><code>R/COMP_Expected_Values.R</code></a></small>
-    <div class="hidden name"><code>COMP_Expected_Values.Rd</code></div>
+    <div class="hidden name"><code>comp_expected_values.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -129,9 +127,7 @@ bad if the COM-Poisson has a large rate or mean." />
     <p>Functions to approximate the various expected values for the COM-Poisson distribution
 via truncation.  The standard COM-Poisson parametrization is being used here. 
 The lambda and nu values are recycled to match the length 
-of the longer one and that would determine the length of the results. 
-Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
-bad if the COM-Poisson has a large rate or mean.</p>
+of the longer one and that would determine the length of the results.</p>
     
     </div>
 
@@ -154,11 +150,12 @@ bad if the COM-Poisson has a large rate or mean.</p>
     </tr>
     <tr>
       <th>log.Z, </th>
-      <td><p>normalising constant Z in log sacle.</p></td>
+      <td><p>an optional vector specifying normalizing constant Z in log sacle.</p></td>
     </tr>
     <tr>
       <th>summax</th>
-      <td><p>maximum number of terms to be considered in the truncated sum</p></td>
+      <td><p>maximum number of terms to be considered in the truncated sum. The
+default is to sum to 100.</p></td>
     </tr>
     </table>
     

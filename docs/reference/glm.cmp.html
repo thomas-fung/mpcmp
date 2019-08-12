@@ -243,7 +243,7 @@ if <em>nu &lt; 1</em> and <em>nu &gt; 1</em> respectively.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). <code>mpcmp</code>: Mean-parametrized
-Conway-Maxwell Poisson Regression. R package version 0.1.4.</p>
+Conway-Maxwell Poisson Regression. R package version 0.2.0.</p>
 <p>Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
     
@@ -262,123 +262,123 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;    (Intercept)      gendermale            math    progAcademic  progVocational  
-#&gt;        2.72000        -0.21500        -0.00633        -0.42500        -1.25000  
+#&gt;        2.75000        -0.23600        -0.00681        -0.42600        -1.27000  
 #&gt; 
-#&gt; Dispersion (nu): 0.02054931
+#&gt; Dispersion (nu): 0.0242
 #&gt; Degrees of Freedom: 313 Total (i.e. Null);  309 Residual
-#&gt; Null Deviance: 456.388 
-#&gt; Residual Deviance: 377.8725 
-#&gt; AIC: 1739.061 
+#&gt; Null Deviance: 462.9562 
+#&gt; Residual Deviance: 383.0771 
+#&gt; AIC: 1739.18 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>M.attendance</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
 #&gt; Deviance Residuals: 
 #&gt;     Min       1Q   Median       3Q      Max  
-#&gt; -2.1936  -1.1177  -0.3978   0.2967   2.8175  
+#&gt; -2.2160  -1.1432  -0.4102   0.3175   2.8865  
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;                Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)      2.7151  0.1902   14.28  &lt; 2e-16 ***
-#&gt; gendermale      -0.2149  0.1171   -1.84   0.0663 .  
-#&gt; math            -0.0063  0.0024   -2.65   0.0079 ** 
-#&gt; progAcademic    -0.4253  0.1693   -2.51   0.0120 *  
-#&gt; progVocational  -1.2540  0.1893   -6.62  3.5e-11 ***
+#&gt; (Intercept)      2.7488  0.1873   14.68  &lt; 2e-16 ***
+#&gt; gendermale      -0.2360  0.1160   -2.03   0.0419 *  
+#&gt; math            -0.0068  0.0024   -2.88   0.0039 ** 
+#&gt; progAcademic    -0.4258  0.1669   -2.55   0.0107 *  
+#&gt; progVocational  -1.2661  0.1873   -6.76  1.4e-11 ***
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.02055)
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.02419)
 #&gt; 
-#&gt;     Null deviance: 456.39  on 313 degrees of freedom
-#&gt; Residual deviance: 377.87  on 309 degrees of freedom
+#&gt;     Null deviance: 462.96  on 313 degrees of freedom
+#&gt; Residual deviance: 383.08  on 309 degrees of freedom
 #&gt; 
-#&gt; AIC: 1739.061 
-#&gt; </div><div class='input'>
-### Barbour & Brown (1974): Overdispersed Fish data
-</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fish</span>)
+#&gt; AIC: 1739.18 
+#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>M.attendance</span>)</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>### Barbour &amp; Brown (1974): Overdispersed Fish data</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fish</span>)
 <span class='no'>M.fish</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>species</span>~ <span class='fl'>1</span>+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Log'>log</a></span>(<span class='no'>area</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>fish</span>)
 <span class='no'>M.fish</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt; (Intercept)    log(area)  
-#&gt;       2.330        0.182  
+#&gt;       2.330        0.183  
 #&gt; 
-#&gt; Dispersion (nu): 0.01880634
+#&gt; Dispersion (nu): 0.0183
 #&gt; Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
-#&gt; Null Deviance: 102.58 
-#&gt; Residual Deviance: 59.98932 
-#&gt; AIC: 638.8879 
+#&gt; Null Deviance: 101.4725 
+#&gt; Residual Deviance: 59.33612 
+#&gt; AIC: 638.8522 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>M.fish</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
 #&gt; 
 #&gt; Deviance Residuals: 
 #&gt;     Min       1Q   Median       3Q      Max  
-#&gt; -2.1271  -0.8060  -0.3349   0.4252   2.7193  
+#&gt; -2.1193  -0.8024  -0.3323   0.4269   2.6943  
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;             Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)   2.3334  0.2334   10.00   &lt;2e-16 ***
-#&gt; log(area)     0.1821  0.0286    6.37    2e-10 ***
+#&gt; (Intercept)   2.3289  0.2342    9.94  &lt; 2e-16 ***
+#&gt; log(area)     0.1827  0.0287    6.36  2.1e-10 ***
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.01881)
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.01833)
 #&gt; 
-#&gt;     Null deviance: 102.580  on 69 degrees of freedom
-#&gt; Residual deviance:  59.989  on 68 degrees of freedom
+#&gt;     Null deviance: 101.473  on 69 degrees of freedom
+#&gt; Residual deviance:  59.336  on 68 degrees of freedom
 #&gt; 
-#&gt; AIC: 638.8879 
+#&gt; AIC: 638.8522 
 #&gt; </div><div class='input'>
 <span class='co'>### Huang (2017) Page 371--372: Underdispersed Takeover Bids data</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>takeoverbids</span>)
 <span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
     + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
-    <span class='no'>M.bids</span></div><div class='output co'>#&gt; 
+<span class='no'>M.bids</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
-#&gt;     0.99000      0.26800     -0.17300      0.06780      0.48100     -0.68500  
+#&gt;     0.99000      0.26800     -0.17300      0.06770      0.48100     -0.68500  
 #&gt;    insthold         size       sizesq     regulatn  
-#&gt;    -0.36800      0.17900     -0.00758     -0.03750  
+#&gt;    -0.36800      0.17900     -0.00758     -0.03760  
 #&gt; 
-#&gt; Dispersion (nu): 1.741934
+#&gt; Dispersion (nu): 1.75
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
-#&gt; Null Deviance: 181.5419 
-#&gt; Residual Deviance: 130.6078 
-#&gt; AIC: 382.1777 
+#&gt; Null Deviance: 182.3899 
+#&gt; Residual Deviance: 131.2013 
+#&gt; AIC: 382.1753 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>M.bids</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
 #&gt; Deviance Residuals: 
 #&gt;      Min        1Q    Median        3Q       Max  
-#&gt; -2.70858  -0.70455  -0.07752   0.35979   3.04475  
+#&gt; -2.71433  -0.70636  -0.07758   0.36084   3.05289  
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;             Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)   0.9895  0.4364    2.27  0.02336 *  
-#&gt; leglrest      0.2678  0.1232    2.17  0.02968 *  
-#&gt; rearest      -0.1734  0.1552   -1.12  0.26377    
-#&gt; finrest       0.0678  0.1748    0.39  0.69820    
-#&gt; whtknght      0.4813  0.1320    3.65  0.00027 ***
-#&gt; bidprem      -0.6847  0.3083   -2.22  0.02638 *  
-#&gt; insthold     -0.3678  0.3476   -1.06  0.29003    
-#&gt; size          0.1793  0.0477    3.76  0.00017 ***
-#&gt; sizesq       -0.0076  0.0025   -3.04  0.00233 ** 
-#&gt; regulatn     -0.0375  0.1306   -0.29  0.77419    
+#&gt; (Intercept)   0.9896  0.4354    2.27  0.02302 *  
+#&gt; leglrest      0.2679  0.1229    2.18  0.02925 *  
+#&gt; rearest      -0.1732  0.1548   -1.12  0.26321    
+#&gt; finrest       0.0677  0.1744    0.39  0.69770    
+#&gt; whtknght      0.4813  0.1317    3.65  0.00026 ***
+#&gt; bidprem      -0.6848  0.3076   -2.23  0.02600 *  
+#&gt; insthold     -0.3679  0.3468   -1.06  0.28878    
+#&gt; size          0.1793  0.0476    3.77  0.00017 ***
+#&gt; sizesq       -0.0076  0.0025   -3.05  0.00228 ** 
+#&gt; regulatn     -0.0376  0.1303   -0.29  0.77308    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be 1.742)
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 1.752)
 #&gt; 
-#&gt;     Null deviance: 181.54  on 125 degrees of freedom
-#&gt; Residual deviance: 130.61  on 116 degrees of freedom
+#&gt;     Null deviance: 182.39  on 125 degrees of freedom
+#&gt; Residual deviance: 131.20  on 116 degrees of freedom
 #&gt; 
-#&gt; AIC: 382.1777 
+#&gt; AIC: 382.1753 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='glm.cmp-5.png' alt='' width='700' height='433' /></div><div class='input'>
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
 ### Model fitting for predictor V 
 </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>cottonbolls</span>)
@@ -396,21 +396,21 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt;         stagesfig:def2  stagescotton boll:def2  
 #&gt;               -1.31000                -0.02000  
 #&gt; 
-#&gt; Dispersion (nu): 4.862578
+#&gt; Dispersion (nu): 4.86
 #&gt; Degrees of Freedom: 124 Total (i.e. Null);  114 Residual
-#&gt; Null Deviance: 346.6977 
-#&gt; Residual Deviance: 125.5356 
+#&gt; Null Deviance: 346.6626 
+#&gt; Residual Deviance: 125.5231 
 #&gt; AIC: 440.8227 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>M.bolls</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 #&gt; 
 #&gt; Deviance Residuals: 
 #&gt;      Min        1Q    Median        3Q       Max  
-#&gt; -2.30023  -0.68371  -0.04976   0.75070   2.74763  
+#&gt; -2.30012  -0.68367  -0.04976   0.75066   2.74750  
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;                        Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)              2.1896  0.0294   74.54  &lt; 2e-16 ***
+#&gt; (Intercept)              2.1896  0.0294   74.53  &lt; 2e-16 ***
 #&gt; stagesvegetative:def     0.4369  0.2394    1.82    0.068 .  
 #&gt; stagesflower bud:def     0.2897  0.2356    1.23    0.219    
 #&gt; stagesblossom:def       -1.2425  0.2829   -4.39  1.1e-05 ***
@@ -419,15 +419,15 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; stagesvegetative:def2   -0.8052  0.2717   -2.96    0.003 ** 
 #&gt; stagesflower bud:def2   -0.4879  0.2630   -1.85    0.064 .  
 #&gt; stagesblossom:def2       0.6728  0.3192    2.11    0.035 *  
-#&gt; stagesfig:def2          -1.3103  0.3166   -4.14  3.5e-05 ***
+#&gt; stagesfig:def2          -1.3103  0.3167   -4.14  3.5e-05 ***
 #&gt; stagescotton boll:def2  -0.0200  0.2562   -0.08    0.938    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be 4.863)
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 4.862)
 #&gt; 
-#&gt;     Null deviance: 346.70  on 124 degrees of freedom
-#&gt; Residual deviance: 125.54  on 114 degrees of freedom
+#&gt;     Null deviance: 346.66  on 124 degrees of freedom
+#&gt; Residual deviance: 125.52  on 114 degrees of freedom
 #&gt; 
 #&gt; AIC: 440.8227 
 #&gt; </div></pre>

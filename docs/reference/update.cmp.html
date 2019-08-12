@@ -116,7 +116,7 @@ identical to update in the stats package." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Update and Re-fit a COM-Poisson Model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/Inference.R'><code>R/Inference.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/inference.R'><code>R/inference.R</code></a></small>
     <div class="hidden name"><code>update.cmp.Rd</code></div>
     </div>
 
@@ -170,15 +170,15 @@ the call</p></td>
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
-#&gt;     0.99000      0.26800     -0.17300      0.06780      0.48100     -0.68500  
+#&gt;     0.99000      0.26800     -0.17300      0.06770      0.48100     -0.68500  
 #&gt;    insthold         size       sizesq     regulatn  
-#&gt;    -0.36800      0.17900     -0.00758     -0.03750  
+#&gt;    -0.36800      0.17900     -0.00758     -0.03760  
 #&gt; 
-#&gt; Dispersion (nu): 1.741934
+#&gt; Dispersion (nu): 1.75
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
-#&gt; Null Deviance: 181.5419 
-#&gt; Residual Deviance: 130.6078 
-#&gt; AIC: 382.1777 
+#&gt; Null Deviance: 182.3899 
+#&gt; Residual Deviance: 131.2013 
+#&gt; AIC: 382.1753 
 #&gt; </div><div class='input'>
 <span class='co'>## Dropping whtknght</span>
 <span class='no'>M.bids.null</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/update'>update</a></span>(<span class='no'>M.bids.full</span>, <span class='no'>.</span>~<span class='no'>.</span>-<span class='no'>whtknght</span>)
@@ -190,13 +190,13 @@ the call</p></td>
 #&gt; (Intercept)     leglrest      rearest      finrest      bidprem     insthold  
 #&gt;     1.33000      0.39100     -0.14600      0.13400     -0.74800     -0.44100  
 #&gt;        size       sizesq     regulatn  
-#&gt;     0.18800     -0.00794     -0.04450  
+#&gt;     0.18800     -0.00794     -0.04460  
 #&gt; 
-#&gt; Dispersion (nu): 1.53423
+#&gt; Dispersion (nu): 1.54
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
-#&gt; Null Deviance: 164.4224 
-#&gt; Residual Deviance: 131.6045 
-#&gt; AIC: 393.8806 
+#&gt; Null Deviance: 164.72 
+#&gt; Residual Deviance: 131.837 
+#&gt; AIC: 393.8799 
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
