@@ -132,6 +132,9 @@ will only update those that have not converged.</p>
     </div>
 
     <pre class="usage"><span class='fu'>comp_lambdas</span>(<span class='no'>mu</span>, <span class='no'>nu</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+
+<span class='fu'>comp_lambdas_fixed_ub</span>(<span class='no'>mu</span>, <span class='no'>nu</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -169,8 +172,12 @@ corresponding mu values is less than tol.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function returns the lambda value(s) that satisfies the mean constraint(s) as well
- as the current lambdaub value.</p>
+    <p>Both <code>comp_lambdas</code> and <code>comp_lambdas_fixed_ub</code> returns the lambda value(s)
+that satisfies the mean constraint(s) as well as the current lambdaub value. 
+lambda value(s) returns by <code>comp_lambdas_fixed_ub</code> is bounded by the lambdaub 
+value. 
+<code>comp_lambdas</code> has the extra ability to scale up/down lambdaub to find most 
+appropriate correct lambda values.</p>
     
 
   </div>

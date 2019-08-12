@@ -125,7 +125,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>comp_mu_loglik</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>summax</span>)</pre>
+    <pre class="usage"><span class='fu'>comp_mu_loglik</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>summax</span>)
+
+<span class='fu'>comp_mu_loglik_log_nu_only</span>(<span class='no'>log_nu</span>, <span class='no'>mu</span>, <span class='no'>y</span>, <span class='no'>summax</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,11 +153,20 @@ It is assumed that <code>nu</code> is in the last position of <code>param</code>
       <th>summax</th>
       <td><p>maximum number of terms to be considered in the truncated sum</p></td>
     </tr>
+    <tr>
+      <th>log_nu</th>
+      <td><p>numeric: nu in log-scale</p></td>
+    </tr>
+    <tr>
+      <th>mu</th>
+      <td><p>numeric vector: fitted mean parameters</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The log-likelihood value of the COM-Poisson model.</p>
+    <p><code>comp_mu_loglik</code> returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
+<code>comp_mu_loglik_log_nu_only</code> returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with <code>optim</code>.</p>
     
 
   </div>
