@@ -1,8 +1,10 @@
 # mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression
 
 # mpcmp <img src="man/figures/logo.svg" align ="right" alt="" width ="150"/>
-
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)
+<!-- badges: start -->
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.org/thomas-fung/mpcmp.svg?branch=master)](https://travis-ci.org/thomas-fung/mpcmp)
+<!-- badges: end -->
 
 The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177%2F1471082X17697749).
 
