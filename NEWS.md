@@ -1,5 +1,7 @@
 # mpcmp 0.2.1
 
+  * Added travis.CI. 
+  
 # mpcmp 0.2.0
 
   * Added a `NEWS.md` file to track changes to the package. 
