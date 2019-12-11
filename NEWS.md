@@ -1,3 +1,12 @@
+<<<<<<< Updated upstream
+=======
+# mpcmp 0.2.1
+
+  * Added travis.CI support. 
+  * New functions `gg_plot()`, `gg_histcompPIT()` and `gg_qqcompPIT()` are added to provide the ggplots version of the diagnostic plots. 
+  * The pacakge now depends on a more recent version of R ($\geq$ 3.2). 
+
+>>>>>>> Stashed changes
 # mpcmp 0.2.0
 
   * Added a `NEWS.md` file to track changes to the package. 

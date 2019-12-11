@@ -12,13 +12,13 @@
 #' @param mu numeric vector: fitted mean parameters
 #' @return 
 #' \code{comp_mu_loglik} returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
-#' \code{comp_mu_loglik_log_nu_only} returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with \code{optim}.
+#' \code{comp_mu_neg_loglik_log_nu_only} returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with \code{optim}.
 #' @name comp_mu_loglik
 NULL
 
 #' @rdname comp_mu_loglik
 comp_mu_loglik <-function(param, y, xx, offset, summax){
-  # compute negative loglikelihood for COMP-mu regression models
+  # compute loglikelihood for COMP-mu regression models
   # y is a n*1 column vector
   # xx is a n*q design matrix, including intercept
   # offset is a column vector matching the lenght of y
@@ -35,17 +35,13 @@ comp_mu_loglik <-function(param, y, xx, offset, summax){
   logfactorialy <- lgamma(y+1)
   log_lambda <- log(lambda)
   log.Z <- logZ(log_lambda, nu, summax = summax)
-  #meanlogfactorialy <- comp_mean_logfactorialy(lambda, nu, mu)
   # compute loglikelihood 
   loglik <- sum(y*log_lambda - nu*logfactorialy - log.Z)
-  # compute gradient of negative loglikelihood (not currently used)
-  #gradl <- -c(rep(0,q), y/lambda-comp_means(lambda,nu)/lambda,
-  #            sum(-logfactorialy+meanlogfactorialy))
   return(loglik)
 }
 
 #' @rdname comp_mu_loglik
-comp_mu_loglik_log_nu_only <-function(log_nu, mu, y, summax){
+comp_mu_neg_loglik_log_nu_only <-function(log_nu, mu, y, summax){
   # compute negative loglikelihood for COMP-mu regression models
   # precompute quantities used later
   nu = exp(log_nu)
@@ -56,8 +52,5 @@ comp_mu_loglik_log_nu_only <-function(log_nu, mu, y, summax){
   #meanlogfactorialy <- comp_mean_logfactorialy(lambda, nu, mu)
   # compute loglikelihood 
   nloglik <- -sum(y*log_lambda - nu*logfactorialy - log.Z)
-  # compute gradient of negative loglikelihood (not currently used)
-  #gradl <- -c(rep(0,q), y/lambda-comp_means(lambda,nu)/lambda,
-  #            sum(-logfactorialy+meanlogfactorialy))
   return(nloglik)
 }

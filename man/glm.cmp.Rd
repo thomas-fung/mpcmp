@@ -145,6 +145,7 @@ Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }
 \seealso{
-\code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
+\code{\link{summary.cmp}}, \code{\link{plot.cmp}}, 
+\code{\link{gg_plot.cmp}}, \code{\link{fitted.cmp}} 
 and \code{\link{residuals.cmp}}.
 }

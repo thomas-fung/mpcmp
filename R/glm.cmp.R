@@ -98,7 +98,8 @@
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #'   
 #' @seealso 
-#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
+#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, 
+#' \code{\link{gg_plot.cmp}}, \code{\link{fitted.cmp}} 
 #' and \code{\link{residuals.cmp}}.
 #' @examples 
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
@@ -173,7 +174,7 @@ glm.cmp <- function(formula, data, offset = NULL,
   nu_lb <- 1e-10
   summax <- ceiling(max(c(max(y)+20*sqrt(var(y)),100)))
   #summax <- 100
-  nu0 <- exp(optimize(f= comp_mu_loglik_log_nu_only, 
+  nu0 <- exp(optimize(f= comp_mu_neg_loglik_log_nu_only, 
                       interval = c(max(-log(1+2*mu0)), 5), mu=mu0, y=y, 
                       summax = summax)$minimum)
   lambda0 <- (mu0+(nu0-1)/(2*nu0))^(nu0)

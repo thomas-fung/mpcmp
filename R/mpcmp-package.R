@@ -6,9 +6,8 @@
 #' @title Mean-parametrized Conway-Maxwell Poisson Regression
 #' @keywords package
 #' @references 
-#' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: Mean-parametrized
-#' Conway-Maxwell Poisson Regression. R package version 0.1.4.
-#' 
+#' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: 
+#' Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.2.0.
 #' 
 #' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
