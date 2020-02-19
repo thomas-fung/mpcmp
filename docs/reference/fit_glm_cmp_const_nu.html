@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • mpcmp</title>
+<title>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+Model with constant dispersion. — fit_glm_cmp_const_nu • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +43,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+Model with constant dispersion. — fit_glm_cmp_const_nu" />
+<meta property="og:description" content="This is a workhorse function in which glm.cmp to call upon to fit a 
+mean-parametrized Conway-Maxwell Poisson generalized linear model with 
+constant dispersion." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +68,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,17 +123,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+Model with constant dispersion.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/fit_glm_cmp_const_nu.R'><code>R/fit_glm_cmp_const_nu.R</code></a></small>
+    <div class="hidden name"><code>fit_glm_cmp_const_nu.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="people.html">mpcmp contributors</a></li>
-      </ul>
+    <div class="ref-description">
+    <p>This is a workhorse function in which glm.cmp to call upon to fit a 
+mean-parametrized Conway-Maxwell Poisson generalized linear model with 
+constant dispersion.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>fit_glm_cmp_const_nu</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='no'>offset</span>,
+  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='no'>betastart</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>y</th>
+      <td><p>the response y vector.</p></td>
+    </tr>
+    <tr>
+      <th>X</th>
+      <td><p>the design matrix for regressing the mean</p></td>
+    </tr>
+    <tr>
+      <th>offset, </th>
+      <td><p>this can be used to specify an *a priori* known component to be included 
+in the linear predictor for mean during fitting. This should be <code>NULL</code> or a numeric vector</p></td>
+    </tr>
+    <tr>
+      <th>betastart</th>
+      <td><p>starting values for the parameters in the linear predictor for mu.</p></td>
+    </tr>
+    <tr>
+      <th>lambdalb, lambdaub</th>
+      <td><p>numeric: the lower and upper end points for the interval to be
+searched for lambda(s). The default value for lambdaub should be sufficient for small to
+moderate size nu. If nu is large and required a larger <code>lambdaub</code>, the algorithm
+will scale up <code>lambdaub</code> accordingly.</p></td>
+    </tr>
+    <tr>
+      <th>maxlambdaiter</th>
+      <td><p>numeric: the maximum number of iterations allowed to solve 
+for lambda(s).</p></td>
+    </tr>
+    <tr>
+      <th>tol</th>
+      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the 
+mean constraint if the absolute difference between the calculated mean and a fitted
+values is less than tol.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A fitted model object of class <code>cmp</code> similar to one obtained from <code>glm</code> or <code>glm.nb</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+
+</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

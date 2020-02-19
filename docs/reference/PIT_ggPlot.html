@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the Log-Likelihood of the COM-Poisson model — comp_mu_loglik • mpcmp</title>
+<title>ggplot version of PIT Plots for a CMP Object — PIT_ggPlot • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,10 @@
 
 
 
-<meta property="og:title" content="Calculate the Log-Likelihood of the COM-Poisson model — comp_mu_loglik" />
-<meta property="og:description" content="A function to compute the log-likelihood of the COM-Poisson model." />
+<meta property="og:title" content="ggplot version of PIT Plots for a CMP Object — PIT_ggPlot" />
+<meta property="og:description" content="Two plots for the non-randomized PIT are currently available for checking the 
+distributional assumption of the fitted CMP model: the PIT histogram, and 
+the uniform Q-Q plot for PIT." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -119,64 +121,106 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the Log-Likelihood of the COM-Poisson model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/comp_mu_loglik.R'><code>R/comp_mu_loglik.R</code></a></small>
-    <div class="hidden name"><code>comp_mu_loglik.Rd</code></div>
+    <h1>ggplot version of PIT Plots for a CMP Object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/graphics_related.R'><code>R/graphics_related.R</code></a></small>
+    <div class="hidden name"><code>PIT_ggPlot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function to compute the log-likelihood of the COM-Poisson model.</p>
+    <p>Two plots for the non-randomized PIT are currently available for checking the 
+distributional assumption of the fitted CMP model: the PIT histogram, and 
+the uniform Q-Q plot for PIT.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comp_mu_loglik</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>summax</span>)
+    <pre class="usage"><span class='fu'>gg_histcompPIT</span>(<span class='no'>object</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ref_line</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col_line</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+  <span class='kw'>col_hist</span> <span class='kw'>=</span> <span class='st'>"royal blue"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
-<span class='fu'>comp_mu_neg_loglik_log_nu_only</span>(<span class='no'>log_nu</span>, <span class='no'>mu</span>, <span class='no'>y</span>, <span class='no'>summax</span>)</pre>
+<span class='fu'>gg_qqcompPIT</span>(<span class='no'>object</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>col1</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>col2</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>,
+  <span class='kw'>lty1</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty2</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>param</th>
-      <td><p>numeric vector: the model coefficients &amp; the current value of <code>nu</code>. 
-It is assumed that <code>nu</code> is in the last position of <code>param</code>.</p></td>
+      <th>object</th>
+      <td><p>an object class "cmp", obtained from a call to <code>glm.cmp</code>.</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>numeric vector: response variable</p></td>
+      <th>bins</th>
+      <td><p>numeric; the number of bins shown in the PIT histogram or the 
+PIT Q-Q plot.</p></td>
     </tr>
     <tr>
-      <th>xx</th>
-      <td><p>numeric matrix: the explanatory variables</p></td>
+      <th>ref_line</th>
+      <td><p>logical; if <code>TRUE</code> (default), the line for displaying the standard 
+uniform distribution will be shown for the purpose of comparison.</p></td>
     </tr>
     <tr>
-      <th>offset</th>
-      <td><p>numeric vector: a vector of length equal to the number of cases</p></td>
+      <th>col_line</th>
+      <td><p>numeric or character: the colour of the reference line 
+for comparison in PIT histogram.</p></td>
     </tr>
     <tr>
-      <th>summax</th>
-      <td><p>maximum number of terms to be considered in the truncated sum</p></td>
+      <th>col_hist</th>
+      <td><p>numeric or character; the colour of the histogram for PIT.</p></td>
     </tr>
     <tr>
-      <th>log_nu</th>
-      <td><p>numeric: nu in log-scale</p></td>
+      <th>size</th>
+      <td><p>numeric; the line widths for the comparison line in PIT histogram.</p></td>
     </tr>
     <tr>
-      <th>mu</th>
-      <td><p>numeric vector: fitted mean parameters</p></td>
+      <th>col1</th>
+      <td><p>numeric or character; the colour of the sample uniform Q-Q plot in PIT.</p></td>
+    </tr>
+    <tr>
+      <th>col2</th>
+      <td><p>numeric or character; the colour of the theoretical uniform Q-Q plot in PIT.</p></td>
+    </tr>
+    <tr>
+      <th>lty1</th>
+      <td><p>integer or character string: the line types for the sample 
+uniform Q-Q plot in PIT, see ggplot2::linetype.</p></td>
+    </tr>
+    <tr>
+      <th>lty2</th>
+      <td><p>an integer or character string: the line types for the theoretical uniform 
+Q-Q plot in PIT, see ggplot2::linetype.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>comp_mu_loglik</code> returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
-<code>comp_mu_neg_loglik_log_nu_only</code> returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with <code>optim</code>.</p>
+    <p><code>histcompPIT</code> and <code>qqcompPIT</code></p>
 
+<p>The histogram and the Q-Q plot are used to compare the fitted profile with a standard
+uniform distribution. If they match relatively well, it means the CMP distribution 
+is appropriate for the data.</p>
+<p>The <code>histcompPIT</code> and <code>qqcompPIT</code> functions 
+would provide the same two plots but in base R format.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
+for count data. <em>Biometrics</em>, <strong>65</strong>, 1254--1261.</p>
+<p>Dunsmuir, W.T.M. and Scott, D.J. (2015). The <code>glarma</code> Package for Observation-Driven
+Time Series Regression of Counts. <em>Journal of Statistical Software</em>, 
+<strong>67</strong>, 1--36.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='PIT_Plot.html'>histcompPIT</a></code>, <code><a href='PIT_Plot.html'>qqcompPIT</a></code>, 
+<code><a href='plot.cmp.html'>plot.cmp</a></code> and <code><a href='gg_plot.html'>gg_plot</a></code>.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>## For examples see example(gg_plot)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

@@ -6,6 +6,13 @@
   * Functions such as `print()`, `summary()` are updated to support the updated `glm.cmp()`. 
   * Added spelltest as part of the testing procedure. 
   * Added the `sitophilus` dataset to demonstrate the updated `glm.cmp()` function. 
+```R
+data(sitophilus)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, 
+data = sitophilus)
+summary(M.sit)
+```
+
 =======
 # mpcmp 0.2.1
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • mpcmp</title>
+<title>Sitophilus data set — sitophilus • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,8 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Sitophilus data set — sitophilus" />
+<meta property="og:description" content="Ribeiro et al. (2013) carried out an experiment to assess the bioactivity of extracts from different parts (seeds, leaves and branches) of Annona mucosa (Annonaceae) to control Sitophilus zeamais (Coleoptera: Curculionidae), a major pest of stored maize/corn in Brazil." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +64,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,17 +119,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Sitophilus data set</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/mpcmp-package.R'><code>R/mpcmp-package.R</code></a></small>
+    <div class="hidden name"><code>sitophilus.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="people.html">mpcmp contributors</a></li>
-      </ul>
+    <div class="ref-description">
+    <p>Ribeiro et al. (2013) carried out an experiment to assess the bioactivity of extracts from different parts (seeds, leaves and branches) of Annona mucosa (Annonaceae) to control Sitophilus zeamais (Coleoptera: Curculionidae), a major pest of stored maize/corn in Brazil.</p>
     </div>
+
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)</pre>
+
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A data frame with 40 observations on 2 variables.</p><dl class='dl-horizontal'>
+<dt>extract</dt><dd><p>the treatment used</p></dd>
+<dt>ninsect</dt><dd><p>number emerged insects (progeny)</p></dd>
+
+</dl>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>10g of corn and 20 animals adults were placed in each Petri dish. Extracts prepared with different parts of mucosa or just water (control) were completely randomized with 10 replicates.</p>
+<p>The numbers of emerged insects (progeny) after 60 days and their corresponding treatments were recorded in this dataset.</p>
+<p>This dataset was obtained from the `cmpreg``package of Ribeiro Jr, 
+Zeviani &amp; Demétrio (2019), which is based on the work of Ribeiro Junior et al. (2019).</p>
+<p>This data set is also used to illustrate the syntax for regression on the dispersion.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Ribeiro Junior, E.E., Zeviani, W.M., Bonat, W.H., Demétrio, C.G., &amp; Hinde, J. (2019). Reparametrization of COM–Poisson regression models with applications in the analysis of experimental data. Statistical Modelling. https://doi.org/10.1177<!-- %2F1471082X19838651.  --></p>
+<p>Ribeiro, L.P., Vendramim, J.D., Bicalho, K.U., Andrade, M.S.,  Fernandes, J.B., Moral, R.A., &amp; Demétrio C.G.B. (2013). Annona mucosa Jacq. (Annonaceae): A promising source of bioactive compounds against Sitophilus zeamais Mots. (Coleoptera: Curculionidae). <em>Journal of Stored Products Research</em>, <b>55</b>, 6-14.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

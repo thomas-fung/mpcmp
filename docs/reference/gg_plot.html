@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Akaike's Information Criterion — AIC.cmp • mpcmp</title>
+<title>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot — gg_plot • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,12 +42,17 @@
 
 
 
-<meta property="og:title" content="Akaike's Information Criterion — AIC.cmp" />
-<meta property="og:description" content="A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
-value extracted from logLik.cmp, according to the formula 
--2*log-likelihood + k*npar, where npar represents the number of parameters 
-in the fitted model, and k=2 for the usual AIC or k=log(n) (n being 
-the number of observations) for the so-called BIC (Bayesian Information Criterion)." />
+<meta property="og:title" content="Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot — gg_plot" />
+<meta property="og:description" content="Eight plots (selectable by which) are currently available: 
+a plot of deviance residuals against fitted values, 
+a non-randomized PIT histogram, 
+a uniform Q-Q plot for non-randomized PIT, 
+a histogram of the normal randomized residuals, 
+a Q-Q plot of the normal randomized residuals, 
+a Scale-Location plot of sqrt(| residuals |) against fitted values
+a plot of Cook's distances versus row labels
+a plot of pearson residuals against leverage. 
+By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -123,51 +128,100 @@ the number of observations) for the so-called BIC (Bayesian Information Criterio
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Akaike's Information Criterion</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>AIC.cmp.Rd</code></div>
+    <h1>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/graphics_related.R'><code>R/graphics_related.R</code></a></small>
+    <div class="hidden name"><code>gg_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
-value extracted from <code><a href='logLik.cmp.html'>logLik.cmp</a></code>, according to the formula 
-<em>-2*log-likelihood + k*npar</em>, where <em>npar</em> represents the number of parameters 
-in the fitted model, and <em>k=2</em> for the usual AIC or <em>k=log(n)</em> (<em>n</em> being 
-the number of observations) for the so-called BIC (Bayesian Information Criterion).</p>
+    <p>Eight plots (selectable by <code>which</code>) are currently available: 
+a plot of deviance residuals against fitted values, 
+a non-randomized PIT histogram, 
+a uniform Q-Q plot for non-randomized PIT, 
+a histogram of the normal randomized residuals, 
+a Q-Q plot of the normal randomized residuals, 
+a Scale-Location plot of sqrt(| residuals |) against fitted values
+a plot of Cook's distances versus row labels
+a plot of pearson residuals against leverage. 
+By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/AIC.html'>AIC</a></span>(<span class='no'>object</span>, <span class='no'>...</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>gg_plot</span>(<span class='no'>x</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>), <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>output_as_ggplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
+      <th>x</th>
       <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
+      <th>which</th>
+      <td><p>if a subset of plots is required, specify a subset of the numbers 1:8. 
+See 'Details' below.</p></td>
     </tr>
     <tr>
-      <th>k</th>
-      <td><p>numeric: the <em>penalty</em> per parameter to be used; the default
-k = 2 is the classical AIC.</p></td>
+      <th>bins</th>
+      <td><p>numeric; the number of bins shown in the PIT histogram or the 
+PIT Q-Q plot.</p></td>
+    </tr>
+    <tr>
+      <th>ask</th>
+      <td><p>logical; if <code>TRUE</code>, the user is asked before each plot.</p></td>
+    </tr>
+    <tr>
+      <th>nrow</th>
+      <td><p>numeric; (optional) number of rows in the plot grid.</p></td>
+    </tr>
+    <tr>
+      <th>ncol</th>
+      <td><p>numeric; (optional) number of columns in the plot grid.</p></td>
+    </tr>
+    <tr>
+      <th>output_as_ggplot</th>
+      <td><p>logical; if <code>TRUE</code>, the function would 
+return a list of <code>ggplot</code> objects; if <code>FALSE</code>, the 
+function would return an <code>ggarrange</code> object.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric value with the corresponding AIC (or BIC, or ..., depends on k).</p>
+    <p>return a list of <code>ggplot</code> objects or a <code>ggarrange</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or 
-BIC, the better the fit.</p>
+    <p>The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
+the absolute standardized deviance residuals (<em>sqrt|E|</em>) in order to diminish 
+skewness is much less skewed than than <em>|E|</em> for Gaussian zero-mean E.</p>
+<p>The 'Scale-Location' plot uses the standardized deviance residuals while the 
+Residual-Leverage plot uses the standardized pearson residuals. They are given as 
+<em>R[i]/sqrt(1-h.ii)</em> where h_ii are the diagonal entries of the hat matrix.</p>
+<p>The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
+and 1.</p>
+<p>There are two plots based on the non-randomized probability integral transformation (PIT) 
+using <code><a href='nrPIT.html'>compPIT</a></code>. These are a histogram and a uniform Q-Q plot. If the 
+model assumption is appropriate, these plots should reflect a sample obtained 
+from a uniform distribution.</p>
+<p>There are also two plots based on the normal randomized residuals calculated 
+using <code><a href='rPIT.html'>compnormRandPIT</a></code>. These are a histogram and a normal Q-Q plot. If the model
+assumption is appropriate, these plots should reflect a sample obtained from a normal
+distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='logLik.cmp.html'>logLik.cmp</a></code>, <code><a href='nobs.cmp.html'>nobs.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code></p></div>
+    <div class='dont-index'><p><code><a href='nrPIT.html'>compPIT</a></code>, <code><a href='rPIT.html'>compnormRandPIT</a></code>, 
+<code><a href='glm.cmp.html'>glm.cmp</a></code> and <code><a href='plot.cmp.html'>plot.cmp</a></code>.</p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
+<span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
+    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
+
+<span class='co'>## The default plots are shown</span>
+<span class='fu'>gg_plot</span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='gg_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+## The plots for the non-randomized PIT 
+# gg_plot(M.bids, which = c(2,3))
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -176,6 +230,7 @@ BIC, the better the fit.</p>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
