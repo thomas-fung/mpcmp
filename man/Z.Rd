@@ -9,7 +9,7 @@ Z(lambda, nu, log.z = FALSE, summax)
 \arguments{
 \item{lambda}{rate parameter, straightly positive}
 
-\item{nu}{diepsersoin parameter, straightly positive}
+\item{nu}{dispersion parameter, straightly positive}
 
 \item{log.z}{logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as 
 \eqn{log(Z)}.}
@@ -19,6 +19,6 @@ Z(lambda, nu, log.z = FALSE, summax)
 \description{
 A function to approximate the normalizing constant for COM-Poisson distributions
 via truncation. The standard COM-Poisson parametrization is being used here. 
-Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
+Notice that the sum is hard coded to truncate at 100 so the approximation will be quite
 bad if the COM-Poisson has a large rate or mean.
 }

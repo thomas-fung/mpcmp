@@ -17,12 +17,12 @@
 residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...){
   type <- match.arg(type)
   y <- object$y
-  mu <- object$fitted.values
+  mu <- object$fitted_values
   nu <- object$nu
   lambda <- object$lambda
-  log.Z <- object$log.Z
+  log.Z <- object$log_Z
   summax <- object$summax
-  res <- switch(type, deviance = object$d.res,
+  res <- switch(type, deviance = object$d_res,
                 pearson = (y-mu)/sqrt(comp_variances(lambda, nu, log.Z, summax)),
                 response = y - mu
   )
@@ -62,7 +62,7 @@ print.logLik.cmp <- function(x,...){
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 nobs.cmp <- function(object, ...)
-{ return(length(object$nobs))}
+{ return(object$nobs)}
 
 #' Akaike's Information Criterion
 #' 
@@ -101,7 +101,7 @@ AIC.cmp <- function(object, ..., k = 2){
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 fitted.cmp <- function(object, ...){
-  return(object$fitted.values)
+  return(object$fitted_values)
 }
 
 #' Extract the Model Frame from a COM-Poisson Model Fit
@@ -115,7 +115,14 @@ fitted.cmp <- function(object, ...){
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 model.frame.cmp <- function(formula, ...){
-  return(formula$model)
+  if (formula$const_nu) {
+    return(formula$model)
+  } else {
+    out <- list()
+    out$model_mu <- formula$model_mu
+    out$model_nu <- formula$model_nu
+    return(out)
+  }
 }
 
 
@@ -150,11 +157,11 @@ coef.cmp <- function(object, ...){
 
 #' @details  
 #' \code{summary.glm} tries to be smart about formatting the coefficients, standard errors 
-#' and gives 'signifiance starts'. The \code{coefficients} component of the result gives the 
+#' and gives 'significance stars'. The \code{coefficients} component of the result gives the 
 #' estimated coefficients and their estimated standard errors, together with their ratio. This 
 #' third column is labelled as \code{Z value} as the dispersion is fixed for this family. A
 #' forth column gives the two-tailed p-value corresponding to \code{Z value} based on 
-#' the asymptotic Normal reference distribuiton. 
+#' the asymptotic Normal reference distribution. 
 #' 
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}.
@@ -166,24 +173,38 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
   cat("\nCall: ", paste(deparse(object$call), sep = "\n", collapse = "\n"),
       "\n", sep = "")
   cat("\nDeviance Residuals:" , "\n")
-  if (object$df.residual > 5) {
-    residuals.dev = setNames(quantile(object$d.res, na.rm = TRUE),
+  if (object$df_residual > 5) {
+    residuals_dev = setNames(quantile(object$d_res, na.rm = TRUE),
                              c("Min", "1Q", "Median", "3Q", "Max"))
   }
-  xx <- zapsmall(residuals.dev, digits + 1L)
+  xx <- zapsmall(residuals_dev, digits + 1L)
   print.default(xx, digits = digits, na.print = "", print.gap = 2L)
-  cat("\nLinear Model Coefficients:\n")
-  cmat <- cbind(object$coefficients, object$se_beta)
+  if (object$const_nu){ 
+    cat("\nLinear Model Coefficients:\n")  
+    cmat <- cbind(object$coefficients, object$se_beta)
+  } else {
+    cat("\nMean Model Coefficients:\n")
+    cmat <- cbind(object$coefficients_beta, object$se_beta)
+  }
   cmat <- cbind(round(cmat,4), cmat[, 1]/cmat[, 2])
   cmat <- cbind(cmat, 2*pnorm(-abs(cmat[,3])))
   colnames(cmat) <- c("Estimate", "Std.Err", "Z value", "Pr(>|z|)")
   printCoefmat(cmat, digits = 3, P.values = TRUE)
-  cat("\n(Dispersion parameter for Mean-CMP estimated to be ", 
-      signif(object$nu, digits), ")\n\n", 
-      apply(cbind(paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
-                  format(unlist(object[c("null.deviance","residuals.deviance")]),
+  if (object$const_nu){
+    cat("\n(Dispersion parameter for Mean-CMP estimated to be ", 
+        signif(object$nu, digits), ")\n\n")
+    } else {
+    cat("\nDispersion Model Coefficients:\n")
+    cmat <- cbind(object$coefficients_gamma, object$se_gamma)
+    cmat <- cbind(round(cmat,4), cmat[, 1]/cmat[, 2])
+    cmat <- cbind(cmat, 2*pnorm(-abs(cmat[,3])))
+    colnames(cmat) <- c("Estimate", "Std.Err", "Z value", "Pr(>|z|)")
+    printCoefmat(cmat, digits = 3, P.values = TRUE)
+    }
+  cat("\n", apply(cbind(paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
+                  format(unlist(object[c("null_deviance","residuals_deviance")]),
                          digits = max(5L, digits + 1L)), " on",
-                  format(unlist(object[c("df.null", "df.residuals")])), 
+                  format(unlist(object[c("df_null", "df_residuals")])), 
                   "degrees of freedom\n"),
             1L, paste, collapse = " "), sep = "")
   cat("\nAIC:", format(AIC(object)), "\n\n")
@@ -209,9 +230,16 @@ print.cmp <- function(x,...)
 {
   cat("\nCall: ", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n", sep = "")
+  if (x$const_nu){
   cat("\nLinear Model Coefficients:\n")
   print.default(format(signif(x$coefficients,3)), print.gap = 2,quote = FALSE)
   cat("\nDispersion (nu):", signif(x$nu, 3))
+  } else {
+    cat("\nMean Model Coefficients:\n")
+    print.default(format(signif(x$coefficients_beta,3)), print.gap = 2,quote = FALSE)
+    cat("\nDispersion Model Coefficients:\n")
+    print.default(format(signif(x$coefficients_gamma,3)), print.gap = 2,quote = FALSE)
+  }
   cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
       x$df.residuals, "Residual")
   cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",
@@ -219,7 +247,7 @@ print.cmp <- function(x,...)
 }
 
 
-#' Model Predicitons for a \code{glm.cmp} Object
+#' Model Predictions for a \code{glm.cmp} Object
 #' 
 #' This is a function for obtaining predictions and optionally estimates standard 
 #' errors of those prediction from a fitted COM-Poisson regression object. 
@@ -259,17 +287,17 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
                         ...){
   type <- match.arg(type)
   if (is.null(newdata)){
-    pred <- switch(type, link = object$linear.predictors,
-                   response = object$fitted.values)
+    pred <- switch(type, link = object$linear_predictors,
+                   response = object$fitted_values)
     if (se.fit){
       se <- switch(type, link = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x))),
                    response = sqrt(diag(object$x%*%object$variance_beta%*%t(object$x)))*
-                     object$fitted.values)
+                     object$fitted_values)
       pred <- list(fit = pred, se.fit = se)
     }
   } else {
-    mf <- model.frame(delete.response(terms(object)), data=newdata)
-    X <- model.matrix(delete.response(terms(object)), mf)
+    mf <- model.frame(delete.response(object$terms_mu), data=newdata)
+    X <- model.matrix(delete.response(object$terms_mu), mf)
     pred <- switch(type, link = X%*%object$coefficients,
                    response = exp(X%*%object$coefficients))
     if (se.fit){

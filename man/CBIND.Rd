@@ -7,7 +7,7 @@
 CBIND(..., deparse.level = 1)
 }
 \arguments{
-\item{...}{(generalized) vectors or matrices. These can be given as named arugments.}
+\item{...}{(generalized) vectors or matrices. These can be given as named arguments}
 
 \item{deparse.level}{integer; deparse.level = 0 constructs no labels, 
 deparse.level = 1 (the default) or > 1 constructs labels from the arguments names.}

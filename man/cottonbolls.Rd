@@ -12,7 +12,7 @@
 \item{def2}{square of def}
 }}
 \source{
-Supplementary Content of Zevini et al. (2014): 
+Supplementary Content of Zeviani et al. (2014): 
 \url{http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014}
 }
 \usage{

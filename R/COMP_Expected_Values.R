@@ -5,7 +5,7 @@
 #' The lambda and nu values are recycled to match the length 
 #' of the longer one and that would determine the length of the results. 
 #' @param lambda,nu, rate and dispersion  parameters. Must be positives. 
-#' @param log.Z, an optional vector specifying normalizing constant Z in log sacle. 
+#' @param log.Z, an optional vector specifying normalizing constant Z in log scale. 
 #' @param summax maximum number of terms to be considered in the truncated sum. The
 #' default is to sum to 100. 
 #' @return 

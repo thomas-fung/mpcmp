@@ -9,7 +9,7 @@
 #' PIT Q-Q plot. 
 #' @param line logical; if \code{TRUE} (default), the line for displaying the standard 
 #' uniform distribution will be shown for the purpose of comparison. 
-#' @param colLine	 numeric or charater: the colour of the line for comparison 
+#' @param colLine	 numeric or character: the colour of the line for comparison 
 #' in PIT histogram.
 #' @param lwdLine numeric; the line widths for the comparison line in PIT histogram.
 #' @param colHist numeric or character; the colour of the histogram for PIT.
@@ -36,11 +36,11 @@
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 #' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @seealso 
 #' \code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}}, 
-#' \code{\link{plot.cmp}} and \code{\link{gg_plot.cmp}}.
+#' \code{\link{plot.cmp}} and \code{\link{gg_plot}}.
 #' @examples 
 #' ## For examples see example(plot.cmp)
 #' @name PIT_Plot
@@ -99,7 +99,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #' PIT Q-Q plot. 
 #' @param ref_line logical; if \code{TRUE} (default), the line for displaying the standard 
 #' uniform distribution will be shown for the purpose of comparison. 
-#' @param col_line	 numeric or charater: the colour of the reference line 
+#' @param col_line	 numeric or character: the colour of the reference line 
 #' for comparison in PIT histogram.
 #' @param size numeric; the line widths for the comparison line in PIT histogram.
 #' @param col_hist numeric or character; the colour of the histogram for PIT.
@@ -124,14 +124,14 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 #' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @seealso 
 #' \code{\link{histcompPIT}}, \code{\link{qqcompPIT}}, 
-#' \code{\link{plot.cmp}} and \code{\link{gg_plot.cmp}}.
+#' \code{\link{plot.cmp}} and \code{\link{gg_plot}}.
 
 #' @examples 
-#' ## For examples see example(gg_plot.cmp)
+#' ## For examples see example(gg_plot)
 #' @name PIT_ggPlot
 NULL
 
@@ -180,7 +180,7 @@ gg_qqcompPIT <- function(object, bins = 10, col1 = "red",
 
 #' Non-randomized Probability Integral Transform 
 #' 
-#' Functions to produce the non-randomzied probability integral transform (PIT) to check the 
+#' Functions to produce the non-randomized probability integral transform (PIT) to check the 
 #' adequacy of the distributional assumption of the COM-Poisson model. The majority of the 
 #' code and descriptions are taken from Dunsmuir and Scott (2015).
 #' 
@@ -194,12 +194,12 @@ gg_qqcompPIT <- function(object, bins = 10, col1 = "red",
 #' @return 
 #' \code{compPredprob} returns a list with values: 
 #' \item{upper}{the predictive cumulative probabilities used as the upper bound for 
-#' computing the non-randomzied PIT.}
+#' computing the non-randomized PIT.}
 #' \item{lower}{the predictive cumulative probabilities used as the upper bound for 
-#' computing the non-randomzied PIT.}
+#' computing the non-randomized PIT.}
 #' 
 #' \code{compPIT} returns a list with values:
-#' \item{conditionalPIT}{the conditional probability integral transoformation given the 
+#' \item{conditionalPIT}{the conditional probability integral transformation given the 
 #' observed counts.}
 #' \item{PIT}{the probability integral transformation.}
 #' @references 
@@ -207,7 +207,7 @@ gg_qqcompPIT <- function(object, bins = 10, col1 = "red",
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 #' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @examples 
 #' data(takeoverbids)
@@ -284,7 +284,7 @@ compPIT <- function (object, bins = 10)
 
 #' @return 
 #' A list consisting of two elements:
-#' \item{rt}{the normal conditioanl randomized quantile residuals}
+#' \item{rt}{the normal conditional randomized quantile residuals}
 #' \item{rdMid}{the midpoints of the predictive probability intervals}
 #' @references 
 #' Berkowitz, J. (2001). Testing density forecasts, with applications to risk management.
@@ -294,7 +294,7 @@ compPIT <- function (object, bins = 10)
 #' Computational and Graphical Statistics}, \bold{5}, 236--244.
 #' 
 #' Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-#' Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+#' Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 #' \strong{67}, 1--36. 
 #' @examples 
 #' data(takeoverbids)
@@ -318,12 +318,12 @@ compnormRandPIT <- function (object) {
 #' Eight plots (selectable by \code{which}) are currently available: 
 #' a plot of deviance residuals against fitted values, 
 #' a non-randomized PIT histogram, 
-#' a uniform Q-Q plot for non-randomzied PIT, 
+#' a uniform Q-Q plot for non-randomized PIT, 
 #' a histogram of the normal randomized residuals, 
 #' a Q-Q plot of the normal randomized residuals, 
 #' a Scale-Location plot of sqrt(| residuals |) against fitted values
-#' a plot of Cook's distances versus row lobels
-#' a plot of pearson residauls against leverage. 
+#' a plot of Cook's distances versus row labels
+#' a plot of pearson residuals against leverage. 
 #' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
 #' 
 #' @param x an object class 'cmp' object, obtained from a call to \code{glm.cmp}
@@ -339,7 +339,7 @@ compnormRandPIT <- function (object) {
 #' @import grDevices
 #' @export
 #' @details 
-#' The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
+#' The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
 #' skewness is much less skewed than than \emph{|E|} for Gaussian zero-mean E. 
 #' 
@@ -355,14 +355,14 @@ compnormRandPIT <- function (object) {
 #' model assumption is appropriate, these plots should reflect a sample obtained 
 #' from a uniform distribution. 
 #' 
-#' There are also two plots based on the normal randomzied residuals calculated 
+#' There are also two plots based on the normal randomized residuals calculated 
 #' using \code{\link{compnormRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
 #' assumption is appropriate, these plots should reflect a sample obtained from a normal
-#' distribuiton. 
+#' distribution. 
 #'
 #' @seealso 
 #' \code{\link{compPIT}}, \code{\link{compnormRandPIT}}, 
-#' \code{\link{glm.cmp}} and \code{\link{gg_plot.cmp}}. 
+#' \code{\link{glm.cmp}} and \code{\link{gg_plot}}. 
 #' @examples 
 #' data(takeoverbids)
 #' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
@@ -371,7 +371,7 @@ compnormRandPIT <- function (object) {
 #' ## The default plots are shown
 #' plot(M.bids)
 #' 
-#' ## The plots for the non-randomzied PIT 
+#' ## The plots for the non-randomized PIT 
 #' # plot(M.bids, which = c(2,3))
 plot.cmp <- function(x, which=c(1L,2L,6L,8L), 
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
@@ -398,19 +398,19 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
     on.exit(devAskNewPage(oask))
   }
   if (any(show[c(1L,6L)] == TRUE)) {
-    dev.res <- object$d.res
+    dev_res <- object$d_res
   }
   if (show[1L]){
     dev.hold()
-    plot(object$linear.predictors, dev.res,
+    plot(object$linear_predictors, dev_res,
          main= "Residuals vs Fitted",
          ylab = "(Deviance) Residuals",
          xlab = paste(c("Linear Predicted values", object$call)))
     abline(h=0,lty=2)
-    lines(lowess(object$linear.predictors,dev.res), col="red")
-    index.dev.res <- order(abs(dev.res), decreasing = TRUE)[1:3]
-    text(object$linear.predictors[index.dev.res],
-         dev.res[index.dev.res], labels=paste(index.dev.res), cex = 0.7, pos = 4)
+    lines(lowess(object$linear_predictors, dev_res), col="red")
+    index.dev.res <- order(abs(dev_res), decreasing = TRUE)[1:3]
+    text(object$linear_predictors[index.dev.res],
+         dev_res[index.dev.res], labels=paste(index.dev.res), cex = 0.7, pos = 4)
     dev.flush()
   }
   if (show[2L]){
@@ -441,15 +441,15 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
   }
   if (show[6L]){
     dev.hold()
-    std.dev.res <- dev.res/sqrt(1-object$leverage)
+    std.dev.res <- dev_res/sqrt(1-object$leverage)
     res <- sqrt(abs(std.dev.res))
-    plot(object$linear.predictors, res,
+    plot(object$linear_predictors, res,
          main="Scale-Location", xlab = paste(c("Linear Predicted values", object$call)),
          ylab = expression(sqrt("|Std. deviance resid.|")))
-    lines(lowess(object$linear.predictors,res), col="red")
+    lines(lowess(object$linear_predictors,res), col="red")
     index.dev.res <- order(res, decreasing = TRUE)[1:3]
-    text(object$linear.predictors[index.dev.res],
-         res[index.dev.res], labels=paste(index.dev.res), cex = 0.7, pos = 4)
+    text(object$linear_predictors[index.dev.res],
+         dev_res[index.dev.res], labels=paste(index.dev.res), cex = 0.7, pos = 4)
     dev.flush()
   }
   if (any(show[7L:8L] == TRUE)) {
@@ -504,12 +504,12 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' Eight plots (selectable by \code{which}) are currently available: 
 #' a plot of deviance residuals against fitted values, 
 #' a non-randomized PIT histogram, 
-#' a uniform Q-Q plot for non-randomzied PIT, 
+#' a uniform Q-Q plot for non-randomized PIT, 
 #' a histogram of the normal randomized residuals, 
 #' a Q-Q plot of the normal randomized residuals, 
 #' a Scale-Location plot of sqrt(| residuals |) against fitted values
-#' a plot of Cook's distances versus row lobels
-#' a plot of pearson residauls against leverage. 
+#' a plot of Cook's distances versus row labels
+#' a plot of pearson residuals against leverage. 
 #' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
 #' 
 #' @param x an object class 'cmp' object, obtained from a call to \code{glm.cmp}
@@ -531,7 +531,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' @import ggpubr
 #' @export
 #' @details 
-#' The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
+#' The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
 #' skewness is much less skewed than than \emph{|E|} for Gaussian zero-mean E. 
 #' 
@@ -547,10 +547,10 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' model assumption is appropriate, these plots should reflect a sample obtained 
 #' from a uniform distribution. 
 #' 
-#' There are also two plots based on the normal randomzied residuals calculated 
+#' There are also two plots based on the normal randomized residuals calculated 
 #' using \code{\link{compnormRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
 #' assumption is appropriate, these plots should reflect a sample obtained from a normal
-#' distribuiton. 
+#' distribution. 
 #'
 #' @seealso 
 #' \code{\link{compPIT}}, \code{\link{compnormRandPIT}}, 
@@ -563,7 +563,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' ## The default plots are shown
 #' gg_plot(M.bids)
 #' 
-#' ## The plots for the non-randomzied PIT 
+#' ## The plots for the non-randomized PIT 
 #' # gg_plot(M.bids, which = c(2,3))
 gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
                        ask = TRUE, nrow = NULL, ncol = NULL, 
@@ -581,18 +581,18 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
   if (any(!(which %in% 1:8))){
     cat("The acceptable ragne for option 'which' is 1:8.\n")
     cat("Anyting outside this range would be ignored.\n")
-    cat("Use ?gg_plot.cmp to see which plots are available.\n")
+    cat("Use ?gg_plot to see which plots are available.\n")
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
   p <- vector("list", sum(show))
   show_count <- 0
   if (any(show[c(1L,6L)] == TRUE)) {
-    dev_res <- object$d.res
+    dev_res <- object$d_res
   }
   if (show[1L]){
     index_dev_res <- order(abs(dev_res), decreasing = TRUE)[1:3]
-    p_temp <- ggplot(data.frame(x = object$linear.predictors,
+    p_temp <- ggplot(data.frame(x = object$linear_predictors,
                                 y = dev_res)) + 
       geom_point(aes(x=x, y=y)) + 
       labs(title= "Residuals vs Fitted", 
@@ -605,7 +605,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
                 hjust = "inward", vjust = "outward", 
                 data = 
                   data.frame(linear_predictors = 
-                               object$linear.predictors[index_dev_res[1:3]],
+                               object$linear_predictors[index_dev_res[1:3]],
                              dev_res = dev_res[index_dev_res[1:3]],
                              index = paste(index_dev_res[1:3])))
     show_count <- show_count + 1
@@ -642,7 +642,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
     std_dev_res <- dev_res/sqrt(1-object$leverage)
     res <- sqrt(abs(std_dev_res))
     index_res <- order(abs(res), decreasing = TRUE)[1:3]
-    p_temp <- ggplot(data.frame(x = object$linear.predictors, y= res)) + 
+    p_temp <- ggplot(data.frame(x = object$linear_predictors, y= res)) + 
       geom_point(aes(x=x, y=y)) +
       labs(title = "Scale-Location", 
            x = paste(c("Linear Predicted values \n", object$call), collapse =""),
@@ -653,7 +653,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
                 y = res, label = index),  
                 hjust = "inward", vjust = "outward", 
                 data = data.frame(linear_predictors = 
-                                    object$linear.predictors[index_res[1:3]],
+                                    object$linear_predictors[index_res[1:3]],
                                   res = res[index_res[1:3]],
                                   index = index_res[1:3]))
     show_count <- show_count + 1
@@ -662,7 +662,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
   if (any(show[7L:8L] == TRUE)) {
     rk <- dim(object$x)[2]
     h <- object$leverage
-    pear <- residuals.cmp(object,type="pearson")
+    pear <- residuals.cmp(object, type="pearson")
     std_pear <- pear/sqrt(1 - h)
     cook <- (h * std_pear^2)/((1 - h) * rk)
     n <- length(cook)

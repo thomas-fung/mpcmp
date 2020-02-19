@@ -2,11 +2,11 @@
 #' 
 #' A function to approximate the normalizing constant for COM-Poisson distributions
 #' via truncation. The standard COM-Poisson parametrization is being used here. 
-#' Notice that the sum is hard coded to tuncate at 100 so the approximation will be quite
+#' Notice that the sum is hard coded to truncate at 100 so the approximation will be quite
 #' bad if the COM-Poisson has a large rate or mean. 
 #' 
 #' @param lambda rate parameter, straightly positive
-#' @param nu diepsersoin parameter, straightly positive
+#' @param nu dispersion parameter, straightly positive
 #' @param log.z logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as 
 #' \eqn{log(Z)}.
 #' @param summax maximum number of terms to be considered in the truncated sum
@@ -65,7 +65,7 @@ Z <- function(lambda, nu, log.z = FALSE, summax){
 #' Zeviani & Demétrio (2019).
 #' 
 #' @param log_lambda rate parameter in log scale.
-#' @param nu diepsersoin parameter, straightly positive.
+#' @param nu dispersion parameter, straightly positive.
 #' @param summax maximum number of terms to be considered in the truncated sum.
 #' @references 
 #'  Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 

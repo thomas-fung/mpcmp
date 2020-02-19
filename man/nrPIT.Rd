@@ -19,17 +19,17 @@ PIT Q-Q plot.}
 \value{
 \code{compPredprob} returns a list with values: 
 \item{upper}{the predictive cumulative probabilities used as the upper bound for 
-computing the non-randomzied PIT.}
+computing the non-randomized PIT.}
 \item{lower}{the predictive cumulative probabilities used as the upper bound for 
-computing the non-randomzied PIT.}
+computing the non-randomized PIT.}
 
 \code{compPIT} returns a list with values:
-\item{conditionalPIT}{the conditional probability integral transoformation given the 
+\item{conditionalPIT}{the conditional probability integral transformation given the 
 observed counts.}
 \item{PIT}{the probability integral transformation.}
 }
 \description{
-Functions to produce the non-randomzied probability integral transform (PIT) to check the 
+Functions to produce the non-randomized probability integral transform (PIT) to check the 
 adequacy of the distributional assumption of the COM-Poisson model. The majority of the 
 code and descriptions are taken from Dunsmuir and Scott (2015).
 }
@@ -50,6 +50,6 @@ Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.
 }

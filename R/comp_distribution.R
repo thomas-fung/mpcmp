@@ -4,7 +4,7 @@
 #' Conway-Maxwell-Poisson distribution with parameter \code{mu} and \code{nu}
 #'       
 #' @param x,q vector of quantiles 
-#' @param p vector of probabilites 
+#' @param p vector of probabilities 
 #' @param n number of observations. If \code{length(n)} > 1, the length is taken to 
 #' be the number required.
 #' @param lambda an alternative way than mu to parametrized the distribution. 
@@ -22,15 +22,15 @@
 #' mean constraint if the absolute difference between the calculated mean and mu 
 #' is less than tol.
 #' @param summax numeric; maximum number of terms to be considered in the truncated sum.
-#' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
+#' @return \code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the quantile function, and \code{rcomp} generates random deviates. 
 #' 
-#' Invalid arguemnts will result in return value \code{NaN}, with a warning.
+#' Invalid arguments will result in return value \code{NaN}, with a warning.
 #' 
 #' The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
 #' of the lengths of the numerical arguments for the other functions.
 #' 
 #' The numerical arguments other than \code{n} are recycled to the length of the results. 
-#' Only the first arugment of the logical arguments are used. 
+#' Only the first argument of the logical arguments are used. 
 #' @examples 
 #' dcomp(0:5, mu = 2, nu = 1.2)
 #' pcomp(5, mu=2, nu =1.2)
@@ -86,18 +86,18 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
     #B <- (1+6*nu)/(144*nu^3*lambda^(2/nu))
     #D <- 1+(nu-1)*(A+B)
     #mu <- rep(max(lambda^(1/nu)-(nu-1)/(2*nu)+1/D*((nu-1)*(-A/nu+2*B/nu))),
-              #length(lambda))
+    #length(lambda))
     #mu_error <- which(is.nan(mu)>0 | mu< 0)
     mu  <- comp_means(lambda, nu, summax = 500)
-      if (missing(summax)){
-        summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
-          cat("As you do not specify mu nor summax, summax will be calculated based on\n")
-          cat("mu which is calcualted by truncated sum at 500.\n")
-          cat("If you believe the mean of the distribution is somewhat close to 500,\n")
-          cat("you may want to do some experiment with the comp_means() and\n")
-          cat("specify summax instead to improve the accuracy.\n")
-        }
-      }
+    if (missing(summax)){
+      summax <- ceiling(max(c(mu+20*sqrt(mu/nu),100)))
+      cat("As you do not specify mu nor summax, summax will be calculated based on\n")
+      cat("mu which is calcualted by truncated sum at 500.\n")
+      cat("If you believe the mean of the distribution is somewhat close to 500,\n")
+      cat("you may want to do some experiment with the comp_means() and\n")
+      cat("specify summax instead to improve the accuracy.\n")
+    }
+  }
   # at a vector of yvalues
   pmf <- rep(0,length(x))
   for (i in 1:length(x)) {

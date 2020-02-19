@@ -160,7 +160,7 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
       }
     }
     not.converge.ind <- which((1-(((abs(mean1-mu) <=tol) + (lambda == lb) + (lambda == ub)
-                               + (ub ==lb)) >= 1))==1)
+                                   + (ub ==lb)) >= 1))==1)
     iter <- iter+1
   }
   out <- list()

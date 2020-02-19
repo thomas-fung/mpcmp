@@ -14,11 +14,11 @@ for details}
 
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 
-\item{evaluate}{logical; if \code{TRUE} evaluate the new call otherwise simply ruturn 
+\item{evaluate}{logical; if \code{TRUE} evaluate the new call otherwise simply return 
 the call}
 }
 \description{
-\code{update} (i.e., \code{update.cmp}) will upate and (by-default) re-fit a model. It is
+\code{update} (i.e., \code{update.cmp}) will update and (by-default) re-fit a model. It is
 identical to \code{update} in the \code{stats} package.
 }
 \examples{

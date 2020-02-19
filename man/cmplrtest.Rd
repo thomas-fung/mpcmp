@@ -14,7 +14,7 @@ cmplrtest(object1, object2, digits = 3)
 \item{digits}{numeric; minimum number of significant digits to be used for most numbers.}
 }
 \description{
-Perform a likelihood ratio chi-sqaured test between nested COM-Poisson models. 
+Perform a likelihood ratio chi-squared test between nested COM-Poisson models. 
 The test statistics is calculated as \emph{2*(llik- llik_0)}. The test statistics 
 has degrees of freedom \emph{r} where \emph{r} is the difference in the number of 
 parameters between the full and null models.

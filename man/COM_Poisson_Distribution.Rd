@@ -48,21 +48,21 @@ is less than tol.}
 \item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
 otherwise, \eqn{P(X>x)}.}
 
-\item{p}{vector of probabilites}
+\item{p}{vector of probabilities}
 
 \item{n}{number of observations. If \code{length(n)} > 1, the length is taken to 
 be the number required.}
 }
 \value{
-\code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the qunatile function, and \code{rcomp} generates random deviates. 
+\code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the quantile function, and \code{rcomp} generates random deviates. 
 
-Invalid arguemnts will result in return value \code{NaN}, with a warning.
+Invalid arguments will result in return value \code{NaN}, with a warning.
 
 The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
 of the lengths of the numerical arguments for the other functions.
 
 The numerical arguments other than \code{n} are recycled to the length of the results. 
-Only the first arugment of the logical arguments are used.
+Only the first argument of the logical arguments are used.
 }
 \description{
 Density, distribution function, quantile function and random generation for the 

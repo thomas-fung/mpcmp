@@ -1,6 +1,6 @@
 #' Likelihood Ratio Test for nested COM-Poisson models
 #' 
-#' Perform a likelihood ratio chi-sqaured test between nested COM-Poisson models. 
+#' Perform a likelihood ratio chi-squared test between nested COM-Poisson models. 
 #' The test statistics is calculated as \emph{2*(llik- llik_0)}. The test statistics 
 #' has degrees of freedom \emph{r} where \emph{r} is the difference in the number of 
 #' parameters between the full and null models. 
@@ -67,7 +67,7 @@ cmplrtest = function(object1,object2, digits=3) {
 
 #' Likelihood Ratio Test for nu = 1 of a COM-Poisson model
 #' 
-#' Perform a likelihood ratio chi-sqaured test for nu = 1 of a COM-Poisson model. 
+#' Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model. 
 #' The test statistics is calculated as \emph{2*(llik- llik_0)} where \emph{llik} and 
 #' \emph{llik_0} are the log-likelihood of a COM-Poisson and Poisson model respectively.  
 #' The test statistic has 1 degrees of freedom. 
@@ -108,14 +108,14 @@ LRTnu <- function(object, digits = 3){
 
 #' Update and Re-fit a COM-Poisson Model
 #' 
-#' \code{update} (i.e., \code{update.cmp}) will upate and (by-default) re-fit a model. It is
+#' \code{update} (i.e., \code{update.cmp}) will update and (by-default) re-fit a model. It is
 #' identical to \code{update} in the \code{stats} package. 
 #' 
 #' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param formula. changes to the existing formula in \code{object} -- see \code{update.formula}
 #' for details
 #' @param ... other arguments passed to or from other methods  (currently unused).
-#' @param evaluate logical; if \code{TRUE} evaluate the new call otherwise simply ruturn 
+#' @param evaluate logical; if \code{TRUE} evaluate the new call otherwise simply return 
 #' the call
 #' @import stats
 #' @export

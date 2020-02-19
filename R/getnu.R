@@ -7,7 +7,7 @@
 #' It is assumed that \code{nu} is in the last position of \code{param}.
 #' @param y numeric vector: response variable
 #' @param xx numeric matrix: the explanatory variables
-#' @param offset numeric vector: a vector of lenght equal to the number of cases
+#' @param offset numeric vector: a vector of length equal to the number of cases
 #' @param llstart numeric: current log-likelihood value
 #' @param fsscale numeric: a scaling factor (generally >1) for the 
 #' relaxed fisher scoring algorithm

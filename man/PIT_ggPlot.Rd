@@ -21,7 +21,7 @@ PIT Q-Q plot.}
 \item{ref_line}{logical; if \code{TRUE} (default), the line for displaying the standard 
 uniform distribution will be shown for the purpose of comparison.}
 
-\item{col_line}{numeric or charater: the colour of the reference line 
+\item{col_line}{numeric or character: the colour of the reference line 
 for comparison in PIT histogram.}
 
 \item{col_hist}{numeric or character; the colour of the histogram for PIT.}
@@ -55,17 +55,17 @@ The \code{histcompPIT} and \code{qqcompPIT} functions
 would provide the same two plots but in base R format.
 }
 \examples{
-## For examples see example(gg_plot.cmp)
+## For examples see example(gg_plot)
 }
 \references{
 Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.
 }
 \seealso{
 \code{\link{histcompPIT}}, \code{\link{qqcompPIT}}, 
-\code{\link{plot.cmp}} and \code{\link{gg_plot.cmp}}.
+\code{\link{plot.cmp}} and \code{\link{gg_plot}}.
 }

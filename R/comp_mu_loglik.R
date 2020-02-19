@@ -6,7 +6,7 @@
 #' It is assumed that \code{nu} is in the last position of \code{param}.
 #' @param y numeric vector: response variable
 #' @param xx numeric matrix: the explanatory variables
-#' @param offset numeric vector: a vector of lenght equal to the number of cases
+#' @param offset numeric vector: a vector of length equal to the number of cases
 #' @param summax maximum number of terms to be considered in the truncated sum
 #' @param log_nu numeric: nu in log-scale
 #' @param mu numeric vector: fitted mean parameters
@@ -21,7 +21,7 @@ comp_mu_loglik <-function(param, y, xx, offset, summax){
   # compute loglikelihood for COMP-mu regression models
   # y is a n*1 column vector
   # xx is a n*q design matrix, including intercept
-  # offset is a column vector matching the lenght of y
+  # offset is a column vector matching the length of y
   n <- length(y)
   q <- ncol(xx)
   # regression coefficients
@@ -30,7 +30,10 @@ comp_mu_loglik <-function(param, y, xx, offset, summax){
   mu <- exp(eta+offset)
   lambda <- param[(q+1):(q+n)]
   # dispersion parameter
-  nu <- param[(q+n+1)]
+  if (length(param)==q+n+1){
+    nu <- param[(q+n+1)]} else {
+      nu <- param[(q+n+1):(q+2*n)]
+    }
   # precompute quantities used later
   logfactorialy <- lgamma(y+1)
   log_lambda <- log(lambda)

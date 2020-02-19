@@ -22,7 +22,7 @@ comp_variances_logfactorialy(lambda, nu, log.Z, summax = 100)
 \arguments{
 \item{lambda, nu, }{rate and dispersion  parameters. Must be positives.}
 
-\item{log.Z, }{an optional vector specifying normalizing constant Z in log sacle.}
+\item{log.Z, }{an optional vector specifying normalizing constant Z in log scale.}
 
 \item{summax}{maximum number of terms to be considered in the truncated sum. The
 default is to sum to 100.}

@@ -19,11 +19,11 @@
 }
 \details{
 \code{summary.glm} tries to be smart about formatting the coefficients, standard errors 
-and gives 'signifiance starts'. The \code{coefficients} component of the result gives the 
+and gives 'significance stars'. The \code{coefficients} component of the result gives the 
 estimated coefficients and their estimated standard errors, together with their ratio. This 
 third column is labelled as \code{Z value} as the dispersion is fixed for this family. A
 forth column gives the two-tailed p-value corresponding to \code{Z value} based on 
-the asymptotic Normal reference distribuiton.
+the asymptotic Normal reference distribution.
 }
 \examples{
 ## For examples see example(glm.cmp)
