@@ -1,4 +1,11 @@
-<<<<<<< Updated upstream
+# mpcmp 0.3.0
+
+  * Updated `glm.cmp()` to allow varying dispersion. You can now link the dispersion parameters to some covaraites via a log-link.
+  * Most calculations are now performed inside `fit_glm_cmp_const_nu()` and
+  `fit_glm_cmp_vary_nu()`. 
+  * Functions such as `print()`, `summary()` are updated to support the updated `glm.cmp()`. 
+  * Added spelltest as part of the testing procedure. 
+  * Added the `sitophilus` dataset to demonstrate the updated `glm.cmp()` function. 
 =======
 # mpcmp 0.2.1
 
