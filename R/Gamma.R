@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD:R/Gamma.R
+=======
+
+>>>>>>> d909705845465c76937b737b0d8de647c787bc03:Gamma.R
 #' Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model with varying dispersion
 #' 
 #' The function \code{glm.cmp.gamma} is used to fit a mean parametrized Conway-Maxwell Poisson
