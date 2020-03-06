@@ -3,15 +3,11 @@
 #' The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Poisson
 #' generalized linear model with a log-link by using Fisher Scoring iteration. 
 #' 
-#' @usage 
-#' glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL,
-#'    lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6, 
-#'    contrasts = NULL)
-#' @param formula an object of class 'formula': a symblic desciption of the model to be 
-#' fitted. 
+#' @param formula an object of class 'formula': a symbolic description of the model to be fitted to the mean via log-link.
+#' @param formula_nu an optional object of class 'formula': a symbolic description of the model to be fitted to the dispersion via log-link.
 #' @param data an optional data frame containing the variables in the model
 #' @param offset this can be used to specify an *a priori* known component to be included 
-#' in the linear predictor during fitting. This should be \code{NULL} or a numeric vector 
+#' in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector 
 #' of length equal to the number of cases.  
 #' @param subset an optional vector specifying a subset of observations to be used in the 
 #' fitting process.
@@ -20,6 +16,7 @@
 #' is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
 #' no action. Value na.exclude can be useful.
 #' @param betastart starting values for the parameters in the linear predictor for mu.
+#' @param gammastart starting values for the parameters in the linear predictor for nu.
 #' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
 #' searched for lambda(s). The default value for lambdaub should be sufficient for small to
 #' moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
@@ -29,14 +26,16 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
-#' @param contrasts an optional list. See the contrasts.arg of model.matrix.default.
+#' @param contrasts_mu,contrasts_nu optional lists. See the contrasts.arg of model.matrix.default.
 #' @export
 #' @import stats
 #' @details 
-#' Fit a mean-parametrizied COM-Poisson regression using maximum likelihood estimation 
+#' Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation 
 #' via an iterative Fisher Scoring algorithm. 
 #' 
-#' The COM-Poisson regression model is
+#' Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion. 
+#' 
+#' For the constant dispersion model, the model is
 #' 
 #' Y_i ~ CMP(mu_i, nu), 
 #'           
@@ -48,6 +47,19 @@
 #' 
 #' The fitted COM-Poisson distribution is over- or under-dispersed 
 #' if \emph{nu < 1} and \emph{nu > 1} respectively.
+#' 
+#' For the varying dispersion model, the model is 
+#' 
+#' Y_i ~ CMP(mu_i, nu_i), 
+#'           
+#' where  
+#'    
+#' E(Y_i) = mu_i = exp(x_i^T beta), 
+#' 
+#' and dispersion parameters are model via
+#' 
+#' nu_i = exp(s_i^T gamma)
+#' 
 #' @return 
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
 #' or \code{glm.nb}.
@@ -55,7 +67,7 @@
 #' The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain 
 #' and print a summary of the results. 
 #' 
-#' The function \code{plot} (i.e., \code{\link{plot.cmp}}) can be used to produce a range 
+#' The functions \code{plot} (i.e., \code{\link{plot.cmp}}) \code{gg_plot} (i.e. \code{\link{gg_plot}}) can be used to produce a range 
 #' of diagnostic plots. 
 #' 
 #' The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
@@ -70,22 +82,29 @@
 #' An object class 'glm.cmp' is a list containing at least the following components:
 #'
 #' \item{coefficients}{a named vector of coefficients}
-#' \item{se_beta}{approximate standard errors (using observed rather than expected 
-#' information) for coefficients}
+#' \item{coefficients_beta}{a named vector of mean coefficients}
+#' \item{coefficients_gamma}{a named vector of dispersion coefficients}
+#' \item{se_beta}{approximate standard errors (using observed rather than expected information) for mean coefficients}
+#' \item{se_gamma}{approximate standard errors (using observed rather than expected information) for dispersion coefficients}
 #' \item{residuals}{the \emph{response} residuals (i.e., observed-fitted)}
-#' \item{fitted.values}{the fitted mean values}
-#' \item{rank}{the numeric rank of the fitted linear model}
-#' \item{linear.predictors}{the linear fit on log scale}
-#' \item{df.residuals}{the residuals degrees of freedom}
-#' \item{df.null}{the residual degrees of freedom for the null model}
-#' \item{null.deviance}{The deviance for the null model. 
+#' \item{fitted_values}{the fitted mean values}
+#' \item{rank_mu}{the numeric rank of the fitted linear model for mean}
+#' \item{rank_nu}{the numeric rank of the fitted linear model for dispersion}
+#' \item{linear_predictors}{the linear fit for mean on log scale}
+#' \item{df_residuals}{the residuals degrees of freedom}
+#' \item{df_null}{the residual degrees of freedom for the null model}
+#' \item{null_deviance}{The deviance for the null model. 
 #' The null model will include only the intercept.}
 #' \item{y}{the \code{y} vector used.}
-#' \item{x}{the model matrix}
-#' \item{model}{the model frame}
+#' \item{x}{the model matrix for mean}
+#' \item{s}{the model matrix for dispersion}
+#' \item{model_mu}{the model frame for mu}
+#' \item{model_nu}{the model frame for nu}
 #' \item{call}{the matched call}
-#' \item{formula}{the formula supplied}
-#' \item{terms}{the \code{terms} object used}
+#' \item{formula}{the formula supplied for mean}
+#' \item{formula_nu}{the formula supplied for dispersion}
+#' \item{terms_mu}{the \code{terms} object used for mean}
+#' \item{terms_nu}{the \code{terms} object used for dispersion}
 #' \item{data}{the \code{data} argument}
 #' \item{offset}{the \code{offset} vector used}
 #' \item{lambdaub}{the final \code{lambdaub} used}
@@ -98,7 +117,7 @@
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #'   
 #' @seealso 
-#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
+#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}} 
 #' and \code{\link{residuals.cmp}}.
 #' @examples 
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
@@ -107,6 +126,7 @@
 #' M.attendance
 #' summary(M.attendance)
 #' plot(M.attendance)
+#' gg_plot(M.attendance)
 #' 
 #' ### Barbour & Brown (1974): Overdispersed Fish data
 #' data(fish)
@@ -131,19 +151,29 @@
 #' M.bolls
 #' summary(M.bolls)
 #' }
+#' 
+#' ### Ribeiro et al. (2013): Varying dispersion as a function of covariates
+#' data(sitophilus)
+#' M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+#' summary(M.sit)
+#' 
 
-glm.cmp <- function(formula, data, offset = NULL,
-                    subset, na.action, betastart = NULL, 
+glm.cmp <- function(formula, formula_nu = NULL, data, offset = NULL,
+                    subset, na.action, betastart = NULL, gammastart = NULL, 
                     lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
-                    contrasts = NULL){
+                    contrasts_mu = NULL, contrasts_nu = NULL){
   call <- match.call()
   mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "subset", "na.action", 
+  m <- match(c("formula", "data", "subset", "na.action",
                "offset"), names(mf), 0L)
   if (is.null(formula)) {
-    stop("formula must be specified (can not be NULL)")
+    stop("formula for beta must be specified (can not be NULL)")
   }
-  if (lambdalb>=lambdaub) {
+  if (is.null(formula_nu) & !is.null(gammastart)){
+    stop("formula_nu should be specified (should not be NULL) \n 
+         given that you have provided the starting values for the estimates")
+  }
+  if (lambdalb >= lambdaub) {
     stop("lower bound for the search of lambda must be smaller than the upper bound")
   }
   if (missing(data)){
@@ -152,176 +182,58 @@ glm.cmp <- function(formula, data, offset = NULL,
   mf <- mf[c(1L, m)]
   mf$drop.unused.levels <- TRUE
   mf[[1L]] <- as.name("model.frame")
-  mf <- eval(mf, parent.frame())
-  mt <- attr(mf, "terms")
-  y <- model.response(mf)
-  X <- model.matrix(formula,mf,contrasts)
+  mf_mu <- eval(mf, parent.frame())
+  mt_mu <- attr(mf_mu, "terms")
+  y <- model.response(mf_mu)
+  X <- model.matrix(formula, mf_mu, contrasts_mu)
+  if (!is.null(formula_nu)){
+    temp <- formula_nu
+    if (length(formula_nu)==2){
+      formula_nu[3] <- formula_nu[2]
+      formula_nu[2] <- formula[2]}
+    mf_nu <- mf 
+    mf_nu$formula <- formula_nu
+    mf_nu <- eval(mf_nu, parent.frame())
+    mt_nu <- attr(mf_nu, "terms")
+    S <- model.matrix(mt_nu, mf_nu, contrasts_nu)
+    formula_nu <- temp
+  } else {
+    mt_nu <- mf_nu <- S <- NULL
+  }
   offset <- as.vector(model.offset(mf))
   if (is.null(offset)){
-    offset.cmp = rep(0,length(y))
+    offset.cmp <-  rep(0,length(y))
   } else {
-    offset.cmp = model.extract(mf,"offset")
+    offset.cmp <-  model.extract(mf,"offset")
   }
-  # use poisson glm to generate initial values for betas
-  M0 <- stats::glm(y~-1+X+offset(offset.cmp), start = betastart, family=stats::poisson())
-  offset <- M0$offset
-  n <- length(y) # sample size
-  q <- ncol(X)  # number of covariates
-  #starting values for optimization
-  beta0 <- stats::coef(M0)
-  mu0 <- M0$fitted.values
-  nu_lb <- 1e-10
-  summax <- ceiling(max(c(max(y)+20*sqrt(var(y)),100)))
-  #summax <- 100
-  nu0 <- exp(optimize(f= comp_mu_loglik_log_nu_only, 
-                      interval = c(max(-log(1+2*mu0)), 5), mu=mu0, y=y, 
-                      summax = summax)$minimum)
-  lambda0 <- (mu0+(nu0-1)/(2*nu0))^(nu0)
-  summax <- ceiling(max(c(mu0+20*sqrt(mu0/nu0),100)))
-  #lambdaub <- min(lambdaub, 2*max(lambda0))
-  lambda.ok <- comp_lambdas(mu0, nu0, lambdalb = lambdalb, 
-                            #lambdaub = lambdaub,
-                            lambdaub = min(lambdaub,2*max(lambda0)), 
-                            maxlambdaiter = maxlambdaiter, tol = tol, summax = summax, 
-                            lambdaint = lambda0)
-  lambda0 <- lambda.ok$lambda
-  lambdaub <- lambda.ok$lambdaub
-  param <- c(beta0,lambda0,nu0)
-  ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset, summax = summax)
-  param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, 
-                    fsscale = 1, lambdalb = lambdalb, lambdaub = lambdaub, 
-                    maxlambdaiter = maxlambdaiter, tol = tol,summax = summax)
-  lambdaub <- param_obj$lambdaub 
-  ll_new <- param_obj$maxl
-  param <- param_obj$param
-  fsscale <- param_obj$fsscale
-  iter <- param_obj$iter
-  while (abs((ll_new-ll_old)/ll_new) > tol && iter <= 100){
-    iter <- iter +1
-    ll_old <- ll_new
-    paramold <- param
-    betaold <- param[1:q]
-    etaold <- t(X%*%betaold)[1,]
-    muold <-  exp(etaold+offset)
-    lambdaold <- param[(q+1):(q+n)]
-    nuold <- param[q+n+1]
-    log.Z <- logZ(log(lambdaold), nuold, summax = summax)
-    ylogfactorialy <- comp_mean_ylogfactorialy(lambdaold, nuold, log.Z, summax)
-    logfactorialy <- comp_mean_logfactorialy(lambdaold, nuold, log.Z, summax)
-    variances <- comp_variances(lambdaold, nuold, log.Z, summax)
-    variances_logfactorialy <- 
-      comp_variances_logfactorialy(lambdaold, nuold, log.Z, summax)
-    W <- diag(muold^2/variances)
-    z <- etaold + (y-muold)/muold
-    beta <- solve(t(X)%*%W%*%X)%*%t(X)%*%W%*%z
-    eta <- t(X%*%beta)[1,]
-    mu <- exp(eta+offset)
-    Aterm <- (ylogfactorialy- mu*logfactorialy)
-    update_score <- sum(Aterm*(y-mu)/variances -(lgamma(y+1)-logfactorialy))
-    update_info_matrix <- sum(-Aterm^2/variances+ variances_logfactorialy)
-    if (update_info_matrix < 0){
-      update_info_matrix <- sum(variances_logfactorialy)
-    }
-    nu <- nuold + update_score/update_info_matrix
-    while (nu < nu_lb){
-      nu <- (nu+nuold)/2
-    }
-    lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
-                              #lambdaub = lambdaub,
-                              lambdaub = min(lambdaub,2*max(lambdaold)), 
-                              maxlambdaiter = maxlambdaiter, tol = tol,
-                              lambdaint = lambdaold, summax = summax)
-    lambda <- lambda.ok$lambda
-    lambdaub <- lambda.ok$lambdaub
-    param <- c(beta, lambda, nu)
-    ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset, summax = summax)
-    halfstep <- 0
-    while (ll_new < ll_old && halfstep <= 20 && abs((ll_new-ll_old)/ll_new)>tol){
-      halfstep <- halfstep + 1
-      beta <- (beta+betaold)/2
-      nu <- (nu+nuold)/2
-      eta <- t(X%*%beta)[1,]
-      mu <- exp(eta+offset)
-      lambdaold <- lambda
-      lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
-                                #lambdaub = lambdaub,
-                                lambdaub = min(lambdaub,2*max(lambdaold)), 
-                                maxlambdaiter = maxlambdaiter, tol = tol,
-                                lambdaint = lambda, summax = summax)
-      lambda <- lambda.ok$lambda
-      lambdaub <- lambda.ok$lambdaub
-      param <- c(beta, lambda, nu)
-      ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset= offset, summax)
-    }
-  }
-  maxl = ll_new # maximum loglikelihood achieved
-  beta = param[1:q]  # estimated regression coefficients beta
-  lambda = param[(q+1):(q+n)]  # estimated rates (not generally useful)
-  nu = param[q+n+1] # estimate dispersion
-  precision_beta = 0
-  eta <- t(X%*%beta)[1,]
-  if (is.null(offset)){
-    fitted <- exp(eta)
+  if (is.null(S)){
+    out <- fit_glm_cmp_const_nu(y = y, X = X, offset = offset.cmp, 
+                                betastart = betastart, 
+                                lambdalb = lambdalb, lambdaub = lambdaub, 
+                                maxlambdaiter = maxlambdaiter, tol = tol) 
   } else {
-    fitted <- exp(eta+offset)
+    out <- fit_glm_cmp_vary_nu(y=y, X = X, S = S, offset = offset.cmp,
+                               betastart = betastart, 
+                               gammastart = gammastart,
+                               lambdalb = lambdalb, lambdaub = lambdaub, 
+                               maxlambdaiter = maxlambdaiter, tol = tol
+    )
   }
-  log.Z <- logZ(log(lambda), nu, summax = summax)
-  variances <- comp_variances(lambda, nu, log.Z = log.Z, summax = summax)
-  for (i in 1:n){
-    precision_beta = precision_beta + fitted[i]^2*X[i,]%*%t(X[i,])/variances[i]
-  }
-  variance_beta <- solve(precision_beta)
-  se_beta <- as.vector(sqrt(diag(variance_beta)))
-  Xtilde <- diag(fitted/sqrt(variances))%*%as.matrix(X)
-  h <- diag(Xtilde%*%solve(t(Xtilde)%*%Xtilde)%*%t(Xtilde))
-  df.residuals <- length(y)-length(beta)
-  if (df.residuals > 0){
-    indsat.deviance = dcomp(y, mu = y, nu = nu, log.p=TRUE, lambdalb = min(lambdalb),
-                            lambdaub = lambdaub, maxlambdaiter = maxlambdaiter, 
-                            tol = tol, summax =summax)
-    indred.deviance = 2*(indsat.deviance - dcomp(y, nu=nu, lambda= lambda,
-                                                 log.p=TRUE, summax=summax))
-    d.res = sign(y-fitted)*sqrt(abs(indred.deviance))
-  } else { d.res = rep(0,length(y))
-  }
-  out <- list()
   out$call <- call
   out$formula <- formula
-  out$y <- y
-  out$x <- X
+  if (is.null(formula_nu)){
+    out$contrasts_mu <- 
+      out$formula_nu <- out$terms_nu <- out$model_nu <- NA
+  } else {
+    out$formula_nu <- formula_nu
+    out$terms_nu <- mt_nu
+    out$model_nu <- mf_nu
+    out$contrasts_mu <- attr(S, "contrasts")
+  }
   out$data <- data
-  out$nobs <- n
-  out$iter <- iter
-  out$coefficients <- beta
-  out$rank <- length(beta)
-  out$lambda <- lambda
-  out$log.Z <- log.Z
-  out$summax <- summax 
-  out$offset <- offset
-  out$nu <- nu
-  out$terms <- mt
-  out$model <- mf
-  out$contrasts <- attr(X, "contrasts")
+  out$terms_mu <- mt_mu
+  out$model_mu <- mf_mu
+  out$contrasts_mu <- attr(X, "contrasts")
   out$na.action <- attr(mf, "na.action")
-  out$lambdaub <- lambdaub
-  out$linear.predictors <- eta
-  out$maxl <- maxl
-  out$fitted.values <- fitted
-  out$residuals <- y - fitted
-  out$leverage <- h
-  out$d.res <- d.res
-  out$variance_beta <- variance_beta
-  out$se_beta <- se_beta
-  out$df.residuals <- df.residuals
-  out$df.null <- n-1
-  out$null.deviance <- 2*(sum(indsat.deviance) -
-                            sum(dcomp(y, mu = mean(y), nu = nu, log.p = TRUE, 
-                                      summax=summax, lambdalb = min(lambdalb),
-                                      lambdaub = max(lambdaub))))
-  out$residuals.deviance <- 2*(sum(indsat.deviance) -
-                                 sum(dcomp(y, lambda = lambda, nu = nu, 
-                                           log.p = TRUE, summax=summax)))
-  names(out$coefficients) = labels(X)[[2]]
-  class(out) <- "cmp"
   return(out)
 }

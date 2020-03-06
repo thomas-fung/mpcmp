@@ -15,7 +15,7 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 
 \item{xx}{numeric matrix: the explanatory variables}
 
-\item{offset}{numeric vector: a vector of lenght equal to the number of cases}
+\item{offset}{numeric vector: a vector of length equal to the number of cases}
 
 \item{llstart}{numeric: current log-likelihood value}
 

@@ -25,16 +25,16 @@ PIT Q-Q plot.}
 Eight plots (selectable by \code{which}) are currently available: 
 a plot of deviance residuals against fitted values, 
 a non-randomized PIT histogram, 
-a uniform Q-Q plot for non-randomzied PIT, 
+a uniform Q-Q plot for non-randomized PIT, 
 a histogram of the normal randomized residuals, 
 a Q-Q plot of the normal randomized residuals, 
 a Scale-Location plot of sqrt(| residuals |) against fitted values
-a plot of Cook's distances versus row lobels
-a plot of pearson residauls against leverage. 
+a plot of Cook's distances versus row labels
+a plot of pearson residuals against leverage. 
 By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.
 }
 \details{
-The 'Scale-Location' plot, also called 'Spread-Loation' plot, takes the square root of 
+The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
 the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
 skewness is much less skewed than than \emph{|E|} for Gaussian zero-mean E. 
 
@@ -50,10 +50,10 @@ using \code{\link{compPIT}}. These are a histogram and a uniform Q-Q plot. If th
 model assumption is appropriate, these plots should reflect a sample obtained 
 from a uniform distribution. 
 
-There are also two plots based on the normal randomzied residuals calculated 
+There are also two plots based on the normal randomized residuals calculated 
 using \code{\link{compnormRandPIT}}. These are a histogram and a normal Q-Q plot. If the model
 assumption is appropriate, these plots should reflect a sample obtained from a normal
-distribuiton.
+distribution.
 }
 \examples{
 data(takeoverbids)
@@ -63,9 +63,10 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 ## The default plots are shown
 plot(M.bids)
 
-## The plots for the non-randomzied PIT 
+## The plots for the non-randomized PIT 
 # plot(M.bids, which = c(2,3))
 }
 \seealso{
-\code{\link{compPIT}}, \code{\link{compnormRandPIT}}, \code{\link{glm.cmp}}
+\code{\link{compPIT}}, \code{\link{compnormRandPIT}}, 
+\code{\link{glm.cmp}} and \code{\link{gg_plot}}.
 }

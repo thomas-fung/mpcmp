@@ -4,7 +4,7 @@
 #' \code{CBIND} is used within the package over \code{cbind} to recycle the shorter 
 #' arguments so that their number of rows would match. 
 #' 
-#' @param ... (generalized) vectors or matrices. These can be given as named arugments. 
+#' @param ... (generalized) vectors or matrices. These can be given as named arguments 
 #' @param deparse.level integer; deparse.level = 0 constructs no labels, 
 #' deparse.level = 1 (the default) or > 1 constructs labels from the arguments names. 
 #' 

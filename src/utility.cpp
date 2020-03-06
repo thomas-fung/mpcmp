@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 //' Calculate the Normalizing Constant in log scale for COM-Poisson distribution
 //'  
-//' The calcaultion of the function \code{logZ} will be performed here. This function is 
+//' The calculation of the function \code{logZ} will be performed here. This function is 
 //' used to approximate the normalizing constant for COM-Poisson distributions via 
 //' truncation. The standard COM-Poisson parametrization is being used here. 
 //' 
@@ -13,7 +13,7 @@ using namespace Rcpp;
 //' Zeviani & Demétrio (2019).
 //' 
 //' @param log_lambda rate parameter in log scale.
-//' @param nu diepsersoin parameter, straightly positive.
+//' @param nu dispersion parameter, straightly positive.
 //' @param summax maximum number of terms to be considered in the truncated sum.
 //' @useDynLib mpcmp, .registration = TRUE
 //' @importFrom Rcpp sourceCpp

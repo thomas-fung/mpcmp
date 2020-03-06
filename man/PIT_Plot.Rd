@@ -21,7 +21,7 @@ PIT Q-Q plot.}
 \item{line}{logical; if \code{TRUE} (default), the line for displaying the standard 
 uniform distribution will be shown for the purpose of comparison.}
 
-\item{colLine}{numeric or charater: the colour of the line for comparison 
+\item{colLine}{numeric or character: the colour of the line for comparison 
 in PIT histogram.}
 
 \item{colHist}{numeric or character; the colour of the histogram for PIT.}
@@ -52,7 +52,10 @@ the uniform Q-Q plot for PIT.
 \details{
 The histogram and the Q-Q plot are used to compare the fitted profile with a standard
 uniform distribution. If they match relatively well, it means the CMP distribution 
-is appropriate for the data.
+is appropriate for the data. 
+
+The \code{gg_histcompPIT} and \code{gg_qqcompPIT} functions 
+would provide the same two plots but in ggplot format.
 }
 \examples{
 ## For examples see example(plot.cmp)
@@ -62,6 +65,10 @@ Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.
+}
+\seealso{
+\code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}}, 
+\code{\link{plot.cmp}} and \code{\link{gg_plot}}.
 }

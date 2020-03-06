@@ -11,14 +11,14 @@
 \item{finrest}{indicator variable for proposed change in ownership structure}
 \item{insthold}{percentage of stock held by institutions}
 \item{leglrest}{indicator variable for legal defence by lawsuit}
-\item{numbids}{number of bids recevied after the initial bid}
+\item{numbids}{number of bids received after the initial bid}
 \item{obs}{Identifier}
 \item{rearest}{indicator variable for proposed changes in asset structure}
 \item{regulatn}{indicator variable for Department of Justice intervention}
 \item{size}{total book value of assets in billions of dollars}
 \item{takeover}{Indicator. 1 if the company was being taken over}
 \item{weeks}{time in weeks between the initial and final offers}
-\item{whtknght}{indicator varible for management invitation 
+\item{whtknght}{indicator variable for management invitation 
 for friendly third-party bid}
 \item{sizesq}{book value squared}
 }}

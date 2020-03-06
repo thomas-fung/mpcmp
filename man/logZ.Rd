@@ -9,7 +9,7 @@ logZ(log_lambda, nu, summax = 100)
 \arguments{
 \item{log_lambda}{rate parameter in log scale.}
 
-\item{nu}{diepsersoin parameter, straightly positive.}
+\item{nu}{dispersion parameter, straightly positive.}
 
 \item{summax}{maximum number of terms to be considered in the truncated sum.}
 }

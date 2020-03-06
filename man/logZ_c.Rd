@@ -4,7 +4,7 @@
 \alias{logZ_c}
 \title{Calculate the Normalizing Constant in log scale for COM-Poisson distribution
  
-The calcaultion of the function \code{logZ} will be performed here. This function is 
+The calculation of the function \code{logZ} will be performed here. This function is 
 used to approximate the normalizing constant for COM-Poisson distributions via 
 truncation. The standard COM-Poisson parametrization is being used here.}
 \usage{
@@ -13,7 +13,7 @@ logZ_c(log_lambda, nu, summax)
 \arguments{
 \item{log_lambda}{rate parameter in log scale.}
 
-\item{nu}{diepsersoin parameter, straightly positive.}
+\item{nu}{dispersion parameter, straightly positive.}
 
 \item{summax}{maximum number of terms to be considered in the truncated sum.}
 }

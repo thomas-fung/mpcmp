@@ -12,7 +12,7 @@ compnormRandPIT(object)
 }
 \value{
 A list consisting of two elements:
-\item{rt}{the normal conditioanl randomized quantile residuals}
+\item{rt}{the normal conditional randomized quantile residuals}
 \item{rdMid}{the midpoints of the predictive probability intervals}
 }
 \description{
@@ -53,6 +53,6 @@ Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journa
 Computational and Graphical Statistics}, \bold{5}, 236--244.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Seires Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
 \strong{67}, 1--36.
 }

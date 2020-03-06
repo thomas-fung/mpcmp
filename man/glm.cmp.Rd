@@ -4,18 +4,20 @@
 \alias{glm.cmp}
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model}
 \usage{
-glm.cmp(formula, data, offset = NULL, subset, na.action, betastart = NULL,
-   lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6, 
-   contrasts = NULL)
+glm.cmp(formula, formula_nu = NULL, data, offset = NULL, subset,
+  na.action, betastart = NULL, gammastart = NULL, lambdalb = 1e-10,
+  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06,
+  contrasts_mu = NULL, contrasts_nu = NULL)
 }
 \arguments{
-\item{formula}{an object of class 'formula': a symblic desciption of the model to be 
-fitted.}
+\item{formula}{an object of class 'formula': a symbolic description of the model to be fitted to the mean via log-link.}
+
+\item{formula_nu}{an optional object of class 'formula': a symbolic description of the model to be fitted to the dispersion via log-link.}
 
 \item{data}{an optional data frame containing the variables in the model}
 
 \item{offset}{this can be used to specify an *a priori* known component to be included 
-in the linear predictor during fitting. This should be \code{NULL} or a numeric vector 
+in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector 
 of length equal to the number of cases.}
 
 \item{subset}{an optional vector specifying a subset of observations to be used in the 
@@ -27,6 +29,8 @@ is unset. The ‘factory-fresh’ default is na.omit. Another possible value is 
 no action. Value na.exclude can be useful.}
 
 \item{betastart}{starting values for the parameters in the linear predictor for mu.}
+
+\item{gammastart}{starting values for the parameters in the linear predictor for nu.}
 
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s). The default value for lambdaub should be sufficient for small to
@@ -40,7 +44,7 @@ for lambda(s).}
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
 
-\item{contrasts}{an optional list. See the contrasts.arg of model.matrix.default.}
+\item{contrasts_mu, contrasts_nu}{optional lists. See the contrasts.arg of model.matrix.default.}
 }
 \value{
 A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
@@ -49,7 +53,7 @@ or \code{glm.nb}.
 The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain 
 and print a summary of the results. 
 
-The function \code{plot} (i.e., \code{\link{plot.cmp}}) can be used to produce a range 
+The functions \code{plot} (i.e., \code{\link{plot.cmp}}) \code{gg_plot} (i.e. \code{\link{gg_plot}}) can be used to produce a range 
 of diagnostic plots. 
 
 The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
@@ -64,22 +68,29 @@ returned by \code{glm.cmp}.
 An object class 'glm.cmp' is a list containing at least the following components:
 
 \item{coefficients}{a named vector of coefficients}
-\item{se_beta}{approximate standard errors (using observed rather than expected 
-information) for coefficients}
+\item{coefficients_beta}{a named vector of mean coefficients}
+\item{coefficients_gamma}{a named vector of dispersion coefficients}
+\item{se_beta}{approximate standard errors (using observed rather than expected information) for mean coefficients}
+\item{se_gamma}{approximate standard errors (using observed rather than expected information) for dispersion coefficients}
 \item{residuals}{the \emph{response} residuals (i.e., observed-fitted)}
-\item{fitted.values}{the fitted mean values}
-\item{rank}{the numeric rank of the fitted linear model}
-\item{linear.predictors}{the linear fit on log scale}
-\item{df.residuals}{the residuals degrees of freedom}
-\item{df.null}{the residual degrees of freedom for the null model}
-\item{null.deviance}{The deviance for the null model. 
+\item{fitted_values}{the fitted mean values}
+\item{rank_mu}{the numeric rank of the fitted linear model for mean}
+\item{rank_nu}{the numeric rank of the fitted linear model for dispersion}
+\item{linear_predictors}{the linear fit for mean on log scale}
+\item{df_residuals}{the residuals degrees of freedom}
+\item{df_null}{the residual degrees of freedom for the null model}
+\item{null_deviance}{The deviance for the null model. 
 The null model will include only the intercept.}
 \item{y}{the \code{y} vector used.}
-\item{x}{the model matrix}
-\item{model}{the model frame}
+\item{x}{the model matrix for mean}
+\item{s}{the model matrix for dispersion}
+\item{model_mu}{the model frame for mu}
+\item{model_nu}{the model frame for nu}
 \item{call}{the matched call}
-\item{formula}{the formula supplied}
-\item{terms}{the \code{terms} object used}
+\item{formula}{the formula supplied for mean}
+\item{formula_nu}{the formula supplied for dispersion}
+\item{terms_mu}{the \code{terms} object used for mean}
+\item{terms_nu}{the \code{terms} object used for dispersion}
 \item{data}{the \code{data} argument}
 \item{offset}{the \code{offset} vector used}
 \item{lambdaub}{the final \code{lambdaub} used}
@@ -89,10 +100,12 @@ The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Po
 generalized linear model with a log-link by using Fisher Scoring iteration.
 }
 \details{
-Fit a mean-parametrizied COM-Poisson regression using maximum likelihood estimation 
+Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation 
 via an iterative Fisher Scoring algorithm. 
 
-The COM-Poisson regression model is
+Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion. 
+
+For the constant dispersion model, the model is
 
 Y_i ~ CMP(mu_i, nu), 
           
@@ -104,6 +117,18 @@ and \emph{nu > 0} is the dispersion parameter.
 
 The fitted COM-Poisson distribution is over- or under-dispersed 
 if \emph{nu < 1} and \emph{nu > 1} respectively.
+
+For the varying dispersion model, the model is 
+
+Y_i ~ CMP(mu_i, nu_i), 
+          
+where  
+   
+E(Y_i) = mu_i = exp(x_i^T beta), 
+
+and dispersion parameters are model via
+
+nu_i = exp(s_i^T gamma)
 }
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
@@ -112,6 +137,7 @@ M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attendance
 summary(M.attendance)
 plot(M.attendance)
+gg_plot(M.attendance)
 
 ### Barbour & Brown (1974): Overdispersed Fish data
 data(fish)
@@ -136,6 +162,12 @@ M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
 M.bolls
 summary(M.bolls)
 }
+
+### Ribeiro et al. (2013): Varying dispersion as a function of covariates
+data(sitophilus)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+summary(M.sit)
+
 }
 \references{
 Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: Mean-parametrized
@@ -145,6 +177,6 @@ Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }
 \seealso{
-\code{\link{summary.cmp}}, \code{\link{plot.cmp}}, \code{\link{fitted.cmp}} 
+\code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}} 
 and \code{\link{residuals.cmp}}.
 }

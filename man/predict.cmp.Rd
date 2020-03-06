@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarize_extract.R
 \name{predict.cmp}
 \alias{predict.cmp}
-\title{Model Predicitons for a \code{glm.cmp} Object}
+\title{Model Predictions for a \code{glm.cmp} Object}
 \usage{
 \method{predict}{cmp}(object, newdata = NULL, se.fit = FALSE,
   type = c("link", "response"), ...)

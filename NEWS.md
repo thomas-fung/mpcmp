@@ -1,7 +1,26 @@
+# mpcmp 0.3.0
+
+  * Updated `glm.cmp()` to allow varying dispersion. You can now link the dispersion parameters to some covaraites via a log-link.
+  * Most calculations are now performed inside `fit_glm_cmp_const_nu()` and
+  `fit_glm_cmp_vary_nu()`. 
+  * Functions such as `print()`, `summary()` are updated to support the updated `glm.cmp()`. 
+  * Added spelltest as part of the testing procedure. 
+  * Added the `sitophilus` dataset to demonstrate the updated `glm.cmp()` function. 
+```R
+data(sitophilus)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, 
+data = sitophilus)
+summary(M.sit)
+```
+
+=======
 # mpcmp 0.2.1
 
-  * Added travis.CI. 
-  
+  * Added travis.CI support. 
+  * New functions `gg_plot()`, `gg_histcompPIT()` and `gg_qqcompPIT()` are added to provide the ggplots version of the diagnostic plots. 
+  * The package now depends on a more recent version of R ($\geq$ 3.2). 
+
+>>>>>>> Stashed changes
 # mpcmp 0.2.0
 
   * Added a `NEWS.md` file to track changes to the package. 
@@ -9,7 +28,7 @@
   * Ribeiro Jr et al. (2018) specification of the CMP model is utilised to provide a better initial estimate for the dispersion parameter. Added `comp_mu_loglik_log_nu_only()` to facilitate the optimisation. 
   * `Z()`, the normalizing constant function, approximates its true value via (a fixed) truncation. This means the approximation would fail if the mean is large. 
   The followings are implemented as a fix:
-    - A new function `logZ()` is created, based on a similar function in the `cmpreg` package of Ribeiro Jr, Zeviani & Demétrio (2019), and will supercede `Z()` due to its superior numerical stability.
+    - A new function `logZ()` is created, based on a similar function in the `cmpreg` package of Ribeiro Jr, Zeviani & Demétrio (2019), and will supersede `Z()` due to its superior numerical stability.
     - A Chebyshev's inequality type argument is now implemented to have a more flexible upper truncation point. 
 
     `glm.cmp()`, `dcomp()`, `pcomp()`, `qcomp()`, `rcomp()` and functions that calculate expected values are updated to take advantage of these changes. 
