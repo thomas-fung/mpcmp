@@ -116,7 +116,7 @@ fitted.cmp <- function(object, ...){
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 model.frame.cmp <- function(formula, ...){
   if (formula$const_nu) {
-    return(formula$model)
+    return(formula$model_mu)
   } else {
     out <- list()
     out$model_mu <- formula$model_mu
@@ -173,7 +173,7 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
   cat("\nCall: ", paste(deparse(object$call), sep = "\n", collapse = "\n"),
       "\n", sep = "")
   cat("\nDeviance Residuals:" , "\n")
-  if (object$df_residual > 5) {
+  if (object$df_residuals > 5) {
     residuals_dev = setNames(quantile(object$d_res, na.rm = TRUE),
                              c("Min", "1Q", "Median", "3Q", "Max"))
   }
@@ -240,10 +240,10 @@ print.cmp <- function(x,...)
     cat("\nDispersion Model Coefficients:\n")
     print.default(format(signif(x$coefficients_gamma,3)), print.gap = 2,quote = FALSE)
   }
-  cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
-      x$df.residuals, "Residual")
-  cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",
-      x$residuals.deviance, "\nAIC:", format(AIC(x)), "\n\n")
+  cat("\nDegrees of Freedom:", x$df_null, "Total (i.e. Null); ",
+      x$df_residuals, "Residual")
+  cat("\nNull Deviance:", x$null_deviance, "\nResidual Deviance:",
+      x$residuals_deviance, "\nAIC:", format(AIC(x)), "\n\n")
 }
 
 
@@ -301,9 +301,10 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
     pred <- switch(type, link = X%*%object$coefficients,
                    response = exp(X%*%object$coefficients))
     if (se.fit){
-      se <- switch(type, link = sqrt(diag(X%*%object$variance_beta%*%X)),
+      se <- switch(type, link = 
+                     sqrt(diag(X%*%object$variance_beta%*%t(X))),
                    response = sqrt(diag(X%*%object$variance_beta%*%t(X)))*pred)
-      pred <- list(fit = pred, se.fit = se)
+      pred <- list(fit = t(pred)[1,], se.fit = se)
     }
   }
   return(pred)

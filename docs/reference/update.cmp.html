@@ -93,6 +93,9 @@ identical to update in the stats package." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Change log</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -131,7 +134,7 @@ identical to <code>update</code> in the <code>stats</code> package.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='no'>formula.</span>, <span class='no'>...</span>, <span class='kw'>evaluate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='no'>formula.</span>, <span class='no'>formula_nu.</span>, <span class='no'>...</span>, <span class='kw'>evaluate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,8 +145,11 @@ identical to <code>update</code> in the <code>stats</code> package.</p>
     </tr>
     <tr>
       <th>formula.</th>
-      <td><p>changes to the existing formula in <code>object</code> -- see <code>update.formula</code>
-for details</p></td>
+      <td><p>changes to the existing formula in <code>object</code> -- see <code>update.formula</code></p></td>
+    </tr>
+    <tr>
+      <th>formula_nu.</th>
+      <td><p>changes to the existing formula_nu in <code>object</code> -- see <code>update.formula</code> for details. It also accepts NULL to not regressing on the dispersion.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -161,7 +167,9 @@ the call</p></td>
     <div class='dont-index'><p><code><a href='glm.cmp.html'>glm.cmp</a></code>, <code><a href='https://rdrr.io/r/stats/update.formula.html'>update.formula</a></code>, <code><a href='cmplrtest.html'>cmplrtest</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
+    <pre class="examples"><div class='input'>
+<span class='co'># To update the mean regression formula</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
 
 <span class='co'>## Fit full model </span>
 <span class='no'>M.bids.full</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
@@ -177,9 +185,9 @@ the call</p></td>
 #&gt;    -0.36800      0.17900     -0.00758     -0.03760  
 #&gt; 
 #&gt; Dispersion (nu): 1.75
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
+#&gt; Null Deviance: 182.3899 
+#&gt; Residual Deviance: 131.2013 
 #&gt; AIC: 382.1753 
 #&gt; </div><div class='input'>
 <span class='co'>## Dropping whtknght</span>
@@ -195,12 +203,65 @@ the call</p></td>
 #&gt;     0.18800     -0.00794     -0.04460  
 #&gt; 
 #&gt; Dispersion (nu): 1.54
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
+#&gt; Null Deviance: 164.72 
+#&gt; Residual Deviance: 131.837 
 #&gt; AIC: 393.8799 
 #&gt; </div><div class='input'>
-</div></pre>
+<span class='co'>## To update the dispersion regression formula</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)
+
+<span class='co'>## Fit full model </span>
+<span class='no'>M.sit.full</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>ninsect</span> ~ <span class='no'>extract</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> ~<span class='no'>extract</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sitophilus</span>)
+<span class='no'>M.sit.full</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+#&gt; 
+#&gt; Mean Model Coefficients:
+#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
+#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
+#&gt; 
+#&gt; Dispersion Model Coefficients:
+#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
+#&gt;        -0.665         -0.383         -0.372         -0.118  
+#&gt; 
+#&gt; Degrees of Freedom: 39 Total (i.e. Null);  32 Residual
+#&gt; Null Deviance: 257.2108 
+#&gt; Residual Deviance: 41.67931 
+#&gt; AIC: 260.8279 
+#&gt; </div><div class='input'>
+<span class='co'>## Dropping extract from the dispersion regression</span>
+<span class='no'>M.sit.null1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span>  ~<span class='no'>.</span>-<span class='no'>extract</span>)
+<span class='no'>M.sit.null1</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)
+#&gt; 
+#&gt; Mean Model Coefficients:
+#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
+#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
+#&gt; 
+#&gt; Dispersion Model Coefficients:
+#&gt; (Intercept)  
+#&gt;      -0.927  
+#&gt; 
+#&gt; Degrees of Freedom: 39 Total (i.e. Null);  35 Residual
+#&gt; Null Deviance: 234.4694 
+#&gt; Residual Deviance: 41.40781 
+#&gt; AIC: 255.2668 
+#&gt; </div><div class='input'>
+<span class='co'>## To not regress on the dispersion at all</span>
+<span class='no'>M.sit.null2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='no'>M.sit.null2</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
+#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
+#&gt; 
+#&gt; Dispersion (nu): 0.396
+#&gt; Degrees of Freedom: 39 Total (i.e. Null);  36 Residual
+#&gt; Null Deviance: 234.4703 
+#&gt; Residual Deviance: 41.40796 
+#&gt; AIC: 253.2668 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -136,14 +136,15 @@ data(attendance)
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attendance
 summary(M.attendance)
-plot(M.attendance)
-gg_plot(M.attendance)
+plot(M.attendance) # or gg_plot(M.attendance) 
 
 ### Barbour & Brown (1974): Overdispersed Fish data
+\donttest{
 data(fish)
 M.fish <- glm.cmp(species~ 1+log(area), data=fish)
 M.fish
 summary(M.fish)
+}
 
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 data(takeoverbids)
@@ -151,8 +152,7 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 M.bids
 summary(M.bids)
-par(mfrow=c(2,2))
-plot(M.bids)
+plot(M.bids) #or gg_plot(M.bids)
 
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
 ### Model fitting for predictor V 

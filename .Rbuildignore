@@ -2,3 +2,12 @@
 ^_pkgdown\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^pkgdown$
+^README\.md$
+^NEWS\.md$
+^cran-comments\.md$
+^vignettes/mpcmp\.Rmd$
+^doc$
+^Meta$
+^codecov\.yml$
