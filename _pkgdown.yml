@@ -50,9 +50,6 @@ reference:
       - fit_glm_cmp_vary_nu
       - logZ
       - logZ_c
-      
-      
-
 
 navbar:
   title: "mpcmp"
@@ -62,6 +59,8 @@ navbar:
       href: index.html
     - text: "Reference"
       href: reference/index.html
+    - text: "Change log"
+      href: news/index.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/thomas-fung/mpcmp

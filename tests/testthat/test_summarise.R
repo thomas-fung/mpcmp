@@ -53,14 +53,14 @@ test_that("Test predict",
                                   se.fit = TRUE), 2)
           })
 
-text_that("Test print",
+test_that("Test print",
           {
             expect_equal(capture_output_lines(print(M.attendance))[8], 
                          "Dispersion (nu): 0.0242")
           })
 
 
-text_that("Test sumamry",
+test_that("Test sumamry",
           {
             expect_equal(capture_output_lines(summary(M.attendance))[24], 
                          "AIC: 1739.18 ")
