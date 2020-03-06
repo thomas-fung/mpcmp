@@ -2,7 +2,7 @@ Package: mpcmp
 Type: Package
 Title: Mean-Parametrized Conway-Maxwell Poisson (COM-Poisson) Regression
 Version: 0.3.0
-Date: 2019-11-06
+Date: 2020-03-07
 Authors@R: c(person("Thomas", "Fung", role = c("aut", "cre"),
          email = "thomas.fung.dr@gmail.com",
          comment =c(ORCID = "0000-0003-2601-0728")),
