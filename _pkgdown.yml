@@ -16,12 +16,14 @@ reference:
       - fish
       - takeoverbids
       - cottonbolls
+      - sitophilus
   - title: "Generic extract, plot, print and summary methods"
     contents:
       - AIC.cmp
       - coef.cmp
       - print.cmp
       - plot.cmp
+      - gg_plot
       - summary.cmp
       - residuals.cmp
       - model.frame.cmp
@@ -36,13 +38,18 @@ reference:
       - is.wholenumber
       - CBIND
       - Z
-      - COMP_Expected_Values
+      - comp_expected_values
       - comp_lambdas
       - comp_mu_loglik
       - getnu
       - PIT_Plot
+      - PIT_ggPlot
       - nrPIT
       - rPIT
+      - fit_glm_cmp_const_nu
+      - fit_glm_cmp_vary_nu
+      - logZ
+      - logZ_c
       
       
 

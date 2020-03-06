@@ -286,9 +286,9 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt;        2.75000        -0.23600        -0.00681        -0.42600        -1.27000  
 #&gt; 
 #&gt; Dispersion (nu): 0.0242
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 313 Total (i.e. Null);  309 Residual
+#&gt; Null Deviance: 462.9562 
+#&gt; Residual Deviance: 383.0771 
 #&gt; AIC: 1739.18 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.attendance</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
@@ -314,8 +314,9 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; Residual deviance: 383.08  on 309 degrees of freedom
 #&gt; 
 #&gt; AIC: 1739.18 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>M.attendance</span>)</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='gg_plot.html'>gg_plot</a></span>(<span class='no'>M.attendance</span>)</div><div class='img'><img src='glm.cmp-5.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>M.attendance</span>) <span class='co'># or gg_plot(M.attendance) </span></div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>### Barbour &amp; Brown (1974): Overdispersed Fish data</span>
+<span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fish</span>)
 <span class='no'>M.fish</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>species</span>~ <span class='fl'>1</span>+<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>area</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>fish</span>)
 <span class='no'>M.fish</span></div><div class='output co'>#&gt; 
@@ -326,9 +327,9 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt;       2.330        0.183  
 #&gt; 
 #&gt; Dispersion (nu): 0.0183
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
+#&gt; Null Deviance: 101.4725 
+#&gt; Residual Deviance: 59.33612 
 #&gt; AIC: 638.8522 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.fish</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
@@ -351,7 +352,8 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; Residual deviance:  59.336  on 68 degrees of freedom
 #&gt; 
 #&gt; AIC: 638.8522 
-#&gt; </div><div class='input'>
+#&gt; </div><div class='input'><span class='co'># }</span>
+
 <span class='co'>### Huang (2017) Page 371--372: Underdispersed Takeover Bids data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
 <span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
@@ -367,9 +369,9 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt;    -0.36800      0.17900     -0.00758     -0.03760  
 #&gt; 
 #&gt; Dispersion (nu): 1.75
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
+#&gt; Null Deviance: 182.3899 
+#&gt; Residual Deviance: 131.2013 
 #&gt; AIC: 382.1753 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.bids</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
@@ -401,8 +403,7 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt; Residual deviance: 131.20  on 116 degrees of freedom
 #&gt; 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='glm.cmp-6.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>M.bids</span>) <span class='co'>#or gg_plot(M.bids)</span></div><div class='img'><img src='glm.cmp-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>### Huang (2017) Page 373--375: Underdispersed Cotton bolls data</span>
 <span class='co'>### Model fitting for predictor V </span>
 <span class='co'># \donttest{</span>
@@ -422,9 +423,9 @@ and <code><a href='residuals.cmp.html'>residuals.cmp</a></code>.</p></div>
 #&gt;               -1.31000                -0.02000  
 #&gt; 
 #&gt; Dispersion (nu): 4.86
-#&gt; Degrees of Freedom: Total (i.e. Null);  Residual
-#&gt; Null Deviance: 
-#&gt; Residual Deviance: 
+#&gt; Degrees of Freedom: 124 Total (i.e. Null);  114 Residual
+#&gt; Null Deviance: 346.6626 
+#&gt; Residual Deviance: 125.5231 
 #&gt; AIC: 440.8227 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.bolls</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
