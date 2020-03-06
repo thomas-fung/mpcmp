@@ -116,8 +116,6 @@ fit_glm_cmp_vary_nu <- function(y=y, X = X, S = S, offset = offset,
       param <- c(beta, lambda, nu, gamma) 
       ll_new <- comp_mu_loglik(param = param, y=y, xx= X, 
                                offset= offset, summax)
-      print(gamma)
-      print(ll_new)
     }
   }
   maxl <-  ll_new # maximum loglikelihood achieved

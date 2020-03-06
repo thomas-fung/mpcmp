@@ -4,13 +4,14 @@
 \alias{update.cmp}
 \title{Update and Re-fit a COM-Poisson Model}
 \usage{
-\method{update}{cmp}(object, formula., ..., evaluate = TRUE)
+\method{update}{cmp}(object, formula., formula_nu., ..., evaluate = TRUE)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}
 
-\item{formula.}{changes to the existing formula in \code{object} -- see \code{update.formula}
-for details}
+\item{formula.}{changes to the existing formula in \code{object} -- see \code{update.formula}}
+
+\item{formula_nu.}{changes to the existing formula_nu in \code{object} -- see \code{update.formula} for details. It also accepts NULL to not regressing on the dispersion.}
 
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 
@@ -22,6 +23,8 @@ the call}
 identical to \code{update} in the \code{stats} package.
 }
 \examples{
+
+# To update the mean regression formula
 data(takeoverbids)
 
 ## Fit full model 
@@ -33,6 +36,20 @@ M.bids.full
 M.bids.null <- update(M.bids.full, .~.-whtknght)
 M.bids.null
 
+## To update the dispersion regression formula
+data(sitophilus)
+
+## Fit full model 
+M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+M.sit.full
+        
+## Dropping extract from the dispersion regression
+M.sit.null1 <- update(M.sit.full, formula_nu. =  ~.-extract)
+M.sit.null1
+
+## To not regress on the dispersion at all
+M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
+M.sit.null2
 }
 \seealso{
 \code{\link{glm.cmp}}, \code{\link{update.formula}}, \code{\link{cmplrtest}}.

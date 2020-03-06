@@ -19,17 +19,15 @@ knitr::opts_chunk$set(
 ```
 ## Introduction {#intro}
 
-We review the theory and application of a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data and describe the estimation of these models using the R package mpcmp. Prediction, inference, diagnostic and graphical methods are also illustrated by several examples. 
-
-The R (@R-base) `mpcmp` package (@R-mpcmp) provides functionality for
-estimating a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data and is avaialble from the Comprehensive R Archive Network (CRAN) at \url{http://CRAN.R-project.org/package=mpcmp}. @Huang2017b provides the theoretical developemnt of the model that this package bases on. 
-
-
 Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008, -@Lord2010; @Sellers2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. COM-Poisson distributions are also full probability models, making them particularly useful for predictions and estimation of event probabilities. See @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
 
+The R (@R-base) `mpcmp` package (@R-mpcmp) provides functionality for
+estimating a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data. In this way, the 
+
+The package is available from the Comprehensive R Archive Network (CRAN) at \url{http://CRAN.R-project.org/package=mpcmp}. @Huang2017b provides the theoretical development of the model that this package bases on. 
 
 ## Conway-Maxwell-Poisson Distributions {#cmpintro}
-The CMP distribution was first used by @Conway1962 as a model for queueing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter $\lambda$ and dispersion parameter $\nu$ if its probability mass function (pmf) is given by
+The CMP distribution was first used by @Conway1962 as a model for queuing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter $\lambda$ and dispersion parameter $\nu$ if its probability mass function (pmf) is given by
 $$
 P(Y =y|λ,ν)= \frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}, \quad y =0,1,2,...,
 $$ 
@@ -39,7 +37,7 @@ Z(\lambda,\nu)= \sum^{\infty}_{y=0}\frac{\lambda^y}{(y!)^{\nu}},
 $$
 is a normalizing constant. The CMP includes Poisson ($\nu = 1$), geometric ($\nu = 0$, $\lambda < 1$) and Bernoulli ($\nu \to \infty$ with probability $\lambda/(1+\lambda)$).
 
-One of the major limitations of CMP distributions is that it is not directly parametrized via the mean as it  does not have closed-form expression for its moments in terms of the parameters $\lambda$ and $\nu$ but satisfy recursive formulas, 
+One of the major limitations of CMP distributions is that it is not directly parametrized via the mean as it does not have closed-form expression for its moments in terms of the parameters $\lambda$ and $\nu$ but satisfy recursive formulas, 
 $$
 \begin{aligned}
 E(Y)  &= \lambda E(Y+1)^{1-\nu};  \\
@@ -59,17 +57,13 @@ The two model parameters, namely, the rate $\lambda \geq  0$ and the dispersion 
 $$
 \frac{P(Y = y − 1)}{P(Y= y)} = \frac{y^{\nu}}{\lambda}.
 $$
-As a result, the CMP generalises the Poisson such that the ratio is not necessarily linear in $y$. If $\nu < 1$, CMP would have a longer tail relative to a Poisson distribution with the same mean and is therefore overdispersed. In reverse, CMP is underdispersed when $\nu >1$. 
+As a result, the CMP generalises the Poisson such that the ratio is not necessarily linear in $y$. If $\nu < 1$, CMP would have a longer tail relative to a Poisson distribution with the same mean and is therefore overdispersed. In reverse, CMP is underdispersed when $\nu>1$. 
 
 As CMP is one of a few distributions that can handle both under- and over-dispersion, the aim is to extend the GLM formulation to the CMP case so that one can model the relationship between $Y$ and the predictors $X$. Given a set of covariates $X \in R^q$, @Sellers2010 proposed a GLM for count response $Y$ that can be specified via
 $$
 Y|X ∼ CMP(\lambda,\nu), \quad \text{s.t.} \quad \log\lambda = X^{\top}\beta
 $$ 
 where $\beta \in R^q$ is a vector of regression coefficients. This model however does not provide a closed form relationship between $E(Y)$ and the linear predictor, making it incompatible with other commonly used log-linear model.
-
-The `R` `mpcmp` 
-
-The outline of the remainder of the paper is as follows. Section \@ref(mpcmpintro)
 
 ## Mean-Parametrized Conway-Maxwell-Poisson Regression {#mpcmpintro}
 As it is more convenient and interpretable to model the mean $\mu = E(Y)>0$ of the distribution directly, @Huang2017b proposed to parametrize the CMP distribution via the mean:
@@ -97,7 +91,7 @@ and compatible other commonly used log-linear regression models for counts. In p
 
 Another advantage of modelling the mean directly is that it is way easier to incorporate offsets into the model, much in the same way as for classical GLMs (e.g., McCullagh & Nelder, 1989, Page 206). In contrast, handling offsets in standard CMP regression models is not as easy, precisely because standard CMP distributions are not parametrized via the mean.
 
-## Estimation 
+## Model fitting
 
 
 Given $n$ successive observations $\{y_t: t = 1, \ldots ,n\}$ on the response series the likelihood is constructed as the product of conditional densities of Yt given Ft. The state vector Wt at each time embodies these conditioning variables and so the log likelihood is given by
@@ -252,6 +246,15 @@ Also a quote using `>`:
 
 The dispersion $\nu$ can in turn be modelled via its own regression model using a set of covariates $\tilte{X}$, with the natural link being $\nu = exp(\tilde{X}^{\top}\gamma))$ to ensure non-negativity. The set of covariates $\tilde{X}$ can coincide with $X$, share common
 components with $X$, or be distinct altogether. 
+
+There are other `R` packages to deal with CMP models and they all help the writing and contruction of this package..
+
+- `compoisson`: Routines for density and moments of the COM-Poisson distribution under original parametrization by @R-compoisson
+- `CompGLM`: Fit COM-Poisson models under original parametrization (includes dispersion modeling) by @R-CompGLM.
+- `COMPoissonReg`: Fit COM-Poisson models under original parametrization (includes zero-inflation and dispersion modeling) by @R-COMPoissonReg. 
+- `glmmTMB`: Fit (among other) COM-Poisson models under a different mean-parametrization (includes zero-inflation, dispersion modeling and random effects) by @R-glmmTMB. 
+
+
 
 ## References
 

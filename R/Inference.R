@@ -113,7 +113,7 @@ LRTnu <- function(object, digits = 3){
 #' 
 #' @param object an object class 'cmp', obtained from a call to \code{glm.cmp}.
 #' @param formula. changes to the existing formula in \code{object} -- see \code{update.formula}
-#' for details
+#' @param formula_nu. changes to the existing formula_nu in \code{object} -- see \code{update.formula} for details. It also accepts NULL to not regressing on the dispersion. 
 #' @param ... other arguments passed to or from other methods  (currently unused).
 #' @param evaluate logical; if \code{TRUE} evaluate the new call otherwise simply return 
 #' the call
@@ -122,6 +122,8 @@ LRTnu <- function(object, digits = 3){
 #' @seealso \code{\link{glm.cmp}}, \code{\link{update.formula}}, \code{\link{cmplrtest}}.
 #' 
 #' @examples 
+#' 
+#'# To update the mean regression formula
 #' data(takeoverbids)
 #'
 #' ## Fit full model 
@@ -133,12 +135,40 @@ LRTnu <- function(object, digits = 3){
 #' M.bids.null <- update(M.bids.full, .~.-whtknght)
 #' M.bids.null
 #' 
-update.cmp <- function(object, formula., ..., evaluate = TRUE) {
+#' ## To update the dispersion regression formula
+#' data(sitophilus)
+#'
+#' ## Fit full model 
+#' M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+#' M.sit.full
+#'         
+#' ## Dropping extract from the dispersion regression
+#' M.sit.null1 <- update(M.sit.full, formula_nu. =  ~.-extract)
+#' M.sit.null1
+#' 
+#' ## To not regress on the dispersion at all
+#' M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
+#' M.sit.null2
+
+update.cmp <- function(object, formula., formula_nu., ..., 
+                       evaluate = TRUE) {
   if (is.null(call <- getCall(object))) 
     stop("need an object with call component")
   extras <- match.call(expand.dots = FALSE)$...
   if (!missing(formula.)) 
     call$formula <- update.formula(formula(object), formula.)
+  if (!missing(formula_nu.)){
+    if (!is.null(formula_nu.)){
+      if (is.na(object$formula_nu)){
+        call$formula_nu <- update.formula(formula(~1), formula_nu.)
+      } else {
+      call$formula_nu <- update.formula(formula(object$formula_nu),
+                                      formula_nu.)
+      }
+    } else {
+      call$formula_nu <- NULL
+    }
+  }
   if (length(extras)) {
     existing <- !is.na(match(names(extras), names(call)))
     for (a in names(extras)[existing]) call[[a]] <- extras[[a]]

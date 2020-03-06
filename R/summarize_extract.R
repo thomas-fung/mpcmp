@@ -240,10 +240,10 @@ print.cmp <- function(x,...)
     cat("\nDispersion Model Coefficients:\n")
     print.default(format(signif(x$coefficients_gamma,3)), print.gap = 2,quote = FALSE)
   }
-  cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
-      x$df.residuals, "Residual")
-  cat("\nNull Deviance:", x$null.deviance, "\nResidual Deviance:",
-      x$residuals.deviance, "\nAIC:", format(AIC(x)), "\n\n")
+  cat("\nDegrees of Freedom:", x$df_null, "Total (i.e. Null); ",
+      x$df_residuals, "Residual")
+  cat("\nNull Deviance:", x$null_deviance, "\nResidual Deviance:",
+      x$residuals_deviance, "\nAIC:", format(AIC(x)), "\n\n")
 }
 
 
