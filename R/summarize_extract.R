@@ -173,7 +173,7 @@ summary.cmp <- function(object, digits = max(3L, getOption("digits") - 3L), ...)
   cat("\nCall: ", paste(deparse(object$call), sep = "\n", collapse = "\n"),
       "\n", sep = "")
   cat("\nDeviance Residuals:" , "\n")
-  if (object$df_residual > 5) {
+  if (object$df_residuals > 5) {
     residuals_dev = setNames(quantile(object$d_res, na.rm = TRUE),
                              c("Min", "1Q", "Median", "3Q", "Max"))
   }

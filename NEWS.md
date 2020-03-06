@@ -1,6 +1,6 @@
 # mpcmp 0.3.0
 
-  * Updated `glm.cmp()` to allow varying dispersion. You can now link the dispersion parameters to some covaraites via a log-link.
+  * Updated `glm.cmp()` to allow varying dispersion. You can now link the dispersion parameters to some covariates via a log-link.
   * Most calculations are now performed inside `fit_glm_cmp_const_nu()` and
   `fit_glm_cmp_vary_nu()`. 
   * Functions such as `print()`, `summary()` are updated to support the updated `glm.cmp()`. 
@@ -13,14 +13,12 @@ data = sitophilus)
 summary(M.sit)
 ```
 
-=======
 # mpcmp 0.2.1
 
   * Added travis.CI support. 
   * New functions `gg_plot()`, `gg_histcompPIT()` and `gg_qqcompPIT()` are added to provide the ggplots version of the diagnostic plots. 
   * The package now depends on a more recent version of R ($\geq$ 3.2). 
 
->>>>>>> Stashed changes
 # mpcmp 0.2.0
 
   * Added a `NEWS.md` file to track changes to the package. 

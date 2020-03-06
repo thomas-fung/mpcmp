@@ -3,3 +3,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^pkgdown$
+^README\.md$
+^NEWS\.md$
