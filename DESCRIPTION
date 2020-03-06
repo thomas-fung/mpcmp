@@ -31,7 +31,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    spelling
+    spelling,
+    covr
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp

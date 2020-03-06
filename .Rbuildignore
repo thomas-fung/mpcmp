@@ -10,3 +10,4 @@
 ^vignettes/mpcmp\.Rmd$
 ^doc$
 ^Meta$
+^codecov\.yml$

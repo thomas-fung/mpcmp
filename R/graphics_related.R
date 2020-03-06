@@ -684,6 +684,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
     p[[show_count]] <- p_temp
   }
   if (show[8L]){
+    options(warn=-1)
     ylim <- extendrange(r = range(std_pear, na.rm = TRUE), f = 0.08)
     xlim <- extendrange(r = c(0,max(h, na.rm = TRUE)), f = 0.08)
     xmax <- min(0.99, xlim[2])
@@ -700,20 +701,24 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
        xlim(xlim[1],xlim[2]) + ylim(ylim[1], ylim[2]) + 
       geom_hline(yintercept = 0, linetype =3, colour ="#999999", size=1.5) + 
       geom_vline(xintercept = 0, linetype =3, colour ="#999999", size=1.5) +
-      stat_function(fun = function(x) sqrt(rk*0.5*(1-x)/x), 
-                      xlim = c(0.01, xlim[2]), aes(colour = leg), 
+      stat_function(aes(colour = leg), 
+                    fun = function(x) sqrt(rk*0.5*(1-x)/x), 
+                      xlim = c(0.01, xlim[2]),
                     show.legend = TRUE, linetype = 2,
                     na.rm = TRUE) + 
-      stat_function(fun = function(x) sqrt(rk*(1-x)/x), 
-                    xlim = c(0.01, xlim[2]), aes(colour = leg), 
+      stat_function(aes(colour = leg), 
+                    fun = function(x) sqrt(rk*(1-x)/x), 
+                    xlim = c(0.01, xlim[2]),
                     show.legend = TRUE, linetype = 2,
                     na.rm = TRUE) +
-      stat_function(fun = function(x) -sqrt(rk*0.5*(1-x)/x),
-                    xlim = c(0.01, xlim[2]), aes(colour = leg), 
+      stat_function(aes(colour = leg), 
+                    fun = function(x) -sqrt(rk*0.5*(1-x)/x),
+                    xlim = c(0.01, xlim[2]),  
                     show.legend = TRUE, linetype = 2,
                     na.rm = TRUE) + 
-      stat_function(fun = function(x) -sqrt(rk*(1-x)/x), 
-                    xlim = c(0.01, xlim[2]), aes(colour = leg), 
+      stat_function( aes(colour = leg), 
+                    fun = function(x) -sqrt(rk*(1-x)/x), 
+                    xlim = c(0.01, xlim[2]),
                     show.legend = TRUE, linetype = 2,
                     na.rm = TRUE) +
       geom_text(aes(x = h, y = std_pear, 
@@ -735,6 +740,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
             legend.title = element_blank())
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
+    options(warn=0)
   }
   p_ggarrange <- ggarrange(plotlist = p, ncol = ncol, nrow = nrow)
   if ((is.null(ncol) & is.null(nrow))){

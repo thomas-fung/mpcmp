@@ -19,11 +19,9 @@ The test statistics is calculated as \emph{2*(llik- llik_0)}. The test statistic
 has degrees of freedom \emph{r} where \emph{r} is the difference in the number of 
 parameters between the full and null models.
 }
-\details{
-Obviously the comparison between two models will only be valid if they are fitted 
-to the same data set.
-}
 \examples{
+
+## Testing for the mean coefficients
 data(takeoverbids)
 
 ## Fit full model 
@@ -31,10 +29,22 @@ M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
     
 ## Fit null model; without whtknght
-M.bids.null <- update(M.bids.full, .~.-whtknght)     
-    
+M.bids.null <- update(M.bids.full, .~.-whtknght)
+     
 ## Likelihood ratio test for the nested models
 cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
+
+## Testing for dispersion coefficients
+data(sitophilus) 
+ M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+ 
+## Fit null model; dropping extract from dispersion equation
+ M.sit.null1 <- update(M.sit.full, formula_nu. = ~1)   
+ cmplrtest(M.sit.null1, M.sit.full)
+
+## Fit null model; using constant dispersion specification
+M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)   
+cmplrtest(M.sit.null2, M.sit.full)
 
 }
 \references{

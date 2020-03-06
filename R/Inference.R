@@ -5,8 +5,6 @@
 #' has degrees of freedom \emph{r} where \emph{r} is the difference in the number of 
 #' parameters between the full and null models. 
 #' 
-#' Obviously the comparison between two models will only be valid if they are fitted 
-#' to the same data set. 
 #' 
 #' @param object1 an object class 'cmp', obtained from a call to \code{glm.cmp}
 #' @param object2 an object class 'cmp', obtained from a call to \code{glm.cmp}
@@ -18,6 +16,8 @@
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 #' @seealso \code{\link{glm.cmp}}, \code{\link{update.cmp}}
 #' @examples 
+#' 
+#' ## Testing for the mean coefficients
 #' data(takeoverbids)
 #'
 #' ## Fit full model 
@@ -25,17 +25,36 @@
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #'     
 #' ## Fit null model; without whtknght
-#' M.bids.null <- update(M.bids.full, .~.-whtknght)     
-#'     
+#' M.bids.null <- update(M.bids.full, .~.-whtknght)
+#'      
 #' ## Likelihood ratio test for the nested models
 #' cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
+#'
+#' ## Testing for dispersion coefficients
+#' data(sitophilus) 
+#'  M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+#'  
+#' ## Fit null model; dropping extract from dispersion equation
+#'  M.sit.null1 <- update(M.sit.full, formula_nu. = ~1)   
+#'  cmplrtest(M.sit.null1, M.sit.full)
 #' 
-cmplrtest = function(object1,object2, digits=3) {
+#' ## Fit null model; using constant dispersion specification
+#' M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)   
+#' cmplrtest(M.sit.null2, M.sit.full)
+#' 
+cmplrtest = function(object1, object2, digits=3) {
   if (class(object1) != "cmp") {
     stop("object1 must be an S3 object of class cmp.")
   }
   if (class(object2) != "cmp") {
     stop("object2 must be an S3 object of class cmp.")
+  }
+  if (object1$const_nu != object2$const_nu){
+    if (object1$const_nu){
+      object1 <- update(object1, formula_nu. = ~ 1)
+    } else {
+      object2 <- update(object2, formula_nu. = ~ 1)
+    }
   }
   if ( !(all(names(object1$coefficients) %in% names(object2$coefficients))) &&
        !all(names(object2$coefficients) %in% names(object1$coefficients))) {
@@ -159,7 +178,7 @@ update.cmp <- function(object, formula., formula_nu., ...,
     call$formula <- update.formula(formula(object), formula.)
   if (!missing(formula_nu.)){
     if (!is.null(formula_nu.)){
-      if (is.na(object$formula_nu)){
+      if (!inherits(object$formula_nu, "formula")){
         call$formula_nu <- update.formula(formula(~1), formula_nu.)
       } else {
       call$formula_nu <- update.formula(formula(object$formula_nu),
