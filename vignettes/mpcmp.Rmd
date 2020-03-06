@@ -1,0 +1,257 @@
+---
+title: "Getting Started with `mpcmp` (under construction)"
+author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: library.bib
+fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{The <tt>`mpcmp`</tt> Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+## Introduction {#intro}
+
+We review the theory and application of a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data and describe the estimation of these models using the R package mpcmp. Prediction, inference, diagnostic and graphical methods are also illustrated by several examples. 
+
+The R (@R-base) `mpcmp` package (@R-mpcmp) provides functionality for
+estimating a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data and is avaialble from the Comprehensive R Archive Network (CRAN) at \url{http://CRAN.R-project.org/package=mpcmp}. @Huang2017b provides the theoretical developemnt of the model that this package bases on. 
+
+
+Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008, -@Lord2010; @Sellers2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. COM-Poisson distributions are also full probability models, making them particularly useful for predictions and estimation of event probabilities. See @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
+
+
+## Conway-Maxwell-Poisson Distributions {#cmpintro}
+The CMP distribution was first used by @Conway1962 as a model for queueing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter $\lambda$ and dispersion parameter $\nu$ if its probability mass function (pmf) is given by
+$$
+P(Y =y|λ,ν)= \frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}, \quad y =0,1,2,...,
+$$ 
+where
+$$
+Z(\lambda,\nu)= \sum^{\infty}_{y=0}\frac{\lambda^y}{(y!)^{\nu}},
+$$
+is a normalizing constant. The CMP includes Poisson ($\nu = 1$), geometric ($\nu = 0$, $\lambda < 1$) and Bernoulli ($\nu \to \infty$ with probability $\lambda/(1+\lambda)$).
+
+One of the major limitations of CMP distributions is that it is not directly parametrized via the mean as it  does not have closed-form expression for its moments in terms of the parameters $\lambda$ and $\nu$ but satisfy recursive formulas, 
+$$
+\begin{aligned}
+E(Y)  &= \lambda E(Y+1)^{1-\nu};  \\
+E(Y^{r+1}) &=  \lambda\frac{d}{d\lambda}E(Y^r) + E(Y)E(Y^r),  \quad r>0.
+\end{aligned}
+$$
+For the first two moments, approximation can be obtained as 
+$$
+\begin{aligned}
+E(Y)  &= \frac{\partial \log Z}{\partial \log\lambda} \approx \lambda^{\frac{1}{\nu}}-\frac{\nu-1}{2\nu};\\
+Var(Y)  &= \frac{\partial^2\log Z}{\partial (\log \lambda)^2} \approx \frac{1}{\nu} \lambda^{\frac{1}{\nu}} \approx \frac{1}{\nu}E(Y),
+\end{aligned}
+$$
+and they can be particularly accurate for $\nu\leq 1$ or $\lambda>10^{\nu}$ (see @Shmueli2005). It is obvious that $E(Y) \ne \lambda$ unless $\nu=1$ i.e. the Poisson special case. 
+
+The two model parameters, namely, the rate $\lambda \geq  0$ and the dispersion $\nu \geq 0$, are often interpreted through ratios of successive probabilities via
+$$
+\frac{P(Y = y − 1)}{P(Y= y)} = \frac{y^{\nu}}{\lambda}.
+$$
+As a result, the CMP generalises the Poisson such that the ratio is not necessarily linear in $y$. If $\nu < 1$, CMP would have a longer tail relative to a Poisson distribution with the same mean and is therefore overdispersed. In reverse, CMP is underdispersed when $\nu >1$. 
+
+As CMP is one of a few distributions that can handle both under- and over-dispersion, the aim is to extend the GLM formulation to the CMP case so that one can model the relationship between $Y$ and the predictors $X$. Given a set of covariates $X \in R^q$, @Sellers2010 proposed a GLM for count response $Y$ that can be specified via
+$$
+Y|X ∼ CMP(\lambda,\nu), \quad \text{s.t.} \quad \log\lambda = X^{\top}\beta
+$$ 
+where $\beta \in R^q$ is a vector of regression coefficients. This model however does not provide a closed form relationship between $E(Y)$ and the linear predictor, making it incompatible with other commonly used log-linear model.
+
+The `R` `mpcmp` 
+
+The outline of the remainder of the paper is as follows. Section \@ref(mpcmpintro)
+
+## Mean-Parametrized Conway-Maxwell-Poisson Regression {#mpcmpintro}
+As it is more convenient and interpretable to model the mean $\mu = E(Y)>0$ of the distribution directly, @Huang2017b proposed to parametrize the CMP distribution via the mean:
+$$
+P(Y = y|\mu, \nu) = \frac{\lambda(\mu,\nu)^{y}}{(y!)^{\nu}}\frac{1}{Z(\lambda(\mu,\nu),\nu)}, \quad y = 0,1,2,\ldots,
+$$
+where the rate $\lambda(\mu,\nu)$ is defined as the solution to the mean constraint:
+$$
+ \mu= \sum^{\infty}_{y=0} y\frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}.
+$$ 
+We shall denote this as CMP$_{\mu}(\mu, \nu)$ distribution to distinguish it from the original/standard one.
+
+A GLM that based on CMP$_{\mu}$ can then be specified via 
+$$
+Y|X ∼ CMP_{\mu}(\mu(X^{\top}\beta),\nu), 
+$$ 
+where
+$$
+E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
+$$
+Note that GLM that based on CMP$_{\mu}$ is a genuine GLM, so the score equations for the regression parameters have the usual 'weighted least-squares' form (cf. Fahrmeir and Kaufman, 1985) and can be solved using standard Newton–Raphson or Fisher scoring algorithms (see Section estimation). Moreover, all the familiar key features of GLMs (e.g., McCullagh & Nelder, 1989, Chapter 2) are retained.
+
+The mean-dispersion specification makes CMP$_{\mu}$ directly comparable
+and compatible other commonly used log-linear regression models for counts. In particular, the mean $\mu = \exp(X^{\top}\beta)$ is functionally independent of the dispersion parameter $\nu$, making it similar in structure to the familiar Negative Binomial regression model for overdispersed counts. 
+
+Another advantage of modelling the mean directly is that it is way easier to incorporate offsets into the model, much in the same way as for classical GLMs (e.g., McCullagh & Nelder, 1989, Page 206). In contrast, handling offsets in standard CMP regression models is not as easy, precisely because standard CMP distributions are not parametrized via the mean.
+
+## Estimation 
+
+
+Given $n$ successive observations $\{y_t: t = 1, \ldots ,n\}$ on the response series the likelihood is constructed as the product of conditional densities of Yt given Ft. The state vector Wt at each time embodies these conditioning variables and so the log likelihood is given by
+n
+l(δ) = 􏰊 log fYt|Wt (yt|Wt; δ). (7)
+t=1
+For the Poisson and binomial response distributions the log-likelihood (7) is
+where δ = (β, φ, θ).
+n
+l(δ) = 􏰊{ytWt(δ) − atb(Wt(δ)) + ct} (8)
+t=1
+For the negative binomial response distribution the log-likelihood is more complicated because the shape parameter α also has to be estimated along with β, φ and θ. We then let δ = (β, φ, θ, α).
+Note that et in (4), the Zt in (5) and thus the Wt in (2) are functions of the unknown parameter δ and hence need to be recomputed for each iteration of the likelihood optimization. Thus in order to calculate the likelihood and its derivatives, recursive expressions are needed to calculate et, Zt and Wt as well as their first and second partial derivative with respect to δ. Expressions for these recursive formulae are available in Davis et al. (2005) for the Poisson case. Corresponding formulae for the binomial case were derived in Lu (2002) and for the negative binomial case in Wang (2004). The essential computational cost is in the recursions for Zt and Wt and their first and second derivative with respect to δ. Fortunately, these require identical code for the various response distributions and definitions of predictive residuals et.
+For calculation of the Zt in (5), initializing conditions for the recursions must be used. The current implementation in glarma is to set et = 0 and Zt = 0 for t ≤ 0 ensuring that the conditional and unconditional expected values of et are zero for all t.
+The likelihood is maximized from a suitable starting value of the parameter δ using a version of Fisher scoring iteration or by Newton-Raphson iteration. For a given value of δ let the vector of first derivatives with respect to δ of the log-likelihood (7) be
+ and the second derivative matrix be
+d(δ) = ∂l(δ) ∂δ
+DNR(δ) = ∂2l(δ) , (9) ∂δ∂δ⊤
+ where the matrix of second derivatives of the log-likelihood is (in the Poisson and binomial response cases) given by
+􏰊n ∂ 2 W t 􏰊n ∂ W t ∂ W t
+DNR(δ) = [yt − atb ̇(Wt)]∂δ∂δ⊤ − at ̈b(Wt) ∂δ ∂δ⊤ . (10)
+t=1 t=1
+   
+and b ̇(u) and  ̈b(u) are the first and second derivatives respectively of the function b(u) with
+respect to the argument u.
+Using the fact that, at the true parameter value δ, E[yt − atb ̇(Wt)|Ft] = 0 the expected value the first summation in (10) is zero and hence the expected value of the matrix of second derivatives is E[DFS(δ)] where
+DFS(δ) = −
+Note also that due to the martingale difference property of the predictive residuals we also have E[DNR(δ)] = −E[d(δ)d(δ)⊤]. While these expectations cannot be computed in closed form, expression (11) requires first derivatives only and is used in package glarma as the basis for the approximate Fisher scoring method.
+Thus, if δ(k) is the parameter vector at the current iterate k, the Newton-Raphson updates proceed using
+δ(k+1) = δ(k) − DNR(δ(k))−1d(δ(k)) (12) and the approximate Fisher scoring updates use DFS in place of DNR
+Given a specified tolerance TOL, iterations continue until the largest gradient of the log- likelihood satisfies maxi |di(δ(k)|) ≤ TOL or a maximum number of iterations MAXITER is surpassed. 
+
+Start with some initial guesses of $\hat{\beta}^{(0)}$ (those from Poisson GLM work well), and use FS to generate a sensible initial value $\hat{\nu}^{(0)}$ starting from the Poisson special case i.e. $\nu^{(0,0)} = 1$. Fixing $\beta$ at $\hat{\beta}^{(0)}$, the $\nu$ update is:
+$$
+\hat{\nu}^{(0,m)} =\hat{\nu}^{(0,m-1)} +  [\mathcal{I}^{(0,m)}]^{-1}U^{(0,m)},
+$$
+where $U^{(0,m)}$ \& $\mathcal{I}^{(0,m)}$ is the score and information matrix evaluated at $\hat{\lambda}^{(0,m-1)}$ \& $\hat{\nu}^{(0,m-1)}$ respectively. Given a specified tolerance TOL, iterations on $\nu$ would continue until the relative change of the log-likelihood is small relative to the tolerance, i.e. |di(δ(k)|) ≤ TOL, the update to $\nu$ is small relative to the tolerance, i.e. $|\hat{\nu}^{(0,m)}-\hat{\nu}^{0,m-1}|\leq TOL$ or a maximum number of iterations is surpassed. Then we set $\hat{\nu}^{(0)} =  \hat{\nu}^{(0,m)}$.
+
+$\beta$ and $\nu$ would then be updated tegether until convergence. 
+Given CMP$_{\mu}$ belongs to the exponential family, we can update $\beta$ using standard iteratively reweighted least squares:
+$$
+\hat{\beta}^{(m)} = \left(X^{\top}WX\right)^{-1}X^{\top}Wz,
+$$
+where $z$ are the local dependant variable, using $\hat{\lambda}^{(m-1)}$ and $\hat{\nu}^{(m-1)}$.
+If the (log)-likelihood is not increasing or $\hat{\nu}^{(m)}$ is out-of-bound}, we will carry out a half-step correction (@Marschner2011) i.e. 
+$$
+\begin{aligned}
+\hat{\beta}^{(m)} & \leftarrow \frac{1}{2}\left[ \hat{\beta}^{(m)} + \hat{\beta}^{(m-1)}\right];\\
+\hat{\nu}^{(m)} &\leftarrow \frac{1}{2}\left[ \hat{\nu}^{(m)} + \hat{\nu}^{(m-1)}\right].
+\end{aligned}
+$$
+
+As the (log-)likelihood is in terms of $\lambda(\mu,\nu)$, we need solve for a set of $\lambda$s by solving for $\hat{\lambda}^{(m)}$ from the mean constraints:
+$$
+e^{\boldsymbol{X}^{\top}\beta} = \mu = \sum^{\infty}_{y=0} y\frac{\lambda^y}{(y!)^{\nu} Z(\lambda,\nu)},
+$$
+whenever we generated a new update to $\widehat{\nu}$ or $\widehat{\beta}$, by using a combination of bisection and Newton Raphson updates.
+
+At termination, we let $(\widehat{\beta},\widehat{\nu}) = (\widehat{\beta}^{(m)},\widehat{\nu}^{(m)})$ and call this the ``maximum likelihood estimate'' of $(\beta,\nu)$.
+
+## Distribution theory for likelihood estimation {#dist_theory}
+
+For inference, @Huang2017b showed that the central limit theory for the likelihood estimates hold so that 
+$$\binom{\widehat{\beta}}{\widehat{\nu}} \overset{d}{\approx} N\left(\binom{\beta}{\nu}, \widehat{\Omega}\right),$$
+where the approximate covariance matrix is estimated by 
+$$\widehat{\Omega} = -\left(D_{FS}(\widehat{\beta},\widehat{\nu})\right)^{-1}.$$ Thus a standard error for the maximum likelihood estimates of the *i*th component of $\beta$ is computed using $\widehat{\Omega}_{ii}^{\frac{1}{2}}$. 
+
+## Modelling function in mpcmp 
+
+The main modelling function for fitting mean-parametrized CMP models is `glm.cmp`. The object returned by any of the fitting routines is of class `cmp`. To specify the model in a call to `glm.cmp`, a symbolic desciption of the model to be fitted needs to be provided as an object of class `formula`. An optional offset term must be specified also. Initial values can be given for the coefficients in the regression component using the argument `beta`. A call is made to the Poisson GLM to obtain initial regression coefficient values for $\beta$ and set $\nu=1$. 
+
+Because we need to find $\lambda$s that can satisfy the mean constraints numerically, we have `lambdalb`, `lambdaub`, `maxlambdaiter` and `tol` to control where the search should be conducted and when the search would be stopped. 
+
+Once a fitted model object has been obtained, there are accessor functions available using `S3` methods to extract the coefficients (`coef()`, or its alias `coefficients()`), the fitted values (`fitted()` or its alias `fitted.values()`), the residuals (`residuals()` or its alias `resid()`), the model frame (`model.frame()`), the number of observations (nobs()), the log-likelihood (`logLik()`), and the AIC (`AIC()`). These are standard implementations of the methods. 
+
+For an object of the fitted model class `cmp` the package also includes S3 print, summary, and plot methods. 
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Diagnostics 
+
+### Likelihood ratio test 
+
+### Probability integral transformation 
+
+### Plots 
+
+The plot method for objects of class `cmp` produces four plots by default: a plot of deviance residuals against fitted values; a histogram of the (non-randomized) uniform PIT values; a scale-location plot; and a plot of standardized pearson residuals against against leverage values. Additional four plots can be produced: a Q-Q plot of the (non-randomized) uniform PIT values; a histogram of the normal randomzied residuals; a Q-Q plot of the normal randomized residuals; a plot of the cook's distance against observation number. Any subset of these eight plots can be obtained using the `which` arguments. For example the default value of `which` is set to `which = c(1L, 2L, 6L, 8L)`. There is an optional `bin` argument to change the number of bins being used for the PIT in these plots. 
+
+
+## Examples 
+
+There are three example datasets currently included in the `mpcmp` package which cover over- and under-dispersed counts. Sample analyses for these datsets are provided in either the help page for the datasets or for the `glm.cmp()` function. 
+
+### Overdispersed attendance data
+```{r} 
+library("mpcmp")
+data("attendance")
+M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+print(M.attendance)
+summary(M.attendance)
+```
+
+### Underdispersed takeover bids data 
+
+### Underdispersed Cotton bolls data
+
+## Other packages for fitting Conway-Maxwell Poisson Model
+
+`CompGLM`, `COMPoissonReg`, `compoisson`
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold', fig.cap='test'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $$Y = X\beta + \epsilon$$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+The dispersion $\nu$ can in turn be modelled via its own regression model using a set of covariates $\tilte{X}$, with the natural link being $\nu = exp(\tilde{X}^{\top}\gamma))$ to ensure non-negativity. The set of covariates $\tilde{X}$ can coincide with $X$, share common
+components with $X$, or be distinct altogether. 
+
+## References
+

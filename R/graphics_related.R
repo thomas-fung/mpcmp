@@ -564,7 +564,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' gg_plot(M.bids)
 #' 
 #' ## The plots for the non-randomized PIT 
-#' # gg_plot(M.bids, which = c(2,3))
+#' gg_plot(M.bids, which = c(2,3))
 gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
                        ask = TRUE, nrow = NULL, ncol = NULL, 
                        output_as_ggplot = TRUE){
