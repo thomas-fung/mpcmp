@@ -24,3 +24,7 @@ test_that("Test qcomp",
             expect_warning(qcomp(-1, 4, 0.5))
           })
 
+test_that("Test rcomp",
+          {
+            expect_length(rcomp(20, 4, 0.5), 20)
+          })
