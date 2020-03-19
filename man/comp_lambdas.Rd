@@ -5,11 +5,27 @@
 \alias{comp_lambdas_fixed_ub}
 \title{Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution}
 \usage{
-comp_lambdas(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
-  maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1, summax = 100)
+comp_lambdas(
+  mu,
+  nu,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  lambdaint = 1,
+  summax = 100
+)
 
-comp_lambdas_fixed_ub(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
-  maxlambdaiter = 1000, tol = 1e-06, lambdaint = 1, summax = 100)
+comp_lambdas_fixed_ub(
+  mu,
+  nu,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  lambdaint = 1,
+  summax = 100
+)
 }
 \arguments{
 \item{mu, nu}{mean and dispersion parameters. Must be straightly positive.}

@@ -6,11 +6,23 @@
 \alias{gg_qqcompPIT}
 \title{ggplot version of PIT Plots for a CMP Object}
 \usage{
-gg_histcompPIT(object, bins = 10, ref_line = TRUE, col_line = "red",
-  col_hist = "royal blue", size = 1)
+gg_histcompPIT(
+  object,
+  bins = 10,
+  ref_line = TRUE,
+  col_line = "red",
+  col_hist = "royal blue",
+  size = 1
+)
 
-gg_qqcompPIT(object, bins = 10, col1 = "red", col2 = "#999999",
-  lty1 = 1, lty2 = 2)
+gg_qqcompPIT(
+  object,
+  bins = 10,
+  col1 = "red",
+  col2 = "#999999",
+  lty1 = 1,
+  lty2 = 2
+)
 }
 \arguments{
 \item{object}{an object class "cmp", obtained from a call to \code{glm.cmp}.}

@@ -4,9 +4,13 @@
 \alias{plot.cmp}
 \title{Plot Diagnostic for a \code{glm.cmp} Object}
 \usage{
-\method{plot}{cmp}(x, which = c(1L, 2L, 6L, 8L),
+\method{plot}{cmp}(
+  x,
+  which = c(1L, 2L, 6L, 8L),
   ask = prod(par("mfcol")) < length(which) && dev.interactive(),
-  bins = 10, ...)
+  bins = 10,
+  ...
+)
 }
 \arguments{
 \item{x}{an object class 'cmp' object, obtained from a call to \code{glm.cmp}}

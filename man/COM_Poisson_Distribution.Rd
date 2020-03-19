@@ -8,19 +8,58 @@
 \alias{rcomp}
 \title{The Conway-Maxwell-Poisson (COM-Poisson) Distribution.}
 \usage{
-dcomp(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
-  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06, summax)
+dcomp(
+  x,
+  mu,
+  nu = 1,
+  lambda,
+  log.p = FALSE,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  summax
+)
 
-pcomp(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1000,
-  tol = 1e-06, summax)
+pcomp(
+  q,
+  mu,
+  nu = 1,
+  lambda,
+  lower.tail = TRUE,
+  log.p = FALSE,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  summax
+)
 
-qcomp(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
-  lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1000,
-  tol = 1e-06, summax)
+qcomp(
+  p,
+  mu,
+  nu = 1,
+  lambda,
+  lower.tail = TRUE,
+  log.p = FALSE,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  summax
+)
 
-rcomp(n, mu, nu = 1, lambda, lambdalb = 1e-10, lambdaub = 1000,
-  maxlambdaiter = 1000, tol = 1e-06, summax)
+rcomp(
+  n,
+  mu,
+  nu = 1,
+  lambda,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  summax
+)
 }
 \arguments{
 \item{x, q}{vector of quantiles}

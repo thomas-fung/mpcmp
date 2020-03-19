@@ -4,8 +4,7 @@
 \alias{residuals.cmp}
 \title{Extract COM-Poisson Model Residuals}
 \usage{
-\method{residuals}{cmp}(object, type = c("deviance", "pearson",
-  "response"), ...)
+\method{residuals}{cmp}(object, type = c("deviance", "pearson", "response"), ...)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}

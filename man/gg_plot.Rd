@@ -4,8 +4,15 @@
 \alias{gg_plot}
 \title{Plot Diagnostic for a \code{glm.cmp} Object in ggplot}
 \usage{
-gg_plot(x, which = c(1L, 2L, 6L, 8L), bins = 10, ask = TRUE,
-  nrow = NULL, ncol = NULL, output_as_ggplot = TRUE)
+gg_plot(
+  x,
+  which = c(1L, 2L, 6L, 8L),
+  bins = 10,
+  ask = TRUE,
+  nrow = NULL,
+  ncol = NULL,
+  output_as_ggplot = TRUE
+)
 }
 \arguments{
 \item{x}{an object class 'cmp' object, obtained from a call to \code{glm.cmp}}

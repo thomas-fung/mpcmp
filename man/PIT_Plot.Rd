@@ -6,11 +6,28 @@
 \alias{qqcompPIT}
 \title{PIT Plots for a CMP Object}
 \usage{
-histcompPIT(object, bins = 10, line = TRUE, colLine = "red",
-  colHist = "royal blue", lwdLine = 2, main = NULL, ...)
+histcompPIT(
+  object,
+  bins = 10,
+  line = TRUE,
+  colLine = "red",
+  colHist = "royal blue",
+  lwdLine = 2,
+  main = NULL,
+  ...
+)
 
-qqcompPIT(object, bins = 10, col1 = "red", col2 = "black",
-  lty1 = 1, lty2 = 2, type = "l", main = NULL, ...)
+qqcompPIT(
+  object,
+  bins = 10,
+  col1 = "red",
+  col2 = "black",
+  lty1 = 1,
+  lty2 = 2,
+  type = "l",
+  main = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{an object class "cmp", obtained from a call to \code{glm.cmp}.}

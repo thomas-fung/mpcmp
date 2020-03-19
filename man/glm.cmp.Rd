@@ -4,10 +4,22 @@
 \alias{glm.cmp}
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model}
 \usage{
-glm.cmp(formula, formula_nu = NULL, data, offset = NULL, subset,
-  na.action, betastart = NULL, gammastart = NULL, lambdalb = 1e-10,
-  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06,
-  contrasts_mu = NULL, contrasts_nu = NULL)
+glm.cmp(
+  formula,
+  formula_nu = NULL,
+  data,
+  offset = NULL,
+  subset,
+  na.action,
+  betastart = NULL,
+  gammastart = NULL,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  contrasts_mu = NULL,
+  contrasts_nu = NULL
+)
 }
 \arguments{
 \item{formula}{an object of class 'formula': a symbolic description of the model to be fitted to the mean via log-link.}

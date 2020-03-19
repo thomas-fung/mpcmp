@@ -5,9 +5,16 @@
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
 Model with constant dispersion.}
 \usage{
-fit_glm_cmp_const_nu(y = y, X = X, offset = offset,
-  betastart = betastart, lambdalb = 1e-10, lambdaub = 1000,
-  maxlambdaiter = 1000, tol = 1e-06)
+fit_glm_cmp_const_nu(
+  y = y,
+  X = X,
+  offset = offset,
+  betastart = betastart,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06
+)
 }
 \arguments{
 \item{y}{the response y vector.}

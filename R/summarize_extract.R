@@ -309,3 +309,35 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
   }
   return(pred)
 }
+
+
+#' Extract the Design Matrix from a COM-Poisson Model Fit
+#'
+#' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
+#' @param ... other arguments passed to or from other methods  (currently unused).
+#'
+#' @return
+#' The method will return the saved \code{\link{model.matrix}} used when fitting the cmp model.
+#' @export
+#'
+#' @examples
+#' ### 
+#' data(attendance)
+#' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+#' model.matrix(M.attendance)
+#' 
+#' data(sitophilus)
+#' M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+#' model.matrix(M.sit)
+model.matrix.cmp <- function(object, ...){
+  if (object$const_nu){
+    return(object$x)
+  } else {
+    out <- list()
+    out$x <- object$x
+    out$s <- object$s
+    return(out)
+  }
+}
+
+#' @param ... 

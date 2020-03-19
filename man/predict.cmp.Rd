@@ -4,8 +4,13 @@
 \alias{predict.cmp}
 \title{Model Predictions for a \code{glm.cmp} Object}
 \usage{
-\method{predict}{cmp}(object, newdata = NULL, se.fit = FALSE,
-  type = c("link", "response"), ...)
+\method{predict}{cmp}(
+  object,
+  newdata = NULL,
+  se.fit = FALSE,
+  type = c("link", "response"),
+  ...
+)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}

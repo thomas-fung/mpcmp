@@ -4,8 +4,19 @@
 \alias{getnu}
 \title{Parameter Generator for nu}
 \usage{
-getnu(param, y, xx, offset, llstart, fsscale = 1, lambdalb = 1e-10,
-  lambdaub = 1000, maxlambdaiter = 1000, tol = 1e-06, summax = 100)
+getnu(
+  param,
+  y,
+  xx,
+  offset,
+  llstart,
+  fsscale = 1,
+  lambdalb = 1e-10,
+  lambdaub = 1000,
+  maxlambdaiter = 1000,
+  tol = 1e-06,
+  summax = 100
+)
 }
 \arguments{
 \item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 

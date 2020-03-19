@@ -4,8 +4,7 @@
 \alias{summary.cmp}
 \title{Summary of COM-Poisson Model Fit}
 \usage{
-\method{summary}{cmp}(object, digits = max(3L, getOption("digits") - 3L),
-  ...)
+\method{summary}{cmp}(object, digits = max(3L, getOption("digits") - 3L), ...)
 }
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}

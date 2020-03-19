@@ -5,10 +5,18 @@
 \title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
 Model with varying dispersion.}
 \usage{
-fit_glm_cmp_vary_nu(y = y, X = X, S = S, offset = offset,
-  betastart = betastart, gammastart = gammastart,
-  lambdalb = lambdalb, lambdaub = lambdaub,
-  maxlambdaiter = maxlambdaiter, tol = tol)
+fit_glm_cmp_vary_nu(
+  y = y,
+  X = X,
+  S = S,
+  offset = offset,
+  betastart = betastart,
+  gammastart = gammastart,
+  lambdalb = lambdalb,
+  lambdaub = lambdaub,
+  maxlambdaiter = maxlambdaiter,
+  tol = tol
+)
 }
 \arguments{
 \item{y}{the response y vector.}
