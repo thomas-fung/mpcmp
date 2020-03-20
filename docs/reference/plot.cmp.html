@@ -86,7 +86,7 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -150,9 +150,13 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
   <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span>(<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfcol"</span>)) <span class='kw'>&lt;</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>which</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/dev.interactive.html'>dev.interactive</a></span>(),
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

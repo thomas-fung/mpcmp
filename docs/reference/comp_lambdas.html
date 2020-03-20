@@ -80,7 +80,7 @@ will only update those that have not converged." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -137,11 +137,27 @@ combination of bisection and Newton-Raphson updates. The function is also vector
 will only update those that have not converged.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comp_lambdas</span>(<span class='no'>mu</span>, <span class='no'>nu</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+    <pre class="usage"><span class='fu'>comp_lambdas</span>(
+  <span class='no'>mu</span>,
+  <span class='no'>nu</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
+)
 
-<span class='fu'>comp_lambdas_fixed_ub</span>(<span class='no'>mu</span>, <span class='no'>nu</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
+<span class='fu'>comp_lambdas_fixed_ub</span>(
+  <span class='no'>mu</span>,
+  <span class='no'>nu</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

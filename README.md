@@ -9,7 +9,7 @@
 
 The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177%2F1471082X17697749).
 
-In version 0.3.0, `mpcmp` supports log-linear mean models, also allows one to incorporate regression being linked to the dispersion parameter.
+From version 0.3.0, `mpcmp` supports log-linear mean models, also allows one to incorporate regression being linked to the dispersion parameter.
 
 Work is progressing to include a zero-inflated Conway-Maxwell-Poisson model. 
 

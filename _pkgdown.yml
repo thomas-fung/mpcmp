@@ -1,7 +1,7 @@
 template:
   params:
     bootswatch: lumen
-    toc_depth: 3
+    toc_depth: 4
 
 reference:
   - title: "Core functions"
@@ -27,6 +27,7 @@ reference:
       - summary.cmp
       - residuals.cmp
       - model.frame.cmp
+      - model.matrix.cmp
       - nobs.cmp
       - fitted.cmp
       - logLik.cmp

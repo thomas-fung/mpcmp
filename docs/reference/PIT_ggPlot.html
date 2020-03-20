@@ -79,7 +79,7 @@ the uniform Q-Q plot for PIT." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -135,11 +135,23 @@ distributional assumption of the fitted CMP model: the PIT histogram, and
 the uniform Q-Q plot for PIT.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gg_histcompPIT</span>(<span class='no'>object</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ref_line</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col_line</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>col_hist</span> <span class='kw'>=</span> <span class='st'>"royal blue"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+    <pre class="usage"><span class='fu'>gg_histcompPIT</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>ref_line</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>col_line</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+  <span class='kw'>col_hist</span> <span class='kw'>=</span> <span class='st'>"royal blue"</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>
+)
 
-<span class='fu'>gg_qqcompPIT</span>(<span class='no'>object</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>col1</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>col2</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>,
-  <span class='kw'>lty1</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lty2</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+<span class='fu'>gg_qqcompPIT</span>(
+  <span class='no'>object</span>,
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>col1</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+  <span class='kw'>col2</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>,
+  <span class='kw'>lty1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>lty2</span> <span class='kw'>=</span> <span class='fl'>2</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -81,7 +81,7 @@ constant dispersion." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -138,9 +138,16 @@ mean-parametrized Conway-Maxwell Poisson generalized linear model with
 constant dispersion.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_glm_cmp_const_nu</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='no'>offset</span>,
-  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='no'>betastart</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>)</pre>
+    <pre class="usage"><span class='fu'>fit_glm_cmp_const_nu</span>(
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>,
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='no'>offset</span>,
+  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='no'>betastart</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

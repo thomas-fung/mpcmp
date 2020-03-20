@@ -78,7 +78,7 @@ Conway-Maxwell-Poisson distribution with parameter mu and nu" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -133,19 +133,58 @@ Conway-Maxwell-Poisson distribution with parameter mu and nu" />
 Conway-Maxwell-Poisson distribution with parameter <code>mu</code> and <code>nu</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>dcomp</span>(<span class='no'>x</span>, <span class='no'>mu</span>, <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>lambda</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='no'>summax</span>)
+    <pre class="usage"><span class='fu'>dcomp</span>(
+  <span class='no'>x</span>,
+  <span class='no'>mu</span>,
+  <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>lambda</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='no'>summax</span>
+)
 
-<span class='fu'>pcomp</span>(<span class='no'>q</span>, <span class='no'>mu</span>, <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>lambda</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='no'>summax</span>)
+<span class='fu'>pcomp</span>(
+  <span class='no'>q</span>,
+  <span class='no'>mu</span>,
+  <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>lambda</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='no'>summax</span>
+)
 
-<span class='fu'>qcomp</span>(<span class='no'>p</span>, <span class='no'>mu</span>, <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>lambda</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='no'>summax</span>)
+<span class='fu'>qcomp</span>(
+  <span class='no'>p</span>,
+  <span class='no'>mu</span>,
+  <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>lambda</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='no'>summax</span>
+)
 
-<span class='fu'>rcomp</span>(<span class='no'>n</span>, <span class='no'>mu</span>, <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>lambda</span>, <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>, <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='no'>summax</span>)</pre>
+<span class='fu'>rcomp</span>(
+  <span class='no'>n</span>,
+  <span class='no'>mu</span>,
+  <span class='kw'>nu</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>lambda</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='no'>summax</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
