@@ -48,7 +48,7 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
   # x, mu, nu are recycled to match the length of each other.
   # lambdaub will be scaled down/up  if there is 
   # over-/under-dispersion so that the correct lambda can be found 
-  if (missing(mu && missing(lambda))){
+  if (missing(mu) && missing(lambda)){
     stop('argument "mu" is missing, with no default')
   }
   if (!missing(mu) && !missing(lambda)) {
@@ -137,7 +137,7 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   # q, mu, nu are recycled to match the length of each other;
   # lambdaub will be scaled down/up if there is 
   # over-/under-dispersion so that the correct lambda can be found 
-  if (missing(mu && missing(lambda))){
+  if (missing(mu) && missing(lambda)){
     stop('argument "mu" is missing, with no default')
   }
   if (!missing(mu) && !missing(lambda)) {
@@ -220,7 +220,7 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   # q, mu, nu are recycled to match the length of each other;
   # lambdaub will be halved/doubled if there is over-/under-dispersion so that 
   # the correct lambda can be found 
-  if (missing(mu && missing(lambda))){
+  if (missing(mu) && missing(lambda)){
     stop('argument "mu" is missing, with no default')
   }
   if (!missing(mu) && !missing(lambda)) {
@@ -309,7 +309,7 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
   if (length(n)>1){
     n <- length(n)
   }
-  if (missing(mu && missing(lambda))){
+  if (missing(mu) && missing(lambda)){
     stop('argument "mu" is missing, with no default')
   }
   if (!missing(mu) && !missing(lambda)) {
