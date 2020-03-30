@@ -201,11 +201,11 @@ glm.cmp <- function(formula, formula_nu = NULL, data, offset = NULL,
   } else {
     mt_nu <- mf_nu <- S <- NULL
   }
-  offset <- as.vector(model.offset(mf))
+  offset <- as.vector(model.offset(mf_mu))
   if (is.null(offset)){
     offset.cmp <-  rep(0,length(y))
   } else {
-    offset.cmp <-  model.extract(mf,"offset")
+    offset.cmp <-  model.extract(mf_mu,"offset")
   }
   if (is.null(S)){
     out <- fit_glm_cmp_const_nu(y = y, X = X, offset = offset.cmp, 
