@@ -1,3 +1,7 @@
+# mpcmp 0.3.2
+
+  * Fixed an issue that `offset` term cannot be incorporated properly in the mean model. Credit to Sean Hardison (@seanhardison1) for finding this bug.
+  
 # mpcmp 0.3.1
 
   * Added the `model.matrix()` to extract model matrix from an fitted object. 
