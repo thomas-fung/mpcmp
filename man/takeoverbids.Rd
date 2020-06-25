@@ -4,7 +4,8 @@
 \name{takeoverbids}
 \alias{takeoverbids}
 \title{Takeover Bids data set}
-\format{A data frame with 126 observations on 14 variables.
+\format{
+A data frame with 126 observations on 14 variables.
 \describe{
 \item{bidprem}{bid price divided by price 14 working days before bid}
 \item{docno}{doc no}
@@ -21,7 +22,8 @@
 \item{whtknght}{indicator variable for management invitation 
 for friendly third-party bid}
 \item{sizesq}{book value squared}
-}}
+}
+}
 \source{
 Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/jae/}.
 }

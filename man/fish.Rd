@@ -4,13 +4,15 @@
 \name{fish}
 \alias{fish}
 \title{Fish  data set}
-\format{A data frame with 70 observations on 4 variables.
+\format{
+A data frame with 70 observations on 4 variables.
 \describe{
 \item{lake}{name of the lakes}
 \item{species}{number of fish species in lakes}
 \item{area}{surface area (km squared) }
 \item{latitude}{latitude of the lakes}
-}}
+}
+}
 \usage{
 data(fish)
 }

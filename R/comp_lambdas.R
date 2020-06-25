@@ -20,8 +20,8 @@
 #' that satisfies the mean constraint(s) as well as the current lambdaub value. 
 #' lambda value(s) returns by \code{comp_lambdas_fixed_ub} is bounded by the lambdaub 
 #' value. 
-#' \code{comp_lambdas} has the extra ability to scale up/down lambdaub to find most 
-#' appropriate correct lambda values. 
+#' \code{comp_lambdas} has the extra ability to scale up/down lambdaub to find the most 
+#' appropriate lambda values. 
 #'  
 #' @name comp_lambdas
 NULL
@@ -88,28 +88,28 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
   #lambda <- df[,3]
   #lb <- df[,4]
   #ub <- df[,5]
-  lambda = lambdaint
-  lb = lambdalb
-  ub = lambdaub
+  lambda <- lambdaint
+  lb <- lambdalb
+  ub <- lambdaub
   iter <- 1
   log.Z <- logZ(log(lambda), nu, summax = summax)
   mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
-  not.converge.ind = which(abs(mean1-mu)>tol)
+  not.converge.ind <- which(abs(mean1-mu)>tol)
   while (length(not.converge.ind)>0 && iter <200){
-    still.above.target.ind = which((mean1[not.converge.ind]
+    still.above.target.ind <-  which((mean1[not.converge.ind]
                                     >mu[not.converge.ind]))
-    still.below.target.ind = which(mean1[not.converge.ind] < mu[not.converge.ind])
-    lb[not.converge.ind[still.below.target.ind]] =
+    still.below.target.ind <-  which(mean1[not.converge.ind] < mu[not.converge.ind])
+    lb[not.converge.ind[still.below.target.ind]] <- 
       lambda[not.converge.ind[still.below.target.ind]]
-    ub[not.converge.ind[still.above.target.ind]] =
+    ub[not.converge.ind[still.above.target.ind]] <- 
       lambda[not.converge.ind[still.above.target.ind]]
-    lambda = (lb+ub)/2
+    lambda <-  (lb+ub)/2
     log.Z <- logZ(log(lambda), nu, summax = summax)
     mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     while (sum(mean1==0)>0){
-      ub[not.converge.ind[mean1==0]] = ub[not.converge.ind[mean1==0]]/2
-      lambdaub = lambdaub/2
-      lambda = (lb+ub)/2
+      ub[not.converge.ind[mean1==0]] <- ub[not.converge.ind[mean1==0]]/2
+      lambdaub <-  lambdaub/2
+      lambda <-  (lb+ub)/2
       log.Z <- logZ(log(lambda), nu, summax = summax)
       mean1 <- comp_means(lambda, nu, log.Z = log.Z, summax = summax)
     }
@@ -131,10 +131,10 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
     
     lambda.new <- lambda[not.converge.ind] + newtonsteps
     ## if newton raphson steps out of bound, use bisection method
-    out.of.bound.ind = which((lambda.new< lb[not.converge.ind])
+    out.of.bound.ind <-  which((lambda.new< lb[not.converge.ind])
                              + (lambda.new>ub[not.converge.ind]) ==1)
     if (length(out.of.bound.ind>0)){
-      lambda.new[out.of.bound.ind] =
+      lambda.new[out.of.bound.ind] <- 
         (lb[not.converge.ind[out.of.bound.ind]]+ub[not.converge.ind[out.of.bound.ind]])/2
       # any out of bound updates are replaced with mid-point of ub and lb
     }
@@ -146,9 +146,9 @@ comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
     }
     mean1 <- apply(term,1,sum)
     if (length(out.of.bound.ind)>0){
-      still.above.target.ind = which(mean1[not.converge.ind[out.of.bound.ind]]
+      still.above.target.ind <-  which(mean1[not.converge.ind[out.of.bound.ind]]
                                      >mu[not.converge.ind[out.of.bound.ind]])
-      still.below.target.ind = which(mean1[out.of.bound.ind]<mu[out.of.bound.ind])
+      still.below.target.ind <-  which(mean1[out.of.bound.ind]<mu[out.of.bound.ind])
       if (length(still.below.target.ind)>0){
         lb[not.converge.ind[out.of.bound.ind[still.below.target.ind]]] =
           lambda[not.converge.ind[out.of.bound.ind[still.below.target.ind]]]

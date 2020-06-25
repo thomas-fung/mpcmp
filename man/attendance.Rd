@@ -4,14 +4,16 @@
 \name{attendance}
 \alias{attendance}
 \title{Attendance data set}
-\format{A data frame with 314 observations on 5 variables.
+\format{
+A data frame with 314 observations on 5 variables.
 \describe{
 \item{id}{Identifier}
 \item{gender}{gender}
 \item{math}{standardized math score out of 100}
 \item{daysabs}{number of days absent from high school}
 \item{prog}{academic programme ('General', 'Academic' and 'Vocational')}
-}}
+}
+}
 \source{
 \url{http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta}
 }

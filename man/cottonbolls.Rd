@@ -4,13 +4,15 @@
 \name{cottonbolls}
 \alias{cottonbolls}
 \title{Cotton Bolls data set}
-\format{A data frame with 125 observations on 4 variables.
+\format{
+A data frame with 125 observations on 4 variables.
 \describe{
 \item{nc}{number of bolls produced by two cotton plants at harvest}
 \item{stages}{growth stage}
 \item{def}{artificial defoliation level}
 \item{def2}{square of def}
-}}
+}
+}
 \source{
 Supplementary Content of Zeviani et al. (2014): 
 \url{http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014}

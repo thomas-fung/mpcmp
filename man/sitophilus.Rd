@@ -4,11 +4,13 @@
 \name{sitophilus}
 \alias{sitophilus}
 \title{Sitophilus data set}
-\format{A data frame with 40 observations on 2 variables.
+\format{
+A data frame with 40 observations on 2 variables.
 \describe{
 \item{extract}{the treatment used}
 \item{ninsect}{number emerged insects (progeny)}
-}}
+}
+}
 \usage{
 data(sitophilus)
 }

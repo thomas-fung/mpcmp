@@ -373,10 +373,11 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
       warn <- TRUE
     } else {
       y <- 0
-      py <- dcomp(y, nu = nu[i], lambda = lambda[i], summax=summax)
+      dc <- dcomp(0:summax, nu = nu[i], lambda = lambda[i], summax=summax)
+      py <- dc[y+1]
       while (py <= unif[i]){
         y <- y+1
-        py <- py + dcomp(y, nu = nu[i], lambda= lambda[i], summax=summax)
+        py <- py + dc[y+1]
       }
       x[i] <- y
     }
