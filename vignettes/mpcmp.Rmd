@@ -139,12 +139,12 @@ In this experiment:
 randomised with 10 replicates.
 - The numbers of emerged insects (progeny) after 60 days were recorded and some descriptive statistics can be found below.
 ```{r, message = FALSE}
-library(tidyverse)
 data(sitophilus)
-sitophilus %>% group_by(extract) %>%  summarise(mu = mean(ninsect), sigma2 = var(ninsect))
+with(sitophilus, tapply(ninsect, factor(extract), mean))
+with(sitophilus, tapply(ninsect, factor(extract), var))
 ```
 
-It appears that the treatment may have some impact on both the mean and variance of the number of progeny. Recall that non-constant variance is a given in a GLM, non-constant variances do not necessarily means varying dispersion. Nonetheless, we will try to use the treatment to explain the dispersion in the data set.
+It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is a given in a GLM, non-constant variances do not necessarily means varying dispersion. Nonetheless, we will try to use the treatment to explain the dispersion in the data set.
 
 ```{r}
 data(sitophilus)
