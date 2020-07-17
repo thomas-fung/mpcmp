@@ -13,6 +13,7 @@
 Z <- function(lambda, nu, log.z = FALSE, summax){
   # approximates normalizing constant for COMP distributions
   # lambda, nu are recycled to match the length of each other.
+  .Deprecated("logZ")
   df <- CBIND(lambda=lambda, nu=nu)
   lambda <- df[,1]
   nu <- df[,2]

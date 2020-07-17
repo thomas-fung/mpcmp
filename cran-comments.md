@@ -1,10 +1,27 @@
 ## Test environments
-* local OS X install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1
+* local R installation, R 4.0.0
+* ubuntu 16.04 (on travis-ci), R 4.0.0
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+There were no ERRORs or WARNINGs. 
 
-* This is a new release.
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+  Maintainer: ‘Thomas Fung <thomas.fung.dr@gmail.com>’
+  
+  New maintainer:
+    Thomas Fung <thomas.fung.dr@gmail.com>
+  Old maintainer(s):
+    Thomas Fung <thomas.fung@mq.edu.au>
+
+The maintainer changed his email address. 
+
+## Downstream dependency. 
+
+There are currently no downstream dependencies for this package. 
+
+
+

@@ -10,10 +10,10 @@ fit_glm_cmp_const_nu(
   X = X,
   offset = offset,
   betastart = betastart,
-  lambdalb = 1e-10,
-  lambdaub = 1000,
-  maxlambdaiter = 1000,
-  tol = 1e-06
+  lambdalb = lambdalb,
+  lambdaub = lambdaub,
+  maxlambdaiter = maxlambdaiter,
+  tol = tol
 )
 }
 \arguments{

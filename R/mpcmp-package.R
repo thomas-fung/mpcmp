@@ -49,7 +49,6 @@ NULL
 #' data frame has 126 observations on 14 variables. The descriptions below are taken from
 #'  Sáez-Castillo and Conde-Sánchez (2013).
 #' 
-#' 
 #' @name takeoverbids
 #' @format A data frame with 126 observations on 14 variables.
 #' \describe{
@@ -87,7 +86,15 @@ NULL
 #' @source
 #' Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/jae/}.
 #' @examples 
-#' ## For examples see example(glm.cmp)
+#' 
+#' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
+#' data(takeoverbids)
+#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+#' M.bids
+#' summary(M.bids)
+#' plot(M.bids) #or gg_plot(M.bids)
+#' 
 NULL
 
 #' Cotton Bolls data set
@@ -95,7 +102,6 @@ NULL
 #' This data set gives the observed number of bolls produced by the cotton 
 #' plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
 #' to examine the effect of five defoliation levels (0%, 25%, 50%, 75% and 100%). 
-#' 
 #' 
 #' @name cottonbolls
 #' @format A data frame with 125 observations on 4 variables.
@@ -107,8 +113,7 @@ NULL
 #' }
 #' @docType data
 #' @keywords datasets
-#' @usage 
-#' data(cottonbolls)
+#' @usage data(cottonbolls)
 #' @references 
 #' Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014). 
 #' The Gamma-count distribution in the analysis of experimental underdispersed data. 
@@ -119,9 +124,15 @@ NULL
 #' \url{http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014}
 #' 
 #' @examples 
-#' ## For examples see example(glm.cmp)
+#' ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
+#' ### Model fitting for predictor V 
+#' 
+#' data(cottonbolls)
+#' M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
+#' M.bolls
+#' summary(M.bolls)
+#' 
 NULL
-
 
 #' Fish  data set
 #'
@@ -148,7 +159,13 @@ NULL
 #' American Naturalist}, \bold{108}, 473--488.
 #' 
 #' @examples 
-#' ## For examples see example(glm.cmp)
+#' ### Barbour & Brown (1974): Overdispersed Fish data
+#' \donttest{
+#' data(fish)
+#' M.fish <- glm.cmp(species~ 1+log(area), data=fish)
+#' M.fish
+#' summary(M.fish)
+#' }
 NULL
 
 #' Sitophilus data set

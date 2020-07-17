@@ -29,8 +29,8 @@
 #' 
 fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset, 
                                  betastart = betastart, 
-                                 lambdalb = 1e-10, lambdaub = 1000, 
-                                 maxlambdaiter = 1e3, tol = 1e-6){
+                                 lambdalb = lambdalb, lambdaub = lambdaub, 
+                                 maxlambdaiter = maxlambdaiter, tol = tol){
   M0 <- stats::glm(y~-1+X+offset(offset), 
                    start = betastart, family=stats::poisson())
   offset <- M0$offset
@@ -53,15 +53,9 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   lambda0 <- lambda.ok$lambda
   lambdaub <- lambda.ok$lambdaub
   param <- c(beta0,lambda0,nu0) 
-  ll_old <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset, summax = summax)
-  param_obj<- getnu(param = param, y=y, xx= X, offset = offset, llstart = ll_old, 
-                    fsscale = 1, lambdalb = lambdalb, lambdaub = lambdaub, 
-                    maxlambdaiter = maxlambdaiter, tol = tol,summax = summax)
-  lambdaub <- param_obj$lambdaub
-  ll_new <- param_obj$maxl
-  param <- param_obj$param
-  fsscale <- param_obj$fsscale
-  iter <- param_obj$iter
+  ll_old <- as.numeric(logLik(M0))
+  ll_new <- comp_mu_loglik(param = param, y=y, xx= X, offset=offset, summax = summax)
+  iter <- 1
   while (abs((ll_new-ll_old)/ll_new) > tol && iter <= 100){
     iter <- iter +1
     ll_old <- ll_new
@@ -93,7 +87,6 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
       nu <- (nu+nuold)/2
     } 
     lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
-                              #lambdaub = lambdaub,
                               lambdaub = min(lambdaub,2*max(lambdaold)), 
                               maxlambdaiter = maxlambdaiter, tol = tol,
                               lambdaint = lambdaold, summax = summax)
@@ -110,7 +103,6 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
       mu <- exp(eta+offset)
       lambdaold <- lambda
       lambda.ok <- comp_lambdas(mu,nu, lambdalb = lambdalb,
-                                #lambdaub = lambdaub,
                                 lambdaub = min(lambdaub,2*max(lambdaold)), 
                                 maxlambdaiter = maxlambdaiter, tol = tol,
                                 lambdaint = lambda, summax = summax)

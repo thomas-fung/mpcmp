@@ -28,16 +28,16 @@ glm.cmp(
 
 \item{data}{an optional data frame containing the variables in the model}
 
-\item{offset}{this can be used to specify an *a priori* known component to be included 
-in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector 
+\item{offset}{this can be used to specify an *a priori* known component to be included
+in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector
 of length equal to the number of cases.}
 
-\item{subset}{an optional vector specifying a subset of observations to be used in the 
+\item{subset}{an optional vector specifying a subset of observations to be used in the
 fitting process.}
 
-\item{na.action}{a function which indicates what should happen when the data contain 
-NAs. The default is set by the na.action setting of options, and is na.fail if that 
-is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
+\item{na.action}{a function which indicates what should happen when the data contain
+NAs. The default is set by the na.action setting of options, and is na.fail if that
+is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL,
 no action. Value na.exclude can be useful.}
 
 \item{betastart}{starting values for the parameters in the linear predictor for mu.}
@@ -49,33 +49,37 @@ searched for lambda(s). The default value for lambdaub should be sufficient for 
 moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
 will scale up \code{lambdaub} accordingly.}
 
-\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
+\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve
 for lambda(s).}
 
-\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
+\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
 
 \item{contrasts_mu, contrasts_nu}{optional lists. See the contrasts.arg of model.matrix.default.}
 }
 \value{
-A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
+A fitted model object of class \code{cmp} similar to one obtained from \code{glm}
 or \code{glm.nb}.
 
-The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain 
-and print a summary of the results. 
+The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain
+and print a summary of the results.
 
-The functions \code{plot} (i.e., \code{\link{plot.cmp}}) \code{gg_plot} (i.e. \code{\link{gg_plot}}) can be used to produce a range 
-of diagnostic plots. 
+The functions \code{plot} (i.e., \code{\link{plot.cmp}}) and
+\code{gg_plot} can be used to produce a range
+of diagnostic plots.
 
-The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
-\code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-\code{fitted} (i.e., \code{\link{fitted.cmp}}), 
-\code{nobs} (i.e., \code{\link{nobs.cmp}}), 
-\code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
-\code{residuals} (i.e., \code{\link{residuals.cmp}}) 
+The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}),
+\code{logLik} (i.e., \code{\link{logLik.cmp}})
+\code{fitted} (i.e., \code{\link{fitted.cmp}}),
+\code{nobs} (i.e., \code{\link{nobs.cmp}}),
+\code{AIC} (i.e., \code{\link{AIC.cmp}}) and
+\code{residuals} (i.e., \code{\link{residuals.cmp}})
 can be used to extract various useful features of the value
 returned by \code{glm.cmp}.
+
+The function \code{LRTnu} can be used to perform a likelihood ratio
+chi-squared test for nu = 1 of a COM-Poisson model.
 
 An object class 'glm.cmp' is a list containing at least the following components:
 
@@ -91,7 +95,7 @@ An object class 'glm.cmp' is a list containing at least the following components
 \item{linear_predictors}{the linear fit for mean on log scale}
 \item{df_residuals}{the residuals degrees of freedom}
 \item{df_null}{the residual degrees of freedom for the null model}
-\item{null_deviance}{The deviance for the null model. 
+\item{null_deviance}{The deviance for the null model.
 The null model will include only the intercept.}
 \item{y}{the \code{y} vector used.}
 \item{x}{the model matrix for mean}
@@ -112,35 +116,37 @@ The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Po
 generalized linear model with a log-link by using Fisher Scoring iteration.
 }
 \details{
-Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation 
-via an iterative Fisher Scoring algorithm. 
+Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation
+via an iterative Fisher Scoring algorithm.
 
-Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion. 
+Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion.
 
 For the constant dispersion model, the model is
 
-Y_i ~ CMP(mu_i, nu), 
-          
-where  
-   
-E(Y_i) = mu_i = exp(x_i^T beta),
-      
-and \emph{nu > 0} is the dispersion parameter. 
+Y_i ~ CMP(mu_i, nu),
 
-The fitted COM-Poisson distribution is over- or under-dispersed 
+where
+
+E(Y_i) = mu_i = exp(x_i^T beta),
+
+and \emph{nu > 0} is the dispersion parameter.
+
+The fitted COM-Poisson distribution is over- or under-dispersed
 if \emph{nu < 1} and \emph{nu > 1} respectively.
 
-For the varying dispersion model, the model is 
+For the varying dispersion model, the model is
 
-Y_i ~ CMP(mu_i, nu_i), 
-          
-where  
-   
-E(Y_i) = mu_i = exp(x_i^T beta), 
+Y_i ~ CMP(mu_i, nu_i),
+
+where
+
+E(Y_i) = mu_i = exp(x_i^T beta),
 
 and dispersion parameters are model via
 
-nu_i = exp(s_i^T gamma)
+nu_i = exp(s_i^T gamma).
+
+where x_i and s_i are some covariates.
 }
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
@@ -148,47 +154,27 @@ data(attendance)
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 M.attendance
 summary(M.attendance)
-plot(M.attendance) # or gg_plot(M.attendance) 
-
-### Barbour & Brown (1974): Overdispersed Fish data
-\donttest{
-data(fish)
-M.fish <- glm.cmp(species~ 1+log(area), data=fish)
-M.fish
-summary(M.fish)
-}
-
-### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
-data(takeoverbids)
-M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-M.bids
-summary(M.bids)
-plot(M.bids) #or gg_plot(M.bids)
-
-### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
-### Model fitting for predictor V 
-\donttest{
-data(cottonbolls)
-M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
-M.bolls
-summary(M.bolls)
+\donttest{plot(M.attendance) # or gg_plot(M.attendance)
 }
 
 ### Ribeiro et al. (2013): Varying dispersion as a function of covariates
-data(sitophilus)
+\donttest{data(sitophilus)
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 summary(M.sit)
+}
 
 }
 \references{
-Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: Mean-parametrized
-Conway-Maxwell Poisson Regression. R package version 0.2.0.
+Fung, T., Alwan, A., Wishart, J. and Huang, A. (2020). \code{mpcmp}: Mean-parametrized
+Conway-Maxwell Poisson Regression. R package version 0.3.4.
 
-Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
+Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }
 \seealso{
-\code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}} 
-and \code{\link{residuals.cmp}}.
+\code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}},
+\code{\link{residuals.cmp}} and \code{\link{LRTnu}}.
+
+Additional examples may be found in \code{\link{fish}},
+ \code{\link{takeoverbids}}, \code{\link{cottonbolls}}.
 }

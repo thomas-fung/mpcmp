@@ -13,9 +13,9 @@ vignette: >
 > Details of those who have contributed to the mpcmp project.
 Core development team:
 
-- Dr Thomas Fung (Macquarie University)
+- Thomas Fung (Macquarie University)
 - Aya Alwan (Macquarie University)
-- Justin Wishart (Macquarie University)
+- Justin Wishart (Displayr)
 - Alan Huang (University of Queensland)
 
 #### Citation
@@ -31,15 +31,15 @@ citation("mpcmp")
 
 To cite the mpcmp package in publications use:
 
-Fung T, Alwan A, Wishart J, Huang A (2019). _mpcmp: Mean-Parametrizied
-Conway-Maxwell Poisson Regression_. R package version 0.1.3.
+Fung T, Alwan A, Wishart J, Huang A (2020). _mpcmp: Mean-Parametrizied
+Conway-Maxwell Poisson Regression_. R package version 0.3.4.
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
     title = {mpcmp: Mean-Parametrizied Conway-Maxwell Poisson Regression},
     author = {Thomas Fung and Aya Alwan and Justin Wishart and Alan Huang},
-    year = {2019},
-    note = {R package version 0.1.3},
+    year = {2020},
+    note = {R package version 0.3.4},
   }
 ```

@@ -6,12 +6,12 @@ M.attendance <- glm.cmp(daysabs~ gender+math+prog,
 
 test_that("Test residuals", 
           { 
-            expect_equal(-0.250, 
+            expect_equal(-0.264, 
                          unname(round(residuals(M.attendance)[1],3)))
             expect_equal(unname(round(residuals(M.attendance, 
-                                         type = "pearson")[1],3)), -0.232)
+                                         type = "pearson")[1],3)), -0.244)
             expect_equal(unname(round(residuals(M.attendance, 
-                                         type = "response")[1],3)), -1.249)
+                                         type = "response")[1],3)), -1.345)
           })
 
 test_that("Test nobs",
@@ -56,12 +56,12 @@ test_that("Test predict",
 test_that("Test print",
           {
             expect_equal(capture_output_lines(print(M.attendance))[8], 
-                         "Dispersion (nu): 0.0242")
+                         "Dispersion (nu): 0.0202")
           })
 
 
 test_that("Test sumamry",
           {
             expect_equal(capture_output_lines(summary(M.attendance))[24], 
-                         "AIC: 1739.18 ")
+                         "AIC: 1739.026 ")
           })

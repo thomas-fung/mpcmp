@@ -1,84 +1,89 @@
 #' Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear Model
-#' 
+#'
 #' The function \code{glm.cmp} is used to fit a mean parametrized Conway-Maxwell Poisson
-#' generalized linear model with a log-link by using Fisher Scoring iteration. 
-#' 
+#' generalized linear model with a log-link by using Fisher Scoring iteration.
+#'
 #' @param formula an object of class 'formula': a symbolic description of the model to be fitted to the mean via log-link.
 #' @param formula_nu an optional object of class 'formula': a symbolic description of the model to be fitted to the dispersion via log-link.
 #' @param data an optional data frame containing the variables in the model
-#' @param offset this can be used to specify an *a priori* known component to be included 
-#' in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector 
-#' of length equal to the number of cases.  
-#' @param subset an optional vector specifying a subset of observations to be used in the 
+#' @param offset this can be used to specify an *a priori* known component to be included
+#' in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector
+#' of length equal to the number of cases.
+#' @param subset an optional vector specifying a subset of observations to be used in the
 #' fitting process.
-#' @param na.action a function which indicates what should happen when the data contain 
-#' NAs. The default is set by the na.action setting of options, and is na.fail if that 
-#' is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL, 
+#' @param na.action a function which indicates what should happen when the data contain
+#' NAs. The default is set by the na.action setting of options, and is na.fail if that
+#' is unset. The ‘factory-fresh’ default is na.omit. Another possible value is NULL,
 #' no action. Value na.exclude can be useful.
 #' @param betastart starting values for the parameters in the linear predictor for mu.
 #' @param gammastart starting values for the parameters in the linear predictor for nu.
 #' @param lambdalb,lambdaub numeric: the lower and upper end points for the interval to be
 #' searched for lambda(s). The default value for lambdaub should be sufficient for small to
 #' moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
-#' will scale up \code{lambdaub} accordingly.  
-#' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve 
+#' will scale up \code{lambdaub} accordingly.
+#' @param maxlambdaiter numeric: the maximum number of iterations allowed to solve
 #' for lambda(s).
-#' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
+#' @param tol numeric: the convergence threshold. A lambda is said to satisfy the
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
 #' @param contrasts_mu,contrasts_nu optional lists. See the contrasts.arg of model.matrix.default.
 #' @export
 #' @import stats
-#' @details 
-#' Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation 
-#' via an iterative Fisher Scoring algorithm. 
-#' 
-#' Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion. 
-#' 
+#' @details
+#' Fit a mean-parametrized COM-Poisson regression using maximum likelihood estimation
+#' via an iterative Fisher Scoring algorithm.
+#'
+#' Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion.
+#'
 #' For the constant dispersion model, the model is
-#' 
-#' Y_i ~ CMP(mu_i, nu), 
-#'           
-#' where  
-#'    
+#'
+#' Y_i ~ CMP(mu_i, nu),
+#'
+#' where
+#'
 #' E(Y_i) = mu_i = exp(x_i^T beta),
-#'       
-#' and \emph{nu > 0} is the dispersion parameter. 
-#' 
-#' The fitted COM-Poisson distribution is over- or under-dispersed 
+#'
+#' and \emph{nu > 0} is the dispersion parameter.
+#'
+#' The fitted COM-Poisson distribution is over- or under-dispersed
 #' if \emph{nu < 1} and \emph{nu > 1} respectively.
-#' 
-#' For the varying dispersion model, the model is 
-#' 
-#' Y_i ~ CMP(mu_i, nu_i), 
-#'           
-#' where  
-#'    
-#' E(Y_i) = mu_i = exp(x_i^T beta), 
-#' 
+#'
+#' For the varying dispersion model, the model is
+#'
+#' Y_i ~ CMP(mu_i, nu_i),
+#'
+#' where
+#'
+#' E(Y_i) = mu_i = exp(x_i^T beta),
+#'
 #' and dispersion parameters are model via
-#' 
-#' nu_i = exp(s_i^T gamma)
-#' 
-#' @return 
-#' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} 
+#'
+#' nu_i = exp(s_i^T gamma).
+#'
+#' where x_i and s_i are some covariates.
+#' @return
+#' A fitted model object of class \code{cmp} similar to one obtained from \code{glm}
 #' or \code{glm.nb}.
-#' 
-#' The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain 
-#' and print a summary of the results. 
-#' 
-#' The functions \code{plot} (i.e., \code{\link{plot.cmp}}) \code{gg_plot} (i.e. \code{\link{gg_plot}}) can be used to produce a range 
-#' of diagnostic plots. 
-#' 
-#' The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}), 
-#' \code{logLik} (i.e., \code{\link{logLik.cmp}}) 
-#' \code{fitted} (i.e., \code{\link{fitted.cmp}}), 
-#' \code{nobs} (i.e., \code{\link{nobs.cmp}}), 
-#' \code{AIC} (i.e., \code{\link{AIC.cmp}}) and 
-#' \code{residuals} (i.e., \code{\link{residuals.cmp}}) 
+#'
+#' The function \code{summary} (i.e., \code{\link{summary.cmp}}) can be used to obtain
+#' and print a summary of the results.
+#'
+#' The functions \code{plot} (i.e., \code{\link{plot.cmp}}) and
+#' \code{gg_plot} can be used to produce a range
+#' of diagnostic plots.
+#'
+#' The generic assessor functions \code{coef} (i.e., \code{\link{coef.cmp}}),
+#' \code{logLik} (i.e., \code{\link{logLik.cmp}})
+#' \code{fitted} (i.e., \code{\link{fitted.cmp}}),
+#' \code{nobs} (i.e., \code{\link{nobs.cmp}}),
+#' \code{AIC} (i.e., \code{\link{AIC.cmp}}) and
+#' \code{residuals} (i.e., \code{\link{residuals.cmp}})
 #' can be used to extract various useful features of the value
 #' returned by \code{glm.cmp}.
-#' 
+#'
+#' The function \code{LRTnu} can be used to perform a likelihood ratio
+#' chi-squared test for nu = 1 of a COM-Poisson model.
+#'
 #' An object class 'glm.cmp' is a list containing at least the following components:
 #'
 #' \item{coefficients}{a named vector of coefficients}
@@ -93,7 +98,7 @@
 #' \item{linear_predictors}{the linear fit for mean on log scale}
 #' \item{df_residuals}{the residuals degrees of freedom}
 #' \item{df_null}{the residual degrees of freedom for the null model}
-#' \item{null_deviance}{The deviance for the null model. 
+#' \item{null_deviance}{The deviance for the null model.
 #' The null model will include only the intercept.}
 #' \item{y}{the \code{y} vector used.}
 #' \item{x}{the model matrix for mean}
@@ -108,76 +113,70 @@
 #' \item{data}{the \code{data} argument}
 #' \item{offset}{the \code{offset} vector used}
 #' \item{lambdaub}{the final \code{lambdaub} used}
-#' 
-#' @references 
-#' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}: Mean-parametrized
-#' Conway-Maxwell Poisson Regression. R package version 0.2.0.
-#' 
-#' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
+#'
+#' @references
+#' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2020). \code{mpcmp}: Mean-parametrized
+#' Conway-Maxwell Poisson Regression. R package version 0.3.4.
+#'
+#' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
-#'   
-#' @seealso 
-#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}} 
-#' and \code{\link{residuals.cmp}}.
-#' 
-#' @examples 
+#'
+#' @seealso
+#' \code{\link{summary.cmp}}, \code{\link{plot.cmp}},  \code{\link{gg_plot}}, \code{\link{fitted.cmp}},
+#' \code{\link{residuals.cmp}} and \code{\link{LRTnu}}.
+#'
+#' Additional examples may be found in \code{\link{fish}},
+#'  \code{\link{takeoverbids}}, \code{\link{cottonbolls}}.
+#'
+#' @examples
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attendance
 #' summary(M.attendance)
-#' plot(M.attendance) # or gg_plot(M.attendance) 
-#' 
-#' ### Barbour & Brown (1974): Overdispersed Fish data
-#' \donttest{
-#' data(fish)
-#' M.fish <- glm.cmp(species~ 1+log(area), data=fish)
-#' M.fish
-#' summary(M.fish)
+#' \donttest{plot(M.attendance) # or gg_plot(M.attendance)
 #' }
-#' 
-#' ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
-#' data(takeoverbids)
-#' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-#'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-#' M.bids
-#' summary(M.bids)
-#' plot(M.bids) #or gg_plot(M.bids)
-#' 
-#' ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
-#' ### Model fitting for predictor V 
-#' \donttest{
-#' data(cottonbolls)
-#' M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
-#' M.bolls
-#' summary(M.bolls)
-#' }
-#' 
+#'
 #' ### Ribeiro et al. (2013): Varying dispersion as a function of covariates
-#' data(sitophilus)
+#' \donttest{data(sitophilus)
 #' M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #' summary(M.sit)
+#' }
 #' 
 
-glm.cmp <- function(formula, formula_nu = NULL, data, offset = NULL,
-                    subset, na.action, betastart = NULL, gammastart = NULL, 
-                    lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
-                    contrasts_mu = NULL, contrasts_nu = NULL){
+glm.cmp <- function(formula,
+                    formula_nu = NULL,
+                    data,
+                    offset = NULL,
+                    subset,
+                    na.action,
+                    betastart = NULL,
+                    gammastart = NULL,
+                    lambdalb = 1e-10,
+                    lambdaub = 1000,
+                    maxlambdaiter = 1e3,
+                    tol = 1e-6,
+                    contrasts_mu = NULL,
+                    contrasts_nu = NULL) {
   call <- match.call()
   mf <- match.call(expand.dots = FALSE)
   m <- match(c("formula", "data", "subset", "na.action",
-               "offset"), names(mf), 0L)
+               "offset"),
+             names(mf),
+             0L)
   if (is.null(formula)) {
     stop("formula for beta must be specified (can not be NULL)")
   }
-  if (is.null(formula_nu) & !is.null(gammastart)){
-    stop("formula_nu should be specified (should not be NULL) \n 
-         given that you have provided the starting values for the estimates")
+  if (is.null(formula_nu) & !is.null(gammastart)) {
+    stop(
+      "formula_nu should be specified (should not be NULL) \n
+         given that you have provided the starting values for the estimates"
+    )
   }
   if (lambdalb >= lambdaub) {
     stop("lower bound for the search of lambda must be smaller than the upper bound")
   }
-  if (missing(data)){
+  if (missing(data)) {
     data <- environment(formula)
   }
   mf <- mf[c(1L, m)]
@@ -187,12 +186,13 @@ glm.cmp <- function(formula, formula_nu = NULL, data, offset = NULL,
   mt_mu <- attr(mf_mu, "terms")
   y <- model.response(mf_mu)
   X <- model.matrix(formula, mf_mu, contrasts_mu)
-  if (!is.null(formula_nu)){
+  if (!is.null(formula_nu)) {
     temp <- formula_nu
-    if (length(formula_nu)==2){
+    if (length(formula_nu) == 2) {
       formula_nu[3] <- formula_nu[2]
-      formula_nu[2] <- formula[2]}
-    mf_nu <- mf 
+      formula_nu[2] <- formula[2]
+    }
+    mf_nu <- mf
     mf_nu$formula <- formula_nu
     mf_nu <- eval(mf_nu, parent.frame())
     mt_nu <- attr(mf_nu, "terms")
@@ -202,28 +202,40 @@ glm.cmp <- function(formula, formula_nu = NULL, data, offset = NULL,
     mt_nu <- mf_nu <- S <- NULL
   }
   offset <- as.vector(model.offset(mf_mu))
-  if (is.null(offset)){
-    offset.cmp <-  rep(0,length(y))
+  if (is.null(offset)) {
+    offset.cmp <-  rep(0, length(y))
   } else {
-    offset.cmp <-  model.extract(mf_mu,"offset")
+    offset.cmp <-  model.extract(mf_mu, "offset")
   }
-  if (is.null(S)){
-    out <- fit_glm_cmp_const_nu(y = y, X = X, offset = offset.cmp, 
-                                betastart = betastart, 
-                                lambdalb = lambdalb, lambdaub = lambdaub, 
-                                maxlambdaiter = maxlambdaiter, tol = tol) 
+  if (is.null(S)) {
+    out <- fit_glm_cmp_const_nu(
+      y = y,
+      X = X,
+      offset = offset.cmp,
+      betastart = betastart,
+      lambdalb = lambdalb,
+      lambdaub = lambdaub,
+      maxlambdaiter = maxlambdaiter,
+      tol = tol
+    )
   } else {
-    out <- fit_glm_cmp_vary_nu(y=y, X = X, S = S, offset = offset.cmp,
-                               betastart = betastart, 
-                               gammastart = gammastart,
-                               lambdalb = lambdalb, lambdaub = lambdaub, 
-                               maxlambdaiter = maxlambdaiter, tol = tol
+    out <- fit_glm_cmp_vary_nu(
+      y = y,
+      X = X,
+      S = S,
+      offset = offset.cmp,
+      betastart = betastart,
+      gammastart = gammastart,
+      lambdalb = lambdalb,
+      lambdaub = lambdaub,
+      maxlambdaiter = maxlambdaiter,
+      tol = tol
     )
   }
   out$call <- call
   out$formula <- formula
-  if (is.null(formula_nu)){
-    out$contrasts_mu <- 
+  if (is.null(formula_nu)) {
+    out$contrasts_mu <-
       out$formula_nu <- out$terms_nu <- out$model_nu <- NA
   } else {
     out$formula_nu <- formula_nu

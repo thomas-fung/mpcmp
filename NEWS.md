@@ -1,5 +1,8 @@
 # mpcmp 0.3.4
   * Added Github action support.  
+  * From this version onward, `glm.cmp()` no longer uses `getnu()`. 
+  * General fixes for cran checks.
+  * Blog post! 
 
 # mpcmp 0.3.3
 

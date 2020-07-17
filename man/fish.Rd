@@ -25,7 +25,13 @@ This data set is also used to illustrate that the fitting algorithm can handle s
 larger count data.
 }
 \examples{
-## For examples see example(glm.cmp)
+### Barbour & Brown (1974): Overdispersed Fish data
+\donttest{
+data(fish)
+M.fish <- glm.cmp(species~ 1+log(area), data=fish)
+M.fish
+summary(M.fish)
+}
 }
 \references{
 Barbour, C. D. and Brown, J. H. (1974). Fish species diversity in lakes. \emph{The

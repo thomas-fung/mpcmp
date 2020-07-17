@@ -232,7 +232,7 @@ print.cmp <- function(x,...)
       "\n", sep = "")
   if (x$const_nu){
   cat("\nLinear Model Coefficients:\n")
-  print.default(format(signif(x$coefficients,3)), print.gap = 2,quote = FALSE)
+  print.default(format(signif(x$coefficients,5)), print.gap = 2,quote = FALSE)
   cat("\nDispersion (nu):", signif(x$nu, 3))
   } else {
     cat("\nMean Model Coefficients:\n")
@@ -321,14 +321,15 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
 #' @export
 #'
 #' @examples
-#' ### 
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' model.matrix(M.attendance)
 #' 
+#' \donttest{
 #' data(sitophilus)
 #' M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #' model.matrix(M.sit)
+#' }
 model.matrix.cmp <- function(object, ...){
   if (object$const_nu){
     return(object$x)

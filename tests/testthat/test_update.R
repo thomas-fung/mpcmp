@@ -9,7 +9,7 @@ test_that("Test updating the mean regression formula",
                                      bidprem + insthold + size + 
                                      sizesq + regulatn, data=takeoverbids)
             M.bids.null <- update(M.bids.full, .~.-whtknght)
-            expect_equal(round(M.bids.null$residuals_deviance,3), 131.837)
+            expect_equal(round(M.bids.null$residuals_deviance,3), 131.838)
             expect_equal(length(M.bids.full$coef), 10)
             expect_equal(length(M.bids.null$coef), 9)
           })

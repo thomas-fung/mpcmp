@@ -3,6 +3,9 @@
 #' A function that use the arguments of a \code{glm.cmp} call to generate a better initial 
 #' \code{nu} estimate. 
 #' 
+#' From version 0.3.4, this function is no longer being used as part of the estimation algorithm 
+#' and this function will be defunct in our next update.
+#' 
 #' @param param numeric vector: the model coefficients & the current value of \code{nu}. 
 #' It is assumed that \code{nu} is in the last position of \code{param}.
 #' @param y numeric vector: response variable
