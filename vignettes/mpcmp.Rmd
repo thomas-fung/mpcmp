@@ -1,12 +1,12 @@
 ---
-title: "Getting Started with `mpcmp` (under construction)"
+title: "Getting Started with the `mpcmp` package (under construction)"
 author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: library.bib
 fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{The <tt>`mpcmp`</tt> Package for Mean-Parametrizied Conway-Maxwell-Poisson Regression}
+  %\VignetteIndexEntry{Getting Started with the `mpcmp` package (under construction)}
   %\usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::knitr}
 editor_options: 
@@ -24,9 +24,7 @@ knitr::opts_chunk$set(
 Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008, -@Lord2010; @Sellers2010). Key features of COM-Poisson distributions include the ability to handle both overdispersion and underdispersion, containing the classical Poisson distribution as a special case, and being a continuous bridge between other classical distributions such as the geometric and Bernoulli distributions. See @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
 
 The R (@R-base) `mpcmp` package (@R-mpcmp) provides functionality for
-estimating a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data.
-
-The package is available from the Comprehensive R Archive Network (CRAN) [here](http://CRAN.R-project.org/package=mpcmp). @Huang2017b provides the theoretical development of the model that this package bases on. 
+estimating a mean-parametrized Conway-Maxwell-Poisson generalzied linear models for dispersed count data. The package is available from the Comprehensive R Archive Network (CRAN) [here](http://CRAN.R-project.org/package=mpcmp). @Huang2017b provides the theoretical development of the model that this package bases on. 
 
 ## Conway-Maxwell-Poisson Distributions {#cmpintro}
 The CMP distribution was first used by @Conway1962 as a model for queuing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter $\lambda$ and dispersion parameter $\nu$ if its probability mass function (pmf) is given by
@@ -79,17 +77,23 @@ and compatible other commonly used log-linear regression models for counts. In p
 
 The model can also be extended so that $\nu$ itself is modelled via a regression with a log-link, i.e.
 $$
-\nu = \exp(\tilde{X}^{\top}\gamma).
+\nu = \exp(\tilde{X}^{\top}\gamma),
 $$
+where $\tilde{X}$ is some covariates. 
 
-The main modelling function in our `mpcmp` package is `glm.cmp`. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (`coef()`, or its alias `coefficients()`), the fitted values (`fitted()` or its alias `fitted.values()`), the residuals (`residuals()` or its alias `resid()`), the model frame (`model.frame()`), the number of observations (nobs()), the log-likelihood (`logLik()`), and the AIC (`AIC()`). 
+## The `mpcmp` package
+
+The main modelling function in our `mpcmp` package is `glm.cmp()`. The optimisation is done using Fisher Scoring updates to take advantage of the fact the CMP$_{\mu}$ belongs to the exponential family. Notice that this is actually a constrained optimisation problem as we have to maintain mean constraints at all times which makes the implementation is bit more challenging. 
+
+The package implements similar methods to those related to `glm` objects. If you used `glm()` previously, you should feel right at home. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (`coef()`, or its alias `coefficients()`), the fitted values (`fitted()` or its alias `fitted.values()`), the residuals (`residuals()` or its alias `resid()`), the model frame (`model.frame()`), the number of observations (nobs()), the log-likelihood (`logLik()`), and the AIC (`AIC()`). 
 
 You can also use `plot()` or `gg_plot()` to obtain diagnostic plots of the fitted model.  
 
+Let's go through some examples to show you what our package can do! 
 
-## Fixed Dispersion Example: `attendance`
+## Constant Dispersion Example: `attendance`
 
-The attendance dataset (originally from [https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/](https://stats.idre.ucla.edu/stat/stata/dae/nb_data.dta)) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools. 
+The `attendance` dataset (originally from [https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/](https://stats.idre.ucla.edu/stat/stata/dae/nb_data.dta)) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools. 
 
 ```{r, message=FALSE}
 library(mpcmp)
@@ -99,7 +103,7 @@ ggplot(attendance, aes(daysabs, fill = prog)) + geom_histogram(binwidth = 1) +
   facet_grid(prog ~ ., margins = TRUE, scales = "free")
 ```
 
-It is obvious that there are overdispersion in this dataset. We can use `glm.cmp()` to fit the mean-parametrized CMP model to this set. 
+It is obvious that there are some overdispersion in this dataset. We can use `glm.cmp()` to fit the mean-parametrized CMP model to this data set. 
 
 ```{r}
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
@@ -111,7 +115,53 @@ beta <- abs(round(coef(M.attendance)[5], 3))
 mul_factor <- round(exp(beta),1)
 ```
 
-Our model estimates that students in the General program (the reference level) are expected to miss exp(+`r beta`) = `r mul_factor` times more days of school compared to students in the Vocational program.
+As `mpcmp` is directly comparable and compatible with other commonly used log-linear regression models for counts, interpreting parameters is straight forward. Our model estimates that students in the General program (the reference level) are expected to miss exp(+`r beta`) = `r mul_factor` times more days of school compared to students in the Vocational program.
+
+One of the key features of the `mpcmp` package is that it provides a range of diagnostic plots.
+```{r}
+gg_plot(M.attendance)
+```
+Please refer to `?gg_plot` to see what plots are available. 
+
+We also implemented a bunch of commonly used methods for "cmp" objects: 
+```{r}
+methods(class = "cmp")
+```
+
+## Varying Dispersion Example: `sitophilus`
+
+Ribeiro et al. (2013) carried out an experiment to assess the bioactivity of extracts from different parts (seeds, leaves and branches) of Annona mucosa (Annonaceae) to control Sitophilus zeamaus (Coleoptera: Curculionidae), a major pest of stored maize/corn in Brazil.
+
+In this experiment:
+
+- 10g of corn and 20 animals adults were placed in each Petri dish.
+- Extracts prepared with different parts of mucosa or just water (control) were completely
+randomised with 10 replicates.
+- The numbers of emerged insects (progeny) after 60 days were recorded and some descriptive statistics can be found below.
+```{r, message = FALSE}
+library(tidyverse)
+data(sitophilus)
+sitophilus %>% group_by(extract) %>%  summarise(mu = mean(ninsect), sigma2 = var(ninsect))
+```
+
+It appears that the treatment may have some impact on both the mean and variance of the number of progeny. Recall that non-constant variance is a given in a GLM, non-constant variances do not necessarily means varying dispersion. Nonetheless, we will try to use the treatment to explain the dispersion in the data set.
+
+```{r}
+data(sitophilus)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~ extract, data = sitophilus)
+summary(M.sit)
+```
+
+From the model summary, we can see that there is not much evidence to suggest the dispersions are varying across treatment groups. We can also formally test whether a constant dispersion model is sufficient here using a likelihood ratio test as the two models are nested:
+```{r}
+M.sit2 <- update(M.sit, formula_nu = NULL)
+cmplrtest(M.sit, M.sit2)
+```
+As a result, our final model is 
+```{r}
+summary(M.sit2)
+```
+
 
 
 
@@ -127,14 +177,6 @@ Our model estimates that students in the General program (the reference level) a
 
 There are three example datasets currently included in the `mpcmp` package which cover over- and under-dispersed counts. Sample analyses for these datsets are provided in either the help page for the datasets or for the `glm.cmp()` function. 
 
-### Overdispersed attendance data
-```{r} 
-library("mpcmp")
-data("attendance")
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
-print(M.attendance)
-summary(M.attendance)
-```
 
 ### Underdispersed takeover bids data 
 
@@ -142,56 +184,14 @@ summary(M.attendance)
 
 ## Other packages for fitting Conway-Maxwell Poisson Model
 
-`CompGLM`, `COMPoissonReg`, `compoisson`
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold', fig.cap='test'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $$Y = X\beta + \epsilon$$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-The dispersion $\nu$ can in turn be modelled via its own regression model using a set of covariates $\tilte{X}$, with the natural link being $\nu = exp(\tilde{X}^{\top}\gamma))$ to ensure non-negativity. The set of covariates $\tilde{X}$ can coincide with $X$, share common
-components with $X$, or be distinct altogether. 
-
-There are other `R` packages to deal with CMP models and they all help the writing and contruction of this package..
+There are other `R` packages to deal with CMP models and they all help the writing and construction of this package.
 
 - `compoisson`: Routines for density and moments of the COM-Poisson distribution under original parametrization by @R-compoisson
-- `CompGLM`: Fit COM-Poisson models under original parametrization (includes dispersion modeling) by @R-CompGLM.
-- `COMPoissonReg`: Fit COM-Poisson models under original parametrization (includes zero-inflation and dispersion modeling) by @R-COMPoissonReg. 
-- `glmmTMB`: Fit (among other) COM-Poisson models under a different mean-parametrization (includes zero-inflation, dispersion modeling and random effects) by @R-glmmTMB. 
-
-
+- `CompGLM`: Fit COM-Poisson models under original parametrization (includes dispersion modelling) by @R-CompGLM.
+- `COMPoissonReg`: Fit COM-Poisson models under original parametrization (includes zero-inflation and dispersion modelling) by @R-COMPoissonReg. 
+- `cmpreg`: Fit Mean-type parametrized COM-Poisson models (includes dispersion modelling) by @R-cmpreg. The authors purposed to regressed on the approximated mean. 
+- `DGLMExtPois`: Fit mean-parametrized COM-Poisson model (includes dispersion modelling) using `nloptr` by @R-DGLMExtPois. 
+- `glmmTMB`: Fit (among other) COM-Poisson models under a different mean-parametrization (includes zero-inflation, dispersion modelling and random effects) by @R-glmmTMB. 
 
 ## References
 

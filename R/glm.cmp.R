@@ -81,8 +81,8 @@
 #' can be used to extract various useful features of the value
 #' returned by \code{glm.cmp}.
 #'
-#' The function \code{LRTnu} can be used to perform a likelihood ratio
-#' chi-squared test for nu = 1 of a COM-Poisson model.
+#' The functions \code{LRTnu} and \code{cmplrtest} can be used to perform a likelihood ratio
+#' chi-squared test for nu = 1 and for nested COM-Poisson model respectively. 
 #'
 #' An object class 'glm.cmp' is a list containing at least the following components:
 #'

@@ -78,7 +78,7 @@ cmplrtest = function(object1, object2, digits=3) {
   } else {
     pval <- signif(pval, digits)
   }
-  cat("\nLikelihood ratio test for testing both COP-Poisson models are equivalent\n")
+  cat("\nLikelihood ratio test for testing both COM-Poisson models are equivalent\n")
   cat("LRT-statistic: ", signif(ttest, digits), "\n")
   cat("Chi-sq degrees of freedom: ", df, "\n")
   cat("P-value: ", pval, "\n")
@@ -162,11 +162,11 @@ LRTnu <- function(object, digits = 3){
 #' M.sit.full
 #'         
 #' ## Dropping extract from the dispersion regression
-#' M.sit.null1 <- update(M.sit.full, formula_nu. =  ~.-extract)
+#' M.sit.null1 <- update(M.sit.full, formula_nu =  ~.-extract)
 #' M.sit.null1
 #' 
 #' ## To not regress on the dispersion at all
-#' M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
+#' M.sit.null2 <- update(M.sit.full, formula_nu = NULL)
 #' M.sit.null2
 
 update.cmp <- function(object, formula., formula_nu., ..., 

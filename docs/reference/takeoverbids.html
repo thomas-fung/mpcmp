@@ -85,7 +85,7 @@ data frame has 126 observations on 14 variables. The descriptions below are take
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -102,6 +102,9 @@ data frame has 126 observations on 14 variables. The descriptions below are take
 </li>
 <li>
   <a href="../news/index.html">Change log</a>
+</li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -181,7 +184,57 @@ Expansions: with Applications. <em>Journal of Applied Econometrics</em> <b>12</b
 Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447--457.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+    <pre class="examples"><div class='input'>
+<span class='co'>### Huang (2017) Page 371--372: Underdispersed Takeover Bids data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
+<span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
+    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
+<span class='no'>M.bids</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
+#&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
+#&gt;   0.9896300    0.2678800   -0.1731800    0.0677440    0.4812800   -0.6848200  
+#&gt;    insthold         size       sizesq     regulatn  
+#&gt;  -0.3678900    0.1793300   -0.0075823   -0.0375690  
+#&gt; 
+#&gt; Dispersion (nu): 1.75
+#&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
+#&gt; Null Deviance: 182.3906 
+#&gt; Residual Deviance: 131.2017 
+#&gt; AIC: 382.1753 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.bids</span>)</div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
+#&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
+#&gt; 
+#&gt; Deviance Residuals: 
+#&gt;      Min        1Q    Median        3Q       Max  
+#&gt; -2.71432  -0.70635  -0.07758   0.36084   3.05289  
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt;             Estimate Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)   0.9896  0.4354    2.27  0.02302 *  
+#&gt; leglrest      0.2679  0.1229    2.18  0.02925 *  
+#&gt; rearest      -0.1732  0.1548   -1.12  0.26320    
+#&gt; finrest       0.0677  0.1744    0.39  0.69769    
+#&gt; whtknght      0.4813  0.1317    3.65  0.00026 ***
+#&gt; bidprem      -0.6848  0.3076   -2.23  0.02600 *  
+#&gt; insthold     -0.3679  0.3468   -1.06  0.28878    
+#&gt; size          0.1793  0.0476    3.77  0.00017 ***
+#&gt; sizesq       -0.0076  0.0025   -3.05  0.00228 ** 
+#&gt; regulatn     -0.0376  0.1303   -0.29  0.77310    
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt; 
+#&gt; (Dispersion parameter for Mean-CMP estimated to be  1.752 )
+#&gt; 
+#&gt; 
+#&gt;     Null deviance: 182.39  on 125 degrees of freedom
+#&gt; Residual deviance: 131.20  on 116 degrees of freedom
+#&gt; 
+#&gt; AIC: 382.1753 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>M.bids</span>) <span class='co'>#or gg_plot(M.bids)</span></div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

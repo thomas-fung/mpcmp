@@ -44,11 +44,11 @@ M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data =
 M.sit.full
         
 ## Dropping extract from the dispersion regression
-M.sit.null1 <- update(M.sit.full, formula_nu. =  ~.-extract)
+M.sit.null1 <- update(M.sit.full, formula_nu =  ~.-extract)
 M.sit.null1
 
 ## To not regress on the dispersion at all
-M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
+M.sit.null2 <- update(M.sit.full, formula_nu = NULL)
 M.sit.null2
 }
 \seealso{

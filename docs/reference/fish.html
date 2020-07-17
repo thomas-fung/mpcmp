@@ -81,7 +81,7 @@ effect of the surface area of the lakes. The latitude of the lakes are also reco
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@ effect of the surface area of the lakes. The latitude of the lakes are also reco
 </li>
 <li>
   <a href="../news/index.html">Change log</a>
+</li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -159,7 +162,44 @@ larger count data.</p>
 American Naturalist</em>, <b>108</b>, 473--488.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+    <pre class="examples"><div class='input'><span class='co'>### Barbour &amp; Brown (1974): Overdispersed Fish data</span>
+<span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fish</span>)
+<span class='no'>M.fish</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>species</span>~ <span class='fl'>1</span>+<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>area</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>fish</span>)
+<span class='no'>M.fish</span></div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt; (Intercept)    log(area)  
+#&gt;     2.32810      0.18286  
+#&gt; 
+#&gt; Dispersion (nu): 0.0184
+#&gt; Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
+#&gt; Null Deviance: 101.6675 
+#&gt; Residual Deviance: 59.45133 
+#&gt; AIC: 638.8532 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.fish</span>)</div><div class='output co'>#&gt; 
+#&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
+#&gt; 
+#&gt; Deviance Residuals: 
+#&gt;     Min       1Q   Median       3Q      Max  
+#&gt; -2.1215  -0.8038  -0.3327   0.4276   2.6966  
+#&gt; 
+#&gt; Linear Model Coefficients:
+#&gt;             Estimate Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)   2.3281  0.2341    9.94  &lt; 2e-16 ***
+#&gt; log(area)     0.1829  0.0287    6.37  1.9e-10 ***
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#&gt; 
+#&gt; (Dispersion parameter for Mean-CMP estimated to be  0.01841 )
+#&gt; 
+#&gt; 
+#&gt;     Null deviance: 101.668  on 69 degrees of freedom
+#&gt; Residual deviance:  59.451  on 68 degrees of freedom
+#&gt; 
+#&gt; AIC: 638.8532 
+#&gt; </div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -81,7 +81,7 @@ identical to update in the stats package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@ identical to update in the stats package." />
 </li>
 <li>
   <a href="../news/index.html">Change log</a>
+</li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -183,14 +186,14 @@ the call</p></td>
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
-#&gt;     0.99000      0.26800     -0.17300      0.06770      0.48100     -0.68500  
+#&gt;   0.9896300    0.2678800   -0.1731800    0.0677440    0.4812800   -0.6848200  
 #&gt;    insthold         size       sizesq     regulatn  
-#&gt;    -0.36800      0.17900     -0.00758     -0.03760  
+#&gt;  -0.3678900    0.1793300   -0.0075823   -0.0375690  
 #&gt; 
 #&gt; Dispersion (nu): 1.75
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
-#&gt; Null Deviance: 182.3899 
-#&gt; Residual Deviance: 131.2013 
+#&gt; Null Deviance: 182.3906 
+#&gt; Residual Deviance: 131.2017 
 #&gt; AIC: 382.1753 
 #&gt; </div><div class='input'>
 <span class='co'>## Dropping whtknght</span>
@@ -201,14 +204,14 @@ the call</p></td>
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt; (Intercept)     leglrest      rearest      finrest      bidprem     insthold  
-#&gt;     1.33000      0.39100     -0.14600      0.13400     -0.74800     -0.44100  
+#&gt;   1.3344000    0.3912400   -0.1464000    0.1342300   -0.7477300   -0.4406100  
 #&gt;        size       sizesq     regulatn  
-#&gt;     0.18800     -0.00794     -0.04460  
+#&gt;   0.1878000   -0.0079426   -0.0445510  
 #&gt; 
 #&gt; Dispersion (nu): 1.54
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
-#&gt; Null Deviance: 164.72 
-#&gt; Residual Deviance: 131.837 
+#&gt; Null Deviance: 164.7208 
+#&gt; Residual Deviance: 131.8376 
 #&gt; AIC: 393.8799 
 #&gt; </div><div class='input'>
 <span class='co'>## To update the dispersion regression formula</span>
@@ -233,7 +236,7 @@ the call</p></td>
 #&gt; AIC: 260.8279 
 #&gt; </div><div class='input'>
 <span class='co'>## Dropping extract from the dispersion regression</span>
-<span class='no'>M.sit.null1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span>  ~<span class='no'>.</span>-<span class='no'>extract</span>)
+<span class='no'>M.sit.null1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span>  ~<span class='no'>.</span>-<span class='no'>extract</span>)
 <span class='no'>M.sit.null1</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)
 #&gt; 
@@ -251,18 +254,18 @@ the call</p></td>
 #&gt; AIC: 255.2668 
 #&gt; </div><div class='input'>
 <span class='co'>## To not regress on the dispersion at all</span>
-<span class='no'>M.sit.null2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='no'>M.sit.null2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 <span class='no'>M.sit.null2</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)
 #&gt; 
 #&gt; Linear Model Coefficients:
 #&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
-#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
+#&gt;     3.4500000     -0.0063694     -0.0521290     -3.3547000  
 #&gt; 
 #&gt; Dispersion (nu): 0.396
 #&gt; Degrees of Freedom: 39 Total (i.e. Null);  36 Residual
-#&gt; Null Deviance: 234.4703 
-#&gt; Residual Deviance: 41.40796 
+#&gt; Null Deviance: 234.4696 
+#&gt; Residual Deviance: 41.40784 
 #&gt; AIC: 253.2668 
 #&gt; </div></pre>
   </div>

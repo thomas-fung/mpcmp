@@ -83,7 +83,7 @@ parameters between the full and null models." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ parameters between the full and null models." />
 </li>
 <li>
   <a href="../news/index.html">Change log</a>
+</li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -181,7 +184,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
 <span class='co'>## Likelihood ratio test for the nested models</span>
 <span class='fu'>cmplrtest</span>(<span class='no'>M.bids.full</span>, <span class='no'>M.bids.null</span>) <span class='co'># order of objects is not important</span></div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COP-Poisson models are equivalent
+#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
 #&gt; LRT-statistic:  13.7 
 #&gt; Chi-sq degrees of freedom:  1 
 #&gt; P-value:  0.000214 </div><div class='input'>
@@ -192,14 +195,14 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 <span class='co'>## Fit null model; dropping extract from dispersion equation</span>
  <span class='no'>M.sit.null1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span> ~<span class='fl'>1</span>)
  <span class='fu'>cmplrtest</span>(<span class='no'>M.sit.null1</span>, <span class='no'>M.sit.full</span>)</div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COP-Poisson models are equivalent
+#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
 #&gt; LRT-statistic:  0.439 
 #&gt; Chi-sq degrees of freedom:  3 
 #&gt; P-value:  0.932 </div><div class='input'>
 <span class='co'>## Fit null model; using constant dispersion specification</span>
 <span class='no'>M.sit.null2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu.</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 <span class='fu'>cmplrtest</span>(<span class='no'>M.sit.null2</span>, <span class='no'>M.sit.full</span>)</div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COP-Poisson models are equivalent
+#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
 #&gt; LRT-statistic:  0.439 
 #&gt; Chi-sq degrees of freedom:  3 
 #&gt; P-value:  0.932 </div><div class='input'>

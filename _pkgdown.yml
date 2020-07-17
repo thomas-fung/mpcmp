@@ -62,6 +62,8 @@ navbar:
       href: reference/index.html
     - text: "Change log"
       href: news/index.html
+    - text: "Blog"
+      href: "articles/mpcmp.html"
   right:
     - icon: fa-github fa-lg
       href: https://github.com/thomas-fung/mpcmp

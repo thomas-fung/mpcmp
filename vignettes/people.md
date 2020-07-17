@@ -1,5 +1,5 @@
 ---
-title: mpcmp contributors
+title: The <tt>`mpcmp`</tt> Team
 keywords: authors, mpcmp, contributors
 bibliography: 
 csl: apa-old-doi-prefix.csl
