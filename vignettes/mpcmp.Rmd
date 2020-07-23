@@ -142,7 +142,8 @@ One of the key features of the `mpcmp` package is that it provides a range of di
 ```{r}
 gg_plot(M.attendance)
 ```
-Please refer to `?gg_plot` to see what plots are available. 
+
+Please refer to `?gg_plot` to see what diagnostic plots are available. 
 
 We also implemented a bunch of commonly used methods for "cmp" objects: 
 ```{r}
