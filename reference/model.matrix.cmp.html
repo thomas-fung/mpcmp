@@ -98,6 +98,9 @@
 <li>
   <a href="../news/index.html">Change log</a>
 </li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -135,7 +138,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,10 +158,9 @@
     <p>The method will return the saved <code><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></code> used when fitting the cmp model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### </span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
-<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>M.attendance</span>)</div><div class='output co'>#&gt;     (Intercept) gendermale math progAcademic progVocational
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>attendance</span>)
+<span class='no'>M.attendance</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>daysabs</span>~ <span class='no'>gender</span>+<span class='no'>math</span>+<span class='no'>prog</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>attendance</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='no'>M.attendance</span>)</div><div class='output co'>#&gt;     (Intercept) gendermale math progAcademic progVocational
 #&gt; 1             1          1   63            1              0
 #&gt; 2             1          1   27            1              0
 #&gt; 3             1          0   20            1              0
@@ -482,9 +484,10 @@
 #&gt; attr(,"contrasts")$prog
 #&gt; [1] "contr.treatment"
 #&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>sitophilus</span>)
-<span class='kw'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(formula = <span class='kw'>ninsect</span> <span class='op'>~</span> <span class='kw'>extract</span>, formula_nu = <span class='op'>~</span><span class='kw'>extract</span>, data = <span class='kw'>sitophilus</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='kw'>M.sit</span>)</div><div class='output co'>#&gt; $x
+<span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)
+<span class='no'>M.sit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>ninsect</span> ~ <span class='no'>extract</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> ~<span class='no'>extract</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sitophilus</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span>(<span class='no'>M.sit</span>)</div><div class='output co'>#&gt; $x
 #&gt;    (Intercept) extractLeaf extractBranch extractSeed
 #&gt; 1            1           1             0           0
 #&gt; 2            1           1             0           0
@@ -581,7 +584,8 @@
 #&gt; attr(,"contrasts")$extract
 #&gt; [1] "contr.treatment"
 #&gt; 
-#&gt; </div></pre>
+#&gt; </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -597,7 +601,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

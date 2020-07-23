@@ -99,6 +99,9 @@ nu estimate." />
 <li>
   <a href="../news/index.html">Change log</a>
 </li>
+<li>
+  <a href="../articles/mpcmp.html">Blog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -137,17 +140,17 @@ nu estimate." />
     </div>
 
     <pre class="usage"><span class='fu'>getnu</span>(
-  <span class='kw'>param</span>,
-  <span class='kw'>y</span>,
-  <span class='kw'>xx</span>,
-  <span class='kw'>offset</span>,
-  <span class='kw'>llstart</span>,
-  fsscale = <span class='fl'>1</span>,
-  lambdalb = <span class='fl'>1e-10</span>,
-  lambdaub = <span class='fl'>1000</span>,
-  maxlambdaiter = <span class='fl'>1000</span>,
-  tol = <span class='fl'>1e-06</span>,
-  summax = <span class='fl'>100</span>
+  <span class='no'>param</span>,
+  <span class='no'>y</span>,
+  <span class='no'>xx</span>,
+  <span class='no'>offset</span>,
+  <span class='no'>llstart</span>,
+  <span class='kw'>fsscale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
+  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -208,6 +211,10 @@ values is less than tol.</p></td>
 <dt>maxl</dt><dd><p>the updated log-likelihood</p></dd>
 <dt>fsscale</dt><dd><p>the final scaling factor used</p></dd>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>From version 0.3.4, this function is no longer being used as part of the estimation algorithm 
+and this function will be defunct in our next update.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -224,7 +231,7 @@ values is less than tol.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
