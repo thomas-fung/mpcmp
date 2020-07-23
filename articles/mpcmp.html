@@ -161,7 +161,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">prog</span> <span class="op">~</span> <span class="kw">.</span>, margins = <span class="fl">TRUE</span>, scales = <span class="st">"free"</span>)
 </pre></div>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>It is evident that there is some overdispersion in this dataset. We can use <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to fit the mean-parametrized CMP model to this data set.</p>
+<p>It appears students enrolled into the General program tend to miss more days of school than those enrolled into the Academic or the Vocotional program. There is some overdispersion in this dataset. We can use <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to fit the mean-parametrized CMP model to try to account for that overdispersion.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="kw">M.attendance</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(<span class="kw">daysabs</span><span class="op">~</span> <span class="kw">gender</span><span class="op">+</span><span class="kw">math</span><span class="op">+</span><span class="kw">prog</span>, data=<span class="kw">attendance</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.attendance</span>)
