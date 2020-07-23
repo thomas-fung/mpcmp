@@ -21,7 +21,7 @@ The maintainer changed his email address.
 
 ## Downstream dependency. 
 
-There are currently no downstream dependencies for this package. 
+There are currently no downstream dependencies for this package.
 
 
 

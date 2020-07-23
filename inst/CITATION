@@ -14,5 +14,6 @@ bibentry(bibtype = "Manual",
                           email = "alan.huang@uq.edu.au")),
   year         = "2020",
   note         = "R package version 0.3.4",
-  header       = "To cite the mpcmp package in publications use:"
+  header       = "To cite the mpcmp package in publications use:",
+  url          = "https://cran.r-project.org/web/packages/mpcmp/index.html"
 )

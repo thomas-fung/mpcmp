@@ -33,7 +33,8 @@ Suggests:
     testthat,
     spelling,
     covr,
-    markdown (>= 1.1)
+    markdown (>= 1.1),
+    tidyverse
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp
