@@ -1,11 +1,11 @@
 ---
-title: The <tt>`mpcmp`</tt> Team
+title: The `mpcmp` Team
 keywords: authors, mpcmp, contributors
 bibliography: 
 csl: apa-old-doi-prefix.csl
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The <tt>`mpcmp`</tt> Team}
+  %\VignetteIndexEntry{The `mpcmp` Team}
   %\VignetteEngine{knitr::knitr}
   %\usepackage[utf8]{inputenc}
 ---
