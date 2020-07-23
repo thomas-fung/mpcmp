@@ -116,7 +116,7 @@ ggplot(attendance, aes(daysabs, fill = prog)) + geom_histogram(binwidth = 1) +
   facet_grid(prog ~ ., margins = TRUE, scales = "free")
 ```
 
-It is evident that there is some overdispersion in this dataset. We can use `glm.cmp()` to fit the mean-parametrized CMP model to this data set. 
+It appears students enrolled into the General program tend to miss more days of school than those enrolled into the Academic or the Vocotional program. There is some overdispersion in this dataset. We can use `glm.cmp()` to fit the mean-parametrized CMP model to try to account for that overdispersion. 
 
 ```{r}
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
