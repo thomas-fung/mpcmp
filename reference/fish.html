@@ -139,12 +139,12 @@ effect of the surface area of the lakes. The latitude of the lakes are also reco
 effect of the surface area of the lakes. The latitude of the lakes are also recorded.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fish</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fish</span>)</pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 70 observations on 4 variables.</p><dl'>
+    <p>A data frame with 70 observations on 4 variables.</p><dl>
 <dt>lake</dt><dd><p>name of the lakes</p></dd>
 <dt>species</dt><dd><p>number of fish species in lakes</p></dd>
 <dt>area</dt><dd><p>surface area (km squared)</p></dd>
@@ -164,9 +164,9 @@ American Naturalist</em>, <b>108</b>, 473--488.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Barbour &amp; Brown (1974): Overdispersed Fish data</span>
 <span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fish</span>)
-<span class='no'>M.fish</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>species</span>~ <span class='fl'>1</span>+<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>area</span>), <span class='kw'>data</span><span class='kw'>=</span><span class='no'>fish</span>)
-<span class='no'>M.fish</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fish</span>)
+<span class='kw'>M.fish</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>species</span><span class='op'>~</span> <span class='fl'>1</span><span class='op'>+</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='kw'>area</span>), data=<span class='kw'>fish</span>)
+<span class='kw'>M.fish</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -178,7 +178,7 @@ American Naturalist</em>, <b>108</b>, 473--488.</p>
 #&gt; Null Deviance: 101.6675 
 #&gt; Residual Deviance: 59.45133 
 #&gt; AIC: 638.8532 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.fish</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.fish</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -199,8 +199,7 @@ American Naturalist</em>, <b>108</b>, 473--488.</p>
 #&gt; Residual deviance:  59.451  on 68 degrees of freedom
 #&gt; 
 #&gt; AIC: 638.8532 
-#&gt; </div><div class='input'># }
-</div></pre>
+#&gt; </div><div class='input'><span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -216,7 +215,7 @@ American Naturalist</em>, <b>108</b>, 473--488.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

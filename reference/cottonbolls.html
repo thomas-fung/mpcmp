@@ -141,12 +141,12 @@ plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton bo
 to examine the effect of five defoliation levels (0<!-- %, 25%, 50%, 75% and 100%). --></p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cottonbolls</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>cottonbolls</span>)</pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 125 observations on 4 variables.</p><dl'>
+    <p>A data frame with 125 observations on 4 variables.</p><dl>
 <dt>nc</dt><dd><p>number of bolls produced by two cotton plants at harvest</p></dd>
 <dt>stages</dt><dd><p>growth stage</p></dd>
 <dt>def</dt><dd><p>artificial defoliation level</p></dd>
@@ -168,9 +168,9 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 373--375: Underdispersed Cotton bolls data</span>
 <span class='co'>### Model fitting for predictor V </span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cottonbolls</span>)
-<span class='no'>M.bolls</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>nc</span>~ <span class='fl'>1</span>+<span class='no'>stages</span>:<span class='no'>def</span>+<span class='no'>stages</span>:<span class='no'>def2</span>, <span class='kw'>data</span><span class='kw'>=</span> <span class='no'>cottonbolls</span>)
-<span class='no'>M.bolls</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>cottonbolls</span>)
+<span class='kw'>M.bolls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>nc</span><span class='op'>~</span> <span class='fl'>1</span><span class='op'>+</span><span class='kw'>stages</span><span class='op'>:</span><span class='kw'>def</span><span class='op'>+</span><span class='kw'>stages</span><span class='op'>:</span><span class='kw'>def2</span>, data= <span class='kw'>cottonbolls</span>)
+<span class='kw'>M.bolls</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -188,7 +188,7 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 #&gt; Null Deviance: 345.9363 
 #&gt; Residual Deviance: 125.2598 
 #&gt; AIC: 440.8229 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.bolls</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.bolls</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -218,8 +218,7 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 #&gt; Residual deviance: 125.26  on 114 degrees of freedom
 #&gt; 
 #&gt; AIC: 440.8229 
-#&gt; </div><div class='input'>
-</div></pre>
+#&gt; </div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -235,7 +234,7 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

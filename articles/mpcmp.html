@@ -145,7 +145,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <a href="#the-mpcmp-package" class="anchor"></a>The <code>mpcmp</code> package</h2>
 <p>The main modelling function in our <code>mpcmp</code> package is <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>. The optimisation is done using Fisher Scoring updates to take advantage of the fact the CMP<span class="math inline">\(_{\mu}\)</span> belongs to the exponential family. Notice that this is a constrained optimisation problem as we have to maintain mean constraints at all times, which makes the implementation is a bit more challenging.</p>
 <p>The package implements similar methods to those related to <code>glm</code> objects. If you used <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> previously, you should feel right at home. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (<code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code>, or its alias <code><a href="https://rdrr.io/r/stats/coef.html">coefficients()</a></code>), the fitted values (<code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted.values()</a></code>), the residuals (<code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/residuals.html">resid()</a></code>), the model frame (<code><a href="https://rdrr.io/r/stats/model.frame.html">model.frame()</a></code>), the number of observations (nobs()), the log-likelihood (<code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code>), and the AIC (<code><a href="https://rdrr.io/r/stats/AIC.html">AIC()</a></code>).</p>
-<p>You can also use <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> or <code><a href="../reference/gg_plot.html">gg_plot()</a></code> to obtain diagnostic plots of the fitted model.</p>
+<p>You can also use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or <code><a href="../reference/gg_plot.html">gg_plot()</a></code> to obtain diagnostic plots of the fitted model.</p>
 <p>Let’s go through some examples to show you what our package can do!</p>
 </div>
 <div id="constant-dispersion-example-attendance" class="section level2">
@@ -153,15 +153,18 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <a href="#constant-dispersion-example-attendance" class="anchor"></a>Constant Dispersion Example: <code>attendance</code>
 </h2>
 <p>The <code>attendance</code> dataset (originally from <a href="https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/">https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/</a>) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mpcmp</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">attendance</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">attendance</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">daysabs</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">prog</span>)) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span>(<span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">prog</span> ~ <span class="no">.</span>, <span class="kw">margins</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/thomas-fung/mpcmp">mpcmp</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">attendance</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">attendance</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">daysabs</span>, fill = <span class="kw">prog</span>)) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span>(binwidth = <span class="fl">1</span>) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">prog</span> <span class="op">~</span> <span class="kw">.</span>, margins = <span class="fl">TRUE</span>, scales = <span class="st">"free"</span>)
+</pre></div>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>It is evident that there is some overdispersion in this dataset. We can use <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to fit the mean-parametrized CMP model to this data set.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">M.attendance</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(<span class="no">daysabs</span>~ <span class="no">gender</span>+<span class="no">math</span>+<span class="no">prog</span>, <span class="kw">data</span><span class="kw">=</span><span class="no">attendance</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">M.attendance</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">M.attendance</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(<span class="kw">daysabs</span><span class="op">~</span> <span class="kw">gender</span><span class="op">+</span><span class="kw">math</span><span class="op">+</span><span class="kw">prog</span>, data=<span class="kw">attendance</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.attendance</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)</span>
 <span class="co">#&gt; </span>
@@ -185,10 +188,12 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt;     Null deviance: 455.83  on 313 degrees of freedom</span>
 <span class="co">#&gt; Residual deviance: 377.44  on 309 degrees of freedom</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; AIC: 1739.026</span></pre></body></html></div>
+<span class="co">#&gt; AIC: 1739.026</span>
+</pre></div>
 <p>As <code>mpcmp</code> is directly comparable and compatible with other commonly used log-linear regression models for counts, interpreting parameters is straight forward. Our model estimates that students in the General program (the reference level) are expected to miss exp(+1.254) = 3.5 times more days of school compared to students in the Vocational program.</p>
 <p>To see whether a simpler Poisson model, i.e. <span class="math inline">\(\nu = 1\)</span> is adequate, we can run the model through the <code><a href="../reference/LRTnu.html">LRTnu()</a></code> function:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/LRTnu.html">LRTnu</a></span>(<span class="no">M.attendance</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/LRTnu.html">LRTnu</a></span>(<span class="kw">M.attendance</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Likelihood ratio test for testing nu=1:</span>
 <span class="co">#&gt; </span>
@@ -196,16 +201,21 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; Log-Likelihood for Poisson:  -1320 </span>
 <span class="co">#&gt; LRT-statistic:  903 </span>
 <span class="co">#&gt; Chi-sq degrees of freedom:  1 </span>
-<span class="co">#&gt; P-value:  &lt; 2e-16</span></pre></body></html></div>
+<span class="co">#&gt; P-value:  &lt; 2e-16</span>
+</pre></div>
 <p>As the P-value is small, we conclude that dispersion is present in this data set.</p>
 <p>One of the key features of the <code>mpcmp</code> package is that it provides a range of diagnostic plots.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/gg_plot.html">gg_plot</a></span>(<span class="no">M.attendance</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/gg_plot.html">gg_plot</a></span>(<span class="kw">M.attendance</span>)
+</pre></div>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-6-1.png" width="700"> Please refer to <code><a href="../reference/gg_plot.html">?gg_plot</a></code> to see what plots are available.</p>
 <p>We also implemented a bunch of commonly used methods for “cmp” objects:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="st">"cmp"</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span>(class = <span class="st">"cmp"</span>)
 <span class="co">#&gt; [1] model.matrix plot         predict      print        summary     </span>
 <span class="co">#&gt; [6] update      </span>
-<span class="co">#&gt; see '?methods' for accessing help and source code</span></pre></body></html></div>
+<span class="co">#&gt; see '?methods' for accessing help and source code</span>
+</pre></div>
 </div>
 <div id="varying-dispersion-example-sitophilus" class="section level2">
 <h2 class="hasAnchor">
@@ -218,27 +228,30 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <li>Extracts prepared with different parts of mucosa or just water (control) were completely randomised with 10 replicates.</li>
 <li>The numbers of emerged insects (progeny) after 60 days were recorded and some descriptive statistics can be found below.</li>
 </ul>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">sitophilus</span>)
-<span class="no">sitophilus</span> <span class="kw">%&gt;%</span> <span class="fu">group_by</span>(<span class="no">extract</span>) <span class="kw">%&gt;%</span> <span class="fu">summarise</span>(<span class="kw">mu</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">ninsect</span>),
-                                               <span class="kw">sigma2</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="no">ninsect</span>))
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">sitophilus</span>)
+<span class="kw">sitophilus</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span>(<span class="kw">extract</span>) <span class="op">%&gt;%</span> <span class="fu">summarise</span>(mu = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ninsect</span>), 
+                                               sigma2 = <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="kw">ninsect</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;   extract    mu sigma2</span>
 <span class="co">#&gt;   &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Control  31.5  62.5 </span>
 <span class="co">#&gt; 2 Leaf     31.3  94.0 </span>
 <span class="co">#&gt; 3 Branch   29.9  88.8 </span>
-<span class="co">#&gt; 4 Seed      1.1   1.66</span></pre></body></html></div>
+<span class="co">#&gt; 4 Seed      1.1   1.66</span>
+</pre></div>
 <p>It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is the norm in a GLM, non-constant variances do not necessarily mean varying dispersions. Nonetheless, we will try to use the treatment to explain the dispersion in the data set. To do that we specify the <code>formula_nu</code> argument in the <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> function.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">sitophilus</span>)
-<span class="no">M.sit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">ninsect</span> ~ <span class="no">extract</span>, <span class="kw">formula_nu</span> <span class="kw">=</span> ~ <span class="no">extract</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">sitophilus</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">M.sit</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">sitophilus</span>)
+<span class="kw">M.sit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(formula = <span class="kw">ninsect</span> <span class="op">~</span> <span class="kw">extract</span>, formula_nu = <span class="op">~</span> <span class="kw">extract</span>, data = <span class="kw">sitophilus</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.sit</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Deviance Residuals: </span>
 <span class="co">#&gt;      Min        1Q    Median        3Q       Max  </span>
-<span class="co">#&gt; -2.21084  -1.16849   0.07494   0.64152   1.72653  </span>
+<span class="co">#&gt; -2.21085  -1.16849   0.07494   0.64152   1.72653  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Mean Model Coefficients:</span>
 <span class="co">#&gt;               Estimate Std.Err Z value Pr(&gt;|z|)    </span>
@@ -259,17 +272,21 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt;     Null deviance: 257.211  on 39 degrees of freedom</span>
 <span class="co">#&gt; Residual deviance:  41.679  on 32 degrees of freedom</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; AIC: 260.8279</span></pre></body></html></div>
+<span class="co">#&gt; AIC: 260.8279</span>
+</pre></div>
 <p>From the model summary, we can see that there is not much evidence to suggest the dispersions are varying across treatment groups. We can also formally test whether a constant dispersion model is sufficient here using a likelihood ratio test as the two models are nested:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">M.sit2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span>(<span class="no">M.sit</span>, <span class="kw">formula_nu</span> <span class="kw">=</span> <span class="kw">NULL</span>)
-<span class="fu"><a href="../reference/cmplrtest.html">cmplrtest</a></span>(<span class="no">M.sit</span>, <span class="no">M.sit2</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">M.sit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span>(<span class="kw">M.sit</span>, formula_nu = <span class="kw">NULL</span>)
+<span class="fu"><a href="../reference/cmplrtest.html">cmplrtest</a></span>(<span class="kw">M.sit</span>, <span class="kw">M.sit2</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent</span>
 <span class="co">#&gt; LRT-statistic:  0.439 </span>
 <span class="co">#&gt; Chi-sq degrees of freedom:  3 </span>
-<span class="co">#&gt; P-value:  0.932</span></pre></body></html></div>
+<span class="co">#&gt; P-value:  0.932</span>
+</pre></div>
 <p>As a result, our final model is</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">M.sit2</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.sit2</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)</span>
 <span class="co">#&gt; </span>
@@ -292,7 +309,8 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt;     Null deviance: 234.470  on 39 degrees of freedom</span>
 <span class="co">#&gt; Residual deviance:  41.408  on 36 degrees of freedom</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; AIC: 253.2668</span></pre></body></html></div>
+<span class="co">#&gt; AIC: 253.2668</span>
+</pre></div>
 </div>
 <div id="other-packages-for-fitting-conway-maxwell-poisson-model" class="section level2">
 <h2 class="hasAnchor">
@@ -382,7 +400,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

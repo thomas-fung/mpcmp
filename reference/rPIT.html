@@ -139,7 +139,7 @@ The majority of the code and descriptions are taken from Dunsmuir and Scott (201
 The majority of the code and descriptions are taken from Dunsmuir and Scott (2015).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compnormRandPIT</span>(<span class='no'>object</span>)</pre>
+    <pre class="usage"><span class='fu'>compnormRandPIT</span>(<span class='kw'>object</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,10 +185,10 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 <strong>67</strong>, 1--36.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
-<span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
-    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
-<span class='fu'>compnormRandPIT</span>(<span class='no'>M.bids</span>)</div><div class='output co'>#&gt; $rt
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
+<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
+    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
+<span class='fu'>compnormRandPIT</span>(<span class='kw'>M.bids</span>)</div><div class='output co'>#&gt; $rt
 #&gt;   [1] -0.20016809 -1.81257497 -1.51743440 -0.32208532 -0.24345221  0.55642354
 #&gt;   [7]  0.15153776 -0.49321625  0.17991618 -0.71811993 -0.15837151  0.29653545
 #&gt;  [13]  0.09700635 -0.69146480  0.77969682  0.46652584  0.29965061  0.20915127
@@ -212,32 +212,32 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 #&gt; [121]  0.78139897  1.93281653  0.88283234  1.07306945 -0.89773472 -2.10185581
 #&gt; 
 #&gt; $rtMid
-#&gt;   [1] -0.4898606062 -1.2821938868 -0.9046825637 -0.1188628665 -0.1341943955
-#&gt;   [6]  0.7653209644  0.2351273791  0.0171245477  0.3047524695 -1.1693426930
-#&gt;  [11]  0.0792278583  0.1389754517 -0.1034624760 -0.3370842297  0.3110988247
-#&gt;  [16]  0.1809578919  0.6063865729  0.1827372110  0.4748603621  0.1493556282
-#&gt;  [21]  2.0323888732 -0.4065244790 -0.0484976130  0.5966832622 -0.7121949358
-#&gt;  [26] -0.4681955940 -0.4067855846  0.0763118537  1.5778089664 -0.0213205177
-#&gt;  [31]  0.4153366135 -0.6181257788  1.5710150664 -0.4889168756 -0.6975868867
-#&gt;  [36]  2.8736704065  0.0293201146 -0.2299245558 -0.5074023918 -0.3107316174
-#&gt;  [41]  0.0040065543  0.3722261170 -1.0535891331  0.0433498525  0.2062825008
-#&gt;  [46] -0.6344033290 -1.0333900479 -1.0037282465  0.1400302405  0.6852283188
-#&gt;  [51] -0.3569787946  0.9064627306  0.3550496831  0.4009327342  1.1722251731
-#&gt;  [56] -0.5882093511  0.0362166243  0.1670724294  0.3196225939  0.7366028166
-#&gt;  [61] -1.0515786490  1.0488723309 -1.3465565765 -0.9436796462  3.0214268715
-#&gt;  [66]  0.1992771103  0.1892685791 -0.3062366884  0.3521605187  0.2239147660
-#&gt;  [71] -0.9333315840  1.2075756659  1.2234166307  2.2949753829 -1.3122964302
-#&gt;  [76]  0.1964248362  0.1269481755  0.0006044533  1.0115869874  0.1407696905
-#&gt;  [81] -0.0423125859 -1.0175105925 -0.7704861901 -0.0680272239  0.0658472523
-#&gt;  [86]  0.9119777099  1.8459551273  0.7570070431 -0.6610489094  0.1146635066
-#&gt;  [91] -0.4192417437 -0.6305074010 -0.2280802144 -0.7868264230 -1.8992452805
-#&gt;  [96] -0.7696441410 -1.2730186286 -0.4626315568 -0.8699211674 -0.1090825305
-#&gt; [101] -0.0729589355 -1.2752291761 -0.0714993132 -0.5068596338  0.0602518482
-#&gt; [106]  0.9397780467 -1.3557052954 -0.3086795429 -0.0736675542 -0.9880935056
-#&gt; [111] -2.2394275131 -0.1111248843  0.0010495722 -0.1014678559 -0.2458562638
-#&gt; [116] -0.6169651651  0.6335435903  2.7480914083  0.4121673586  1.3053444181
-#&gt; [121]  1.0357631158  1.8208308603  0.5919705275  0.6312364256 -0.9654756217
-#&gt; [126] -2.1524864300
+#&gt;   [1] -0.4898606061 -1.2821938868 -0.9046825637 -0.1188628664 -0.1341943955
+#&gt;   [6]  0.7653209644  0.2351273792  0.0171245477  0.3047524696 -1.1693426929
+#&gt;  [11]  0.0792278583  0.1389754517 -0.1034624759 -0.3370842297  0.3110988247
+#&gt;  [16]  0.1809578919  0.6063865730  0.1827372111  0.4748603622  0.1493556283
+#&gt;  [21]  2.0323888733 -0.4065244790 -0.0484976130  0.5966832624 -0.7121949358
+#&gt;  [26] -0.4681955939 -0.4067855845  0.0763118538  1.5778089666 -0.0213205177
+#&gt;  [31]  0.4153366135 -0.6181257788  1.5710150666 -0.4889168755 -0.6975868866
+#&gt;  [36]  2.8736704068  0.0293201147 -0.2299245558 -0.5074023918 -0.3107316174
+#&gt;  [41]  0.0040065544  0.3722261171 -1.0535891330  0.0433498525  0.2062825008
+#&gt;  [46] -0.6344033289 -1.0333900478 -1.0037282464  0.1400302405  0.6852283189
+#&gt;  [51] -0.3569787946  0.9064627306  0.3550496832  0.4009327342  1.1722251732
+#&gt;  [56] -0.5882093511  0.0362166243  0.1670724296  0.3196225939  0.7366028167
+#&gt;  [61] -1.0515786490  1.0488723310 -1.3465565765 -0.9436796461  3.0214268716
+#&gt;  [66]  0.1992771104  0.1892685792 -0.3062366884  0.3521605187  0.2239147661
+#&gt;  [71] -0.9333315839  1.2075756661  1.2234166308  2.2949753830 -1.3122964301
+#&gt;  [76]  0.1964248362  0.1269481755  0.0006044534  1.0115869874  0.1407696906
+#&gt;  [81] -0.0423125858 -1.0175105924 -0.7704861900 -0.0680272239  0.0658472523
+#&gt;  [86]  0.9119777100  1.8459551274  0.7570070432 -0.6610489094  0.1146635067
+#&gt;  [91] -0.4192417436 -0.6305074010 -0.2280802144 -0.7868264230 -1.8992452804
+#&gt;  [96] -0.7696441409 -1.2730186285 -0.4626315568 -0.8699211673 -0.1090825304
+#&gt; [101] -0.0729589354 -1.2752291760 -0.0714993131 -0.5068596338  0.0602518483
+#&gt; [106]  0.9397780468 -1.3557052953 -0.3086795428 -0.0736675541 -0.9880935056
+#&gt; [111] -2.2394275131 -0.1111248842  0.0010495722 -0.1014678559 -0.2458562638
+#&gt; [116] -0.6169651651  0.6335435903  2.7480914085  0.4121673587  1.3053444182
+#&gt; [121]  1.0357631159  1.8208308604  0.5919705276  0.6312364257 -0.9654756217
+#&gt; [126] -2.1524864299
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -254,7 +254,7 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

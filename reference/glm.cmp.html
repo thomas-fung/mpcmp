@@ -140,20 +140,20 @@ generalized linear model with a log-link by using Fisher Scoring iteration.</p>
     </div>
 
     <pre class="usage"><span class='fu'>glm.cmp</span>(
-  <span class='no'>formula</span>,
-  <span class='kw'>formula_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>subset</span>,
-  <span class='no'>na.action</span>,
-  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gammastart</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>contrasts_mu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>contrasts_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>formula</span>,
+  formula_nu = <span class='kw'>NULL</span>,
+  <span class='kw'>data</span>,
+  offset = <span class='kw'>NULL</span>,
+  <span class='kw'>subset</span>,
+  <span class='kw'>na.action</span>,
+  betastart = <span class='kw'>NULL</span>,
+  gammastart = <span class='kw'>NULL</span>,
+  lambdalb = <span class='fl'>1e-10</span>,
+  lambdaub = <span class='fl'>1000</span>,
+  maxlambdaiter = <span class='fl'>1000</span>,
+  tol = <span class='fl'>1e-06</span>,
+  contrasts_mu = <span class='kw'>NULL</span>,
+  contrasts_nu = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -303,9 +303,9 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 368--370: Overdispersed Attendance data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>attendance</span>)
-<span class='no'>M.attendance</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>daysabs</span>~ <span class='no'>gender</span>+<span class='no'>math</span>+<span class='no'>prog</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>attendance</span>)
-<span class='no'>M.attendance</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span></div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -314,10 +314,10 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; 
 #&gt; Dispersion (nu): 0.0202
 #&gt; Degrees of Freedom: 313 Total (i.e. Null);  309 Residual
-#&gt; Null Deviance: 455.8327 
-#&gt; Residual Deviance: 377.4414 
+#&gt; Null Deviance: 455.8326 
+#&gt; Residual Deviance: 377.4413 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.attendance</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.attendance</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -341,17 +341,17 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Residual deviance: 377.44  on 309 degrees of freedom
 #&gt; 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>M.attendance</span>) <span class='co'># or gg_plot(M.attendance)</span></div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.attendance</span>) <span class='co'># or gg_plot(M.attendance)</span></div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>### Ribeiro et al. (2013): Varying dispersion as a function of covariates</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)
-<span class='no'>M.sit</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>ninsect</span> ~ <span class='no'>extract</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> ~<span class='no'>extract</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sitophilus</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.sit</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>sitophilus</span>)
+<span class='kw'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(formula = <span class='kw'>ninsect</span> <span class='op'>~</span> <span class='kw'>extract</span>, formula_nu = <span class='op'>~</span><span class='kw'>extract</span>, data = <span class='kw'>sitophilus</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.sit</span>)</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #&gt; 
 #&gt; Deviance Residuals: 
 #&gt;      Min        1Q    Median        3Q       Max  
-#&gt; -2.21084  -1.16849   0.07494   0.64152   1.72653  
+#&gt; -2.21085  -1.16849   0.07494   0.64152   1.72653  
 #&gt; 
 #&gt; Mean Model Coefficients:
 #&gt;               Estimate Std.Err Z value Pr(&gt;|z|)    
@@ -374,7 +374,6 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; 
 #&gt; AIC: 260.8279 
 #&gt; </div><div class='input'>
-
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -391,7 +390,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

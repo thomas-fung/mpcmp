@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Diagnostic for a <code>glm.cmp</code> Object — plot.cmp • mpcmp</title>
+<title>Plot Diagnostic for a glm.cmp Object — plot.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Plot Diagnostic for a <code>glm.cmp</code> Object — plot.cmp" />
+<meta property="og:title" content="Plot Diagnostic for a glm.cmp Object — plot.cmp" />
 <meta property="og:description" content="Eight plots (selectable by which) are currently available: 
 a plot of deviance residuals against fitted values, 
 a non-randomized PIT histogram, 
@@ -156,12 +156,12 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
-  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span>(<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfcol"</span>)) <span class='kw'>&lt;</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>which</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/dev.interactive.html'>dev.interactive</a></span>(),
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='no'>...</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
+  <span class='kw'>x</span>,
+  which = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
+  ask = <span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span>(<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfcol"</span>)) <span class='op'>&lt;</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>which</span>) <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/dev.interactive.html'>dev.interactive</a></span>(),
+  bins = <span class='fl'>10</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -215,15 +215,14 @@ distribution.</p>
 <code><a href='glm.cmp.html'>glm.cmp</a></code> and <code><a href='gg_plot.html'>gg_plot</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
-<span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
-    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
+<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
+    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
 
 <span class='co'>## The default plots are shown</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
-## The plots for the non-randomized PIT 
-# plot(M.bids, which = c(2,3))
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>)</div><div class='img'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'>## The plots for the non-randomized PIT </span>
+<span class='co'># plot(M.bids, which = c(2,3))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +238,7 @@ distribution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
