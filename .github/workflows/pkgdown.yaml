@@ -8,7 +8,8 @@ jobs:
   pkgdown:
     runs-on: macOS-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.TOKEN }}
+      EMAIL: ${{ secrets.EMAIL}}
     steps:
       - uses: actions/checkout@v2
 
@@ -21,8 +22,6 @@ jobs:
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-          git config --global user.email "thomas.fung.dr@gmail.com"
-          git config --global user.name "thomas-fung"
         shell: Rscript {0}
 
       - name: Cache R packages
