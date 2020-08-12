@@ -23,7 +23,7 @@ data(cottonbolls)
 \description{
 This data set gives the observed number of bolls produced by the cotton 
 plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
-to examine the effect of five defoliation levels (0%, 25%, 50%, 75% and 100%).
+to examine the effect of five defoliation levels (0\%, 25\%, 50\%, 75\% and 100\%).
 }
 \examples{
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data

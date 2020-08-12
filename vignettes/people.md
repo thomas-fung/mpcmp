@@ -1,11 +1,11 @@
 ---
-title: The <tt>`mpcmp`</tt> Team
+title: The `mpcmp` Team
 keywords: authors, mpcmp, contributors
 bibliography: 
 csl: apa-old-doi-prefix.csl
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The <tt>`mpcmp`</tt> Team}
+  %\VignetteIndexEntry{The `mpcmp` Team}
   %\VignetteEngine{knitr::knitr}
   %\usepackage[utf8]{inputenc}
 ---
@@ -32,7 +32,8 @@ citation("mpcmp")
 To cite the mpcmp package in publications use:
 
 Fung T, Alwan A, Wishart J, Huang A (2020). _mpcmp: Mean-Parametrizied
-Conway-Maxwell Poisson Regression_. R package version 0.3.4.
+Conway-Maxwell Poisson Regression_. R package version 0.3.4, <URL:
+https://cran.r-project.org/web/packages/mpcmp/index.html>.
 
 A BibTeX entry for LaTeX users is
 
@@ -41,5 +42,6 @@ A BibTeX entry for LaTeX users is
     author = {Thomas Fung and Aya Alwan and Justin Wishart and Alan Huang},
     year = {2020},
     note = {R package version 0.3.4},
+    url = {https://cran.r-project.org/web/packages/mpcmp/index.html},
   }
 ```
