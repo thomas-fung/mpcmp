@@ -77,10 +77,10 @@ test_that("Test sumamry",
 
 test_that("Test rstandard",
          {
-           expect_equal(unname(rstandard.cmp(M.attendance)[1]), 
-                        -0.2659678)
-           expect_equal(unname(rstandard.cmp(M.attendance, type = "pearson")[1]), 
-                        -0.2450951)
+           expect_equal(round(unname(rstandard.cmp(M.attendance)[1]), 5), 
+                        -0.26597)
+           expect_equal(round(unname(rstandard.cmp(M.attendance, type = "pearson")[1]), 5), 
+                        -0.2451)
          })
 
 test_that("Test influence",
