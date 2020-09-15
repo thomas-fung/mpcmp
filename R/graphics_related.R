@@ -345,7 +345,7 @@ compnormRandPIT <- function (object) {
 #' 
 #' The 'Scale-Location' plot uses the standardized deviance residuals while the 
 #' Residual-Leverage plot uses the standardized pearson residuals. They are given as 
-#' \emph{R[i]/sqrt(1-h.ii)} where h_ii are the diagonal entries of the hat matrix.  
+#' \eqn{R_i/\sqrt{1-h_{ii}}} where \eqn{h_{ii}} are the diagonal entries of the hat matrix.  
 #' 
 #' The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
 #' and 1. 
@@ -441,7 +441,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
   }
   if (show[6L]){
     dev.hold()
-    std.dev.res <- dev_res/sqrt(1-object$leverage)
+    std.dev.res <- rstandard.cmp(object, type = "deviance")
     res <- sqrt(abs(std.dev.res))
     plot(object$linear_predictors, res,
          main="Scale-Location", xlab = paste(c("Linear Predicted values", object$call)),
@@ -453,11 +453,10 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
     dev.flush()
   }
   if (any(show[7L:8L] == TRUE)) {
-    rk <- dim(object$x)[2]
-    h <- object$leverage
-    pear <- residuals.cmp(object,type="pearson")
-    std.pear <- pear/sqrt(1 - h)
-    cook <- (h * std.pear^2)/((1 - h) * rk)
+    rk <- object$rank
+    h <- hatvalues.cmp(object)
+    std.pear <- rstandard.cmp(object, type = "pearson")
+    cook <- cooks.distance.cmp(object)
     n <- length(cook)
     index.cook <- order(cook,decreasing = TRUE)[1:3]
   }
@@ -472,7 +471,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
   if (show[8L]){
     ylim <- extendrange(r = range(std.pear, na.rm = TRUE), f = 0.08)
     xlim <- extendrange(r = c(0,max(h, na.rm = TRUE)), f = 0.08)
-    plot(object$leverage, std.pear, main="Residuals vs Leverage",
+    plot(h, std.pear, main="Residuals vs Leverage",
          xlab= paste(c("Leverage", object$call)), ylab ="Std. Pearson resid.",
          xlim = xlim, ylim = ylim)
     abline(h = 0, v = 0, lty = 3, col = "gray")
@@ -537,7 +536,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' 
 #' The 'Scale-Location' plot uses the standardized deviance residuals while the 
 #' Residual-Leverage plot uses the standardized pearson residuals. They are given as 
-#' \emph{R[i]/sqrt(1-h.ii)} where h_ii are the diagonal entries of the hat matrix.  
+#' \eqn{R_i/\sqrt{1-h_{ii}}} where \eqn{h_{ii}} are the diagonal entries of the hat matrix.  
 #' 
 #' The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
 #' and 1. 
@@ -639,7 +638,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
     p[[show_count]] <- p_temp
   }
   if (show[6L]){
-    std_dev_res <- dev_res/sqrt(1-object$leverage)
+    std_dev_res <- rstandard.cmp(object, type = "deviance")
     res <- sqrt(abs(std_dev_res))
     index_res <- order(abs(res), decreasing = TRUE)[1:3]
     p_temp <- ggplot(data.frame(x = object$linear_predictors, y= res)) + 
@@ -660,11 +659,10 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
     p[[show_count]] <- p_temp
   }
   if (any(show[7L:8L] == TRUE)) {
-    rk <- dim(object$x)[2]
-    h <- object$leverage
-    pear <- residuals.cmp(object, type="pearson")
-    std_pear <- pear/sqrt(1 - h)
-    cook <- (h * std_pear^2)/((1 - h) * rk)
+    rk <- object$rank
+    h <- hatvalues.cmp(object)
+    std_pear <- rstandard.cmp(object, type = "pearson")
+    cook <- cooks.distance.cmp(object)
     n <- length(cook)
     index_cook <- order(cook,decreasing = TRUE)[1:3]
   }
@@ -691,7 +689,7 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
     ymult <- sqrt(rk * (1 - xmax)/xmax)
     cook_levels <- c(0.5,1)
     at_y <- sqrt(cook_levels) * ymult
-    p_temp <- ggplot(data.frame(h = object$leverage, 
+    p_temp <- ggplot(data.frame(h = h, 
                                 std_pear = std_pear,
                                 leg = "Cook's distance")) + 
       geom_point(aes(x = h, y = std_pear)) +

@@ -15,7 +15,7 @@
 
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 
-\item{evaluate}{logical; if \code{TRUE} evaluate the new call otherwise simply return 
+\item{evaluate}{logical; if \code{TRUE} evaluate the new call otherwise simply return
 the call}
 }
 \description{

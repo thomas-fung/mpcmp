@@ -146,6 +146,12 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   out$const_nu <- TRUE
   out$y <- y
   out$x <- X
+  out$family <- 
+    structure(list(family = 
+                     paste0("CMP(mu, ", 
+                            signif(nu, 
+                                   max(3, getOption("digits") - 4)),
+                            ")"), link = 'log'), class = "family")
   out$nobs <- n
   out$iter <- iter
   out$coefficients <- beta
@@ -161,8 +167,10 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   out$fitted_values <- fitted
   out$residuals <- y - fitted
   out$leverage <- h
+  names(out$leverage) <- 1:n
   out$d_res <- d_res
   out$variance_beta <- variance_beta
+  colnames(out$variance_beta) <- row.names(variance_beta)
   out$se_beta <- se_beta
   out$df_residuals <- df_residuals
   out$df_null <- n-1
@@ -175,9 +183,10 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
                             sum(dcomp(y, mu = mean(y), nu = nu, log.p = TRUE, 
                                       summax=summax, lambdalb = min(lambdalb),
                                       lambdaub = max(lambdaub))))
-  out$residuals_deviance <- 2*(sum(indsat_deviance) -
-                                 sum(dcomp(y, lambda = lambda, nu = nu, 
-                                           log.p = TRUE, summax=summax)))
+  out$deviance <- out$residual_deviance <- 
+    2*(sum(indsat_deviance) -
+         sum(dcomp(y, lambda = lambda, nu = nu, 
+                   log.p = TRUE, summax=summax)))
   names(out$coefficients) <-  labels(X)[[2]]
   class(out) <- "cmp"
   return(out)

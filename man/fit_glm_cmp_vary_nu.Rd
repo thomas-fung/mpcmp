@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_glm_cmp_vary_nu.R
 \name{fit_glm_cmp_vary_nu}
 \alias{fit_glm_cmp_vary_nu}
-\title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+\title{Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with varying dispersion.}
 \usage{
 fit_glm_cmp_vary_nu(
@@ -25,7 +25,7 @@ fit_glm_cmp_vary_nu(
 
 \item{S}{the design matrix for regressing the dispersion}
 
-\item{offset}{this can be used to specify an *a priori* known component to be included 
+\item{offset}{this can be used to specify an \emph{a priori} known component to be included
 in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector}
 
 \item{betastart}{starting values for the parameters in the linear predictor for mu.}
@@ -37,10 +37,10 @@ searched for lambda(s). The default value for lambdaub should be sufficient for 
 moderate size nu. If nu is large and required a larger \code{lambdaub}, the algorithm
 will scale up \code{lambdaub} accordingly.}
 
-\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
+\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve
 for lambda(s).}
 
-\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
+\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
 }
@@ -48,7 +48,7 @@ values is less than tol.}
 A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 }
 \description{
-Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with varying dispersion.
 }
 \examples{

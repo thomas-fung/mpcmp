@@ -19,7 +19,7 @@ A data frame with 126 observations on 14 variables.
 \item{size}{total book value of assets in billions of dollars}
 \item{takeover}{Indicator. 1 if the company was being taken over}
 \item{weeks}{time in weeks between the initial and final offers}
-\item{whtknght}{indicator variable for management invitation 
+\item{whtknght}{indicator variable for management invitation
 for friendly third-party bid}
 \item{sizesq}{book value squared}
 }
@@ -32,11 +32,11 @@ data(takeoverbids)
 }
 \description{
 This data set gives the number of bids received by 126 US firms that were successful
-targets of tender offers during the period 1978--1985, along with some explanatory 
+targets of tender offers during the period 1978--1985, along with some explanatory
 variables on the defensive actions taken by management of target firm, firm-specific
-characteristics and intervention taken by federal regulators. The \code{takeoverbids} 
+characteristics and intervention taken by federal regulators. The \code{takeoverbids}
 data frame has 126 observations on 14 variables. The descriptions below are taken from
- Sáez-Castillo and Conde-Sánchez (2013).
+Sáez-Castillo and Conde-Sánchez (2013).
 }
 \examples{
 
@@ -50,7 +50,7 @@ plot(M.bids) #or gg_plot(M.bids)
 
 }
 \references{
-Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series 
+Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series
 Expansions: with Applications. \emph{Journal of Applied Econometrics} \bold{12} 203--223.
 
 Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{http://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.

@@ -15,7 +15,7 @@
 Coefficients extracted from the object \code{object}.
 }
 \description{
-An accessor function used to extract model coefficients from a 'cmp' object.
+An function used to extract model coefficients from a 'cmp' object.
 \code{coefficients} is an alias for \code{coef}.
 }
 \seealso{

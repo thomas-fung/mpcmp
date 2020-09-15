@@ -15,26 +15,26 @@
 \arguments{
 \item{object}{an object class 'cmp', obtained from a call to \code{glm.cmp}.}
 
-\item{newdata}{optionally, a data frame in which to look for variables with which to 
+\item{newdata}{optionally, a data frame in which to look for variables with which to
 predict. If omitted, the fitted linear predictors are used.}
 
 \item{se.fit}{logical; indicating if standard errors are required.}
 
-\item{type}{the type of prediction required. The default is 'link' which is the scale 
-of the linear predictor i.e., a log scale; the alternative 'response' is on the scale 
+\item{type}{the type of prediction required. The default is 'link' which is the scale
+of the linear predictor i.e., a log scale; the alternative 'response' is on the scale
 of the response variable. The value of this argument can be abbreviated.}
 
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 }
 \value{
-If \code{se.fit = FALSE}, a vector of predictions. 
+If \code{se.fit = FALSE}, a vector of predictions.
 
 If \code{se.fit = TRUE}, a list with components
 \item{fit}{Predictions, as for se.fit = FALSE.}
 \item{se.fit}{Estimated standard errors.}
 }
 \description{
-This is a function for obtaining predictions and optionally estimates standard 
+This is a function for obtaining predictions and optionally estimates standard
 errors of those prediction from a fitted COM-Poisson regression object.
 }
 \details{

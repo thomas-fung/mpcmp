@@ -28,7 +28,7 @@ glm.cmp(
 
 \item{data}{an optional data frame containing the variables in the model}
 
-\item{offset}{this can be used to specify an *a priori* known component to be included
+\item{offset}{this can be used to specify an \emph{a priori} known component to be included
 in the linear predictor for mean during fitting. This should be \code{NULL} or a numeric vector
 of length equal to the number of cases.}
 
@@ -79,7 +79,7 @@ can be used to extract various useful features of the value
 returned by \code{glm.cmp}.
 
 The functions \code{LRTnu} and \code{cmplrtest} can be used to perform a likelihood ratio
-chi-squared test for nu = 1 and for nested COM-Poisson model respectively. 
+chi-squared test for nu = 1 and for nested COM-Poisson model respectively.
 
 An object class 'glm.cmp' is a list containing at least the following components:
 
@@ -97,6 +97,7 @@ An object class 'glm.cmp' is a list containing at least the following components
 \item{df_null}{the residual degrees of freedom for the null model}
 \item{null_deviance}{The deviance for the null model.
 The null model will include only the intercept.}
+\item{deviance; residual_deviance}{The residual deviance of the model}
 \item{y}{the \code{y} vector used.}
 \item{x}{the model matrix for mean}
 \item{s}{the model matrix for dispersion}
@@ -123,30 +124,30 @@ Currently, the COM-Poisson regression model allows constant dispersion and regre
 
 For the constant dispersion model, the model is
 
-Y_i ~ CMP(mu_i, nu),
+\deqn{Y_i ~ CMP(\mu_i, \nu),}
 
 where
 
-E(Y_i) = mu_i = exp(x_i^T beta),
+\deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
 
-and \emph{nu > 0} is the dispersion parameter.
+and \eqn{\nu > 0} is the dispersion parameter.
 
 The fitted COM-Poisson distribution is over- or under-dispersed
-if \emph{nu < 1} and \emph{nu > 1} respectively.
+if \eqn{\nu < 1} and \eqn{\nu > 1} respectively.
 
 For the varying dispersion model, the model is
 
-Y_i ~ CMP(mu_i, nu_i),
+\deqn{Y_i ~ CMP(\mu_i, \nu_i),}
 
 where
 
-E(Y_i) = mu_i = exp(x_i^T beta),
+\deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
 
 and dispersion parameters are model via
 
-nu_i = exp(s_i^T gamma).
+\deqn{\nu_i = exp(s_i^T \gamma),}
 
-where x_i and s_i are some covariates.
+where \eqn{x_i} and \eqn{s_i} are some covariates.
 }
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
@@ -176,5 +177,5 @@ dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 \code{\link{residuals.cmp}} and \code{\link{LRTnu}}.
 
 Additional examples may be found in \code{\link{fish}},
- \code{\link{takeoverbids}}, \code{\link{cottonbolls}}.
+\code{\link{takeoverbids}}, \code{\link{cottonbolls}}.
 }

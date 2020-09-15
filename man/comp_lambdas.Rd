@@ -33,11 +33,11 @@ comp_lambdas_fixed_ub(
 \item{lambdalb, lambdaub}{numeric; the lower and upper end points for the interval to be
 searched for lambda(s).}
 
-\item{maxlambdaiter}{numeric; the maximum number of iterations allowed to solve 
+\item{maxlambdaiter}{numeric; the maximum number of iterations allowed to solve
 for lambda(s).}
 
-\item{tol}{numeric; the convergence threshold. A lambda is said to satisfy the 
-mean constraint if the absolute difference between the calculated mean and the 
+\item{tol}{numeric; the convergence threshold. A lambda is said to satisfy the
+mean constraint if the absolute difference between the calculated mean and the
 corresponding mu values is less than tol.}
 
 \item{lambdaint}{numeric vector; initial gauss for lambda(s).}
@@ -46,15 +46,15 @@ corresponding mu values is less than tol.}
 }
 \value{
 Both \code{comp_lambdas} and \code{comp_lambdas_fixed_ub} returns the lambda value(s)
-that satisfies the mean constraint(s) as well as the current lambdaub value. 
-lambda value(s) returns by \code{comp_lambdas_fixed_ub} is bounded by the lambdaub 
-value. 
-\code{comp_lambdas} has the extra ability to scale up/down lambdaub to find the most 
+that satisfies the mean constraint(s) as well as the current lambdaub value.
+lambda value(s) returns by \code{comp_lambdas_fixed_ub} is bounded by the lambdaub
+value.
+\code{comp_lambdas} has the extra ability to scale up/down lambdaub to find the most
 appropriate lambda values.
 }
 \description{
-Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
-this function is used to find a lambda that can satisfy the mean constraint with a 
+Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu,
+this function is used to find a lambda that can satisfy the mean constraint with a
 combination of bisection and Newton-Raphson updates. The function is also vectorized but
 will only update those that have not converged.
 }

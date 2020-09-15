@@ -37,30 +37,30 @@
 #'
 #' For the constant dispersion model, the model is
 #'
-#' Y_i ~ CMP(mu_i, nu),
+#' \deqn{Y_i ~ CMP(\mu_i, \nu),}
 #'
 #' where
 #'
-#' E(Y_i) = mu_i = exp(x_i^T beta),
+#' \deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
 #'
-#' and \emph{nu > 0} is the dispersion parameter.
+#' and \eqn{\nu > 0} is the dispersion parameter.
 #'
 #' The fitted COM-Poisson distribution is over- or under-dispersed
-#' if \emph{nu < 1} and \emph{nu > 1} respectively.
+#' if \eqn{\nu < 1} and \eqn{\nu > 1} respectively.
 #'
 #' For the varying dispersion model, the model is
 #'
-#' Y_i ~ CMP(mu_i, nu_i),
+#' \deqn{Y_i ~ CMP(\mu_i, \nu_i),}
 #'
 #' where
 #'
-#' E(Y_i) = mu_i = exp(x_i^T beta),
+#' \deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
 #'
 #' and dispersion parameters are model via
 #'
-#' nu_i = exp(s_i^T gamma).
+#' \deqn{\nu_i = exp(s_i^T \gamma),}
 #'
-#' where x_i and s_i are some covariates.
+#' where \eqn{x_i} and \eqn{s_i} are some covariates.
 #' @return
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm}
 #' or \code{glm.nb}.
@@ -100,6 +100,7 @@
 #' \item{df_null}{the residual degrees of freedom for the null model}
 #' \item{null_deviance}{The deviance for the null model.
 #' The null model will include only the intercept.}
+#' \item{deviance; residual_deviance}{The residual deviance of the model}
 #' \item{y}{the \code{y} vector used.}
 #' \item{x}{the model matrix for mean}
 #' \item{s}{the model matrix for dispersion}
@@ -247,6 +248,6 @@ glm.cmp <- function(formula,
   out$terms_mu <- mt_mu
   out$model_mu <- mf_mu
   out$contrasts_mu <- attr(X, "contrasts")
-  out$na.action <- attr(mf, "na.action")
+  out$na.action <- attr(mf_mu, "na.action")
   return(out)
 }

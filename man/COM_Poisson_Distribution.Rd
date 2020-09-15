@@ -66,45 +66,45 @@ rcomp(
 
 \item{mu, nu}{mean and dispersion parameters. Must be strictly positive.}
 
-\item{lambda}{an alternative way than mu to parametrized the distribution. 
+\item{lambda}{an alternative way than mu to parametrized the distribution.
 Must be strictly positive}
 
-\item{log.p}{logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as 
+\item{log.p}{logical; if \code{TRUE}, probabilities/densities \eqn{p} are returned as
 \eqn{log(p)}.}
 
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s).}
 
-\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
+\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve
 for lambda(s).}
 
-\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
-mean constraint if the absolute difference between the calculated mean and mu 
+\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the
+mean constraint if the absolute difference between the calculated mean and mu
 is less than tol.}
 
 \item{summax}{numeric; maximum number of terms to be considered in the truncated sum.}
 
-\item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)}, 
+\item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \eqn{P(X \le x)},
 otherwise, \eqn{P(X>x)}.}
 
 \item{p}{vector of probabilities}
 
-\item{n}{number of observations. If \code{length(n)} > 1, the length is taken to 
+\item{n}{number of observations. If \code{length(n)} > 1, the length is taken to
 be the number required.}
 }
 \value{
-\code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the quantile function, and \code{rcomp} generates random deviates. 
+\code{dcomp} gives the density, \code{pcomp} gives the distribution function, \code{qcomp} gives the quantile function, and \code{rcomp} generates random deviates.
 
 Invalid arguments will result in return value \code{NaN}, with a warning.
 
-The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum 
+The length of the results is determined by \code{n} for \code{rcomp}, and is the maximum
 of the lengths of the numerical arguments for the other functions.
 
-The numerical arguments other than \code{n} are recycled to the length of the results. 
+The numerical arguments other than \code{n} are recycled to the length of the results.
 Only the first argument of the logical arguments are used.
 }
 \description{
-Density, distribution function, quantile function and random generation for the 
+Density, distribution function, quantile function and random generation for the
 Conway-Maxwell-Poisson distribution with parameter \code{mu} and \code{nu}
 }
 \examples{

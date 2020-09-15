@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with the `mpcmp` package (under construction)"
+title: "Getting Started with the `mpcmp` package"
 author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -144,6 +144,17 @@ gg_plot(M.attendance)
 ```
 
 Please refer to `?gg_plot` to see what diagnostic plots are available. 
+
+The `mpcmp` package also supports `broom` `tidier` method. 
+```{r}
+tidy(M.attendance)
+```
+This means "cmp" objects can take advantage of any packages that required `broom` support such as the `modelsummary` package: 
+```{r}
+M_poisson <- glm(daysabs~ gender+math+prog, data=attendance, family = poisson)
+M_nb <- MASS::glm.nb(daysabs~ gender+math+prog, data=attendance)
+modelsummary::modelsummary(list(M.attendance, M_poisson, M_nb))
+```
 
 We also implemented a bunch of commonly used methods for "cmp" objects: 
 ```{r}

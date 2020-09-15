@@ -201,3 +201,44 @@ update.cmp <- function(object, formula., formula_nu., ...,
   else call
 }
 
+
+#' Confidence Intervals for CMP Model Parameters
+#'
+#' Computes confidence intervals for one or more parameters in a
+#' fitted model.
+#' @param object an object class 'cmp', obtained from a call to \code{\link{glm.cmp}}.
+#' @param parm a specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names (comparing to those provided by \code{\link{coef}()}) . If missing, all parameters are considered. 
+#' @param level the confidence level required.
+#' @param ... other arguments passed to or from other methods  (currently unused).
+#'
+#' @return
+#' A matrix (or vector) with columns giving lower and upper confidence limits for each parameter. These will be labelled as (1-level)/2 and 1 - (1-level)/2 in % (by default 2.5% and 97.5%).
+#' @export
+#'
+#' @examples
+#' data(attendance)
+#' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+#' confint(M.attendance)
+#' confint(M.attendance, parm = "math", level = 0.9)
+#' 
+confint.cmp <- function(object, parm, level = 0.95, ...){
+  cf <- coef(object)
+  if (object$const_nu){
+    ses <- object$se_beta
+  } else {
+    ses <- c(object$se_beta, object$se_gamma)
+  }
+  pnames <- names(ses) <- names(cf)
+  if (missing(parm)) 
+    parm <- pnames
+  else if (is.numeric(parm)) 
+    parm <- pnames[parm]
+  a <- (1 - level)/2
+  a <- c(a, 1 - a)
+  fac <- qnorm(a)
+  pct <- format.perc(a, 3)
+  ci <- array(NA_real_, dim = c(length(parm), 2L), 
+              dimnames = list(parm, pct))
+  ci[] <- cf[parm] + ses[parm] %o% fac
+  ci
+}

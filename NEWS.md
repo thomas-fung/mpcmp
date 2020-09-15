@@ -1,3 +1,8 @@
+# mpcmp 0.3.5
+  * Added `broom` `tidier` methods support. Specifically added method for `tidy()`, `glance()` and `augment()`.   
+  * `summary()` was rewritten in order to support `tidier` methods.
+  * Also added method for `vcov()`, `confint()`, `influence()`, `hatvalues()`, `rstandard()`, `cooks.distance()`.
+
 # mpcmp 0.3.4
   * Added Github action support.  
   * From this version onward, `glm.cmp()` no longer uses `getnu()`. 

@@ -3,9 +3,9 @@
 \name{logZ_c}
 \alias{logZ_c}
 \title{Calculate the Normalizing Constant in log scale for COM-Poisson distribution
- 
-The calculation of the function \code{logZ} will be performed here. This function is 
-used to approximate the normalizing constant for COM-Poisson distributions via 
+
+The calculation of the function \code{logZ} will be performed here. This function is
+used to approximate the normalizing constant for COM-Poisson distributions via
 truncation. The standard COM-Poisson parametrization is being used here.}
 \usage{
 logZ_c(log_lambda, nu, summax)
@@ -21,10 +21,10 @@ logZ_c(log_lambda, nu, summax)
 It is assumed that vectors log_lambda & nu are of equal length.
 }
 \details{
-This function was originally purposed in the \code{cmpreg} package of Ribeiro Jr, 
+This function was originally purposed in the \code{cmpreg} package of Ribeiro Jr,
 Zeviani & Demétrio (2019).
 }
 \references{
-Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
+Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}:
 Reparametrized COM-Poisson Regression Models. R package version 0.0.1.
 }

@@ -10,7 +10,7 @@ comp_mu_loglik(param, y, xx, offset, summax)
 comp_mu_neg_loglik_log_nu_only(log_nu, mu, y, summax)
 }
 \arguments{
-\item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 
+\item{param}{numeric vector: the model coefficients & the current value of \code{nu}.
 It is assumed that \code{nu} is in the last position of \code{param}.}
 
 \item{y}{numeric vector: response variable}

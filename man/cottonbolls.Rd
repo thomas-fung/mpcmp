@@ -14,16 +14,16 @@ A data frame with 125 observations on 4 variables.
 }
 }
 \source{
-Supplementary Content of Zeviani et al. (2014): 
+Supplementary Content of Zeviani et al. (2014):
 \url{http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014}
 }
 \usage{
 data(cottonbolls)
 }
 \description{
-This data set gives the observed number of bolls produced by the cotton 
-plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
-to examine the effect of five defoliation levels (0\%, 25\%, 50\%, 75\% and 100\%).
+This data set gives the observed number of bolls produced by the cotton
+plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll;
+to examine the effect of five defoliation levels (0\\%, 25\\%, 50\\%, 75\\% and 100\\%).
 }
 \examples{
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
@@ -36,8 +36,8 @@ summary(M.bolls)
 
 }
 \references{
-Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014). 
-The Gamma-count distribution in the analysis of experimental underdispersed data. 
+Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014).
+The Gamma-count distribution in the analysis of experimental underdispersed data.
 \emph{Journal of Applied Statistics} \bold{41}, 2616--26.
 }
 \keyword{datasets}

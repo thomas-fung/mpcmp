@@ -167,6 +167,9 @@ fit_glm_cmp_vary_nu <- function(y=y, X = X, S = S, offset = offset,
   out$x <- X
   out$nobs <- n
   out$iter <- iter
+  out$family <- 
+    structure(list(family = "CMP(mu, nu)", link = 'log'), 
+              class = "family")
   out$coefficients <- c(beta, gamma)
   out$coefficients_beta <- beta
   out$rank <- length(beta)
@@ -184,9 +187,12 @@ fit_glm_cmp_vary_nu <- function(y=y, X = X, S = S, offset = offset,
   out$fitted_values <- fitted
   out$residuals <- y - fitted
   out$leverage <- h
+  names(out$leverage) <- 1:n
   out$d_res <- d.res
   out$variance_beta <- variance_beta
+  colnames(out$variance_beta) <- row.names(variance_beta)
   out$variance_gamma <- variance_gamma
+  colnames(out$variance_gamma) <- row.names(variance_gamma)
   out$se_beta <- se_beta
   out$se_gamma <- se_gamma
   out$df_residuals <- df.residuals
@@ -195,9 +201,10 @@ fit_glm_cmp_vary_nu <- function(y=y, X = X, S = S, offset = offset,
                             sum(dcomp(y, mu = mean(y), nu = nu, log.p = TRUE, 
                                       summax=summax, lambdalb = min(lambdalb),
                                       lambdaub = max(lambdaub))))
-  out$residuals_deviance <- 2*(sum(indsat.deviance) -
-                                 sum(dcomp(y, lambda = lambda, nu = nu, 
-                                           log.p = TRUE, summax=summax)))
+  out$deviance <- out$residual_deviance <- 
+    2*(sum(indsat.deviance) -
+         sum(dcomp(y, lambda = lambda, nu = nu, 
+                   log.p = TRUE, summax=summax)))
   names(out$coefficients_beta) <-  labels(X)[[2]]
   names(out$coefficients_gamma) <-  labels(S)[[2]]
   names(out$coefficients) <- c(paste0("beta_", names(out$coefficients_beta)), paste0("gamma_", names(out$coefficients_gamma)))

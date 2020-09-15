@@ -18,8 +18,8 @@
 Residuals extracted from the object \code{object}.
 }
 \description{
-\code{residuals} is a generic function which extracts model residuals from objects 
-returned by the modelling function \code{glm.comp}. \code{resid} is an alias for 
+\code{residuals} is a generic function which extracts model residuals from objects
+returned by the modelling function \code{glm.comp}. \code{resid} is an alias for
 \code{residuals} .
 }
 \seealso{

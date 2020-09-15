@@ -16,27 +16,27 @@ A list consisting of two elements:
 \item{rdMid}{the midpoints of the predictive probability intervals}
 }
 \description{
-A function to create the normal conditional (randomized) quantile residuals. 
+A function to create the normal conditional (randomized) quantile residuals.
 The majority of the code and descriptions are taken from Dunsmuir and Scott (2015).
 }
 \details{
-The function \code{compPredProb} produces the non-randomized probability integral 
-transform(PIT). It returns estimates of the cumulative predictive probabilities as 
-upper and lower bounds of a collection of intervals. If the model is correct, a 
-histogram drawn using these estimated probabilities should resemble a histogram 
-obtained from a sample from the uniform distribution. 
+The function \code{compPredProb} produces the non-randomized probability integral
+transform(PIT). It returns estimates of the cumulative predictive probabilities as
+upper and lower bounds of a collection of intervals. If the model is correct, a
+histogram drawn using these estimated probabilities should resemble a histogram
+obtained from a sample from the uniform distribution.
 
-This function aims to produce observations which instead resemble a sample from 
-a normal distribution. Such a sample can then be examined by the usual tools for 
+This function aims to produce observations which instead resemble a sample from
+a normal distribution. Such a sample can then be examined by the usual tools for
 checking normality, such as histograms and normal Q-Q plots.
 
-For each of the intervals produced by \code{compPredProb}, a random uniform observation 
+For each of the intervals produced by \code{compPredProb}, a random uniform observation
 is generated, which is then converted to a normal observation by applying the inverse
-standard normal distribution function (using \code{qnorm}). The vector of these values 
-is returned by the function in the list element \code{rt}. In addition non-random 
-observations which should appear similar to a sample from a normal distribution 
+standard normal distribution function (using \code{qnorm}). The vector of these values
+is returned by the function in the list element \code{rt}. In addition non-random
+observations which should appear similar to a sample from a normal distribution
 are obtained by applying \code{qnorm} to the mid-points of the predictive distribution
-intervals. The vector of these values is returned by the function in the list element 
+intervals. The vector of these values is returned by the function in the list element
 \code{rtMid}.
 }
 \examples{
@@ -53,6 +53,6 @@ Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journa
 Computational and Graphical Statistics}, \bold{5}, 236--244.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software},
 \strong{67}, 1--36.
 }

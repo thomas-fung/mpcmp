@@ -19,13 +19,13 @@ A numeric value with the corresponding AIC (or BIC, or ..., depends on k).
 }
 \description{
 A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
-value extracted from \code{\link{logLik.cmp}}, according to the formula 
-\emph{-2*log-likelihood + k*npar}, where \emph{npar} represents the number of parameters 
-in the fitted model, and \emph{k=2} for the usual AIC or \emph{k=log(n)} (\emph{n} being 
+value extracted from \code{\link{logLik.cmp}}, according to the formula
+\emph{-2\emph{log-likelihood + k}npar}, where \emph{npar} represents the number of parameters
+in the fitted model, and \emph{k=2} for the usual AIC or \emph{k=log(n)} (\emph{n} being
 the number of observations) for the so-called BIC (Bayesian Information Criterion).
 }
 \details{
-When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or 
+When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or
 BIC, the better the fit.
 }
 \seealso{

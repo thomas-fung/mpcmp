@@ -12,9 +12,9 @@ LRTnu(object, digits = 3)
 \item{digits}{numeric; minimum number of significant digits to be used for most numbers.}
 }
 \description{
-Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model. 
-The test statistics is calculated as \emph{2*(llik- llik_0)} where \emph{llik} and 
-\emph{llik_0} are the log-likelihood of a COM-Poisson and Poisson model respectively.  
+Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model.
+The test statistics is calculated as \emph{2*(llik- llik_0)} where \emph{llik} and
+\emph{llik_0} are the log-likelihood of a COM-Poisson and Poisson model respectively.
 The test statistic has 1 degrees of freedom.
 }
 \examples{
@@ -24,6 +24,6 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 LRTnu(M.bids)
 }
 \references{
-Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
+Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }

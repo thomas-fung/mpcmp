@@ -19,7 +19,7 @@ getnu(
 )
 }
 \arguments{
-\item{param}{numeric vector: the model coefficients & the current value of \code{nu}. 
+\item{param}{numeric vector: the model coefficients & the current value of \code{nu}.
 It is assumed that \code{nu} is in the last position of \code{param}.}
 
 \item{y}{numeric vector: response variable}
@@ -30,16 +30,16 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 
 \item{llstart}{numeric: current log-likelihood value}
 
-\item{fsscale}{numeric: a scaling factor (generally >1) for the 
+\item{fsscale}{numeric: a scaling factor (generally >1) for the
 relaxed fisher scoring algorithm}
 
 \item{lambdalb, lambdaub}{numeric: the lower and upper end points for the interval to be
 searched for lambda(s).}
 
-\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve 
+\item{maxlambdaiter}{numeric: the maximum number of iterations allowed to solve
 for lambda(s).}
 
-\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the 
+\item{tol}{numeric: the convergence threshold. A lambda is said to satisfy the
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.}
 
@@ -52,10 +52,10 @@ List containing the following:
 \item{fsscale}{the final scaling factor used}
 }
 \description{
-A function that use the arguments of a \code{glm.cmp} call to generate a better initial 
+A function that use the arguments of a \code{glm.cmp} call to generate a better initial
 \code{nu} estimate.
 }
 \details{
-From version 0.3.4, this function is no longer being used as part of the estimation algorithm 
+From version 0.3.4, this function is no longer being used as part of the estimation algorithm
 and this function will be defunct in our next update.
 }

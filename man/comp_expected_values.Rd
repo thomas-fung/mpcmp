@@ -28,11 +28,11 @@ comp_variances_logfactorialy(lambda, nu, log.Z, summax = 100)
 default is to sum to 100.}
 }
 \value{
-\code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}. 
+\code{comp_mean_logfactorialy} gives the mean of \emph{log(Y!)}.
 
 \code{comp_mean_ylogfactorialy} gives the mean of \emph{ylog(Y!)}.
 
-\code{comp_means} gives the mean of \emph{Y}. 
+\code{comp_means} gives the mean of \emph{Y}.
 
 \code{comp_variances} gives the variance of \emph{Y}.
 
@@ -40,7 +40,7 @@ default is to sum to 100.}
 }
 \description{
 Functions to approximate the various expected values for the COM-Poisson distribution
-via truncation.  The standard COM-Poisson parametrization is being used here. 
-The lambda and nu values are recycled to match the length 
+via truncation.  The standard COM-Poisson parametrization is being used here.
+The lambda and nu values are recycled to match the length
 of the longer one and that would determine the length of the results.
 }

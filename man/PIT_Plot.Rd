@@ -32,13 +32,13 @@ qqcompPIT(
 \arguments{
 \item{object}{an object class "cmp", obtained from a call to \code{glm.cmp}.}
 
-\item{bins}{numeric; the number of bins shown in the PIT histogram or the 
+\item{bins}{numeric; the number of bins shown in the PIT histogram or the
 PIT Q-Q plot.}
 
-\item{line}{logical; if \code{TRUE} (default), the line for displaying the standard 
+\item{line}{logical; if \code{TRUE} (default), the line for displaying the standard
 uniform distribution will be shown for the purpose of comparison.}
 
-\item{colLine}{numeric or character: the colour of the line for comparison 
+\item{colLine}{numeric or character: the colour of the line for comparison
 in PIT histogram.}
 
 \item{colHist}{numeric or character; the colour of the histogram for PIT.}
@@ -53,25 +53,25 @@ in PIT histogram.}
 
 \item{col2}{numeric or character; the colour of the theoretical uniform Q-Q plot in PIT.}
 
-\item{lty1}{integer or character string: the line types for the sample 
+\item{lty1}{integer or character string: the line types for the sample
 uniform Q-Q plot in PIT, see par(lty = .).}
 
-\item{lty2}{an integer or character string: the line types for the theoretical uniform 
+\item{lty2}{an integer or character string: the line types for the theoretical uniform
 Q-Q plot in PIT, see par(lty = .).}
 
 \item{type}{1-character string; the type of plot for the sample uniform Q-Q plot in PIT.}
 }
 \description{
-Two plots for the non-randomized PIT are currently available for checking the 
-distributional assumption of the fitted CMP model: the PIT histogram, and 
+Two plots for the non-randomized PIT are currently available for checking the
+distributional assumption of the fitted CMP model: the PIT histogram, and
 the uniform Q-Q plot for PIT.
 }
 \details{
 The histogram and the Q-Q plot are used to compare the fitted profile with a standard
-uniform distribution. If they match relatively well, it means the CMP distribution 
-is appropriate for the data. 
+uniform distribution. If they match relatively well, it means the CMP distribution
+is appropriate for the data.
 
-The \code{gg_histcompPIT} and \code{gg_qqcompPIT} functions 
+The \code{gg_histcompPIT} and \code{gg_qqcompPIT} functions
 would provide the same two plots but in ggplot format.
 }
 \examples{
@@ -82,10 +82,10 @@ Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
 
 Dunsmuir, W.T.M. and Scott, D.J. (2015). The \code{glarma} Package for Observation-Driven
-Time Series Regression of Counts. \emph{Journal of Statistical Software}, 
+Time Series Regression of Counts. \emph{Journal of Statistical Software},
 \strong{67}, 1--36.
 }
 \seealso{
-\code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}}, 
+\code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}},
 \code{\link{plot.cmp}} and \code{\link{gg_plot}}.
 }

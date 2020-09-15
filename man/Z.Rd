@@ -11,14 +11,14 @@ Z(lambda, nu, log.z = FALSE, summax)
 
 \item{nu}{dispersion parameter, straightly positive}
 
-\item{log.z}{logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as 
+\item{log.z}{logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as
 \eqn{log(Z)}.}
 
 \item{summax}{maximum number of terms to be considered in the truncated sum}
 }
 \description{
 A function to approximate the normalizing constant for COM-Poisson distributions
-via truncation. The standard COM-Poisson parametrization is being used here. 
+via truncation. The standard COM-Poisson parametrization is being used here.
 Notice that the sum is hard coded to truncate at 100 so the approximation will be quite
 bad if the COM-Poisson has a large rate or mean.
 }

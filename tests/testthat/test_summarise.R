@@ -3,6 +3,7 @@ library(mpcmp)
 data("attendance")
 M.attendance <- glm.cmp(daysabs~ gender+math+prog, 
                         data=attendance)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 
 test_that("Test residuals", 
           { 
@@ -62,6 +63,69 @@ test_that("Test print",
 
 test_that("Test sumamry",
           {
-            expect_equal(capture_output_lines(summary(M.attendance))[24], 
+            expect_equal(capture_output_lines(print(summary(M.attendance)))[24], 
                          "AIC: 1739.026 ")
+            expect_is(summary(M.attendance)$coefficients, "matrix")
+            expect_vector(as.vector(summary(M.attendance)$coefficients), 
+                          ptype = numeric(), size = 20)
+            expect_is(summary(M.sit)$coefficients, "matrix")
+            expect_is(summary(M.sit)$coef.table_beta, "matrix")
+            expect_is(summary(M.sit)$coef.table_gamma, "matrix")
+            expect_equal(capture_output_lines(print(summary(M.sit)))[20],
+                         "extractLeaf    -0.3831  0.6509  -0.589    0.556")
           })
+
+test_that("Test rstandard",
+         {
+           expect_equal(unname(rstandard.cmp(M.attendance)[1]), 
+                        -0.2659678)
+           expect_equal(unname(rstandard.cmp(M.attendance, type = "pearson")[1]), 
+                        -0.2450951)
+         })
+
+test_that("Test influence",
+         {
+           infl <- influence.cmp(M.attendance)
+           expect_is(infl, class = "list")
+           expect_equal(unname(infl$h[1]), 0.01152283)
+           expect_equal(unname(round(infl$dev_res[1],4)), -0.2644)
+           expect_equal(unname(round(infl$pear_res[1],4)), -0.2437)
+         })
+
+test_that("Test hatvalues",
+          {
+            expect_equal(unname(hatvalues.cmp(M.attendance)[1]),  0.01152283)
+            expect_length(hatvalues.cmp(M.attendance), 314)
+          })
+
+test_that("Test cooks.distance",
+          {
+            expect_equal(unname(cooks.distance.cmp(M.attendance)[1]), 0.0001400528)
+            expect_length(cooks.distance.cmp(M.attendance), 314)
+          })
+
+test_that("Test vcov",
+          {
+            expect_is(vcov(M.attendance), class = "matrix")
+            expect_is(vcov(M.sit), class = "list")
+          })
+
+test_that("Test broom",
+          {
+            expect_named(tidy(M.sit), 
+                         expected = c("parameter", "term", "estimate", 
+                                      "std.error", "statistic", 
+                                      "p.value"))
+            expect_named(tidy(M.attendance), 
+                         expected = c("term", "estimate", 
+                                      "std.error", "statistic", 
+                                      "p.value"))
+            expect_length(glance(M.attendance), 8)
+            expect_is(glance(M.attendance), class = "tbl_df")
+            expect_length(glance(M.sit), 8)
+            expect_is(glance(M.sit), class = "tbl_df")
+            expect_is(augment(M.attendance), class = "tbl_df")
+            expect_length(augment(M.attendance), 9)
+            expect_length(augment(M.sit), 9)
+          })
+
