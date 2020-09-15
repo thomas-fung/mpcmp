@@ -47,15 +47,15 @@
 
 
 <meta property="og:title" content="Plot Diagnostic for a glm.cmp Object — plot.cmp" />
-<meta property="og:description" content="Eight plots (selectable by which) are currently available: 
-a plot of deviance residuals against fitted values, 
-a non-randomized PIT histogram, 
-a uniform Q-Q plot for non-randomized PIT, 
-a histogram of the normal randomized residuals, 
-a Q-Q plot of the normal randomized residuals, 
+<meta property="og:description" content="Eight plots (selectable by which) are currently available:
+a plot of deviance residuals against fitted values,
+a non-randomized PIT histogram,
+a uniform Q-Q plot for non-randomized PIT,
+a histogram of the normal randomized residuals,
+a Q-Q plot of the normal randomized residuals,
 a Scale-Location plot of sqrt(| residuals |) against fitted values
 a plot of Cook's distances versus row labels
-a plot of pearson residuals against leverage. 
+a plot of pearson residuals against leverage.
 By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -89,7 +89,7 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -143,15 +143,15 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
     </div>
 
     <div class="ref-description">
-    <p>Eight plots (selectable by <code>which</code>) are currently available: 
-a plot of deviance residuals against fitted values, 
-a non-randomized PIT histogram, 
-a uniform Q-Q plot for non-randomized PIT, 
-a histogram of the normal randomized residuals, 
-a Q-Q plot of the normal randomized residuals, 
+    <p>Eight plots (selectable by <code>which</code>) are currently available:
+a plot of deviance residuals against fitted values,
+a non-randomized PIT histogram,
+a uniform Q-Q plot for non-randomized PIT,
+a histogram of the normal randomized residuals,
+a Q-Q plot of the normal randomized residuals,
 a Scale-Location plot of sqrt(| residuals |) against fitted values
 a plot of Cook's distances versus row labels
-a plot of pearson residuals against leverage. 
+a plot of pearson residuals against leverage.
 By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.</p>
     </div>
 
@@ -173,7 +173,7 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
     </tr>
     <tr>
       <th>which</th>
-      <td><p>if a subset of plots is required, specify a subset of the numbers 1:8. 
+      <td><p>if a subset of plots is required, specify a subset of the numbers 1:8.
 See 'Details' below.</p></td>
     </tr>
     <tr>
@@ -182,7 +182,7 @@ See 'Details' below.</p></td>
     </tr>
     <tr>
       <th>bins</th>
-      <td><p>numeric; the number of bins shown in the PIT histogram or the 
+      <td><p>numeric; the number of bins shown in the PIT histogram or the
 PIT Q-Q plot.</p></td>
     </tr>
     <tr>
@@ -193,25 +193,25 @@ PIT Q-Q plot.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
-the absolute standardized deviance residuals (<em>sqrt|E|</em>) in order to diminish 
+    <p>The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of
+the absolute standardized deviance residuals (<em>sqrt|E|</em>) in order to diminish
 skewness is much less skewed than than <em>|E|</em> for Gaussian zero-mean E.</p>
-<p>The 'Scale-Location' plot uses the standardized deviance residuals while the 
-Residual-Leverage plot uses the standardized pearson residuals. They are given as 
-<em>R[i]/sqrt(1-h.ii)</em> where h_ii are the diagonal entries of the hat matrix.</p>
-<p>The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
+<p>The 'Scale-Location' plot uses the standardized deviance residuals while the
+Residual-Leverage plot uses the standardized pearson residuals. They are given as
+\(R_i/\sqrt{1-h_{ii}}\) where \(h_{ii}\) are the diagonal entries of the hat matrix.</p>
+<p>The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5
 and 1.</p>
-<p>There are two plots based on the non-randomized probability integral transformation (PIT) 
-using <code><a href='nrPIT.html'>compPIT</a></code>. These are a histogram and a uniform Q-Q plot. If the 
-model assumption is appropriate, these plots should reflect a sample obtained 
+<p>There are two plots based on the non-randomized probability integral transformation (PIT)
+using <code><a href='nrPIT.html'>compPIT</a></code>. These are a histogram and a uniform Q-Q plot. If the
+model assumption is appropriate, these plots should reflect a sample obtained
 from a uniform distribution.</p>
-<p>There are also two plots based on the normal randomized residuals calculated 
+<p>There are also two plots based on the normal randomized residuals calculated
 using <code><a href='rPIT.html'>compnormRandPIT</a></code>. These are a histogram and a normal Q-Q plot. If the model
 assumption is appropriate, these plots should reflect a sample obtained from a normal
 distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='nrPIT.html'>compPIT</a></code>, <code><a href='rPIT.html'>compnormRandPIT</a></code>, 
+    <div class='dont-index'><p><code><a href='nrPIT.html'>compPIT</a></code>, <code><a href='rPIT.html'>compnormRandPIT</a></code>,
 <code><a href='glm.cmp.html'>glm.cmp</a></code> and <code><a href='gg_plot.html'>gg_plot</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -220,9 +220,11 @@ distribution.</p>
     <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
 
 <span class='co'>## The default plots are shown</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>)</div><div class='img'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>)
+</div><div class='img'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## The plots for the non-randomized PIT </span>
-<span class='co'># plot(M.bids, which = c(2,3))</span></div></pre>
+<span class='co'># plot(M.bids, which = c(2,3))</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -238,7 +240,7 @@ distribution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

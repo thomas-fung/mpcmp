@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp • mpcmp</title>
+<title>Confidence Intervals for CMP Model Parameters — confint.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp" />
-<meta property="og:description" content="An accessor function used to extract the model frame from a 'cmp' object." />
+<meta property="og:title" content="Confidence Intervals for CMP Model Parameters — confint.cmp" />
+<meta property="og:description" content="Computes confidence intervals for one or more parameters in a
+fitted model." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -128,24 +129,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the Model Frame from a COM-Poisson Model Fit</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>model.frame.cmp.Rd</code></div>
+    <h1>Confidence Intervals for CMP Model Parameters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/Inference.R'><code>R/Inference.R</code></a></small>
+    <div class="hidden name"><code>confint.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An accessor function used to extract the model frame from a 'cmp' object.</p>
+    <p>Computes confidence intervals for one or more parameters in a
+fitted model.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>formula</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>object</span>, <span class='kw'>parm</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>formula</th>
-      <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
+      <th>object</th>
+      <td><p>an object class 'cmp', obtained from a call to <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>parm</th>
+      <td><p>a specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names (comparing to those provided by <code><a href='https://rdrr.io/r/stats/coef.html'>coef</a>()</code>) . If missing, all parameters are considered.</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>the confidence level required.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -155,11 +165,21 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The method will return the saved <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> used when fitting the cmp model.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>A matrix (or vector) with columns giving lower and upper confidence limits for each parameter. These will be labelled as (1-level)/2 and 1 - (1-level)/2 in % (by default 2.5% and 97.5%).</p>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='residuals.cmp.html'>residuals.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>M.attendance</span>)
+</div><div class='output co'>#&gt;                      2.5 %       97.5 %
+#&gt; (Intercept)     2.34145410  3.087836394
+#&gt; gendermale     -0.44432501  0.014885301
+#&gt; math           -0.01099927 -0.001646777
+#&gt; progAcademic   -0.75758417 -0.093060258
+#&gt; progVocational -1.62526645 -0.882524655</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span>(<span class='kw'>M.attendance</span>, parm = <span class='st'>"math"</span>, level = <span class='fl'>0.9</span>)
+</div><div class='output co'>#&gt;              5 %         95 %
+#&gt; math -0.01024745 -0.002398593</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

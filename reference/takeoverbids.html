@@ -48,11 +48,11 @@
 
 <meta property="og:title" content="Takeover Bids data set — takeoverbids" />
 <meta property="og:description" content="This data set gives the number of bids received by 126 US firms that were successful
-targets of tender offers during the period 1978--1985, along with some explanatory 
+targets of tender offers during the period 1978--1985, along with some explanatory
 variables on the defensive actions taken by management of target firm, firm-specific
-characteristics and intervention taken by federal regulators. The takeoverbids 
+characteristics and intervention taken by federal regulators. The takeoverbids
 data frame has 126 observations on 14 variables. The descriptions below are taken from
- Sáez-Castillo and Conde-Sánchez (2013)." />
+Sáez-Castillo and Conde-Sánchez (2013)." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -85,7 +85,7 @@ data frame has 126 observations on 14 variables. The descriptions below are take
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -140,11 +140,11 @@ data frame has 126 observations on 14 variables. The descriptions below are take
 
     <div class="ref-description">
     <p>This data set gives the number of bids received by 126 US firms that were successful
-targets of tender offers during the period 1978--1985, along with some explanatory 
+targets of tender offers during the period 1978--1985, along with some explanatory
 variables on the defensive actions taken by management of target firm, firm-specific
-characteristics and intervention taken by federal regulators. The <code>takeoverbids</code> 
+characteristics and intervention taken by federal regulators. The <code>takeoverbids</code>
 data frame has 126 observations on 14 variables. The descriptions below are taken from
- Sáez-Castillo and Conde-Sánchez (2013).</p>
+Sáez-Castillo and Conde-Sánchez (2013).</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)</pre>
@@ -165,7 +165,7 @@ data frame has 126 observations on 14 variables. The descriptions below are take
 <dt>size</dt><dd><p>total book value of assets in billions of dollars</p></dd>
 <dt>takeover</dt><dd><p>Indicator. 1 if the company was being taken over</p></dd>
 <dt>weeks</dt><dd><p>time in weeks between the initial and final offers</p></dd>
-<dt>whtknght</dt><dd><p>indicator variable for management invitation 
+<dt>whtknght</dt><dd><p>indicator variable for management invitation
 for friendly third-party bid</p></dd>
 <dt>sizesq</dt><dd><p>book value squared</p></dd>
 
@@ -176,7 +176,7 @@ for friendly third-party bid</p></dd>
     <p>Journal of Applied Econometrics data archive: <a href='http://qed.econ.queensu.ca/jae/'>http://qed.econ.queensu.ca/jae/</a>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series 
+    <p>Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series
 Expansions: with Applications. <em>Journal of Applied Econometrics</em> <b>12</b> 203--223.</p>
 <p>Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, <a href='http://cameron.econ.ucdavis.edu/racd/racddata.html'>http://cameron.econ.ucdavis.edu/racd/racddata.html</a> chapter 5.</p>
 <p>Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1-6.1.</p>
@@ -189,7 +189,8 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
 <span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span>
     <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span></div><div class='output co'>#&gt; 
+<span class='kw'>M.bids</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
@@ -202,9 +203,10 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 #&gt; Dispersion (nu): 1.75
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
 #&gt; Null Deviance: 182.3906 
-#&gt; Residual Deviance: 131.2017 
+#&gt; Residual Deviance: 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.bids</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.bids</span>)
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
@@ -213,28 +215,30 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 #&gt; -2.71432  -0.70635  -0.07758   0.36084   3.05289  
 #&gt; 
 #&gt; Linear Model Coefficients:
-#&gt;             Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)   0.9896  0.4354    2.27  0.02302 *  
-#&gt; leglrest      0.2679  0.1229    2.18  0.02925 *  
-#&gt; rearest      -0.1732  0.1548   -1.12  0.26320    
-#&gt; finrest       0.0677  0.1744    0.39  0.69769    
-#&gt; whtknght      0.4813  0.1317    3.65  0.00026 ***
-#&gt; bidprem      -0.6848  0.3076   -2.23  0.02600 *  
-#&gt; insthold     -0.3679  0.3468   -1.06  0.28878    
-#&gt; size          0.1793  0.0476    3.77  0.00017 ***
-#&gt; sizesq       -0.0076  0.0025   -3.05  0.00228 ** 
-#&gt; regulatn     -0.0376  0.1303   -0.29  0.77310    
+#&gt;              Estimate   Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)  0.989630  0.435366   2.273 0.023020 *  
+#&gt; leglrest     0.267879  0.122873   2.180 0.029248 *  
+#&gt; rearest     -0.173177  0.154779  -1.119 0.263197    
+#&gt; finrest      0.067744  0.174403   0.388 0.697693    
+#&gt; whtknght     0.481281  0.131721   3.654 0.000258 ***
+#&gt; bidprem     -0.684822  0.307627  -2.226 0.026005 *  
+#&gt; insthold    -0.367886  0.346799  -1.061 0.288780    
+#&gt; size         0.179325  0.047627   3.765 0.000166 ***
+#&gt; sizesq      -0.007582  0.002485  -3.052 0.002276 ** 
+#&gt; regulatn    -0.037569  0.130303  -0.288 0.773101    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be  1.752 )
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 1.752)
 #&gt; 
 #&gt; 
 #&gt;     Null deviance: 182.39  on 125 degrees of freedom
 #&gt; Residual deviance: 131.20  on 116 degrees of freedom
 #&gt; 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>) <span class='co'>#or gg_plot(M.bids)</span></div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div><div class='input'></div></pre>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>) <span class='co'>#or gg_plot(M.bids)</span>
+</div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -250,7 +254,7 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

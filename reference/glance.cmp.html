@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp • mpcmp</title>
+<title>Glance at a(n) CMP model object — glance.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp" />
-<meta property="og:description" content="An accessor function used to extract the model frame from a 'cmp' object." />
+<meta property="og:title" content="Glance at a(n) CMP model object — glance.cmp" />
+<meta property="og:description" content="Glance accepts a model object and returns a tibble::tibble() with exactly one row of model summaries. The summaries are typically goodness of fit measures, p-values for hypothesis tests on residuals, or model convergence information." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -128,23 +128,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the Model Frame from a COM-Poisson Model Fit</h1>
+    <h1>Glance at a(n) CMP model object</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>model.frame.cmp.Rd</code></div>
+    <div class="hidden name"><code>glance.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An accessor function used to extract the model frame from a 'cmp' object.</p>
+    <p>Glance accepts a model object and returns a <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row of model summaries. The summaries are typically goodness of fit measures, p-values for hypothesis tests on residuals, or model convergence information.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>formula</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>formula</th>
+      <th>x</th>
       <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
     </tr>
     <tr>
@@ -155,11 +155,30 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The method will return the saved <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> used when fitting the cmp model.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with exactly one row and columns:</p>
+<dt>AIC</dt><dd><p>Akaike's Information Criterion for the model.</p></dd>
+<dt>BIC</dt><dd><p>Bayesian Information Criterion for the model.</p></dd>
+<dt>deviance</dt><dd><p>(Residual) Deviance of the model.</p></dd>
+<dt>df.null</dt><dd><p>Degrees of freedom used by the null model.</p></dd>
+<dt>df.residual</dt><dd><p>Residual degrees of freedom.</p></dd>
+<dt>logLik</dt><dd><p>The log-likelihood of the model.</p></dd>
+<dt>nobs</dt><dd><p>Number of observations used.</p></dd>
+<dt>null.deviance</dt><dd><p>Deviance of the null model.</p></dd>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='residuals.cmp.html'>residuals.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>Glance never returns information from the original call to the modeling function. This includes the name of the modeling function or any arguments passed to the modeling function.</p>
+<p>Glance does not calculate summary measures. Rather, it farms out these computations to appropriate methods and gathers the results together. Sometimes a goodness of fit measure will be undefined. In these cases the measure will be reported as NA.</p>
+<p>Glance returns the same number of columns regardless of whether the model matrix is rank-deficient or not. If so, entries in columns that no longer have a well-defined value are filled in with an NA of the appropriate type.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></span>(<span class='kw'>M.attendance</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 8</span><span>
+#&gt;   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>          456.     313  -</span><span style='color: #BB0000;'>864.</span><span> </span><span style='text-decoration: underline;'>1</span><span>739. </span><span style='text-decoration: underline;'>1</span><span>762.     377.         309   314</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

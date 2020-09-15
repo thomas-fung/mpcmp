@@ -47,9 +47,9 @@
 
 
 <meta property="og:title" content="Likelihood Ratio Test for nu = 1 of a COM-Poisson model — LRTnu" />
-<meta property="og:description" content="Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model. 
-The test statistics is calculated as 2*(llik- llik_0) where llik and 
-llik_0 are the log-likelihood of a COM-Poisson and Poisson model respectively.  
+<meta property="og:description" content="Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model.
+The test statistics is calculated as 2*(llik- llik_0) where llik and
+llik_0 are the log-likelihood of a COM-Poisson and Poisson model respectively.
 The test statistic has 1 degrees of freedom." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -83,7 +83,7 @@ The test statistic has 1 degrees of freedom." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -137,9 +137,9 @@ The test statistic has 1 degrees of freedom." />
     </div>
 
     <div class="ref-description">
-    <p>Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model. 
-The test statistics is calculated as <em>2*(llik- llik_0)</em> where <em>llik</em> and 
-<em>llik_0</em> are the log-likelihood of a COM-Poisson and Poisson model respectively.  
+    <p>Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model.
+The test statistics is calculated as <em>2*(llik- llik_0)</em> where <em>llik</em> and
+<em>llik_0</em> are the log-likelihood of a COM-Poisson and Poisson model respectively.
 The test statistic has 1 degrees of freedom.</p>
     </div>
 
@@ -160,14 +160,15 @@ The test statistic has 1 degrees of freedom.</p>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for 
+    <p>Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
 <span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
     <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
-<span class='fu'>LRTnu</span>(<span class='kw'>M.bids</span>)</div><div class='output co'>#&gt; 
+<span class='fu'>LRTnu</span>(<span class='kw'>M.bids</span>)
+</div><div class='output co'>#&gt; 
 #&gt; Likelihood ratio test for testing nu=1:
 #&gt; 
 #&gt; Log-Likelihood for Mean-CMP:  -180 
@@ -190,7 +191,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

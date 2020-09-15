@@ -48,9 +48,9 @@
 
 <meta property="og:title" content="Akaike's Information Criterion — AIC.cmp" />
 <meta property="og:description" content="A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
-value extracted from logLik.cmp, according to the formula 
--2*log-likelihood + k*npar, where npar represents the number of parameters 
-in the fitted model, and k=2 for the usual AIC or k=log(n) (n being 
+value extracted from logLik.cmp, according to the formula
+-2log-likelihood + knpar, where npar represents the number of parameters
+in the fitted model, and k=2 for the usual AIC or k=log(n) (n being
 the number of observations) for the so-called BIC (Bayesian Information Criterion)." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -84,7 +84,7 @@ the number of observations) for the so-called BIC (Bayesian Information Criterio
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -139,9 +139,9 @@ the number of observations) for the so-called BIC (Bayesian Information Criterio
 
     <div class="ref-description">
     <p>A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
-value extracted from <code><a href='logLik.cmp.html'>logLik.cmp</a></code>, according to the formula 
-<em>-2*log-likelihood + k*npar</em>, where <em>npar</em> represents the number of parameters 
-in the fitted model, and <em>k=2</em> for the usual AIC or <em>k=log(n)</em> (<em>n</em> being 
+value extracted from <code><a href='logLik.cmp.html'>logLik.cmp</a></code>, according to the formula
+<em>-2<em>log-likelihood + k</em>npar</em>, where <em>npar</em> represents the number of parameters
+in the fitted model, and <em>k=2</em> for the usual AIC or <em>k=log(n)</em> (<em>n</em> being
 the number of observations) for the so-called BIC (Bayesian Information Criterion).</p>
     </div>
 
@@ -171,7 +171,7 @@ k = 2 is the classical AIC.</p></td>
     <p>A numeric value with the corresponding AIC (or BIC, or ..., depends on k).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or 
+    <p>When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or
 BIC, the better the fit.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -192,7 +192,7 @@ BIC, the better the fit.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp • mpcmp</title>
+<title>Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit — vcov.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +47,10 @@
 
 
 
-<meta property="og:title" content="Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp" />
-<meta property="og:description" content="An accessor function used to extract the model frame from a 'cmp' object." />
+<meta property="og:title" content="Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit — vcov.cmp" />
+<meta property="og:description" content="Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit" />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -128,23 +131,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the Model Frame from a COM-Poisson Model Fit</h1>
+    <h1>Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>model.frame.cmp.Rd</code></div>
+    <div class="hidden name"><code>vcov.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An accessor function used to extract the model frame from a 'cmp' object.</p>
+    <p>Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>formula</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>formula</th>
+      <th>object</th>
       <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
     </tr>
     <tr>
@@ -155,11 +160,25 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The method will return the saved <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> used when fitting the cmp model.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>The method will return the estimated covariances between the parameter estimates of the fitted cmp model.</p>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='residuals.cmp.html'>residuals.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>M.attendance</span>)
+</div><div class='output co'>#&gt;                  (Intercept)    gendermale          math  progAcademic
+#&gt; (Intercept)     0.0362548811 -6.220523e-03 -2.500916e-04 -2.278627e-02
+#&gt; gendermale     -0.0062205234  1.372357e-02  5.319850e-06 -7.355543e-04
+#&gt; math           -0.0002500916  5.319850e-06  5.692439e-06  1.039727e-05
+#&gt; progAcademic   -0.0227862689 -7.355543e-04  1.039727e-05  2.873856e-02
+#&gt; progVocational -0.0189576499 -5.111472e-04 -7.981398e-05  2.253265e-02
+#&gt;                progVocational
+#&gt; (Intercept)     -1.895765e-02
+#&gt; gendermale      -5.111472e-04
+#&gt; math            -7.981398e-05
+#&gt; progAcademic     2.253265e-02
+#&gt; progVocational   3.590207e-02</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

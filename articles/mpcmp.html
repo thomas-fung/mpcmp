@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started with the `mpcmp` package (under construction) • mpcmp</title>
+<title>Getting Started with the `mpcmp` package • mpcmp</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with the `mpcmp` package (under construction)">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with the `mpcmp` package">
 <meta property="og:description" content="mpcmp">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -83,13 +83,14 @@
 
       
 
-      </header><script src="mpcmp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="mpcmp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="mpcmp_files/kePrint-0.0.1/kePrint.js"></script><link href="mpcmp_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Getting Started with the <code>mpcmp</code> package (under construction)</h1>
+      <h1 data-toc-skip>Getting Started with the <code>mpcmp</code> package</h1>
                         <h4 class="author">Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang</h4>
             
-            <h4 class="date">2020-08-12</h4>
+            <h4 class="date">2020-09-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/thomas-fung/mpcmp/blob/master/vignettes/mpcmp.Rmd"><code>vignettes/mpcmp.Rmd</code></a></small>
       <div class="hidden name"><code>mpcmp.Rmd</code></div>
@@ -173,16 +174,16 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; -2.1925  -1.1166  -0.3973   0.2964   2.8154  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Linear Model Coefficients:</span>
-<span class="co">#&gt;                Estimate Std.Err Z value Pr(&gt;|z|)    </span>
-<span class="co">#&gt; (Intercept)      2.7146  0.1904   14.26  &lt; 2e-16 ***</span>
-<span class="co">#&gt; gendermale      -0.2147  0.1171   -1.83    0.067 .  </span>
-<span class="co">#&gt; math            -0.0063  0.0024   -2.65    0.008 ** </span>
-<span class="co">#&gt; progAcademic    -0.4253  0.1695   -2.51    0.012 *  </span>
-<span class="co">#&gt; progVocational  -1.2539  0.1895   -6.62  3.7e-11 ***</span>
+<span class="co">#&gt;                 Estimate   Std.Err Z value Pr(&gt;|z|)    </span>
+<span class="co">#&gt; (Intercept)     2.714645  0.190407  14.257  &lt; 2e-16 ***</span>
+<span class="co">#&gt; gendermale     -0.214720  0.117148  -1.833  0.06682 .  </span>
+<span class="co">#&gt; math           -0.006323  0.002386  -2.650  0.00804 ** </span>
+<span class="co">#&gt; progAcademic   -0.425322  0.169525  -2.509  0.01211 *  </span>
+<span class="co">#&gt; progVocational -1.253896  0.189478  -6.618 3.65e-11 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; (Dispersion parameter for Mean-CMP estimated to be  0.02024 )</span>
+<span class="co">#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.02024)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Null deviance: 455.83  on 313 degrees of freedom</span>
@@ -210,11 +211,238 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 </pre></div>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Please refer to <code><a href="../reference/gg_plot.html">?gg_plot</a></code> to see what diagnostic plots are available.</p>
-<p>We also implemented a bunch of commonly used methods for “cmp” objects:</p>
+<p>The <code>mpcmp</code> package also supports <code>broom</code> <code>tidier</code> method.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="kw">M.attendance</span>)
+<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt;   term           estimate std.error statistic  p.value</span>
+<span class="co">#&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 (Intercept)     2.71      0.190       14.3  4.05e-46</span>
+<span class="co">#&gt; 2 gendermale     -0.215     0.117       -1.83 6.68e- 2</span>
+<span class="co">#&gt; 3 math           -0.00632   0.00239     -2.65 8.04e- 3</span>
+<span class="co">#&gt; 4 progAcademic   -0.425     0.170       -2.51 1.21e- 2</span>
+<span class="co">#&gt; 5 progVocational -1.25      0.189       -6.62 3.65e-11</span>
+</pre></div>
+<p>This means “cmp” objects can take advantage of any packages that required <code>broom</code> support such as the <code>modelsummary</code> package:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">M_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(<span class="kw">daysabs</span><span class="op">~</span> <span class="kw">gender</span><span class="op">+</span><span class="kw">math</span><span class="op">+</span><span class="kw">prog</span>, data=<span class="kw">attendance</span>, family = <span class="kw">poisson</span>)
+<span class="kw">M_nb</span> <span class="op">&lt;-</span> <span class="kw">MASS</span>::<span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">glm.nb</a></span>(<span class="kw">daysabs</span><span class="op">~</span> <span class="kw">gender</span><span class="op">+</span><span class="kw">math</span><span class="op">+</span><span class="kw">prog</span>, data=<span class="kw">attendance</span>)
+<span class="kw">modelsummary</span>::<span class="fu"><a href="https://rdrr.io/pkg/modelsummary/man/modelsummary.html">modelsummary</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">M.attendance</span>, <span class="kw">M_poisson</span>, <span class="kw">M_nb</span>))
+</pre></div>
+<table class="table table">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Model 1
+</th>
+<th style="text-align:left;">
+Model 2
+</th>
+<th style="text-align:left;">
+Model 3
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:left;">
+2.715
+</td>
+<td style="text-align:left;">
+2.759
+</td>
+<td style="text-align:left;">
+2.707
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(0.190)
+</td>
+<td style="text-align:left;">
+(0.064)
+</td>
+<td style="text-align:left;">
+(0.204)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gendermale
+</td>
+<td style="text-align:left;">
+-0.215
+</td>
+<td style="text-align:left;">
+-0.242
+</td>
+<td style="text-align:left;">
+-0.211
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(0.117)
+</td>
+<td style="text-align:left;">
+(0.047)
+</td>
+<td style="text-align:left;">
+(0.122)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+math
+</td>
+<td style="text-align:left;">
+-0.006
+</td>
+<td style="text-align:left;">
+-0.007
+</td>
+<td style="text-align:left;">
+-0.006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(0.002)
+</td>
+<td style="text-align:left;">
+(0.001)
+</td>
+<td style="text-align:left;">
+(0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+progAcademic
+</td>
+<td style="text-align:left;">
+-0.425
+</td>
+<td style="text-align:left;">
+-0.426
+</td>
+<td style="text-align:left;">
+-0.425
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(0.170)
+</td>
+<td style="text-align:left;">
+(0.057)
+</td>
+<td style="text-align:left;">
+(0.182)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+progVocational
+</td>
+<td style="text-align:left;">
+-1.254
+</td>
+<td style="text-align:left;">
+-1.271
+</td>
+<td style="text-align:left;">
+-1.253
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+(0.189)
+</td>
+<td style="text-align:left;">
+(0.078)
+</td>
+<td style="text-align:left;">
+(0.200)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:left;">
+314
+</td>
+<td style="text-align:left;">
+314
+</td>
+<td style="text-align:left;">
+314
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:left;">
+1739.0
+</td>
+<td style="text-align:left;">
+2640.2
+</td>
+<td style="text-align:left;">
+1740.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:left;">
+1761.5
+</td>
+<td style="text-align:left;">
+2658.9
+</td>
+<td style="text-align:left;">
+1762.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:left;">
+-863.513
+</td>
+<td style="text-align:left;">
+-1315.089
+</td>
+<td style="text-align:left;">
+-864.154
+</td>
+</tr>
+</tbody>
+</table>
+<p>We also implemented a bunch of commonly used methods for “cmp” objects:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span>(class = <span class="st">"cmp"</span>)
-<span class="co">#&gt; [1] model.matrix plot         predict      print        summary     </span>
-<span class="co">#&gt; [6] update      </span>
+<span class="co">#&gt;  [1] augment        confint        cooks.distance glance         hatvalues     </span>
+<span class="co">#&gt;  [6] influence      model.matrix   plot           predict        print         </span>
+<span class="co">#&gt; [11] rstandard      summary        tidy           update         vcov          </span>
 <span class="co">#&gt; see '?methods' for accessing help and source code</span>
 </pre></div>
 </div>
@@ -229,7 +457,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <li>Extracts prepared with different parts of mucosa or just water (control) were completely randomised with 10 replicates.</li>
 <li>The numbers of emerged insects (progeny) after 60 days were recorded and some descriptive statistics can be found below.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">sitophilus</span>)
 <span class="kw">sitophilus</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span>(<span class="kw">extract</span>) <span class="op">%&gt;%</span> <span class="fu">summarise</span>(mu = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">ninsect</span>), 
@@ -243,7 +471,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; 4 Seed      1.1   1.66</span>
 </pre></div>
 <p>It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is the norm in a GLM, non-constant variances do not necessarily mean varying dispersions. Nonetheless, we will try to use the treatment to explain the dispersion in the data set. To do that we specify the <code>formula_nu</code> argument in the <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">sitophilus</span>)
 <span class="kw">M.sit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span>(formula = <span class="kw">ninsect</span> <span class="op">~</span> <span class="kw">extract</span>, formula_nu = <span class="op">~</span> <span class="kw">extract</span>, data = <span class="kw">sitophilus</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.sit</span>)
@@ -255,20 +483,20 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; -2.21085  -1.16849   0.07494   0.64152   1.72653  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Mean Model Coefficients:</span>
-<span class="co">#&gt;               Estimate Std.Err Z value Pr(&gt;|z|)    </span>
-<span class="co">#&gt; (Intercept)     3.4500  0.0780   44.25   &lt;2e-16 ***</span>
-<span class="co">#&gt; extractLeaf    -0.0064  0.1221   -0.05     0.96    </span>
-<span class="co">#&gt; extractBranch  -0.0521  0.1234   -0.42     0.67    </span>
-<span class="co">#&gt; extractSeed    -3.3547  0.3621   -9.26   &lt;2e-16 ***</span>
+<span class="co">#&gt;                Estimate   Std.Err Z value Pr(&gt;|z|)    </span>
+<span class="co">#&gt; (Intercept)    3.449988  0.077974  44.245   &lt;2e-16 ***</span>
+<span class="co">#&gt; extractLeaf   -0.006369  0.122139  -0.052    0.958    </span>
+<span class="co">#&gt; extractBranch -0.052129  0.123387  -0.422    0.673    </span>
+<span class="co">#&gt; extractSeed   -3.354677  0.362108  -9.264   &lt;2e-16 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Dispersion Model Coefficients:</span>
 <span class="co">#&gt;               Estimate Std.Err Z value Pr(&gt;|z|)</span>
-<span class="co">#&gt; (Intercept)     -0.665   0.457   -1.45     0.15</span>
-<span class="co">#&gt; extractLeaf     -0.383   0.651   -0.59     0.56</span>
-<span class="co">#&gt; extractBranch   -0.372   0.651   -0.57     0.57</span>
-<span class="co">#&gt; extractSeed     -0.118   1.546   -0.08     0.94</span>
+<span class="co">#&gt; (Intercept)    -0.6652  0.4573  -1.455    0.146</span>
+<span class="co">#&gt; extractLeaf    -0.3831  0.6509  -0.589    0.556</span>
+<span class="co">#&gt; extractBranch  -0.3724  0.6514  -0.572    0.567</span>
+<span class="co">#&gt; extractSeed    -0.1176  1.5461  -0.076    0.939</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Null deviance: 257.211  on 39 degrees of freedom</span>
 <span class="co">#&gt; Residual deviance:  41.679  on 32 degrees of freedom</span>
@@ -276,7 +504,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; AIC: 260.8279</span>
 </pre></div>
 <p>From the model summary, we can see that there is not much evidence to suggest the dispersions are varying across treatment groups. We can also formally test whether a constant dispersion model is sufficient here using a likelihood ratio test as the two models are nested:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">M.sit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span>(<span class="kw">M.sit</span>, formula_nu = <span class="kw">NULL</span>)
 <span class="fu"><a href="../reference/cmplrtest.html">cmplrtest</a></span>(<span class="kw">M.sit</span>, <span class="kw">M.sit2</span>)
 <span class="co">#&gt; </span>
@@ -286,7 +514,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; P-value:  0.932</span>
 </pre></div>
 <p>As a result, our final model is</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">M.sit2</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)</span>
@@ -296,15 +524,15 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; -1.9515  -1.2310   0.0794   0.6255   1.6762  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Linear Model Coefficients:</span>
-<span class="co">#&gt;               Estimate Std.Err Z value Pr(&gt;|z|)    </span>
-<span class="co">#&gt; (Intercept)     3.4500  0.0885   39.00   &lt;2e-16 ***</span>
-<span class="co">#&gt; extractLeaf    -0.0064  0.1253   -0.05     0.96    </span>
-<span class="co">#&gt; extractBranch  -0.0521  0.1267   -0.41     0.68    </span>
-<span class="co">#&gt; extractSeed    -3.3547  0.3722   -9.01   &lt;2e-16 ***</span>
+<span class="co">#&gt;                Estimate   Std.Err Z value Pr(&gt;|z|)    </span>
+<span class="co">#&gt; (Intercept)    3.449988  0.088455  39.003   &lt;2e-16 ***</span>
+<span class="co">#&gt; extractLeaf   -0.006369  0.125289  -0.051    0.959    </span>
+<span class="co">#&gt; extractBranch -0.052129  0.126712  -0.411    0.681    </span>
+<span class="co">#&gt; extractSeed   -3.354677  0.372197  -9.013   &lt;2e-16 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; (Dispersion parameter for Mean-CMP estimated to be  0.3957 )</span>
+<span class="co">#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.3957)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Null deviance: 234.470  on 39 degrees of freedom</span>
@@ -328,7 +556,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <li>
 <code>cmpreg</code>: Fit Mean-type parametrized CMP models (includes dispersion modelling) by <span class="citation">Elias Ribeiro Junior (2020)</span>. The authors purposed to regress on the approximated mean.</li>
 <li>
-<code>DGLMExtPois</code>: Fit mean-parametrized CMP model (includes dispersion modelling) using <code>nloptr</code> by <span class="citation">(<span class="citeproc-not-found" data-reference-id="R-DGLMExtPois"><strong>???</strong></span>)</span>.</li>
+<code>DGLMExtPois</code>: Fit mean-parametrized CMP model (includes dispersion modelling) using <code>nloptr</code> by <span class="citation">Saez-Castillo, Conde-Sanchez, and Martinez (2020)</span>.</li>
 <li>
 <code>glmmTMB</code>: Fit (among other) CMP models under a different mean-parametrization (includes zero-inflation, dispersion modelling and random effects) by <span class="citation">Brooks et al. (2017)</span>.</li>
 </ul>
@@ -376,6 +604,9 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <div id="ref-Ribeiro2013">
 <p>Ribeiro, Leandro do Prado, José Djair Vendramim, Keylla Utherdyany Bicalho, Moacir dos Santos Andrade, João Batista Fernandes, Rafael de Andrade Moral, and Clarice Garcia Borges Demétrio. 2013. “Annona mucosa Jacq. (Annonaceae): A promising source of bioactive compounds against Sitophilus zeamais Mots. (Coleoptera: Curculionidae).” <em>Journal of Stored Products Research</em> 55: 6–14. <a href="https://doi.org/10.1016/j.jspr.2013.06.001">https://doi.org/10.1016/j.jspr.2013.06.001</a>.</p>
 </div>
+<div id="ref-R-DGLMExtPois">
+<p>Saez-Castillo, Antonio Jose, Antonio Conde-Sanchez, and Francisco Martinez. 2020. <em>DGLMExtPois: Double Generalized Linear Models Extending Poisson Regression</em>. <a href="https://CRAN.R-project.org/package=DGLMExtPois">https://CRAN.R-project.org/package=DGLMExtPois</a>.</p>
+</div>
 <div id="ref-Sellers2010">
 <p>Sellers, Kimberly F., and Galit Shmueli. 2010. “A flexible regression model for count data.” <em>Annals of Applied Statistics</em> 4 (2): 943–61. <a href="https://doi.org/10.1214/09-AOAS306">https://doi.org/10.1214/09-AOAS306</a>.</p>
 </div>
@@ -401,7 +632,7 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

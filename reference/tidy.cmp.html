@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp • mpcmp</title>
+<title>Tidy a(n) CMP model object — tidy.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Extract the Model Frame from a COM-Poisson Model Fit — model.frame.cmp" />
-<meta property="og:description" content="An accessor function used to extract the model frame from a 'cmp' object." />
+<meta property="og:title" content="Tidy a(n) CMP model object — tidy.cmp" />
+<meta property="og:description" content="Tidy summarizes information about the components of a model. A model component might be a single term in a regression, a single hypothesis, a cluster, or a class. Exactly what tidy considers to be a model component varies across models but is usually self-evident. If a model has several distinct types of components, you will need to specify which components to return." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -128,24 +128,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the Model Frame from a COM-Poisson Model Fit</h1>
+    <h1>Tidy a(n) CMP model object</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
-    <div class="hidden name"><code>model.frame.cmp.Rd</code></div>
+    <div class="hidden name"><code>tidy.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An accessor function used to extract the model frame from a 'cmp' object.</p>
+    <p>Tidy summarizes information about the components of a model. A model component might be a single term in a regression, a single hypothesis, a cluster, or a class. Exactly what tidy considers to be a model component varies across models but is usually self-evident. If a model has several distinct types of components, you will need to specify which components to return.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/model.frame.html'>model.frame</a></span>(<span class='kw'>formula</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>x</span>, conf.int = <span class='fl'>FALSE</span>, conf.level = <span class='fl'>0.95</span>, exponentiate = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>formula</th>
+      <th>x</th>
       <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
+    </tr>
+    <tr>
+      <th>conf.int</th>
+      <td><p>Logical indicating whether or not to include a confidence interval in the tidied output. Defaults to FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>The confidence level to use for the confidence interval if conf.int = TRUE. Must be strictly greater than 0 and less than 1. Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p></td>
+    </tr>
+    <tr>
+      <th>exponentiate</th>
+      <td><p>Logical indicating whether or not to exponentiate the the coefficient estimates.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -155,11 +167,29 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The method will return the saved <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> used when fitting the cmp model.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> with columns:</p>
+<dt>term</dt><dd><p>The name of the regression term.</p></dd>
+<dt>estimate</dt><dd><p>The estimated value of the regression term.</p></dd>
+<dt>std.error</dt><dd><p>The standard error of the regression term.</p></dd>
+<dt>statistic</dt><dd><p>The value of a test statistic to use in a hypothesis that the regression term is non-zero.</p></dd>
+<dt>p.value</dt><dd><p>The two-sided p-value associated with the observed statistic based on asymptotic normality.</p></dd>
+<dt>parameter</dt><dd><p>Only for varying dispersion models. Type of coefficient being estimated: 'mu', 'nu'</p></dd>
+<dt>conf.low</dt><dd><p>Lower bound on the confidence interval for the estimate.</p></dd>
+<dt>conf.high</dt><dd><p>Upper bound on the confidence interval for the estimate.</p></dd>
 
-    <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='residuals.cmp.html'>residuals.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
+<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>(<span class='kw'>M.attendance</span>)
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 5</span><span>
+#&gt;   term           estimate std.error statistic  p.value
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)     2.71      0.190       14.3  4.05</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-46</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> gendermale     -</span><span style='color: #BB0000;'>0.215</span><span>     0.117       -</span><span style='color: #BB0000;'>1.83</span><span> 6.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> math           -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>32</span><span>   0.002</span><span style='text-decoration: underline;'>39</span><span>     -</span><span style='color: #BB0000;'>2.65</span><span> 8.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> progAcademic   -</span><span style='color: #BB0000;'>0.425</span><span>     0.170       -</span><span style='color: #BB0000;'>2.51</span><span> 1.21</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> progVocational -</span><span style='color: #BB0000;'>1.25</span><span>      0.189       -</span><span style='color: #BB0000;'>6.62</span><span> 3.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
