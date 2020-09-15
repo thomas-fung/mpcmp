@@ -8,7 +8,7 @@
 
 There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE:
+There were 2 NOTEs:
 
 * checking CRAN incoming feasibility ... NOTE
   Maintainer: ‘Thomas Fung <thomas.fung.dr@gmail.com>’
@@ -19,6 +19,11 @@ There was 1 NOTE:
     Thomas Fung <thomas.fung@mq.edu.au>
 
 The maintainer changed his email address. 
+
+* checking for future file timestamps ... NOTE
+unable to verify current time
+
+I believe this is something outside our control. 
 
 ## Downstream dependency. 
 

@@ -32,8 +32,8 @@ citation("mpcmp")
 To cite the mpcmp package in publications use:
 
 Fung T, Alwan A, Wishart J, Huang A (2020). _mpcmp: Mean-Parametrizied
-Conway-Maxwell Poisson Regression_. R package version 0.3.4, <URL:
-https://cran.r-project.org/web/packages/mpcmp/index.html>.
+Conway-Maxwell Poisson Regression_. R package version 0.3.5, <URL:
+https://CRAN.R-project.org/package=mpcmp>.
 
 A BibTeX entry for LaTeX users is
 
@@ -41,7 +41,8 @@ A BibTeX entry for LaTeX users is
     title = {mpcmp: Mean-Parametrizied Conway-Maxwell Poisson Regression},
     author = {Thomas Fung and Aya Alwan and Justin Wishart and Alan Huang},
     year = {2020},
-    note = {R package version 0.3.4},
-    url = {https://cran.r-project.org/web/packages/mpcmp/index.html},
+    note = {R package version 0.3.5},
+    url = {https://CRAN.R-project.org/package=mpcmp},
   }
 ```
+ 
