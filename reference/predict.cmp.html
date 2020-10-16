@@ -140,13 +140,13 @@ errors of those prediction from a fitted COM-Poisson regression object.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(
-  <span class='kw'>object</span>,
-  newdata = <span class='kw'>NULL</span>,
-  se.fit = <span class='fl'>FALSE</span>,
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"link"</span>, <span class='st'>"response"</span>),
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
+  se.fit <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"link"</span>, <span class='st'>"response"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,11 +188,11 @@ of the response variable. The value of this argument can be abbreviated.</p></td
     <p>If newdata is omitted the predictions are based on the data used for the fit.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
-    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>M.bids</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            1            2            3            4            5            6 
 #&gt;  1.006520439  0.259798415  0.760894043  0.173563231  0.186989281  0.738303942 
 #&gt;            7            8            9           10           11           12 
@@ -234,7 +234,7 @@ of the response variable. The value of this argument can be abbreviated.</p></td
 #&gt;          115          116          117          118          119          120 
 #&gt;  0.281981137  0.566765615  0.317799545  1.004602390  0.471858789  0.826524942 
 #&gt;          121          122          123          124          125          126 
-#&gt;  0.007167728  0.554654865  0.831965305  0.319462447 -0.075292452  1.430628677 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>M.bids</span>, type= <span class='st'>"response"</span>)
+#&gt;  0.007167728  0.554654865  0.831965305  0.319462447 -0.075292452  1.430628677 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>M.bids</span>, type<span class='op'>=</span> <span class='st'>"response"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;         1         2         3         4         5         6         7         8 
 #&gt; 2.7360641 1.2966687 2.1401888 1.1895359 1.2056144 2.0923837 1.7998165 1.0514304 
 #&gt;         9        10        11        12        13        14        15        16 
@@ -266,7 +266,7 @@ of the response variable. The value of this argument can be abbreviated.</p></td
 #&gt;       113       114       115       116       117       118       119       120 
 #&gt; 1.0673303 1.1714179 1.3257537 1.7625570 1.3741008 2.7308213 1.6029710 2.2853632 
 #&gt;       121       122       123       124       125       126 
-#&gt; 1.0071935 1.7413399 2.2978302 1.3763877 0.9274722 4.1813271 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>M.bids</span>, se.fit=<span class='fl'>TRUE</span>, type=<span class='st'>"response"</span>)
+#&gt; 1.0071935 1.7413399 2.2978302 1.3763877 0.9274722 4.1813271 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>M.bids</span>, se.fit<span class='op'>=</span><span class='cn'>TRUE</span>, type<span class='op'>=</span><span class='st'>"response"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $fit
 #&gt;         1         2         3         4         5         6         7         8 
 #&gt; 2.7360641 1.2966687 2.1401888 1.1895359 1.2056144 2.0923837 1.7998165 1.0514304 
@@ -335,10 +335,10 @@ of the response variable. The value of this argument can be abbreviated.</p></td
 #&gt;       121       122       123       124       125       126 
 #&gt; 0.1758039 0.3321550 0.4027205 0.3047164 0.1720074 0.8861603 
 #&gt; </div><div class='input'>
-<span class='kw'>newdataframe</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(bidprem = <span class='fl'>1</span>, finrest = <span class='fl'>0</span>, insthold = <span class='fl'>0.05</span>,
-    leglrest = <span class='fl'>0</span>, rearest = <span class='fl'>1</span>, regulatn = <span class='fl'>0</span>, size = <span class='fl'>0.1</span>, whtknght = <span class='fl'>1</span>, 
-    sizesq = <span class='fl'>.1</span><span class='op'>^</span><span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>M.bids</span>, se.fit=<span class='fl'>TRUE</span>, newdata = <span class='kw'>newdataframe</span>, type=<span class='st'>"response"</span>)
+<span class='va'>newdataframe</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>bidprem <span class='op'>=</span> <span class='fl'>1</span>, finrest <span class='op'>=</span> <span class='fl'>0</span>, insthold <span class='op'>=</span> <span class='fl'>0.05</span>,
+    leglrest <span class='op'>=</span> <span class='fl'>0</span>, rearest <span class='op'>=</span> <span class='fl'>1</span>, regulatn <span class='op'>=</span> <span class='fl'>0</span>, size <span class='op'>=</span> <span class='fl'>0.1</span>, whtknght <span class='op'>=</span> <span class='fl'>1</span>, 
+    sizesq <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>M.bids</span>, se.fit<span class='op'>=</span><span class='cn'>TRUE</span>, newdata <span class='op'>=</span> <span class='va'>newdataframe</span>, type<span class='op'>=</span><span class='st'>"response"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $fit
 #&gt;        1 
 #&gt; 1.844806 

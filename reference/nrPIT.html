@@ -141,9 +141,9 @@ adequacy of the distributional assumption of the COM-Poisson model. The majority
 code and descriptions are taken from Dunsmuir and Scott (2015).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compPredProb</span>(<span class='kw'>object</span>)
+    <pre class="usage"><span class='fu'>compPredProb</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
-<span class='fu'>compPIT</span>(<span class='kw'>object</span>, bins = <span class='fl'>10</span>)</pre>
+<span class='fu'>compPIT</span><span class='op'>(</span><span class='va'>object</span>, bins <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,10 +186,10 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 <strong>67</strong>, 1--36.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
-    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
-<span class='fu'>compPredProb</span>(<span class='kw'>M.bids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='fu'>compPredProb</span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $lower
 #&gt;   [1] 0.167217581 0.000000000 0.055885961 0.232781936 0.227539216 0.668012652
 #&gt;   [7] 0.423340098 0.282348026 0.402595909 0.000000000 0.306708026 0.383373685
@@ -235,7 +235,7 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 #&gt; [109] 0.69262227 0.32310686 0.02512811 0.62514829 0.72462582 0.68036179
 #&gt; [115] 0.61422655 0.43714847 0.87998164 0.99913415 0.82081348 0.95870941
 #&gt; [121] 0.94990546 0.98923327 0.84684206 0.87944469 0.33430664 0.02932648
-#&gt; </div><div class='input'><span class='fu'>compPIT</span>(<span class='kw'>M.bids</span>)
+#&gt; </div><div class='input'><span class='fu'>compPIT</span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $ConditionalPIT
 #&gt;            [,1]     [,2]      [,3]      [,4]      [,5]     [,6]      [,7]
 #&gt;  [1,] 0.0000000 0.000000 0.0000000 0.0000000 0.0000000 0.000000 0.0000000

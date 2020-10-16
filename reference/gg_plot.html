@@ -155,15 +155,15 @@ a plot of pearson residuals against leverage.
 By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gg_plot</span>(
-  <span class='kw'>x</span>,
-  which = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
-  bins = <span class='fl'>10</span>,
-  ask = <span class='fl'>TRUE</span>,
-  nrow = <span class='kw'>NULL</span>,
-  ncol = <span class='kw'>NULL</span>,
-  output_as_ggplot = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>gg_plot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  which <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span><span class='op'>)</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  ask <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output_as_ggplot <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,15 +229,15 @@ distribution.</p>
 <code><a href='glm.cmp.html'>glm.cmp</a></code> and <code><a href='plot.cmp.html'>plot.cmp</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
-    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 
 <span class='co'>## The default plots are shown</span>
-<span class='fu'>gg_plot</span>(<span class='kw'>M.bids</span>)
+<span class='fu'>gg_plot</span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='img'><img src='gg_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## The plots for the non-randomized PIT </span>
-<span class='fu'>gg_plot</span>(<span class='kw'>M.bids</span>, which = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
+<span class='fu'>gg_plot</span><span class='op'>(</span><span class='va'>M.bids</span>, which <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='gg_plot-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

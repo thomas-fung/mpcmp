@@ -139,22 +139,22 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
 generalized linear model with a log-link by using Fisher Scoring iteration.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>glm.cmp</span>(
-  <span class='kw'>formula</span>,
-  formula_nu = <span class='kw'>NULL</span>,
-  <span class='kw'>data</span>,
-  offset = <span class='kw'>NULL</span>,
-  <span class='kw'>subset</span>,
-  <span class='kw'>na.action</span>,
-  betastart = <span class='kw'>NULL</span>,
-  gammastart = <span class='kw'>NULL</span>,
-  lambdalb = <span class='fl'>1e-10</span>,
-  lambdaub = <span class='fl'>1000</span>,
-  maxlambdaiter = <span class='fl'>1000</span>,
-  tol = <span class='fl'>1e-06</span>,
-  contrasts_mu = <span class='kw'>NULL</span>,
-  contrasts_nu = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>glm.cmp</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  formula_nu <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>data</span>,
+  offset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>subset</span>,
+  <span class='va'>na.action</span>,
+  betastart <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gammastart <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lambdalb <span class='op'>=</span> <span class='fl'>1e-10</span>,
+  lambdaub <span class='op'>=</span> <span class='fl'>1000</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  contrasts_mu <span class='op'>=</span> <span class='cn'>NULL</span>,
+  contrasts_nu <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -304,9 +304,9 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 368--370: Overdispersed Attendance data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
-<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
-<span class='kw'>M.attendance</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
@@ -319,7 +319,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Null Deviance: 455.8326 
 #&gt; Residual Deviance: 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.attendance</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
@@ -344,13 +344,13 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Residual deviance: 377.44  on 309 degrees of freedom
 #&gt; 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.attendance</span>) <span class='co'># or gg_plot(M.attendance)</span>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span> <span class='co'># or gg_plot(M.attendance)</span>
 </div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>### Ribeiro et al. (2013): Varying dispersion as a function of covariates</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>sitophilus</span>)
-<span class='kw'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span>(formula = <span class='kw'>ninsect</span> <span class='op'>~</span> <span class='kw'>extract</span>, formula_nu = <span class='op'>~</span><span class='kw'>extract</span>, data = <span class='kw'>sitophilus</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.sit</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
+<span class='va'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.sit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #&gt; 

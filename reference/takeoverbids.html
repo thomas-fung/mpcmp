@@ -147,7 +147,7 @@ data frame has 126 observations on 14 variables. The descriptions below are take
 Sáez-Castillo and Conde-Sánchez (2013).</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -186,10 +186,10 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>### Huang (2017) Page 371--372: Underdispersed Takeover Bids data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span>
-    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span>
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
@@ -205,7 +205,7 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 #&gt; Null Deviance: 182.3906 
 #&gt; Residual Deviance: 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>M.bids</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
@@ -236,7 +236,7 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 #&gt; Residual deviance: 131.20  on 116 degrees of freedom
 #&gt; 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>M.bids</span>) <span class='co'>#or gg_plot(M.bids)</span>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span> <span class='co'>#or gg_plot(M.bids)</span>
 </div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>

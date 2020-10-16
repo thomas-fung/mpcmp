@@ -139,7 +139,7 @@ The majority of the code and descriptions are taken from Dunsmuir and Scott (201
 The majority of the code and descriptions are taken from Dunsmuir and Scott (2015).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compnormRandPIT</span>(<span class='kw'>object</span>)</pre>
+    <pre class="usage"><span class='fu'>compnormRandPIT</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,10 +185,10 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 <strong>67</strong>, 1--36.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>takeoverbids</span>)
-<span class='kw'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>numbids</span> <span class='op'>~</span> <span class='kw'>leglrest</span> <span class='op'>+</span> <span class='kw'>rearest</span> <span class='op'>+</span> <span class='kw'>finrest</span> <span class='op'>+</span> <span class='kw'>whtknght</span> 
-    <span class='op'>+</span> <span class='kw'>bidprem</span> <span class='op'>+</span> <span class='kw'>insthold</span> <span class='op'>+</span> <span class='kw'>size</span> <span class='op'>+</span> <span class='kw'>sizesq</span> <span class='op'>+</span> <span class='kw'>regulatn</span>, data=<span class='kw'>takeoverbids</span>)
-<span class='fu'>compnormRandPIT</span>(<span class='kw'>M.bids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='fu'>compnormRandPIT</span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $rt
 #&gt;   [1] -0.20016809 -1.81257497 -1.51743440 -0.32208532 -0.24345221  0.55642354
 #&gt;   [7]  0.15153776 -0.49321625  0.17991618 -0.71811993 -0.15837151  0.29653545

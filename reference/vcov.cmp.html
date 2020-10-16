@@ -143,7 +143,7 @@ Model Fit</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,9 +163,9 @@ Model Fit</p>
     <p>The method will return the estimated covariances between the parameter estimates of the fitted cmp model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
-<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span>(<span class='kw'>M.attendance</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                  (Intercept)    gendermale          math  progAcademic
 #&gt; (Intercept)     0.0362548811 -6.220523e-03 -2.500916e-04 -2.278627e-02
 #&gt; gendermale     -0.0062205234  1.372357e-02  5.319850e-06 -7.355543e-04

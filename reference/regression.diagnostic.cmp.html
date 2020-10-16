@@ -138,27 +138,27 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstandard</a></span>(
-  <span class='kw'>model</span>,
-  infl = <span class='fu'>influence.cmp</span>(<span class='kw'>model</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deviance"</span>, <span class='st'>"pearson"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstandard</a></span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  infl <span class='op'>=</span> <span class='fu'>influence.cmp</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"deviance"</span>, <span class='st'>"pearson"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span>(
-  <span class='kw'>model</span>,
-  infl = <span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(<span class='kw'>model</span>),
-  res = <span class='kw'>infl</span><span class='op'>$</span><span class='kw'>pear_res</span>,
-  hat = <span class='kw'>infl</span><span class='op'>$</span><span class='kw'>hat</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  infl <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>,
+  res <span class='op'>=</span> <span class='va'>infl</span><span class='op'>$</span><span class='va'>pear_res</span>,
+  hat <span class='op'>=</span> <span class='va'>infl</span><span class='op'>$</span><span class='va'>hat</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,9 +191,9 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>attendance</span>)
-<span class='kw'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>daysabs</span><span class='op'>~</span> <span class='kw'>gender</span><span class='op'>+</span><span class='kw'>math</span><span class='op'>+</span><span class='kw'>prog</span>, data=<span class='kw'>attendance</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span>(<span class='kw'>M.attendance</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $hat
 #&gt;           1           2           3           4           5           6 
 #&gt; 0.011522828 0.010632762 0.012781977 0.014026783 0.020060944 0.013743377 
@@ -517,7 +517,7 @@
 #&gt;  0.244837730  1.213132429 -0.623311767 -0.848895172  0.128849730 -0.997147709 
 #&gt;          313          314 
 #&gt; -0.864886641 -0.214601088 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span>(<span class='kw'>M.attendance</span>)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>hatvalues</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;           1           2           3           4           5           6 
 #&gt; 0.011522828 0.010632762 0.012781977 0.014026783 0.020060944 0.013743377 
 #&gt;           7           8           9          10          11          12 
@@ -623,7 +623,7 @@
 #&gt;         307         308         309         310         311         312 
 #&gt; 0.011935202 0.012055708 0.013019191 0.010814960 0.013506387 0.010889962 
 #&gt;         313         314 
-#&gt; 0.015684221 0.013211352 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstandard</a></span>(<span class='kw'>M.attendance</span>, type = <span class='st'>"pearson"</span>)
+#&gt; 0.015684221 0.013211352 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>rstandard</a></span><span class='op'>(</span><span class='va'>M.attendance</span>, type <span class='op'>=</span> <span class='st'>"pearson"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            1            2            3            4            5            6 
 #&gt; -0.245095080 -0.404441405 -0.796185608 -0.688738723 -0.728371217  1.058332521 
 #&gt;            7            8            9           10           11           12 
@@ -729,7 +729,7 @@
 #&gt;          307          308          309          310          311          312 
 #&gt;  0.246312035  1.220511804 -0.627409328 -0.853523128  0.129728792 -1.002621910 
 #&gt;          313          314 
-#&gt; -0.871750019 -0.216032876 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span>(<span class='kw'>M.attendance</span>)
+#&gt; -0.871750019 -0.216032876 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;            1            2            3            4            5            6 
 #&gt; 1.400527e-04 3.515846e-04 1.641510e-03 1.349684e-03 2.172140e-03 3.121604e-03 
 #&gt;            7            8            9           10           11           12 
