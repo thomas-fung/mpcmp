@@ -42,8 +42,7 @@ Suggests:
     covr,
     markdown (>= 1.1),
     tidyverse,
-    modelsummary,
-    vdiffr
+    modelsummary
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp
