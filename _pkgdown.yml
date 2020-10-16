@@ -33,6 +33,12 @@ reference:
       - logLik.cmp
       - predict.cmp
       - update.cmp
+      - tidy.cmp
+      - augment.cmp
+      - confint.cmp
+      - glance.cmp
+      - regression.diagnostic.cmp
+      - vcov.cmp
   - exclude:
     contents:
       - mpcmp-package
