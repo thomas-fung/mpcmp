@@ -15,7 +15,7 @@ Authors@R: c(person("Thomas", "Fung", role = c("aut", "cre"),
          email = "alan.huang@uq.edu.au"))
 Description: A collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell-Poisson (COM-Poisson) regression model of Huang (2017) <doi:10.1177/1471082X17697749>.
 Depends: R (>= 3.2)
-License: GPL (>= 3.2)
+License: GPL-3
 Imports:
     Rcpp,
     graphics,
@@ -42,7 +42,8 @@ Suggests:
     covr,
     markdown (>= 1.1),
     tidyverse,
-    modelsummary
+    modelsummary,
+    vdiffr
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp
