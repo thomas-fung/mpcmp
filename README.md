@@ -37,7 +37,7 @@ library(mpcmp)
 
 ## Usage
 
-A reference manual is available at [thomas-fung.github.io/mpcmp](https://thomas-fung.github.io/mpcmp/)
+A reference manual and some examples are available at [thomas-fung.github.io/mpcmp](https://thomas-fung.github.io/mpcmp/)
 
 ## Citation
 

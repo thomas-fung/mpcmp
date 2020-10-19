@@ -8,7 +8,7 @@
 
 There were no ERRORs or WARNINGs. 
 
-There were 2 NOTEs:
+There was 1 NOTE:
 
 * checking CRAN incoming feasibility ... NOTE
   Maintainer: ‘Thomas Fung <thomas.fung.dr@gmail.com>’
@@ -20,10 +20,8 @@ There were 2 NOTEs:
 
 The maintainer changed his email address. 
 
-* checking for future file timestamps ... NOTE
-unable to verify current time
-
-I believe this is something outside our control. 
+There are some issues with the ubuntu 16.04 check via GitHub actions: 
+"Failed to get R 4.0.3: Failed to get R 4.0.3" but it passes the checks on travis-ci. 
 
 ## Downstream dependency. 
 
