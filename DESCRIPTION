@@ -26,7 +26,6 @@ Imports:
     generics,
     tibble,
     dplyr,
-    broom,
     rlang,
     stringr,
     purrr
@@ -42,7 +41,8 @@ Suggests:
     covr,
     markdown (>= 1.1),
     tidyverse,
-    modelsummary
+    modelsummary,
+    broom
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp

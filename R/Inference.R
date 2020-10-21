@@ -117,7 +117,7 @@ LRTnu <- function(object, digits = 3){
     pval <- signif(pval, digits)
   }
   cat("\nLikelihood ratio test for testing nu=1:\n\n")
-  cat("Log-Likelihood for Mean-CMP: ", signif(L1, digits), "\n")
+  cat("Log-Likelihood for Mean-CMP(", signif(object$nu),"): ", signif(L1, digits), "\n")
   cat("Log-Likelihood for Poisson: ", signif(L2, digits), "\n")
   cat("LRT-statistic: ", signif(ttest, digits), "\n")
   cat("Chi-sq degrees of freedom: ", 1, "\n")
