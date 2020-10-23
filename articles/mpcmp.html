@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -83,14 +83,15 @@
 
       
 
-      </header><script src="mpcmp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="mpcmp_files/kePrint-0.0.1/kePrint.js"></script><link href="mpcmp_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="mpcmp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="mpcmp_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="mpcmp_files/anchor-sections-1.0/anchor-sections.js"></script><script src="mpcmp_files/kePrint-0.0.1/kePrint.js"></script><link href="mpcmp_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting Started with the <code>mpcmp</code> package</h1>
                         <h4 class="author">Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang</h4>
             
-            <h4 class="date">2020-10-21</h4>
+            <h4 class="date">2020-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/thomas-fung/mpcmp/blob/master/vignettes/mpcmp.Rmd"><code>vignettes/mpcmp.Rmd</code></a></small>
       <div class="hidden name"><code>mpcmp.Rmd</code></div>
@@ -146,12 +147,12 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <a href="#the-mpcmp-package" class="anchor"></a>The <code>mpcmp</code> package</h2>
 <p>The main modelling function in our <code>mpcmp</code> package is <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>. The optimisation is done using Fisher Scoring updates to take advantage of the fact the CMP<span class="math inline">\(_{\mu}\)</span> belongs to the exponential family. Notice that this is a constrained optimisation problem as we have to maintain mean constraints at all times, which makes the implementation is a bit more challenging.</p>
 <p>The package implements similar methods to those related to <code>glm</code> objects. If you used <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> previously, you should feel right at home. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (<code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code>, or its alias <code><a href="https://rdrr.io/r/stats/coef.html">coefficients()</a></code>), the fitted values (<code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted.values()</a></code>), the residuals (<code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/residuals.html">resid()</a></code>), the model frame (<code><a href="https://rdrr.io/r/stats/model.frame.html">model.frame()</a></code>), the number of observations (nobs()), the log-likelihood (<code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code>), and the AIC (<code><a href="https://rdrr.io/r/stats/AIC.html">AIC()</a></code>).</p>
-<p>You can also use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or <code><a href="../reference/gg_plot.html">gg_plot()</a></code> to obtain diagnostic plots of the fitted model.</p>
+<p>You can also use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot()</a></code> to obtain diagnostic plots of the fitted model.</p>
 <p>Let’s go through some examples to show you what our package can do!</p>
 </div>
-<div id="constant-dispersion-example-attendance" class="section level2">
+<div id="constant-overdispersion-example-attendance" class="section level2">
 <h2 class="hasAnchor">
-<a href="#constant-dispersion-example-attendance" class="anchor"></a>Constant Dispersion Example: <code>attendance</code>
+<a href="#constant-overdispersion-example-attendance" class="anchor"></a>Constant Overdispersion Example: <code>attendance</code>
 </h2>
 <p>The <code>attendance</code> dataset (originally from <a href="https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/">https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/</a>) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
@@ -196,17 +197,17 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Likelihood ratio test for testing nu=1:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Log-Likelihood for Mean-CMP:  -864 </span>
-<span class="co">#&gt; Log-Likelihood for Poisson:  -1320 </span>
-<span class="co">#&gt; LRT-statistic:  903 </span>
-<span class="co">#&gt; Chi-sq degrees of freedom:  1 </span>
-<span class="co">#&gt; P-value:  &lt; 2e-16</span></pre></div>
+<span class="co">#&gt; Log-Likelihood for Mean-CMP(0.0202406): -864</span>
+<span class="co">#&gt; Log-Likelihood for Poisson: -1320</span>
+<span class="co">#&gt; LRT-statistic: 903</span>
+<span class="co">#&gt; Chi-sq degrees of freedom: 1</span>
+<span class="co">#&gt; P-value: &lt; 2e-16</span></pre></div>
 <p>As the P-value is small, we conclude that dispersion is present in this data set.</p>
 <p>One of the key features of the <code>mpcmp</code> package is that it provides a range of diagnostic plots.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/gg_plot.html">gg_plot</a></span><span class="op">(</span><span class="va">M.attendance</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">M.attendance</span><span class="op">)</span></pre></div>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>Please refer to <code><a href="../reference/gg_plot.html">?gg_plot</a></code> to see what diagnostic plots are available.</p>
+<p>Please refer to <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">?autoplot</a></code> to see what diagnostic plots are available for a <code>cmp</code> class object.</p>
 <p>The <code>mpcmp</code> package also supports <code>broom</code> <code>tidier</code> method.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span><span class="op">(</span><span class="va">M.attendance</span><span class="op">)</span>
@@ -434,10 +435,16 @@ Log.Lik.
 <p>We also implemented a bunch of commonly used methods for “cmp” objects:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"cmp"</span><span class="op">)</span>
-<span class="co">#&gt;  [1] augment        confint        cooks.distance glance         hatvalues     </span>
-<span class="co">#&gt;  [6] influence      model.matrix   plot           predict        print         </span>
-<span class="co">#&gt; [11] rstandard      summary        tidy           update         vcov          </span>
+<span class="co">#&gt;  [1] augment        autoplot       confint        cooks.distance glance        </span>
+<span class="co">#&gt;  [6] hatvalues      influence      model.matrix   plot           predict       </span>
+<span class="co">#&gt; [11] print          rstandard      summary        tidy           update        </span>
+<span class="co">#&gt; [16] vcov          </span>
 <span class="co">#&gt; see '?methods' for accessing help and source code</span></pre></div>
+</div>
+<div id="constant-underdispersion-example-takeoverbids" class="section level2">
+<h2 class="hasAnchor">
+<a href="#constant-underdispersion-example-takeoverbids" class="anchor"></a>Constant Underdispersion Example: <code>takeoverbids</code>
+</h2>
 </div>
 <div id="varying-dispersion-example-sitophilus" class="section level2">
 <h2 class="hasAnchor">
