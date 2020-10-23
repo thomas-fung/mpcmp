@@ -57,7 +57,7 @@
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -223,19 +223,21 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">M_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">daysabs</span><span class="op">~</span> <span class="va">gender</span><span class="op">+</span><span class="va">math</span><span class="op">+</span><span class="va">prog</span>, data<span class="op">=</span><span class="va">attendance</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span>
 <span class="va">M_nb</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">glm.nb</a></span><span class="op">(</span><span class="va">daysabs</span><span class="op">~</span> <span class="va">gender</span><span class="op">+</span><span class="va">math</span><span class="op">+</span><span class="va">prog</span>, data<span class="op">=</span><span class="va">attendance</span><span class="op">)</span>
-<span class="fu">modelsummary</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelsummary.html">modelsummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">M.attendance</span>, <span class="va">M_poisson</span>, <span class="va">M_nb</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="fu">modelsummary</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelsummary.html">modelsummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mpcmp <span class="op">=</span> <span class="va">M.attendance</span>, 
+                                Poisson <span class="op">=</span> <span class="va">M_poisson</span>, 
+                                Neg.Bin <span class="op">=</span> <span class="va">M_nb</span><span class="op">)</span><span class="op">)</span></pre></div>
 <table class="table table">
 <thead><tr>
 <th style="text-align:left;">
 </th>
 <th style="text-align:left;">
-Model 1
+mpcmp
 </th>
 <th style="text-align:left;">
-Model 2
+Poisson
 </th>
 <th style="text-align:left;">
-Model 3
+Neg.Bin
 </th>
 </tr></thead>
 <tbody>
@@ -445,6 +447,228 @@ Log.Lik.
 <h2 class="hasAnchor">
 <a href="#constant-underdispersion-example-takeoverbids" class="anchor"></a>Constant Underdispersion Example: <code>takeoverbids</code>
 </h2>
+<p>A dataset from <span class="citation">Cameron and Johansson (1997)</span> that gives the number of bids received by 126 US firms that were successful targets of tender offers during the period 1978-85. The dataset comes with a set of explanatory variables such as defensive actions taken by management of target firm, firm-specific characteristics and intervention by federal regulators.</p>
+<p>If we fit a Poisson distribution to the marginal distribution of the number of bids, we have:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"takeoverbids"</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">takeoverbids</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">numbids</span>, y <span class="op">=</span> <span class="va">..count..</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">..count..</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">numbids</span>,  
+                        y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">numbids</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">numbids</span><span class="op">)</span><span class="op">)</span>, 
+                        ymin <span class="op">=</span> <span class="fl">0</span>, 
+                        ymax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">numbids</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">numbids</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
+                  colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Number of bids with Poisson fit"</span>, y <span class="op">=</span> <span class="st">"Probability"</span><span class="op">)</span></pre></div>
+<p><img src="mpcmp_files/figure-html/unnamed-chunk-10-1.png" width="700"> We can see that the response variable is more concentrated than a Poisson fit suggests which is a sign of underdispersion.</p>
+<p>Here, we can use <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to fit the mean-parametrized CMP model to try to account for that underdispersion.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">M.bids</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span><span class="op">(</span><span class="va">numbids</span> <span class="op">~</span> <span class="va">leglrest</span> <span class="op">+</span> <span class="va">rearest</span> <span class="op">+</span> <span class="va">finrest</span> <span class="op">+</span> <span class="va">whtknght</span>
+    <span class="op">+</span> <span class="va">bidprem</span> <span class="op">+</span> <span class="va">insthold</span> <span class="op">+</span> <span class="va">size</span> <span class="op">+</span> <span class="va">sizesq</span> <span class="op">+</span> <span class="va">regulatn</span>, data<span class="op">=</span><span class="va">takeoverbids</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span><span class="op">(</span><span class="va">M.bids</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 10 x 5</span>
+<span class="co">#&gt;    term        estimate std.error statistic  p.value</span>
+<span class="co">#&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 (Intercept)  0.990     0.435       2.27  0.0230  </span>
+<span class="co">#&gt;  2 leglrest     0.268     0.123       2.18  0.0292  </span>
+<span class="co">#&gt;  3 rearest     -0.173     0.155      -1.12  0.263   </span>
+<span class="co">#&gt;  4 finrest      0.0677    0.174       0.388 0.698   </span>
+<span class="co">#&gt;  5 whtknght     0.481     0.132       3.65  0.000258</span>
+<span class="co">#&gt;  6 bidprem     -0.685     0.308      -2.23  0.0260  </span>
+<span class="co">#&gt;  7 insthold    -0.368     0.347      -1.06  0.289   </span>
+<span class="co">#&gt;  8 size         0.179     0.0476      3.77  0.000166</span>
+<span class="co">#&gt;  9 sizesq      -0.00758   0.00248    -3.05  0.00228 </span>
+<span class="co">#&gt; 10 regulatn    -0.0376    0.130      -0.288 0.773</span>
+<span class="fu"><a href="../reference/LRTnu.html">LRTnu</a></span><span class="op">(</span><span class="va">M.bids</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Likelihood ratio test for testing nu=1:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Log-Likelihood for Mean-CMP(1.75214): -180</span>
+<span class="co">#&gt; Log-Likelihood for Poisson: -185</span>
+<span class="co">#&gt; LRT-statistic: 9.72</span>
+<span class="co">#&gt; Chi-sq degrees of freedom: 1</span>
+<span class="co">#&gt; P-value: 0.00182</span></pre></div>
+<p>From the likelihood ratio test, we can see that the dispersion parameter is significantly differnet to 1, suggesting the model is trying to account for that underdispersion.</p>
+<p>We can also compare the results with a Poisson model.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="va">M.bids.pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">numbids</span> <span class="op">~</span> <span class="va">leglrest</span> <span class="op">+</span> <span class="va">rearest</span> <span class="op">+</span> <span class="va">finrest</span> <span class="op">+</span> <span class="va">whtknght</span>
+    <span class="op">+</span> <span class="va">bidprem</span> <span class="op">+</span> <span class="va">insthold</span> <span class="op">+</span> <span class="va">size</span> <span class="op">+</span> <span class="va">sizesq</span> <span class="op">+</span> <span class="va">regulatn</span>, data<span class="op">=</span><span class="va">takeoverbids</span>,
+    family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span>
+<span class="fu">modelsummary</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelsummary.html">modelsummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mpcmp <span class="op">=</span> <span class="va">M.bids</span>, Poisson <span class="op">=</span> <span class="va">M.bids.pois</span><span class="op">)</span>,
+                           statistic_vertical <span class="op">=</span> <span class="cn">FALSE</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<table class="table table">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+mpcmp
+</th>
+<th style="text-align:left;">
+Poisson
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:left;">
+0.990** (0.435)
+</td>
+<td style="text-align:left;">
+0.986* (0.534)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+leglrest
+</td>
+<td style="text-align:left;">
+0.268** (0.123)
+</td>
+<td style="text-align:left;">
+0.260* (0.151)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rearest
+</td>
+<td style="text-align:left;">
+-0.173 (0.155)
+</td>
+<td style="text-align:left;">
+-0.196 (0.193)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+finrest
+</td>
+<td style="text-align:left;">
+0.068 (0.174)
+</td>
+<td style="text-align:left;">
+0.074 (0.217)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+whtknght
+</td>
+<td style="text-align:left;">
+0.481*** (0.132)
+</td>
+<td style="text-align:left;">
+0.481*** (0.159)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bidprem
+</td>
+<td style="text-align:left;">
+-0.685** (0.308)
+</td>
+<td style="text-align:left;">
+-0.678* (0.377)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+insthold
+</td>
+<td style="text-align:left;">
+-0.368 (0.347)
+</td>
+<td style="text-align:left;">
+-0.362 (0.424)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:left;">
+0.179*** (0.048)
+</td>
+<td style="text-align:left;">
+0.179*** (0.060)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sizesq
+</td>
+<td style="text-align:left;">
+-0.008*** (0.002)
+</td>
+<td style="text-align:left;">
+-0.008** (0.003)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+regulatn
+</td>
+<td style="text-align:left;">
+-0.038 (0.130)
+</td>
+<td style="text-align:left;">
+-0.029 (0.161)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:left;">
+126
+</td>
+<td style="text-align:left;">
+126
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:left;">
+382.2
+</td>
+<td style="text-align:left;">
+389.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:left;">
+413.4
+</td>
+<td style="text-align:left;">
+418.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:left;">
+-180.088
+</td>
+<td style="text-align:left;">
+-184.948
+</td>
+</tr>
+</tbody>
+<tfoot><tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr></tfoot>
+</table>
+<p>If we compare the two models, we can see that the CMP<span class="math inline">\(_{\mu}\)</span> model fitted the data better. We can also see that all the estimated standard errors under CMP<span class="math inline">\(_{\mu}\)</span> model are smaller which in turn makes the p-values for both <code>leglrest</code> and <code>bidprem</code> to drop below 0.05 instead of 0.1 under the Poisson model.</p>
 </div>
 <div id="varying-dispersion-example-sitophilus" class="section level2">
 <h2 class="hasAnchor">
@@ -457,7 +681,7 @@ Log.Lik.
 <li>Extracts prepared with different parts of mucosa or just water (control) were completely randomised with 10 replicates.</li>
 <li>The numbers of emerged insects (progeny) after 60 days were recorded and some descriptive statistics can be found below.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">sitophilus</span><span class="op">)</span>
 <span class="va">sitophilus</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">extract</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">summarise</span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ninsect</span><span class="op">)</span>, 
@@ -470,7 +694,7 @@ Log.Lik.
 <span class="co">#&gt; 3 Branch   29.9  88.8 </span>
 <span class="co">#&gt; 4 Seed      1.1   1.66</span></pre></div>
 <p>It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is the norm in a GLM, non-constant variances do not necessarily mean varying dispersions. Nonetheless, we will try to use the treatment to explain the dispersion in the data set. To do that we specify the <code>formula_nu</code> argument in the <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">sitophilus</span><span class="op">)</span>
 <span class="va">M.sit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">ninsect</span> <span class="op">~</span> <span class="va">extract</span>, formula_nu <span class="op">=</span> <span class="op">~</span> <span class="va">extract</span>, data <span class="op">=</span> <span class="va">sitophilus</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">M.sit</span><span class="op">)</span>
@@ -502,7 +726,7 @@ Log.Lik.
 <span class="co">#&gt; </span>
 <span class="co">#&gt; AIC: 260.8279</span></pre></div>
 <p>From the model summary, we can see that there is not much evidence to suggest the dispersions are varying across treatment groups. We can also formally test whether a constant dispersion model is sufficient here using a likelihood ratio test as the two models are nested:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
+<div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="va">M.sit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">M.sit</span>, formula_nu <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="fu"><a href="../reference/cmplrtest.html">cmplrtest</a></span><span class="op">(</span><span class="va">M.sit</span>, <span class="va">M.sit2</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -511,7 +735,7 @@ Log.Lik.
 <span class="co">#&gt; Chi-sq degrees of freedom:  3 </span>
 <span class="co">#&gt; P-value:  0.932</span></pre></div>
 <p>As a result, our final model is</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">M.sit2</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)</span>
@@ -566,6 +790,9 @@ Log.Lik.
 </div>
 <div id="ref-R-glmmTMB">
 <p>Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, Arni Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin Maechler, and Benjamin M. Bolker. 2017. “glmmTMB Balances Speed and Flexibility Among Packages for Zero-Inflated Generalized Linear Mixed Modeling.” <em>The R Journal</em> 9 (2): 378–400. <a href="https://journal.r-project.org/archive/2017/RJ-2017-066/index.html">https://journal.r-project.org/archive/2017/RJ-2017-066/index.html</a>.</p>
+</div>
+<div id="ref-Cameron1997a">
+<p>Cameron, A. Colin, and Per Johansson. 1997. “Count data regression using series expansions: With applications.” <em>Journal of Applied Econometrics</em> 12 (3): 203–23. <a href="https://doi.org/10.1002/(SICI)1099-1255(199705)12:3%3C203::AID-JAE446%3E3.0.CO;2-2">https://doi.org/10.1002/(SICI)1099-1255(199705)12:3&lt;203::AID-JAE446&gt;3.0.CO;2-2</a>.</p>
 </div>
 <div id="ref-Conway1962">
 <p>Conway, R. W., and W. L. Maxwell. 1962. “A queuing model with state dependent service rates.” New York :</p>
