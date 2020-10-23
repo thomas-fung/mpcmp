@@ -100,11 +100,11 @@ The main modelling function in our `mpcmp` package is `glm.cmp()`. The optimisat
 
 The package implements similar methods to those related to `glm` objects. If you used `glm()` previously, you should feel right at home. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (`coef()`, or its alias `coefficients()`), the fitted values (`fitted()` or its alias `fitted.values()`), the residuals (`residuals()` or its alias `resid()`), the model frame (`model.frame()`), the number of observations (nobs()), the log-likelihood (`logLik()`), and the AIC (`AIC()`). 
 
-You can also use `plot()` or `gg_plot()` to obtain diagnostic plots of the fitted model.  
+You can also use `plot()` or `autoplot()` to obtain diagnostic plots of the fitted model.  
 
 Let's go through some examples to show you what our package can do! 
 
-## Constant Dispersion Example: `attendance`
+## Constant Overdispersion Example: `attendance`
 
 The `attendance` dataset (originally from [https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/](https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/)) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools. 
 
@@ -140,10 +140,10 @@ As the P-value is small, we conclude that dispersion is present in this data set
 
 One of the key features of the `mpcmp` package is that it provides a range of diagnostic plots.
 ```{r}
-gg_plot(M.attendance)
+autoplot(M.attendance)
 ```
 
-Please refer to `?gg_plot` to see what diagnostic plots are available. 
+Please refer to `?autoplot` to see what diagnostic plots are available for a `cmp` class object. 
 
 The `mpcmp` package also supports `broom` `tidier` method. 
 ```{r}
@@ -160,6 +160,11 @@ We also implemented a bunch of commonly used methods for "cmp" objects:
 ```{r}
 methods(class = "cmp")
 ```
+
+## Constant Underdispersion Example: `takeoverbids`
+
+
+
 
 ## Varying Dispersion Example: `sitophilus`
 

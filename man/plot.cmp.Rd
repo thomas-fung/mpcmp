@@ -72,5 +72,5 @@ plot(M.bids)
 }
 \seealso{
 \code{\link{compPIT}}, \code{\link{compnormRandPIT}},
-\code{\link{glm.cmp}} and \code{\link{gg_plot}}.
+\code{\link{glm.cmp}} and \code{\link{autoplot}}.
 }

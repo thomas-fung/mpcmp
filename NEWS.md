@@ -1,3 +1,5 @@
+# mpcmp 0.3.6
+
 # mpcmp 0.3.5
   * Added `broom` `tidier` methods support. Specifically added method for `tidy()`, `glance()` and `augment()`.   
   * `summary()` was rewritten in order to support `tidier` methods.

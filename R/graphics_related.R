@@ -40,7 +40,7 @@
 #' \strong{67}, 1--36. 
 #' @seealso 
 #' \code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}}, 
-#' \code{\link{plot.cmp}} and \code{\link{gg_plot}}.
+#' \code{\link{plot.cmp}} and \code{\link{autoplot}}.
 #' @examples 
 #' ## For examples see example(plot.cmp)
 #' @name PIT_Plot
@@ -128,10 +128,10 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #' \strong{67}, 1--36. 
 #' @seealso 
 #' \code{\link{histcompPIT}}, \code{\link{qqcompPIT}}, 
-#' \code{\link{plot.cmp}} and \code{\link{gg_plot}}.
+#' \code{\link{plot.cmp}} and \code{\link{autoplot}}.
 
 #' @examples 
-#' ## For examples see example(gg_plot)
+#' ## For examples see example(autoplot)
 #' @name PIT_ggPlot
 NULL
 
@@ -362,7 +362,7 @@ compnormRandPIT <- function (object) {
 #'
 #' @seealso 
 #' \code{\link{compPIT}}, \code{\link{compnormRandPIT}}, 
-#' \code{\link{glm.cmp}} and \code{\link{gg_plot}}. 
+#' \code{\link{glm.cmp}} and \code{\link{autoplot}}. 
 #' @examples 
 #' data(takeoverbids)
 #' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
@@ -498,8 +498,11 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 }
 
 
-#' Plot Diagnostic for a \code{glm.cmp} Object in ggplot
+#' Plot Diagnostic for a \code{glm.cmp} Object in ggplot style
 #' 
+#' \code{autoplot} uses ggplot2 to draw the diagnostic plots for a 'cmp' class object.
+#'  \code{gg_plot} is an \emph{alias} for it. 
+#'
 #' Eight plots (selectable by \code{which}) are currently available: 
 #' a plot of deviance residuals against fitted values, 
 #' a non-randomized PIT histogram, 
@@ -511,7 +514,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' a plot of pearson residuals against leverage. 
 #' By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided. 
 #' 
-#' @param x an object class 'cmp' object, obtained from a call to \code{glm.cmp}
+#' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
 #' @param which if a subset of plots is required, specify a subset of the numbers 1:8. 
 #' See 'Details' below. 
 #' @param ask logical; if \code{TRUE}, the user is asked before each plot. 
@@ -522,13 +525,12 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' @param output_as_ggplot logical; if \code{TRUE}, the function would 
 #' return a list of \code{ggplot} objects; if \code{FALSE}, the 
 #' function would return an \code{ggarrange} object.
-#' 
+#' @param ... other arguments passed to or from other methods (currently unused).
 #' @return 
 #' return a list of \code{ggplot} objects or a \code{ggarrange} object.
 #' @import stats
 #' @import ggplot2
 #' @import ggpubr
-#' @export
 #' @details 
 #' The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
@@ -560,13 +562,14 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' 
 #' ## The default plots are shown
-#' gg_plot(M.bids)
+#' gg_plot(M.bids) # or autoplot(M.bids)
 #' 
 #' ## The plots for the non-randomized PIT 
-#' gg_plot(M.bids, which = c(2,3))
-gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
+#' gg_plot(M.bids, which = c(2,3)) # or autoplot(M.bids, which = c(2,3))
+#' @export
+autoplot.cmp <- function(object, which=c(1L,2L,6L,8L), bins = 10,
                        ask = TRUE, nrow = NULL, ncol = NULL, 
-                       output_as_ggplot = TRUE){
+                       output_as_ggplot = TRUE, ...){
   # plot 1 deviance residuals vs fitted
   # plot 2 Histogram of non-randomized PIT
   # plot 3 q-q plot of non-randomized PIT
@@ -575,12 +578,11 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
   # plot 6 sclae-location plot
   # plot 7 cook's distance vs obs number
   # plot 8 std pearson resid. vs leverage
-  y <- linear_predictors <- index <- leg <- cook_level <- NULL
-  object <- x
+  x <- y <- linear_predictors <- index <- leg <- cook_level <- NULL
   if (any(!(which %in% 1:8))){
     cat("The acceptable ragne for option 'which' is 1:8.\n")
     cat("Anyting outside this range would be ignored.\n")
-    cat("Use ?gg_plot to see which plots are available.\n")
+    cat("Use ?autoplot to see which plots are available.\n")
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -760,4 +762,9 @@ gg_plot <- function(x, which=c(1L,2L,6L,8L), bins = 10,
   invisible()
 }
 
+
+#' @rdname autoplot.cmp
+#' @aliases autoplot.cmp
+#' @export
+gg_plot <- autoplot.cmp
 

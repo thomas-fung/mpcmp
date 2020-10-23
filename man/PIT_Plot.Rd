@@ -87,5 +87,5 @@ Time Series Regression of Counts. \emph{Journal of Statistical Software},
 }
 \seealso{
 \code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}},
-\code{\link{plot.cmp}} and \code{\link{gg_plot}}.
+\code{\link{plot.cmp}} and \code{\link{autoplot}}.
 }

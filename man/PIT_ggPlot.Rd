@@ -66,7 +66,7 @@ The \code{histcompPIT} and \code{qqcompPIT} functions
 would provide the same two plots but in base R format.
 }
 \examples{
-## For examples see example(gg_plot)
+## For examples see example(autoplot)
 }
 \references{
 Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
@@ -78,5 +78,5 @@ Time Series Regression of Counts. \emph{Journal of Statistical Software},
 }
 \seealso{
 \code{\link{histcompPIT}}, \code{\link{qqcompPIT}},
-\code{\link{plot.cmp}} and \code{\link{gg_plot}}.
+\code{\link{plot.cmp}} and \code{\link{autoplot}}.
 }
