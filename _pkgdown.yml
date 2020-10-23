@@ -23,7 +23,7 @@ reference:
       - coef.cmp
       - print.cmp
       - plot.cmp
-      - gg_plot
+      - autoplot.cmp
       - summary.cmp
       - residuals.cmp
       - model.frame.cmp
@@ -68,7 +68,7 @@ navbar:
       href: reference/index.html
     - text: "Change log"
       href: news/index.html
-    - text: "Blog"
+    - text: "Tutorial"
       href: "articles/mpcmp.html"
   right:
     - icon: fa-github fa-lg

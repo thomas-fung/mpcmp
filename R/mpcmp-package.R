@@ -93,7 +93,7 @@ NULL
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' M.bids
 #' summary(M.bids)
-#' plot(M.bids) #or gg_plot(M.bids)
+#' autoplot(M.bids) #or plot(M.bids)
 #' 
 NULL
 
@@ -134,7 +134,7 @@ NULL
 #' 
 NULL
 
-#' Fish  data set
+#' Fish data set
 #'
 #' This data set gives the the number of fish species in lakes of the world; to examine the
 #' effect of the surface area of the lakes. The latitude of the lakes are also recorded. 

@@ -153,7 +153,9 @@ This means "cmp" objects can take advantage of any packages that required `broom
 ```{r}
 M_poisson <- glm(daysabs~ gender+math+prog, data=attendance, family = poisson)
 M_nb <- MASS::glm.nb(daysabs~ gender+math+prog, data=attendance)
-modelsummary::modelsummary(list(M.attendance, M_poisson, M_nb))
+modelsummary::modelsummary(list(mpcmp = M.attendance, 
+                                Poisson = M_poisson, 
+                                Neg.Bin = M_nb))
 ```
 
 We also implemented a bunch of commonly used methods for "cmp" objects: 
@@ -163,8 +165,40 @@ methods(class = "cmp")
 
 ## Constant Underdispersion Example: `takeoverbids`
 
+A dataset from @Cameron1997a that gives the number of bids  received by 126 US firms that were successful targets of tender offers during the period 1978-85. The dataset comes with a set of explanatory variables such as defensive actions taken by management of target firm, firm-specific characteristics and intervention by federal regulators.
 
+If we fit a Poisson distribution to the marginal distribution of the number of bids, we have:  
+```{r}
+data("takeoverbids")
+ggplot(takeoverbids) + 
+  geom_bar(aes(x= numbids, y = ..count../sum(..count..)))+
+  geom_pointrange(aes(x = numbids,  
+                        y = dpois(numbids, mean(numbids)), 
+                        ymin = 0, 
+                        ymax = dpois(numbids, mean(numbids))),
+                  colour = "red") + 
+  labs(title = "Number of bids with Poisson fit", y = "Probability")
+```
+We can see that the response variable is more concentrated than a Poisson fit suggests which is a sign of underdispersion. 
 
+Here, we can use `glm.cmp()` to fit the mean-parametrized CMP model to try to account for that underdispersion. 
+```{r}
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+tidy(M.bids)
+LRTnu(M.bids)
+```
+From the likelihood ratio test, we can see that the dispersion parameter is significantly differnet to 1, suggesting the model is trying to account for that underdispersion. 
+
+We can also compare the results with a Poisson model.
+```{r}
+M.bids.pois <- glm(numbids ~ leglrest + rearest + finrest + whtknght
+    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids,
+    family = poisson)
+modelsummary::modelsummary(list(mpcmp = M.bids, Poisson = M.bids.pois),
+                           statistic_vertical = FALSE, stars = TRUE)
+```
+If we compare the two models, we can see that the CMP$_{\mu}$ model fitted the data better. We can also see that all the estimated standard errors under CMP$_{\mu}$ model are smaller which in turn makes the p-values for both `leglrest` and `bidprem` to drop below 0.05 instead of 0.1 under the Poisson model.
 
 ## Varying Dispersion Example: `sitophilus`
 

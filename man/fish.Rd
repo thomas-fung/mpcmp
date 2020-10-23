@@ -3,7 +3,7 @@
 \docType{data}
 \name{fish}
 \alias{fish}
-\title{Fish  data set}
+\title{Fish data set}
 \format{
 A data frame with 70 observations on 4 variables.
 \describe{

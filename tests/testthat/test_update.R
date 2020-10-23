@@ -28,7 +28,7 @@ test_that("Test cmplrtest function",
 test_that("Test LRTnu", 
           {
             expect_equal(capture_output_lines(LRTnu(M.attendance))[8], 
-                         "P-value:  < 2e-16 ")
+                         "P-value: < 2e-16")
           })
 
 test_that("Test updating the dispersion regression formula",

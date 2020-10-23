@@ -1,5 +1,7 @@
 # mpcmp 0.3.6
-
+  * Added `autoplot` as an alias to `gg_plot`. Credit to Emi Tanaka  (@emitanaka) for this suggestion.
+  * Also patched an issue in the Rcpp code to pass cran check for solaris.
+  * There are also other minor QOL improvements. 
 # mpcmp 0.3.5
   * Added `broom` `tidier` methods support. Specifically added method for `tidy()`, `glance()` and `augment()`.   
   * `summary()` was rewritten in order to support `tidier` methods.
