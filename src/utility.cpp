@@ -35,7 +35,7 @@ NumericVector logZ_c(NumericVector log_lambda, NumericVector nu, int summax) {
     double logz  = 0;
     double logz_ = 0;
     for (int j = 1; j < summax; ++j) {
-      logz_ += log_lambda[i] - nu[i] * log(j);
+      logz_ += log_lambda[i] - nu[i] * log((double)j);
       logz = R::logspace_add(logz, logz_);
       if (logz_ - logz < log_epsilon) break;
     }
