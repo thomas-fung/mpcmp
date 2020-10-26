@@ -165,7 +165,7 @@ methods(class = "cmp")
 
 ## Constant Underdispersion Example: `takeoverbids`
 
-A dataset from @Cameron1997a that gives the number of bids  received by 126 US firms that were successful targets of tender offers during the period 1978-85. The dataset comes with a set of explanatory variables such as defensive actions taken by management of target firm, firm-specific characteristics and intervention by federal regulators.
+One of the key strength of the CMP distribution is that it can handle underdispersion. Here is an example demonstrating that. A dataset from @Cameron1997a that gives the number of bids received by 126 US firms that were successful targets of tender offers during the period 1978-85. The dataset comes with a set of explanatory variables such as defensive actions taken by management of target firm, firm-specific characteristics and intervention by federal regulators.
 
 If we fit a Poisson distribution to the marginal distribution of the number of bids, we have:  
 ```{r}
@@ -179,7 +179,7 @@ ggplot(takeoverbids) +
                   colour = "red") + 
   labs(title = "Number of bids with Poisson fit", y = "Probability")
 ```
-We can see that the response variable is more concentrated than a Poisson fit suggests which is a sign of underdispersion. 
+We can see that the response variable is more concentrated than a Poisson fit, which is a sign of underdispersion. 
 
 Here, we can use `glm.cmp()` to fit the mean-parametrized CMP model to try to account for that underdispersion. 
 ```{r}
@@ -188,7 +188,7 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 tidy(M.bids)
 LRTnu(M.bids)
 ```
-From the likelihood ratio test, we can see that the dispersion parameter is significantly differnet to 1, suggesting the model is trying to account for that underdispersion. 
+From the likelihood ratio test, we can see that the dispersion parameter is significantly different to 1, suggesting the model is trying to account for that underdispersion. 
 
 We can also compare the results with a Poisson model.
 ```{r}

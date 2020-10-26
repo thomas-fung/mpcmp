@@ -135,7 +135,7 @@
 #' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
 #' M.attendance
 #' summary(M.attendance)
-#' \donttest{autoplot(M.attendance) # or plot(M.attendance)
+#' \donttest{plot(M.attendance) # or autoplot(M.attendance)
 #' }
 #'
 #' ### Ribeiro et al. (2013): Varying dispersion as a function of covariates

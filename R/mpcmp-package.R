@@ -93,7 +93,7 @@ NULL
 #'     + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
 #' M.bids
 #' summary(M.bids)
-#' autoplot(M.bids) #or plot(M.bids)
+#' plot(M.bids) #or autoplot(M.bids)
 #' 
 NULL
 
