@@ -25,6 +25,7 @@ doi
 Dunsmuir
 Ecdat
 edu
+Emi
 frac
 fresh’
 fung
@@ -65,7 +66,9 @@ pearson
 pmf
 Poisson
 precalculating
+QOL
 Raphson
+Rcpp
 Reparametrization
 Reparametrized
 resid
@@ -76,6 +79,7 @@ Sánchez
 se
 Shimakura
 Sitophilus
+solaris
 spelltest
 stars’
 thomas
@@ -87,6 +91,8 @@ Trivedi
 ts
 ucla
 underdispersed
+underdispersion
+Underdispersion
 Var
 Vendramim
 ylog

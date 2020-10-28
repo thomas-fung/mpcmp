@@ -48,8 +48,9 @@ values is less than tol.}
 A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 }
 \description{
-Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
-Model with varying dispersion.
+This is a workhorse function in which glm.cmp to call upon to fit a
+mean-parametrized Conway-Maxwell Poisson generalized linear model with
+varying dispersion.
 }
 \examples{
 ## For examples see example(glm.cmp)

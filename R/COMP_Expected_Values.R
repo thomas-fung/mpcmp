@@ -24,6 +24,7 @@
 NULL
 
 #' @rdname comp_expected_values
+#' @export
 comp_mean_logfactorialy = function(lambda, nu, log.Z, summax=100){
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.

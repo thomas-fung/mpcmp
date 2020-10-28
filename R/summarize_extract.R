@@ -8,10 +8,9 @@
 #' @param type the \code{type} of residuals which should be returned. The alternatives are:
 #' 'deviance' (default), 'pearson' and 'response'. Can be abbreviated. 
 #' @param ... other arguments passed to or from other methods  (currently unused).
-#' 
+#' @export
 #' @return 
 #' Residuals extracted from the object \code{object}.
-#' 
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...){
@@ -38,7 +37,7 @@ residuals.cmp <- function(object, type = c("deviance","pearson","response"), ...
 #' 
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
-#' 
+#' @export
 #' @name logLik.cmp
 logLik.cmp <- function(object,...)
 { out <- object$maxl
@@ -59,6 +58,7 @@ print.logLik.cmp <- function(x,...){
 #' @param ... other arguments passed to or from other methods  (currently unused).
 #' @return 
 #' The number of observations extracted from the object \code{object}.
+#' @export
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
 nobs.cmp <- function(object, ...)
@@ -79,6 +79,7 @@ nobs.cmp <- function(object, ...)
 #' @details 
 #' When comparing models fitted by maximum likelihood to the same data, the smaller the AIC or 
 #' BIC, the better the fit. 
+#' @export
 #' @return 
 #' A numeric value with the corresponding AIC (or BIC, or ..., depends on k).
 #' @seealso 
@@ -98,6 +99,7 @@ AIC.cmp <- function(object, ..., k = 2){
 #' @param ... other arguments passed to or from other methods  (currently unused).
 #' @return 
 #' Fitted values \code{mu} extracted from the object \code{object}.
+#' @export
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 fitted.cmp <- function(object, ...){
@@ -112,6 +114,7 @@ fitted.cmp <- function(object, ...){
 #' @param ... other arguments passed to or from other methods  (currently unused).
 #' @return 
 #' The method will return the saved \code{\link{data.frame}} used when fitting the cmp model.
+#' @export
 #' @seealso 
 #' \code{\link{coef.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 model.frame.cmp <- function(formula, ...){
@@ -132,9 +135,9 @@ model.frame.cmp <- function(formula, ...){
 #' 
 #' @param object an object class 'cmp' object, obtained from a call to \code{glm.cmp}
 #' @param ... other arguments passed to or from other methods  (currently unused).
-#' 
 #' @return 
 #' Coefficients extracted from the object \code{object}.
+#' @export
 #' @seealso 
 #' \code{\link{fitted.cmp}}, \code{\link{residuals.cmp}}, \code{\link{glm.cmp}}.
 #' 

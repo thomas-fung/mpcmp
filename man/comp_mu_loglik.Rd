@@ -26,7 +26,7 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 \item{mu}{numeric vector: fitted mean parameters}
 }
 \value{
-\code{comp_mu_loglik} returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
+\code{comp_mu_loglik} returns the log-likelihood value of the COM-Poisson model based on Huang (2017).
 \code{comp_mu_neg_loglik_log_nu_only} returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with \code{optim}.
 }
 \description{

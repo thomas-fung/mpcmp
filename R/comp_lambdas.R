@@ -27,6 +27,7 @@
 NULL
 
 #' @rdname comp_lambdas
+#' @export
 comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000, 
                          maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1, summax = 100){
   df <- CBIND(mu=mu, nu=nu, lambda = lambdaint, lb = lambdalb, ub = lambdaub)
@@ -79,6 +80,7 @@ comp_lambdas <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000,
 }
 
 #' @rdname comp_lambdas
+#' @export
 comp_lambdas_fixed_ub <- function(mu, nu, lambdalb = 1e-10, lambdaub = 1000, 
                                   maxlambdaiter = 1e3, tol = 1e-6, lambdaint = 1, 
                                   summax = 100) {

@@ -1,6 +1,12 @@
 #' Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
 #' Model with varying dispersion. 
 #'
+#' @description  
+#' This is a workhorse function in which glm.cmp to call upon to fit a 
+#' mean-parametrized Conway-Maxwell Poisson generalized linear model with 
+#' varying dispersion. 
+#'
+
 #' @param y the response y vector.
 #' @param X the design matrix for regressing the mean
 #' @param S the design matrix for regressing the dispersion
@@ -17,7 +23,7 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the 
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
-#'
+#' @export
 #' @return
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 #'

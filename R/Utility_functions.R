@@ -7,7 +7,7 @@
 #' @param ... (generalized) vectors or matrices. These can be given as named arguments 
 #' @param deparse.level integer; deparse.level = 0 constructs no labels, 
 #' deparse.level = 1 (the default) or > 1 constructs labels from the arguments names. 
-#' 
+#' @export
 CBIND <- function(..., deparse.level = 1) {
   dots <- list(...)
   len <- sapply(dots, length)
@@ -23,7 +23,7 @@ CBIND <- function(..., deparse.level = 1) {
 #' 
 #' @param x numeric vector to be tested  
 #' @param tol numeric; precision level
-#' 
+#' @export
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   abs(x - round(x)) < tol
 }

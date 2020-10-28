@@ -47,6 +47,7 @@
 NULL
 
 #' @rdname PIT_Plot
+#' @export
 histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHist = "royal blue", lwdLine = 2, main = NULL, ...)
 {
   PIT <- compPIT(object, bins = bins)$PIT
@@ -73,6 +74,7 @@ histcompPIT <- function (object, bins = 10, line = TRUE, colLine = "red", colHis
 }
 
 #' @rdname PIT_Plot
+#' @export
 qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
                       lty2 = 2, type = "l", main = NULL, ...){
   dummy.variable <- seq(0, 1, by = 1/bins)
@@ -136,6 +138,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 NULL
 
 #' @rdname PIT_ggPlot
+#' @export
 gg_histcompPIT <- 
     function (object, bins = 10, ref_line = TRUE, col_line = "red", 
               col_hist = "royal blue", size = 1)
@@ -164,6 +167,7 @@ gg_histcompPIT <-
 }
 
 #' @rdname PIT_ggPlot
+#' @export
 gg_qqcompPIT <- function(object, bins = 10, col1 = "red", 
                          col2 = "#999999", 
                          lty1 = 1, lty2 = 2){
@@ -531,6 +535,7 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' @import stats
 #' @import ggplot2
 #' @import ggpubr
+#' @export
 #' @details 
 #' The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
 #' the absolute standardized deviance residuals (\emph{sqrt|E|}) in order to diminish 
@@ -566,7 +571,6 @@ plot.cmp <- function(x, which=c(1L,2L,6L,8L),
 #' 
 #' ## The plots for the non-randomized PIT 
 #' gg_plot(M.bids, which = c(2,3)) # or autoplot(M.bids, which = c(2,3))
-#' @export
 autoplot.cmp <- function(object, which=c(1L,2L,6L,8L), bins = 10,
                        ask = TRUE, nrow = NULL, ncol = NULL, 
                        output_as_ggplot = TRUE, ...){

@@ -10,6 +10,7 @@
 #' @param log.z logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as 
 #' \eqn{log(Z)}.
 #' @param summax maximum number of terms to be considered in the truncated sum
+#' @export
 Z <- function(lambda, nu, log.z = FALSE, summax){
   # approximates normalizing constant for COMP distributions
   # lambda, nu are recycled to match the length of each other.
@@ -68,10 +69,11 @@ Z <- function(lambda, nu, log.z = FALSE, summax){
 #' @param log_lambda rate parameter in log scale.
 #' @param nu dispersion parameter, straightly positive.
 #' @param summax maximum number of terms to be considered in the truncated sum.
+#' @export
 #' @references 
 #'  Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
 #'  Reparametrized COM-Poisson Regression Models. R package version 0.0.1.
-
+#'
 logZ <- function(log_lambda, nu, summax = 100){
   # approximates normalizing constant for COMP distributions
   # lambda, nu are recycled to match the length of each other.
