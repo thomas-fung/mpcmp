@@ -1,3 +1,6 @@
+# mpcmp (development version)
+  * Export more functions to NAMESPACE as requested by @yangchino1. 
+  
 # mpcmp 0.3.6
   * Added `autoplot` as an alias to `gg_plot`. Credit to Emi Tanaka  (@emitanaka) for this suggestion.
   * Also patched an issue in the Rcpp code to pass cran check for solaris.
