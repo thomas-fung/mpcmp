@@ -82,7 +82,7 @@
 #' returned by \code{glm.cmp}.
 #'
 #' The functions \code{LRTnu} and \code{cmplrtest} can be used to perform a likelihood ratio
-#' chi-squared test for nu = 1 and for nested COM-Poisson model respectively. 
+#' chi-squared test for nu = 1 and for nested COM-Poisson model respectively.
 #'
 #' An object class 'glm.cmp' is a list containing at least the following components:
 #'
@@ -132,19 +132,20 @@
 #' @examples
 #' ### Huang (2017) Page 368--370: Overdispersed Attendance data
 #' data(attendance)
-#' M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+#' M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 #' M.attendance
 #' summary(M.attendance)
-#' \donttest{plot(M.attendance) # or autoplot(M.attendance)
+#' \donttest{
+#' plot(M.attendance) # or autoplot(M.attendance)
 #' }
 #'
 #' ### Ribeiro et al. (2013): Varying dispersion as a function of covariates
-#' \donttest{data(sitophilus)
+#' \donttest{
+#' data(sitophilus)
 #' M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #' summary(M.sit)
 #' }
-#' 
-
+#'
 glm.cmp <- function(formula,
                     formula_nu = NULL,
                     data,
@@ -161,10 +162,14 @@ glm.cmp <- function(formula,
                     contrasts_nu = NULL) {
   call <- match.call()
   mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "subset", "na.action",
-               "offset"),
-             names(mf),
-             0L)
+  m <- match(
+    c(
+      "formula", "data", "subset", "na.action",
+      "offset"
+    ),
+    names(mf),
+    0L
+  )
   if (is.null(formula)) {
     stop("formula for beta must be specified (can not be NULL)")
   }
@@ -204,9 +209,9 @@ glm.cmp <- function(formula,
   }
   offset <- as.vector(model.offset(mf_mu))
   if (is.null(offset)) {
-    offset.cmp <-  rep(0, length(y))
+    offset.cmp <- rep(0, length(y))
   } else {
-    offset.cmp <-  model.extract(mf_mu, "offset")
+    offset.cmp <- model.extract(mf_mu, "offset")
   }
   if (is.null(S)) {
     out <- fit_glm_cmp_const_nu(
@@ -236,8 +241,7 @@ glm.cmp <- function(formula,
   out$call <- call
   out$formula <- formula
   if (is.null(formula_nu)) {
-    out$contrasts_mu <-
-      out$formula_nu <- out$terms_nu <- out$model_nu <- NA
+    out$contrasts_mu <- out$formula_nu <- out$terms_nu <- out$model_nu <- NA
   } else {
     out$formula_nu <- formula_nu
     out$terms_nu <- mt_nu

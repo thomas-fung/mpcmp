@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ```
 ## Introduction {#intro}
 
-Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008; @Lord2010a; @Sellers2010). Key features of CMP distributions include the ability to handle both over- and under-dispersion while containing the classical Poisson distribution as a special case. See the corresponding  [Wikipedia](https://en.wikipedia.org/wiki/Conway–Maxwell–Poisson_distribution) page for a quick summary or @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
+Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., @Shmueli2005; @Lord2008; @Lord2010a; @Sellers2010; @sellersConwayMaxwellPoisson). Key features of CMP distributions include the ability to handle both over- and under-dispersion while containing the classical Poisson distribution as a special case. See the corresponding  [Wikipedia](https://en.wikipedia.org/wiki/Conway–Maxwell–Poisson_distribution) page for a quick summary or @Shmueli2005 for a more detailed overview of the history, features and applications of CMP distributions.
 
 The R (@R-base) `mpcmp` package of @R-mpcmp provides the functionality for
 estimating a mean-parametrized Conway-Maxwell-Poisson generalized linear models for dispersed count data. The package is available from the Comprehensive R Archive Network (CRAN) [here](http://CRAN.R-project.org/package=mpcmp). @Huang2017b provides the theoretical development of the model that this package bases on. 
@@ -29,13 +29,13 @@ estimating a mean-parametrized Conway-Maxwell-Poisson generalized linear models 
 ## Conway-Maxwell-Poisson Distributions {#cmpintro}
 The CMP distribution was first used by @Conway1962 as a model for a queuing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter $\lambda$ and dispersion parameter $\nu$ if its probability mass function (pmf) is given by
 $$
-P(Y =y|λ,ν)= \frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}, \quad y =0,1,2,...,
+P(Y =y|\lambda,\nu)= \frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}, \quad y =0,1,2,...,
 $$ 
 where
 $$
 Z(\lambda,\nu)= \sum^{\infty}_{y=0}\frac{\lambda^y}{(y!)^{\nu}},
 $$
-is a normalizing constant. The CMP includes Poisson ($\nu = 1$), geometric ($\nu = 0$, $\lambda < 1$) and Bernoulli ($\nu \to \infty$ with probability $\lambda/(1+\lambda)$).
+is a normalizing constant. The CMP includes Poisson ($\nu = 1$), geometric ($\nu = 0$, $\lambda < 1$) and Bernoulli ($\nu \to \infty$ with probability $\lambda/(1+\lambda)$) as its special cases.
 
 One of the major limitations of CMP distributions is that it is not directly parametrized via the mean as it does not have closed-form expression for its moments in terms of the parameters $\lambda$ and $\nu$. For the first two moments, approximations can be obtained as 
 $$
