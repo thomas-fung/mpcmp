@@ -1,19 +1,32 @@
-bibentry(bibtype = "Manual",
-  title        = "mpcmp: Mean-Parametrizied Conway-Maxwell Poisson Regression",
-  author       = c(person(given = "Thomas",
-                          family = "Fung",
-                          email = "thomas.fung.dr@gmail.com"),
-                   person(given = "Aya",
-                          family = "Alwan",
-                          email = "aya.alwan@mq.edu.au"),
-                   person(given = c("Justin"),
-                          family = "Wishart",
-                          email = "justin.r.wishart@gmail.com"),
-		   person(given = c("Alan"),
-                          family = "Huang",
-                          email = "alan.huang@uq.edu.au")),
-  year         = "2020",
-  note         = "R package version 0.3.5",
-  header       = "To cite the mpcmp package in publications use:",
-  url          = "https://CRAN.R-project.org/package=mpcmp"
+citHeader("To cite the mpcmp package in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Mean-Parametrized {{Conway}}–{{Maxwell}}–{{Poisson}} Regression Models for Dispersed Counts",
+  author   = personList(as.person("Alan Huang")),
+  journal  = "Statistical Modelling",
+  year     = "2017",
+  volume   = "17",
+  pages    = "359--380",
+  url      = "http://journals.sagepub.com/doi/10.1177/1471082X17697749/.",
+  textVersion = paste("Huang A. (2017)", 
+  "Mean-Parametrized Conway–Maxwell–Poisson Regression Models for Dispersed Counts",
+  "Statistical Modelling, 17, 359-380.",
+  "URL http://journals.sagepub.com/doi/10.1177/1471082X17697749/.")
+)
+
+citEntry(
+  entry    = "Manual",
+  title    = "mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression",
+  author   = personList(as.person("Thomas Fung"),
+  as.person("Aya Alwan"),
+  as.person("Justin Wishart"),
+  as.person("Alan Huang")
+  ),
+  year     = "2020", 
+  note = "R package version 0.3.6.9000.",
+  url      = "URL: https://CRAN.R-project.org/package=mpcmp",
+  textVersion = paste("Fung, T., Alwan, A., Wishart, J. & Huang, A. (2020)", 
+  "mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.6.9000.",
+  "URL https://CRAN.R-project.org/package=mpcmp/.")
 )
