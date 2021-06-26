@@ -53,6 +53,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -64,9 +66,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -137,7 +145,7 @@
     <p><code>summary</code> method for class <code>cmp</code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cmp</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for cmp</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for summary.cmp</span>
@@ -146,7 +154,7 @@
   digits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"digits"</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>3</span><span class='op'>)</span>,
   signif.stars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"show.signif.stars"</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,7 +196,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>print.summary.glm</code> tries to be smart about formatting the coefficients, standard errors
+    <p><code>print.summary.cmp</code> tries to be smart about formatting the coefficients, standard errors
 and gives 'significance stars'. The <code>coefficients</code> component of the result gives the
 estimated coefficients and their estimated standard errors, together with their ratio. This
 third column is labelled as <code>Z value</code> as the dispersion is fixed for this family. A
@@ -199,8 +207,9 @@ the asymptotic Normal reference distribution.</p>
     <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## For examples see example(glm.cmp)</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## For examples see example(glm.cmp)</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,11 +221,11 @@ the asymptotic Normal reference distribution.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p><p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -224,6 +233,8 @@ the asymptotic Normal reference distribution.</p>
 
   
 
+
+  
 
   </body>
 </html>

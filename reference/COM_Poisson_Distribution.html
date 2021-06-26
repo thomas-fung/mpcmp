@@ -54,6 +54,8 @@ Conway-Maxwell-Poisson distribution with parameter mu and nu" />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -65,9 +67,15 @@ Conway-Maxwell-Poisson distribution with parameter mu and nu" />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -139,7 +147,7 @@ Conway-Maxwell-Poisson distribution with parameter mu and nu" />
 Conway-Maxwell-Poisson distribution with parameter <code>mu</code> and <code>nu</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>dcomp</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>dcomp</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>mu</span>,
   nu <span class='op'>=</span> <span class='fl'>1</span>,
@@ -190,7 +198,7 @@ Conway-Maxwell-Poisson distribution with parameter <code>mu</code> and <code>nu<
   maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
   tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
   <span class='va'>summax</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -244,7 +252,7 @@ otherwise, \(P(X&gt;x)\).</p></td>
     </tr>
     <tr>
       <th>n</th>
-      <td><p>number of observations. If <code><a href='https://rdrr.io/r/base/length.html'>length(n)</a></code> &gt; 1, the length is taken to
+      <td><p>number of observations. If <code>length(n)</code> &gt; 1, the length is taken to
 be the number required.</p></td>
     </tr>
     </table>
@@ -259,12 +267,16 @@ of the lengths of the numerical arguments for the other functions.</p>
 Only the first argument of the logical arguments are used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>dcomp</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>5</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>1.2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.11374731 0.27609781 0.29170831 0.18946331 0.08713145 0.03065722</div><div class='input'><span class='fu'>pcomp</span><span class='op'>(</span><span class='fl'>5</span>, mu<span class='op'>=</span><span class='fl'>2</span>, nu <span class='op'>=</span><span class='fl'>1.2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.9888054</div><div class='input'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span>
-<span class='fu'>qcomp</span><span class='op'>(</span><span class='va'>p</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0 1 1 1 2 2 3 3 4</div><div class='input'><span class='fu'>rcomp</span><span class='op'>(</span><span class='fl'>10</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 0 3 2 0 0 2 2 1 3 3</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>dcomp</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>5</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>1.2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.11374731 0.27609781 0.29170831 0.18946331 0.08713145 0.03065722</span>
+<span class='r-in'><span class='fu'>pcomp</span><span class='op'>(</span><span class='fl'>5</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>1.2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.9888054</span>
+<span class='r-in'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>10</span></span>
+<span class='r-in'><span class='fu'>qcomp</span><span class='op'>(</span><span class='va'>p</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0 1 1 1 2 2 3 3 4</span>
+<span class='r-in'><span class='fu'>rcomp</span><span class='op'>(</span><span class='fl'>10</span>, mu <span class='op'>=</span> <span class='fl'>2</span>, nu <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 0 3 2 0 0 2 2 1 3 3</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -276,11 +288,11 @@ Only the first argument of the logical arguments are used.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p><p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -288,6 +300,8 @@ Only the first argument of the logical arguments are used.</p>
 
   
 
+
+  
 
   </body>
 </html>

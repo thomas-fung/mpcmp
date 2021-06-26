@@ -53,6 +53,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -64,9 +66,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -137,8 +145,8 @@
     <p>Tidy summarizes information about the components of a model. A model component might be a single term in a regression, a single hypothesis, a cluster, or a class. Exactly what tidy considers to be a model component varies across models but is usually self-evident. If a model has several distinct types of components, you will need to specify which components to return.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, exponentiate <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for cmp</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>FALSE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, exponentiate <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,17 +187,18 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
-<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 5</span><span>
-#&gt;   term           estimate std.error statistic  p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)     2.71      0.190       14.3  4.05</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-46</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> gendermale     -</span><span style='color: #BB0000;'>0.215</span><span>     0.117       -</span><span style='color: #BB0000;'>1.83</span><span> 6.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> math           -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>32</span><span>   0.002</span><span style='text-decoration: underline;'>39</span><span>     -</span><span style='color: #BB0000;'>2.65</span><span> 8.04</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 3</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> progAcademic   -</span><span style='color: #BB0000;'>0.425</span><span>     0.170       -</span><span style='color: #BB0000;'>2.51</span><span> 1.21</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 2</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> progVocational -</span><span style='color: #BB0000;'>1.25</span><span>      0.189       -</span><span style='color: #BB0000;'>6.62</span><span> 3.65</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-11</span><span></div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span> <span class='op'>~</span> <span class='va'>gender</span> <span class='op'>+</span> <span class='va'>math</span> <span class='op'>+</span> <span class='va'>prog</span>, data <span class='op'>=</span> <span class='va'>attendance</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 x 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term           estimate std.error statistic  p.value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)     2.71      0.190       14.3  4.05<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-46</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> gendermale     -<span style='color: #BB0000;'>0.215</span>     0.117       -<span style='color: #BB0000;'>1.83</span> 6.68<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> math           -<span style='color: #BB0000;'>0.006</span><span style='color: #BB0000; text-decoration: underline;'>32</span>   0.002<span style='text-decoration: underline;'>39</span>     -<span style='color: #BB0000;'>2.65</span> 8.04<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> progAcademic   -<span style='color: #BB0000;'>0.425</span>     0.170       -<span style='color: #BB0000;'>2.51</span> 1.21<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> progVocational -<span style='color: #BB0000;'>1.25</span>      0.189       -<span style='color: #BB0000;'>6.62</span> 3.65<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-11</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -201,11 +210,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p><p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -213,6 +222,8 @@
 
   
 
+
+  
 
   </body>
 </html>

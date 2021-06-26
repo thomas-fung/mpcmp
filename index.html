@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -88,31 +90,31 @@
 
 <div id="mpcmp-mean-parametrized-conway-maxwell-poisson-regression" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#mpcmp-mean-parametrized-conway-maxwell-poisson-regression" class="anchor"></a>mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression</h1></div>
+<a href="#mpcmp-mean-parametrized-conway-maxwell-poisson-regression" class="anchor" aria-hidden="true"></a>mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression</h1></div>
 </div>
 <div id="mpcmp-" class="section level1">
 <h1 class="hasAnchor">
-<a href="#mpcmp-" class="anchor"></a>mpcmp <img src="reference/figures/logo.svg" align="right" alt="" width="150">
+<a href="#mpcmp-" class="anchor" aria-hidden="true"></a>mpcmp <img src="reference/figures/logo.svg" align="right" alt="" width="150">
 </h1>
 <!-- badges: start -->
 
-<p>The <code>mpcmp</code> package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of <a href="https://doi.org/10.1177%2F1471082X17697749">Huang (2017)</a>.</p>
+<p>The <code>mpcmp</code> package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of <a href="https://doi.org/10.1177%2F1471082X17697749" class="external-link">Huang (2017)</a>.</p>
 <p>From version 0.3.0, <code>mpcmp</code> supports log-linear mean models, also allows one to incorporate regression being linked to the dispersion parameter.</p>
 <p>Work is progressing to include a zero-inflated Conway-Maxwell-Poisson model.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <div id="stable-release-on-cran" class="section level3">
 <h3 class="hasAnchor">
-<a href="#stable-release-on-cran" class="anchor"></a>Stable release on CRAN</h3>
-<p>The <strong><em>mpcmp</em></strong> package has been on <a href="https://cran.r-project.org/package=mpcmp">CRAN</a> since March 2019. You can install it from CRAN in the usual way:</p>
+<a href="#stable-release-on-cran" class="anchor" aria-hidden="true"></a>Stable release on CRAN</h3>
+<p>The <strong><em>mpcmp</em></strong> package has been on <a href="https://cran.r-project.org/package=mpcmp" class="external-link">CRAN</a> since March 2019. You can install it from CRAN in the usual way:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb1-1"><a href="#cb1-1"></a>install.packages(<span class="st">"mpcmp"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>library(<span class="st">"mpcmp"</span>)</span></code></pre></div>
 </div>
 <div id="development-version-on-github" class="section level3">
 <h3 class="hasAnchor">
-<a href="#development-version-on-github" class="anchor"></a>Development version on Github</h3>
-<p>You can use the <strong>devtools</strong> package to install the development version of <strong>mpcmp</strong> from <a href="https://github.com/thomas-fung/mpcmp">GitHub</a>:</p>
+<a href="#development-version-on-github" class="anchor" aria-hidden="true"></a>Development version on Github</h3>
+<p>You can use the <strong>devtools</strong> package to install the development version of <strong>mpcmp</strong> from <a href="https://github.com/thomas-fung/mpcmp" class="external-link">GitHub</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># install.packages("devtools")</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">devtools::</span>install_github(<span class="st">"thomas-fung/mpcmp"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>library(mpcmp)</span></code></pre></div>
@@ -120,15 +122,15 @@
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>A reference manual and some examples are available at <a href="https://thomas-fung.github.io/mpcmp/">thomas-fung.github.io/mpcmp</a></p>
+<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
+<p>A reference manual and some examples are available at <a href="https://thomas-fung.github.io/mpcmp/" class="external-link">thomas-fung.github.io/mpcmp</a></p>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
 <p>If you use this package to analyse your data, please use the following citation:</p>
 <ul>
-<li>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2020). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.4.</li>
+<li>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2020). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.6.9000.</li>
 </ul>
 <p>From R you can use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb3-1"><a href="#cb3-1"></a>citation(<span class="st">"mpcmp"</span>)</span>
@@ -140,7 +142,7 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=mpcmp">https://​cloud.r-project.org/​package=mpcmp</a>
 </li>
@@ -150,21 +152,25 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing mpcmp</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Thomas Fung <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2601-0728" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Aya Alwan <br><small class="roles"> Author </small>  </li>
@@ -173,26 +179,29 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=mpcmp"><img src="http://www.r-pkg.org/badges/version/mpcmp" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://travis-ci.org/thomas-fung/mpcmp"><img src="https://travis-ci.org/thomas-fung/mpcmp.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/thomas-fung/mpcmp?branch=master"><img src="https://codecov.io/gh/thomas-fung/mpcmp/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/thomas-fung/mpcmp/actions"><img src="https://github.com/thomas-fung/mpcmp/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://cran.r-project.org/package=mpcmp" class="external-link"><img src="http://www.r-pkg.org/badges/version/mpcmp" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://travis-ci.org/thomas-fung/mpcmp" class="external-link"><img src="https://travis-ci.org/thomas-fung/mpcmp.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://codecov.io/gh/thomas-fung/mpcmp?branch=master" class="external-link"><img src="https://codecov.io/gh/thomas-fung/mpcmp/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/thomas-fung/mpcmp/actions" class="external-link"><img src="https://github.com/thomas-fung/mpcmp/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p></p>
+<p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -200,6 +209,8 @@
 
   
 
+
+  
 
   </body>
 </html>

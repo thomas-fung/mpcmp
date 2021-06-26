@@ -56,6 +56,8 @@ parameters between the full and null models." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -67,9 +69,15 @@ parameters between the full and null models." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -143,7 +151,7 @@ has degrees of freedom <em>r</em> where <em>r</em> is the difference in the numb
 parameters between the full and null models.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>object1</span>, <span class='va'>object2</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>object1</span>, <span class='va'>object2</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,45 +179,47 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
     <div class='dont-index'><p><code><a href='glm.cmp.html'>glm.cmp</a></code>, <code><a href='update.cmp.html'>update.cmp</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## Testing for the mean coefficients</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
-
-<span class='co'>## Fit full model </span>
-<span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
-    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
-    
-<span class='co'>## Fit null model; without whtknght</span>
-<span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span><span class='op'>~</span><span class='va'>.</span><span class='op'>-</span><span class='va'>whtknght</span><span class='op'>)</span>
-     
-<span class='co'>## Likelihood ratio test for the nested models</span>
-<span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>M.bids.null</span><span class='op'>)</span> <span class='co'># order of objects is not important</span>
-</div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
-#&gt; LRT-statistic:  13.7 
-#&gt; Chi-sq degrees of freedom:  1 
-#&gt; P-value:  0.000214 </div><div class='input'>
-<span class='co'>## Testing for dispersion coefficients</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span> 
- <span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
- 
-<span class='co'>## Fit null model; dropping extract from dispersion equation</span>
- <span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu. <span class='op'>=</span> <span class='op'>~</span><span class='fl'>1</span><span class='op'>)</span>   
- <span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.sit.null1</span>, <span class='va'>M.sit.full</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
-#&gt; LRT-statistic:  0.439 
-#&gt; Chi-sq degrees of freedom:  3 
-#&gt; P-value:  0.932 </div><div class='input'>
-<span class='co'>## Fit null model; using constant dispersion specification</span>
-<span class='va'>M.sit.null2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu. <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>   
-<span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.sit.null2</span>, <span class='va'>M.sit.full</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; Likelihood ratio test for testing both COM-Poisson models are equivalent
-#&gt; LRT-statistic:  0.439 
-#&gt; Chi-sq degrees of freedom:  3 
-#&gt; P-value:  0.932 </div><div class='input'>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='co'>## Testing for the mean coefficients</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit full model</span></span>
+<span class='r-in'><span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span></span>
+<span class='r-in'>  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit null model; without whtknght</span></span>
+<span class='r-in'><span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>whtknght</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Likelihood ratio test for the nested models</span></span>
+<span class='r-in'><span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>M.bids.null</span><span class='op'>)</span> <span class='co'># order of objects is not important</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Likelihood ratio test for testing both COM-Poisson models are equivalent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> LRT-statistic:  13.7 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chi-sq degrees of freedom:  1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> P-value:  0.000214 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Testing for dispersion coefficients</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit null model; dropping extract from dispersion equation</span></span>
+<span class='r-in'><span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu. <span class='op'>=</span> <span class='op'>~</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.sit.null1</span>, <span class='va'>M.sit.full</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Likelihood ratio test for testing both COM-Poisson models are equivalent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> LRT-statistic:  0.439 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chi-sq degrees of freedom:  3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> P-value:  0.932 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit null model; using constant dispersion specification</span></span>
+<span class='r-in'><span class='va'>M.sit.null2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu. <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>cmplrtest</span><span class='op'>(</span><span class='va'>M.sit.null2</span>, <span class='va'>M.sit.full</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Likelihood ratio test for testing both COM-Poisson models are equivalent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> LRT-statistic:  0.439 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chi-sq degrees of freedom:  3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> P-value:  0.932 </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -221,11 +231,11 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p><p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -233,6 +243,8 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 
   
 
+
+  
 
   </body>
 </html>

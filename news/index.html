@@ -52,6 +52,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -63,9 +65,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -133,145 +141,105 @@
 
     <div id="mpcmp-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
-<a href="#mpcmp-development-version" class="anchor"></a>mpcmp (development version)<small> Unreleased </small>
-</h1>
-<ul>
-<li>Export more functions to NAMESPACE as requested by <a href='https://github.com/yangchino1'>@yangchino1</a>.</li>
-</ul>
-</div>
+<a href="#mpcmp-development-version" class="anchor" aria-hidden="true"></a>mpcmp (development version)<small> Unreleased </small></h1>
+<ul><li>Export more functions to NAMESPACE as requested by <a href='https://github.com/yangchino1'>@yangchino1</a>.</li>
+</ul></div>
     <div id="mpcmp-036" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.6">
-<a href="#mpcmp-036" class="anchor"></a>mpcmp 0.3.6<small> 2020-10-26 </small>
-</h1>
-<ul>
-<li><p>Added <code>autoplot</code> as an alias to <code>gg_plot</code>. Credit to Emi Tanaka (<a href='https://github.com/emitanaka'>@emitanaka</a>) for this suggestion.</p></li>
-<li><p>Also patched an issue in the Rcpp code to pass cran check for solaris.</p></li>
+<a href="#mpcmp-036" class="anchor" aria-hidden="true"></a>mpcmp 0.3.6<small> 2020-10-26 </small></h1>
+<ul><li>Added <code>autoplot</code> as an alias to <code>gg_plot</code>. Credit to Emi Tanaka (<a href='https://github.com/emitanaka'>@emitanaka</a>) for this suggestion.</li>
+<li>Also patched an issue in the Rcpp code to pass cran check for solaris.</li>
+<li>There are also other minor QOL improvements. # mpcmp 0.3.5</li>
+<li>Added <code>broom</code> <code>tidier</code> methods support. Specifically added method for <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code>.<br></li>
 <li>
-<p>There are also other minor QOL improvements.</p>
-<h1 id="mpcmp-035" class="page-header" data-toc-text="0.3.6">mpcmp 0.3.5<small> 2020-10-26 </small>
-</h1>
-</li>
-<li><p>Added <code>broom</code> <code>tidier</code> methods support. Specifically added method for <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy()</a></code>, <code><a href="https://rdrr.io/pkg/generics/man/glance.html">glance()</a></code> and <code><a href="https://rdrr.io/pkg/generics/man/augment.html">augment()</a></code>.<br></p></li>
-<li><p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> was rewritten in order to support <code>tidier</code> methods.</p></li>
-<li><p>Also added method for <code><a href="https://rdrr.io/r/stats/vcov.html">vcov()</a></code>, <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.influence.html">influence()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html">hatvalues()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance()</a></code>.</p></li>
-</ul>
-</div>
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> was rewritten in order to support <code>tidier</code> methods.</li>
+<li>Also added method for <code><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov()</a></code>, <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code>, <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">influence()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">rstandard()</a></code>, <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">cooks.distance()</a></code>.</li>
+</ul></div>
     <div id="mpcmp-034" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.4">
-<a href="#mpcmp-034" class="anchor"></a>mpcmp 0.3.4<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added Github action support.<br>
-</li>
+<a href="#mpcmp-034" class="anchor" aria-hidden="true"></a>mpcmp 0.3.4<small> Unreleased </small></h1>
+<ul><li>Added Github action support.<br></li>
 <li>From this version onward, <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> no longer uses <code><a href="../reference/getnu.html">getnu()</a></code>.</li>
 <li>General fixes for cran checks.</li>
 <li>Blog post!</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-033" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.3">
-<a href="#mpcmp-033" class="anchor"></a>mpcmp 0.3.3<small> Unreleased </small>
-</h1>
-<ul>
-<li>Optimised <code><a href="../reference/COM_Poisson_Distribution.html">rcomp()</a></code> a bit by precalculating all the <code><a href="../reference/COM_Poisson_Distribution.html">dcomp()</a></code> values. Credit to Guilherme Parreira (<a href='https://github.com/guilhermeparreira'>@guilhermeparreira</a>) for the issue request.</li>
+<a href="#mpcmp-033" class="anchor" aria-hidden="true"></a>mpcmp 0.3.3<small> Unreleased </small></h1>
+<ul><li>Optimised <code><a href="../reference/COM_Poisson_Distribution.html">rcomp()</a></code> a bit by precalculating all the <code><a href="../reference/COM_Poisson_Distribution.html">dcomp()</a></code> values. Credit to Guilherme Parreira (<a href='https://github.com/guilhermeparreira'>@guilhermeparreira</a>) for the issue request.</li>
 <li>Documentations are now generated by Roxygen version 7.1.0.</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-032" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
-<a href="#mpcmp-032" class="anchor"></a>mpcmp 0.3.2<small> Unreleased </small>
-</h1>
-<ul>
-<li>Fixed an issue that <code>offset</code> term cannot be incorporated properly in the mean model. Credit to Sean Hardison (<a href='https://github.com/seanhardison1'>@seanhardison1</a>) for finding this bug.</li>
-</ul>
-</div>
+<a href="#mpcmp-032" class="anchor" aria-hidden="true"></a>mpcmp 0.3.2<small> Unreleased </small></h1>
+<ul><li>Fixed an issue that <code>offset</code> term cannot be incorporated properly in the mean model. Credit to Sean Hardison (<a href='https://github.com/seanhardison1'>@seanhardison1</a>) for finding this bug.</li>
+</ul></div>
     <div id="mpcmp-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
-<a href="#mpcmp-031" class="anchor"></a>mpcmp 0.3.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added the <code><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix()</a></code> to extract model matrix from a fitted object.</li>
+<a href="#mpcmp-031" class="anchor" aria-hidden="true"></a>mpcmp 0.3.1<small> Unreleased </small></h1>
+<ul><li>Added the <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code> to extract model matrix from a fitted object.</li>
 <li>Documentations are now generated by Roxygen version 7.0.2.</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#mpcmp-030" class="anchor"></a>mpcmp 0.3.0<small> Unreleased </small>
-</h1>
-<ul>
-<li>Updated <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to allow varying dispersion. You can now link the dispersion parameters to some covariates via a log-link.</li>
+<a href="#mpcmp-030" class="anchor" aria-hidden="true"></a>mpcmp 0.3.0<small> Unreleased </small></h1>
+<ul><li>Updated <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> to allow varying dispersion. You can now link the dispersion parameters to some covariates via a log-link.</li>
 <li>Most calculations are now performed inside <code><a href="../reference/fit_glm_cmp_const_nu.html">fit_glm_cmp_const_nu()</a></code> and <code><a href="../reference/fit_glm_cmp_vary_nu.html">fit_glm_cmp_vary_nu()</a></code>.</li>
-<li>Functions such as <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> are updated to support the updated <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>.</li>
+<li>Functions such as <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> are updated to support the updated <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>.</li>
 <li>Added spelltest as part of the testing procedure.</li>
 <li>Added the <code>sitophilus</code> dataset to demonstrate the updated <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> function.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="downlit">
+</ul><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">sitophilus</span><span class="op">)</span>
 <span class="va">M.sit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">ninsect</span> <span class="op">~</span> <span class="va">extract</span>, formula_nu <span class="op">=</span> <span class="op">~</span><span class="va">extract</span>, 
 data <span class="op">=</span> <span class="va">sitophilus</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">M.sit</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">M.sit</span><span class="op">)</span></code></pre></div>
 </div>
     <div id="mpcmp-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#mpcmp-021" class="anchor"></a>mpcmp 0.2.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added travis.CI support.</li>
+<a href="#mpcmp-021" class="anchor" aria-hidden="true"></a>mpcmp 0.2.1<small> Unreleased </small></h1>
+<ul><li>Added travis.CI support.</li>
 <li>New functions <code><a href="../reference/autoplot.cmp.html">gg_plot()</a></code>, <code><a href="../reference/PIT_ggPlot.html">gg_histcompPIT()</a></code> and <code><a href="../reference/PIT_ggPlot.html">gg_qqcompPIT()</a></code> are added to provide the ggplots version of the diagnostic plots.</li>
 <li>The package now depends on a more recent version of R (<span class="math inline">≥</span> 3.2).</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#mpcmp-020" class="anchor"></a>mpcmp 0.2.0<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<a href="#mpcmp-020" class="anchor" aria-hidden="true"></a>mpcmp 0.2.0<small> Unreleased </small></h1>
+<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 <li>Added a draft logo to the package.</li>
 <li>Ribeiro Jr et al. (2018) specification of the CMP model is utilised to provide a better initial estimate for the dispersion parameter. Added <code>comp_mu_loglik_log_nu_only()</code> to facilitate the optimisation.</li>
 <li>
 <code><a href="../reference/Z.html">Z()</a></code>, the normalizing constant function, approximates its true value via (a fixed) truncation. This means the approximation would fail if the mean is large. The followings are implemented as a fix:
-<ul>
-<li>A new function <code><a href="../reference/logZ.html">logZ()</a></code> is created, based on a similar function in the <code>cmpreg</code> package of Ribeiro Jr, Zeviani &amp; Demétrio (2019), and will supersede <code><a href="../reference/Z.html">Z()</a></code> due to its superior numerical stability.</li>
+<ul><li>A new function <code><a href="../reference/logZ.html">logZ()</a></code> is created, based on a similar function in the <code>cmpreg</code> package of Ribeiro Jr, Zeviani &amp; Demétrio (2019), and will supersede <code><a href="../reference/Z.html">Z()</a></code> due to its superior numerical stability.</li>
 <li>A Chebyshev’s inequality type argument is now implemented to have a more flexible upper truncation point.</li>
-</ul>
-<code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">dcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">pcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">qcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">rcomp()</a></code> and functions that calculate expected values are updated to take advantage of these changes.</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="downlit">
+</ul><code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">dcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">pcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">qcomp()</a></code>, <code><a href="../reference/COM_Poisson_Distribution.html">rcomp()</a></code> and functions that calculate expected values are updated to take advantage of these changes.</li>
+</ul><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">500</span><span class="op">*</span><span class="fu"><a href="../reference/COM_Poisson_Distribution.html">dcomp</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">500</span>,<span class="fl">100</span>,<span class="fl">1.2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">500</span><span class="op">*</span><span class="fu"><a href="../reference/COM_Poisson_Distribution.html">dcomp</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">500</span>,<span class="fl">150</span>,<span class="fl">0.8</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/COM_Poisson_Distribution.html">qcomp</a></span><span class="op">(</span><span class="fl">0.6</span>, <span class="fl">150</span>, <span class="fl">1.2</span><span class="op">)</span></pre></div>
-<ul>
-<li>Added the <code>fish</code> dataset as a proof of concept that <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> can handle some larger count data.</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/COM_Poisson_Distribution.html">qcomp</a></span><span class="op">(</span><span class="fl">0.6</span>, <span class="fl">150</span>, <span class="fl">1.2</span><span class="op">)</span></code></pre></div>
+<ul><li>Added the <code>fish</code> dataset as a proof of concept that <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> can handle some larger count data.</li>
+</ul><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">fish</span><span class="op">)</span>
 <span class="va">M.fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span><span class="op">(</span><span class="va">species</span><span class="op">~</span> <span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span>, data<span class="op">=</span><span class="va">fish</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">M.fish</span><span class="op">$</span><span class="va">fitted.values</span><span class="op">)</span></pre></div>
-<ul>
-<li>
+<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">M.fish</span><span class="op">$</span><span class="va">fitted.values</span><span class="op">)</span></code></pre></div>
+<ul><li>
 <code><a href="../reference/comp_lambdas.html">comp_lambdas()</a></code> now has the ability to scale up &amp; down <code>lambdaub</code> so that the correct <span class="math inline"><em>λ</em></span>s can be found even if they are outside the preset boundary.</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-014" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.4">
-<a href="#mpcmp-014" class="anchor"></a>mpcmp 0.1.4<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix()</a></code> now retrieves the design matrix of the model properly.</li>
+<a href="#mpcmp-014" class="anchor" aria-hidden="true"></a>mpcmp 0.1.4<small> Unreleased </small></h1>
+<ul><li>
+<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code> now retrieves the design matrix of the model properly.</li>
 <li>
 <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> gains a few standard glm arguments: <code>start</code>, <code>contrasts</code>, <code>na.action</code>, <code>subset</code>.</li>
-</ul>
-</div>
+</ul></div>
     <div id="mpcmp-013" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.3">
-<a href="#mpcmp-013" class="anchor"></a>mpcmp 0.1.3<small> 2019-03-04 </small>
-</h1>
-<ul>
-<li>First major release of the package.</li>
-</ul>
-</div>
+<a href="#mpcmp-013" class="anchor" aria-hidden="true"></a>mpcmp 0.1.3<small> 2019-03-04 </small></h1>
+<ul><li>First major release of the package.</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -285,11 +253,11 @@ data <span class="op">=</span> <span class="va">sitophilus</span><span class="op
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p>
+  <p><p>Developed by Thomas Fung, Aya Alwan, Justin Wishart, Alan Huang.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -297,6 +265,8 @@ data <span class="op">=</span> <span class="va">sitophilus</span><span class="op
 
   
 
+
+  
 
   </body>
 </html>
