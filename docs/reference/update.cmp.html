@@ -173,106 +173,111 @@ the call</p></td>
     <div class='dont-index'><p><code><a href='glm.cmp.html'>glm.cmp</a></code>, <code><a href='https://rdrr.io/r/stats/update.formula.html'>update.formula</a></code>, <code><a href='cmplrtest.html'>cmplrtest</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># To update the mean regression formula</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
-
-<span class='co'>## Fit full model</span>
-<span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span>
-  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span>
-<span class='va'>M.bids.full</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
-#&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
-#&gt; 
-#&gt; Linear Model Coefficients:
-#&gt; (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  
-#&gt;   0.9896300    0.2678800   -0.1731800    0.0677440    0.4812800   -0.6848200  
-#&gt;    insthold         size       sizesq     regulatn  
-#&gt;  -0.3678900    0.1793300   -0.0075823   -0.0375690  
-#&gt; 
-#&gt; Dispersion (nu): 1.75
-#&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
-#&gt; Null Deviance: 182.3906 
-#&gt; Residual Deviance: 
-#&gt; AIC: 382.1753 
-#&gt; </div><div class='input'>
-<span class='co'>## Dropping whtknght</span>
-<span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>whtknght</span><span class='op'>)</span>
-<span class='va'>M.bids.null</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + bidprem + 
-#&gt;     insthold + size + sizesq + regulatn, data = takeoverbids)
-#&gt; 
-#&gt; Linear Model Coefficients:
-#&gt; (Intercept)     leglrest      rearest      finrest      bidprem     insthold  
-#&gt;   1.3344000    0.3912400   -0.1464000    0.1342300   -0.7477300   -0.4406100  
-#&gt;        size       sizesq     regulatn  
-#&gt;   0.1878000   -0.0079426   -0.0445510  
-#&gt; 
-#&gt; Dispersion (nu): 1.54
-#&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
-#&gt; Null Deviance: 164.7208 
-#&gt; Residual Deviance: 
-#&gt; AIC: 393.8799 
-#&gt; </div><div class='input'>
-<span class='co'>## To update the dispersion regression formula</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
-
-<span class='co'>## Fit full model</span>
-<span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
-<span class='va'>M.sit.full</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
-#&gt; 
-#&gt; Mean Model Coefficients:
-#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
-#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
-#&gt; 
-#&gt; Dispersion Model Coefficients:
-#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
-#&gt;        -0.665         -0.383         -0.372         -0.118  
-#&gt; 
-#&gt; Degrees of Freedom: 39 Total (i.e. Null);  32 Residual
-#&gt; Null Deviance: 257.2108 
-#&gt; Residual Deviance: 
-#&gt; AIC: 260.8279 
-#&gt; </div><div class='input'>
-<span class='co'>## Dropping extract from the dispersion regression</span>
-<span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>extract</span><span class='op'>)</span>
-<span class='va'>M.sit.null1</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)
-#&gt; 
-#&gt; Mean Model Coefficients:
-#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
-#&gt;       3.45000       -0.00637       -0.05210       -3.35000  
-#&gt; 
-#&gt; Dispersion Model Coefficients:
-#&gt; (Intercept)  
-#&gt;      -0.927  
-#&gt; 
-#&gt; Degrees of Freedom: 39 Total (i.e. Null);  35 Residual
-#&gt; Null Deviance: 234.4694 
-#&gt; Residual Deviance: 
-#&gt; AIC: 255.2668 
-#&gt; </div><div class='input'>
-<span class='co'>## To not regress on the dispersion at all</span>
-<span class='va'>M.sit.null2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-<span class='va'>M.sit.null2</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)
-#&gt; 
-#&gt; Linear Model Coefficients:
-#&gt;   (Intercept)    extractLeaf  extractBranch    extractSeed  
-#&gt;     3.4500000     -0.0063694     -0.0521290     -3.3547000  
-#&gt; 
-#&gt; Dispersion (nu): 0.396
-#&gt; Degrees of Freedom: 39 Total (i.e. Null);  36 Residual
-#&gt; Null Deviance: 234.4696 
-#&gt; Residual Deviance: 
-#&gt; AIC: 253.2668 
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># To update the mean regression formula</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit full model</span></span>
+<span class='r-in'><span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span></span>
+<span class='r-in'>  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.bids.full</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)     leglrest      rearest      finrest     whtknght      bidprem  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.9896300    0.2678800   -0.1731800    0.0677440    0.4812800   -0.6848200  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    insthold         size       sizesq     regulatn  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.3678900    0.1793300   -0.0075823   -0.0375690  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion (nu): 1.75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 125 Total (i.e. Null);  116 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 182.3906 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 382.1753 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Dropping whtknght</span></span>
+<span class='r-in'><span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>whtknght</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.bids.null</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + bidprem + </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     insthold + size + sizesq + regulatn, data = takeoverbids)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)     leglrest      rearest      finrest      bidprem     insthold  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.3344000    0.3912400   -0.1464000    0.1342300   -0.7477300   -0.4406100  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        size       sizesq     regulatn  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.1878000   -0.0079426   -0.0445510  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion (nu): 1.54</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 125 Total (i.e. Null);  117 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 164.7208 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 393.8799 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## To update the dispersion regression formula</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Fit full model</span></span>
+<span class='r-in'><span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.sit.full</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mean Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   (Intercept)    extractLeaf  extractBranch    extractSeed  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       3.45000       -0.00637       -0.05210       -3.35000  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   (Intercept)    extractLeaf  extractBranch    extractSeed  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        -0.665         -0.383         -0.372         -0.118  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 39 Total (i.e. Null);  32 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 257.2108 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 260.8279 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Dropping extract from the dispersion regression</span></span>
+<span class='r-in'><span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>extract</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.sit.null1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mean Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   (Intercept)    extractLeaf  extractBranch    extractSeed  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       3.45000       -0.00637       -0.05210       -3.35000  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      -0.927  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 39 Total (i.e. Null);  35 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 234.4694 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 255.2668 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## To not regress on the dispersion at all</span></span>
+<span class='r-in'><span class='va'>M.sit.null2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.sit.null2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   (Intercept)    extractLeaf  extractBranch    extractSeed  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     3.4500000     -0.0063694     -0.0521290     -3.3547000  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion (nu): 0.396</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 39 Total (i.e. Null);  36 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 234.4696 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 253.2668 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

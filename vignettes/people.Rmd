@@ -1,8 +1,8 @@
 ---
 title: The `mpcmp` Team
 keywords: authors, mpcmp, contributors
-bibliography: 
-csl: apa-old-doi-prefix.csl
+bibliography: library.bib
+csl: '`r here::here("vignettes", "apa-old-doi-prefix.csl")`'
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{The `mpcmp` Team}

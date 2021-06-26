@@ -165,62 +165,64 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 <em>Journal of Applied Statistics</em> <b>41</b>, 2616--26.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 373--375: Underdispersed Cotton bolls data</span>
-<span class='co'>### Model fitting for predictor V</span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cottonbolls</span><span class='op'>)</span>
-<span class='va'>M.bolls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>nc</span> <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>+</span> <span class='va'>stages</span><span class='op'>:</span><span class='va'>def</span> <span class='op'>+</span> <span class='va'>stages</span><span class='op'>:</span><span class='va'>def2</span>, data <span class='op'>=</span> <span class='va'>cottonbolls</span><span class='op'>)</span>
-<span class='va'>M.bolls</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
-#&gt; 
-#&gt; Linear Model Coefficients:
-#&gt;            (Intercept)    stagesvegetative:def    stagesflower bud:def  
-#&gt;              2.1896000               0.4368500               0.2897100  
-#&gt;      stagesblossom:def           stagesfig:def   stagescotton boll:def  
-#&gt;             -1.2425000               0.3648200               0.0089438  
-#&gt;  stagesvegetative:def2   stagesflower bud:def2      stagesblossom:def2  
-#&gt;             -0.8052100              -0.4878400               0.6728600  
-#&gt;         stagesfig:def2  stagescotton boll:def2  
-#&gt;             -1.3103000              -0.0199660  
-#&gt; 
-#&gt; Dispersion (nu): 4.85
-#&gt; Degrees of Freedom: 124 Total (i.e. Null);  114 Residual
-#&gt; Null Deviance: 345.9363 
-#&gt; Residual Deviance: 
-#&gt; AIC: 440.8229 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.bolls</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
-#&gt; 
-#&gt; Deviance Residuals: 
-#&gt;      Min        1Q    Median        3Q       Max  
-#&gt; -2.29766  -0.68296  -0.04972   0.74987   2.74460  
-#&gt; 
-#&gt; Linear Model Coefficients:
-#&gt;                         Estimate   Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)             2.189562  0.029407  74.456  &lt; 2e-16 ***
-#&gt; stagesvegetative:def    0.436854  0.239663   1.823  0.06834 .  
-#&gt; stagesflower bud:def    0.289708  0.235822   1.229  0.21926    
-#&gt; stagesblossom:def      -1.242507  0.283166  -4.388 1.14e-05 ***
-#&gt; stagesfig:def           0.364816  0.264720   1.378  0.16817    
-#&gt; stagescotton boll:def   0.008944  0.233866   0.038  0.96949    
-#&gt; stagesvegetative:def2  -0.805212  0.271949  -2.961  0.00307 ** 
-#&gt; stagesflower bud:def2  -0.487844  0.263290  -1.853  0.06390 .  
-#&gt; stagesblossom:def2      0.672864  0.319551   2.106  0.03523 *  
-#&gt; stagesfig:def2         -1.310267  0.316982  -4.134 3.57e-05 ***
-#&gt; stagescotton boll:def2 -0.019966  0.256498  -0.078  0.93795    
-#&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be 4.852)
-#&gt; 
-#&gt; 
-#&gt;     Null deviance: 345.94  on 124 degrees of freedom
-#&gt; Residual deviance: 125.26  on 114 degrees of freedom
-#&gt; 
-#&gt; AIC: 440.8229 
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>### Huang (2017) Page 373--375: Underdispersed Cotton bolls data</span></span>
+<span class='r-in'><span class='co'>### Model fitting for predictor V</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cottonbolls</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.bolls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>nc</span> <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>+</span> <span class='va'>stages</span><span class='op'>:</span><span class='va'>def</span> <span class='op'>+</span> <span class='va'>stages</span><span class='op'>:</span><span class='va'>def2</span>, data <span class='op'>=</span> <span class='va'>cottonbolls</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.bolls</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            (Intercept)    stagesvegetative:def    stagesflower bud:def  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              2.1896000               0.4368500               0.2897100  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      stagesblossom:def           stagesfig:def   stagescotton boll:def  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             -1.2425000               0.3648200               0.0089438  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  stagesvegetative:def2   stagesflower bud:def2      stagesblossom:def2  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             -0.8052100              -0.4878400               0.6728600  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         stagesfig:def2  stagescotton boll:def2  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             -1.3103000              -0.0199660  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dispersion (nu): 4.85</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Degrees of Freedom: 124 Total (i.e. Null);  114 Residual</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Null Deviance: 345.9363 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual Deviance: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 440.8229 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.bolls</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Deviance Residuals: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Min        1Q    Median        3Q       Max  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -2.29766  -0.68296  -0.04972   0.74987   2.74460  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Model Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                         Estimate   Std.Err Z value Pr(&gt;|z|)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)             2.189562  0.029407  74.456  &lt; 2e-16 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesvegetative:def    0.436854  0.239663   1.823  0.06834 .  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesflower bud:def    0.289708  0.235822   1.229  0.21926    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesblossom:def      -1.242507  0.283166  -4.388 1.14e-05 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesfig:def           0.364816  0.264720   1.378  0.16817    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagescotton boll:def   0.008944  0.233866   0.038  0.96949    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesvegetative:def2  -0.805212  0.271949  -2.961  0.00307 ** </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesflower bud:def2  -0.487844  0.263290  -1.853  0.06390 .  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesblossom:def2      0.672864  0.319551   2.106  0.03523 *  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagesfig:def2         -1.310267  0.316982  -4.134 3.57e-05 ***</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> stagescotton boll:def2 -0.019966  0.256498  -0.078  0.93795    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Dispersion parameter for Mean-CMP estimated to be 4.852)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Null deviance: 345.94  on 124 degrees of freedom</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residual deviance: 125.26  on 114 degrees of freedom</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC: 440.8229 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

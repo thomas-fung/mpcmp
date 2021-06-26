@@ -215,16 +215,20 @@ distribution.</p>
 <code><a href='glm.cmp.html'>glm.cmp</a></code> and <code>autoplot</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
-<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span>
-  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span>
-
-<span class='co'>## The default plots are shown</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## The plots for the non-randomized PIT</span>
-<span class='co'># plot(M.bids, which = c(2,3))</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span></span>
+<span class='r-in'>  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## The default plots are shown</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='plot.cmp-1.png' alt='' width='700' height='433' /></span>
+<span class='r-plt'><img src='plot.cmp-2.png' alt='' width='700' height='433' /></span>
+<span class='r-plt'><img src='plot.cmp-3.png' alt='' width='700' height='433' /></span>
+<span class='r-plt'><img src='plot.cmp-4.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## The plots for the non-randomized PIT</span></span>
+<span class='r-in'><span class='co'># plot(M.bids, which = c(2,3))</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -12,7 +12,7 @@ citEntry(
   textVersion = paste("Huang A. (2017)", 
   "Mean-Parametrized Conway–Maxwell–Poisson Regression Models for Dispersed Counts",
   "Statistical Modelling, 17, 359-380.",
-  "URL http://journals.sagepub.com/doi/10.1177/1471082X17697749/.")
+  "<URL http://journals.sagepub.com/doi/10.1177/1471082X17697749/.>")
 )
 
 citEntry(
@@ -28,5 +28,5 @@ citEntry(
   url      = "URL: https://CRAN.R-project.org/package=mpcmp",
   textVersion = paste("Fung, T., Alwan, A., Wishart, J. & Huang, A. (2020)", 
   "mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.6.9000.",
-  "URL https://CRAN.R-project.org/package=mpcmp/.")
+  "<URL https://CRAN.R-project.org/package=mpcmp/.>")
 )
