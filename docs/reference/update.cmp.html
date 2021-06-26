@@ -81,7 +81,7 @@ identical to update in the stats package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ identical to update in the stats package." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -140,7 +140,7 @@ identical to <code>update</code> in the <code>stats</code> package.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='no'>formula.</span>, <span class='no'>formula_nu.</span>, <span class='no'>...</span>, <span class='kw'>evaluate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>formula.</span>, <span class='va'>formula_nu.</span>, <span class='va'>...</span>, evaluate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,7 @@ identical to <code>update</code> in the <code>stats</code> package.</p>
     </tr>
     <tr>
       <th>evaluate</th>
-      <td><p>logical; if <code>TRUE</code> evaluate the new call otherwise simply return 
+      <td><p>logical; if <code>TRUE</code> evaluate the new call otherwise simply return
 the call</p></td>
     </tr>
     </table>
@@ -175,12 +175,13 @@ the call</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># To update the mean regression formula</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 
 <span class='co'>## Fit full model </span>
-<span class='no'>M.bids.full</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
-    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
-<span class='no'>M.bids.full</span></div><div class='output co'>#&gt; 
+<span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids.full</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
 #&gt;     bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
@@ -193,12 +194,13 @@ the call</p></td>
 #&gt; Dispersion (nu): 1.75
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
 #&gt; Null Deviance: 182.3906 
-#&gt; Residual Deviance: 131.2017 
+#&gt; Residual Deviance: 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'>
+#&gt; </div><div class='input'>        
 <span class='co'>## Dropping whtknght</span>
-<span class='no'>M.bids.null</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.bids.full</span>, <span class='no'>.</span>~<span class='no'>.</span>-<span class='no'>whtknght</span>)
-<span class='no'>M.bids.null</span></div><div class='output co'>#&gt; 
+<span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span><span class='op'>~</span><span class='va'>.</span><span class='op'>-</span><span class='va'>whtknght</span><span class='op'>)</span>
+<span class='va'>M.bids.null</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + bidprem + 
 #&gt;     insthold + size + sizesq + regulatn, data = takeoverbids)
 #&gt; 
@@ -211,15 +213,16 @@ the call</p></td>
 #&gt; Dispersion (nu): 1.54
 #&gt; Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
 #&gt; Null Deviance: 164.7208 
-#&gt; Residual Deviance: 131.8376 
+#&gt; Residual Deviance: 
 #&gt; AIC: 393.8799 
 #&gt; </div><div class='input'>
 <span class='co'>## To update the dispersion regression formula</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
 
 <span class='co'>## Fit full model </span>
-<span class='no'>M.sit.full</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>ninsect</span> ~ <span class='no'>extract</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> ~<span class='no'>extract</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sitophilus</span>)
-<span class='no'>M.sit.full</span></div><div class='output co'>#&gt; 
+<span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
+<span class='va'>M.sit.full</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #&gt; 
 #&gt; Mean Model Coefficients:
@@ -232,12 +235,13 @@ the call</p></td>
 #&gt; 
 #&gt; Degrees of Freedom: 39 Total (i.e. Null);  32 Residual
 #&gt; Null Deviance: 257.2108 
-#&gt; Residual Deviance: 41.67931 
+#&gt; Residual Deviance: 
 #&gt; AIC: 260.8279 
-#&gt; </div><div class='input'>
+#&gt; </div><div class='input'>        
 <span class='co'>## Dropping extract from the dispersion regression</span>
-<span class='no'>M.sit.null1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span>  ~<span class='no'>.</span>-<span class='no'>extract</span>)
-<span class='no'>M.sit.null1</span></div><div class='output co'>#&gt; 
+<span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span>  <span class='op'>~</span><span class='va'>.</span><span class='op'>-</span><span class='va'>extract</span><span class='op'>)</span>
+<span class='va'>M.sit.null1</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)
 #&gt; 
 #&gt; Mean Model Coefficients:
@@ -250,12 +254,13 @@ the call</p></td>
 #&gt; 
 #&gt; Degrees of Freedom: 39 Total (i.e. Null);  35 Residual
 #&gt; Null Deviance: 234.4694 
-#&gt; Residual Deviance: 41.40781 
+#&gt; Residual Deviance: 
 #&gt; AIC: 255.2668 
 #&gt; </div><div class='input'>
 <span class='co'>## To not regress on the dispersion at all</span>
-<span class='no'>M.sit.null2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>M.sit.full</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-<span class='no'>M.sit.null2</span></div><div class='output co'>#&gt; 
+<span class='va'>M.sit.null2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='va'>M.sit.null2</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, data = sitophilus)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -265,7 +270,7 @@ the call</p></td>
 #&gt; Dispersion (nu): 0.396
 #&gt; Degrees of Freedom: 39 Total (i.e. Null);  36 Residual
 #&gt; Null Deviance: 234.4696 
-#&gt; Residual Deviance: 41.40784 
+#&gt; Residual Deviance: 
 #&gt; AIC: 253.2668 
 #&gt; </div></pre>
   </div>
@@ -283,7 +288,7 @@ the call</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

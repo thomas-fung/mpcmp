@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Parameter Generator for nu — getnu" />
-<meta property="og:description" content="A function that use the arguments of a glm.cmp call to generate a better initial 
+<meta property="og:description" content="A function that use the arguments of a glm.cmp call to generate a better initial
 nu estimate." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -81,7 +81,7 @@ nu estimate." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ nu estimate." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -135,30 +135,30 @@ nu estimate." />
     </div>
 
     <div class="ref-description">
-    <p>A function that use the arguments of a <code>glm.cmp</code> call to generate a better initial 
+    <p>A function that use the arguments of a <code>glm.cmp</code> call to generate a better initial
 <code>nu</code> estimate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getnu</span>(
-  <span class='no'>param</span>,
-  <span class='no'>y</span>,
-  <span class='no'>xx</span>,
-  <span class='no'>offset</span>,
-  <span class='no'>llstart</span>,
-  <span class='kw'>fsscale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
-)</pre>
+    <pre class="usage"><span class='fu'>getnu</span><span class='op'>(</span>
+  <span class='va'>param</span>,
+  <span class='va'>y</span>,
+  <span class='va'>xx</span>,
+  <span class='va'>offset</span>,
+  <span class='va'>llstart</span>,
+  fsscale <span class='op'>=</span> <span class='fl'>1</span>,
+  lambdalb <span class='op'>=</span> <span class='fl'>1e-10</span>,
+  lambdaub <span class='op'>=</span> <span class='fl'>1000</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  summax <span class='op'>=</span> <span class='fl'>100</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>param</th>
-      <td><p>numeric vector: the model coefficients &amp; the current value of <code>nu</code>. 
+      <td><p>numeric vector: the model coefficients &amp; the current value of <code>nu</code>.
 It is assumed that <code>nu</code> is in the last position of <code>param</code>.</p></td>
     </tr>
     <tr>
@@ -179,7 +179,7 @@ It is assumed that <code>nu</code> is in the last position of <code>param</code>
     </tr>
     <tr>
       <th>fsscale</th>
-      <td><p>numeric: a scaling factor (generally &gt;1) for the 
+      <td><p>numeric: a scaling factor (generally &gt;1) for the
 relaxed fisher scoring algorithm</p></td>
     </tr>
     <tr>
@@ -189,12 +189,12 @@ searched for lambda(s).</p></td>
     </tr>
     <tr>
       <th>maxlambdaiter</th>
-      <td><p>numeric: the maximum number of iterations allowed to solve 
+      <td><p>numeric: the maximum number of iterations allowed to solve
 for lambda(s).</p></td>
     </tr>
     <tr>
       <th>tol</th>
-      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the 
+      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.</p></td>
     </tr>
@@ -213,7 +213,7 @@ values is less than tol.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>From version 0.3.4, this function is no longer being used as part of the estimation algorithm 
+    <p>From version 0.3.4, this function is no longer being used as part of the estimation algorithm
 and this function will be defunct in our next update.</p>
 
   </div>
@@ -231,7 +231,7 @@ and this function will be defunct in our next update.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

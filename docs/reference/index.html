@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -198,7 +198,7 @@
         <td>
           <p><code><a href="fish.html">fish</a></code> </p>
         </td>
-        <td><p>Fish  data set</p></td>
+        <td><p>Fish data set</p></td>
       </tr><tr>
         
         <td>
@@ -257,15 +257,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gg_plot.html">gg_plot()</a></code> </p>
+          <p><code><a href="autoplot.cmp.html">autoplot(<i>&lt;cmp&gt;</i>)</a></code> <code><a href="autoplot.cmp.html">gg_plot()</a></code> </p>
         </td>
-        <td><p>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot</p></td>
+        <td><p>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot style</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="summary.cmp.html">summary(<i>&lt;cmp&gt;</i>)</a></code> </p>
+          <p><code><a href="summary.cmp.html">summary(<i>&lt;cmp&gt;</i>)</a></code> <code><a href="summary.cmp.html">print(<i>&lt;summary.cmp&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Summary of COM-Poisson Model Fit</p></td>
+        <td><p>Summarizing COM-Poisson Model Fit</p></td>
       </tr><tr>
         
         <td>
@@ -314,6 +314,43 @@
           <p><code><a href="update.cmp.html">update(<i>&lt;cmp&gt;</i>)</a></code> </p>
         </td>
         <td><p>Update and Re-fit a COM-Poisson Model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tidy.cmp.html">tidy(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Tidy a(n) CMP model object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="augment.cmp.html">augment(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Augment data with information from a(n) CMP model object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="confint.cmp.html">confint(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Confidence Intervals for CMP Model Parameters</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="glance.cmp.html">glance(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Glance at a(n) CMP model object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="regression.diagnostic.cmp.html">influence(<i>&lt;cmp&gt;</i>)</a></code> <code><a href="regression.diagnostic.cmp.html">hatvalues(<i>&lt;cmp&gt;</i>)</a></code> <code><a href="regression.diagnostic.cmp.html">rstandard(<i>&lt;cmp&gt;</i>)</a></code> <code><a href="regression.diagnostic.cmp.html">cooks.distance(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>CMP Regression Diagnostic</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vcov.cmp.html">vcov(<i>&lt;cmp&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Extracting the Variance-Covariance Matrix from a COM-Poisson
+Model Fit</p></td>
       </tr>
     </tbody><tbody>
       
@@ -395,14 +432,14 @@
         <td>
           <p><code><a href="fit_glm_cmp_const_nu.html">fit_glm_cmp_const_nu()</a></code> </p>
         </td>
-        <td><p>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+        <td><p>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with constant dispersion.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="fit_glm_cmp_vary_nu.html">fit_glm_cmp_vary_nu()</a></code> </p>
         </td>
-        <td><p>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+        <td><p>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with varying dispersion.</p></td>
       </tr><tr>
         
@@ -416,9 +453,9 @@ Model with varying dispersion.</p></td>
           <p><code><a href="logZ_c.html">logZ_c()</a></code> </p>
         </td>
         <td><p>Calculate the Normalizing Constant in log scale for COM-Poisson distribution
- 
-The calculation of the function <code>logZ</code> will be performed here. This function is 
-used to approximate the normalizing constant for COM-Poisson distributions via 
+
+The calculation of the function <code>logZ</code> will be performed here. This function is
+used to approximate the normalizing constant for COM-Poisson distributions via
 truncation. The standard COM-Poisson parametrization is being used here.</p></td>
       </tr>
     </tbody>
@@ -439,7 +476,7 @@ truncation. The standard COM-Poisson parametrization is being used here.</p></td
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="ggplot version of PIT Plots for a CMP Object — PIT_ggPlot" />
-<meta property="og:description" content="Two plots for the non-randomized PIT are currently available for checking the 
-distributional assumption of the fitted CMP model: the PIT histogram, and 
+<meta property="og:description" content="Two plots for the non-randomized PIT are currently available for checking the
+distributional assumption of the fitted CMP model: the PIT histogram, and
 the uniform Q-Q plot for PIT." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -82,7 +82,7 @@ the uniform Q-Q plot for PIT." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@ the uniform Q-Q plot for PIT." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -136,28 +136,28 @@ the uniform Q-Q plot for PIT." />
     </div>
 
     <div class="ref-description">
-    <p>Two plots for the non-randomized PIT are currently available for checking the 
-distributional assumption of the fitted CMP model: the PIT histogram, and 
+    <p>Two plots for the non-randomized PIT are currently available for checking the
+distributional assumption of the fitted CMP model: the PIT histogram, and
 the uniform Q-Q plot for PIT.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gg_histcompPIT</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>ref_line</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>col_line</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>col_hist</span> <span class='kw'>=</span> <span class='st'>"royal blue"</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)
+    <pre class="usage"><span class='fu'>gg_histcompPIT</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  ref_line <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  col_line <span class='op'>=</span> <span class='st'>"red"</span>,
+  col_hist <span class='op'>=</span> <span class='st'>"royal blue"</span>,
+  size <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span>
 
-<span class='fu'>gg_qqcompPIT</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>col1</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>col2</span> <span class='kw'>=</span> <span class='st'>"#999999"</span>,
-  <span class='kw'>lty1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lty2</span> <span class='kw'>=</span> <span class='fl'>2</span>
-)</pre>
+<span class='fu'>gg_qqcompPIT</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  col1 <span class='op'>=</span> <span class='st'>"red"</span>,
+  col2 <span class='op'>=</span> <span class='st'>"#999999"</span>,
+  lty1 <span class='op'>=</span> <span class='fl'>1</span>,
+  lty2 <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,17 +168,17 @@ the uniform Q-Q plot for PIT.</p>
     </tr>
     <tr>
       <th>bins</th>
-      <td><p>numeric; the number of bins shown in the PIT histogram or the 
+      <td><p>numeric; the number of bins shown in the PIT histogram or the
 PIT Q-Q plot.</p></td>
     </tr>
     <tr>
       <th>ref_line</th>
-      <td><p>logical; if <code>TRUE</code> (default), the line for displaying the standard 
+      <td><p>logical; if <code>TRUE</code> (default), the line for displaying the standard
 uniform distribution will be shown for the purpose of comparison.</p></td>
     </tr>
     <tr>
       <th>col_line</th>
-      <td><p>numeric or character: the colour of the reference line 
+      <td><p>numeric or character: the colour of the reference line
 for comparison in PIT histogram.</p></td>
     </tr>
     <tr>
@@ -199,12 +199,12 @@ for comparison in PIT histogram.</p></td>
     </tr>
     <tr>
       <th>lty1</th>
-      <td><p>integer or character string: the line types for the sample 
+      <td><p>integer or character string: the line types for the sample
 uniform Q-Q plot in PIT, see ggplot2::linetype.</p></td>
     </tr>
     <tr>
       <th>lty2</th>
-      <td><p>an integer or character string: the line types for the theoretical uniform 
+      <td><p>an integer or character string: the line types for the theoretical uniform
 Q-Q plot in PIT, see ggplot2::linetype.</p></td>
     </tr>
     </table>
@@ -212,26 +212,25 @@ Q-Q plot in PIT, see ggplot2::linetype.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>histcompPIT</code> and <code>qqcompPIT</code></p>
-
 <p>The histogram and the Q-Q plot are used to compare the fitted profile with a standard
-uniform distribution. If they match relatively well, it means the CMP distribution 
+uniform distribution. If they match relatively well, it means the CMP distribution
 is appropriate for the data.</p>
-<p>The <code>histcompPIT</code> and <code>qqcompPIT</code> functions 
+<p>The <code>histcompPIT</code> and <code>qqcompPIT</code> functions
 would provide the same two plots but in base R format.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 for count data. <em>Biometrics</em>, <strong>65</strong>, 1254--1261.</p>
 <p>Dunsmuir, W.T.M. and Scott, D.J. (2015). The <code>glarma</code> Package for Observation-Driven
-Time Series Regression of Counts. <em>Journal of Statistical Software</em>, 
+Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 <strong>67</strong>, 1--36.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='PIT_Plot.html'>histcompPIT</a></code>, <code><a href='PIT_Plot.html'>qqcompPIT</a></code>, 
-<code><a href='plot.cmp.html'>plot.cmp</a></code> and <code><a href='gg_plot.html'>gg_plot</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='PIT_Plot.html'>histcompPIT</a></code>, <code><a href='PIT_Plot.html'>qqcompPIT</a></code>,
+<code><a href='plot.cmp.html'>plot.cmp</a></code> and <code>autoplot</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(gg_plot)
+    <pre class="examples"><div class='input'><span class='co'>## For examples see example(autoplot)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -248,7 +247,7 @@ Time Series Regression of Counts. <em>Journal of Statistical Software</em>,
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

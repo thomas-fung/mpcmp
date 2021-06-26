@@ -81,7 +81,7 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -139,22 +139,22 @@ generalized linear model with a log-link by using Fisher Scoring iteration." />
 generalized linear model with a log-link by using Fisher Scoring iteration.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>glm.cmp</span>(
-  <span class='no'>formula</span>,
-  <span class='kw'>formula_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>subset</span>,
-  <span class='no'>na.action</span>,
-  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gammastart</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>contrasts_mu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>contrasts_nu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>glm.cmp</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  formula_nu <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>data</span>,
+  offset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>subset</span>,
+  <span class='va'>na.action</span>,
+  betastart <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gammastart <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lambdalb <span class='op'>=</span> <span class='fl'>1e-10</span>,
+  lambdaub <span class='op'>=</span> <span class='fl'>1000</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  contrasts_mu <span class='op'>=</span> <span class='cn'>NULL</span>,
+  contrasts_nu <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +173,7 @@ generalized linear model with a log-link by using Fisher Scoring iteration.</p>
     </tr>
     <tr>
       <th>offset</th>
-      <td><p>this can be used to specify an *a priori* known component to be included
+      <td><p>this can be used to specify an <em>a priori</em> known component to be included
 in the linear predictor for mean during fitting. This should be <code>NULL</code> or a numeric vector
 of length equal to the number of cases.</p></td>
     </tr>
@@ -255,6 +255,7 @@ chi-squared test for nu = 1 and for nested COM-Poisson model respectively.</p>
 <dt>df_null</dt><dd><p>the residual degrees of freedom for the null model</p></dd>
 <dt>null_deviance</dt><dd><p>The deviance for the null model.
 The null model will include only the intercept.</p></dd>
+<dt>deviance; residual_deviance</dt><dd><p>The residual deviance of the model</p></dd>
 <dt>y</dt><dd><p>the <code>y</code> vector used.</p></dd>
 <dt>x</dt><dd><p>the model matrix for mean</p></dd>
 <dt>s</dt><dd><p>the model matrix for dispersion</p></dd>
@@ -275,19 +276,19 @@ The null model will include only the intercept.</p></dd>
 via an iterative Fisher Scoring algorithm.</p>
 <p>Currently, the COM-Poisson regression model allows constant dispersion and regression being linked to the dispersion parameter i.e. varying dispersion.</p>
 <p>For the constant dispersion model, the model is</p>
-<p>Y_i ~ CMP(mu_i, nu),</p>
+<p>$$Y_i ~ CMP(\mu_i, \nu),$$</p>
 <p>where</p>
-<p>E(Y_i) = mu_i = exp(x_i^T beta),</p>
-<p>and <em>nu &gt; 0</em> is the dispersion parameter.</p>
+<p>$$E(Y_i) = \mu_i = exp(x_i^T \beta),$$</p>
+<p>and \(\nu &gt; 0\) is the dispersion parameter.</p>
 <p>The fitted COM-Poisson distribution is over- or under-dispersed
-if <em>nu &lt; 1</em> and <em>nu &gt; 1</em> respectively.</p>
+if \(\nu &lt; 1\) and \(\nu &gt; 1\) respectively.</p>
 <p>For the varying dispersion model, the model is</p>
-<p>Y_i ~ CMP(mu_i, nu_i),</p>
+<p>$$Y_i ~ CMP(\mu_i, \nu_i),$$</p>
 <p>where</p>
-<p>E(Y_i) = mu_i = exp(x_i^T beta),</p>
+<p>$$E(Y_i) = \mu_i = exp(x_i^T \beta),$$</p>
 <p>and dispersion parameters are model via</p>
-<p>nu_i = exp(s_i^T gamma).</p>
-<p>where x_i and s_i are some covariates.</p>
+<p>$$\nu_i = exp(s_i^T \gamma),$$</p>
+<p>where \(x_i\) and \(s_i\) are some covariates.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2020). <code>mpcmp</code>: Mean-parametrized
@@ -296,16 +297,17 @@ Conway-Maxwell Poisson Regression. R package version 0.3.4.</p>
 dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='summary.cmp.html'>summary.cmp</a></code>, <code><a href='plot.cmp.html'>plot.cmp</a></code>,  <code><a href='gg_plot.html'>gg_plot</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>,
+    <div class='dont-index'><p><code><a href='summary.cmp.html'>summary.cmp</a></code>, <code><a href='autoplot.cmp.html'>autoplot.cmp</a></code>, <code><a href='plot.cmp.html'>plot.cmp</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>,
 <code><a href='residuals.cmp.html'>residuals.cmp</a></code> and <code><a href='LRTnu.html'>LRTnu</a></code>.</p>
 <p>Additional examples may be found in <code><a href='fish.html'>fish</a></code>,
- <code><a href='takeoverbids.html'>takeoverbids</a></code>, <code><a href='cottonbolls.html'>cottonbolls</a></code>.</p></div>
+<code><a href='takeoverbids.html'>takeoverbids</a></code>, <code><a href='cottonbolls.html'>cottonbolls</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 368--370: Overdispersed Attendance data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>attendance</span>)
-<span class='no'>M.attendance</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='no'>daysabs</span>~ <span class='no'>gender</span>+<span class='no'>math</span>+<span class='no'>prog</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>attendance</span>)
-<span class='no'>M.attendance</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -315,9 +317,10 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Dispersion (nu): 0.0202
 #&gt; Degrees of Freedom: 313 Total (i.e. Null);  309 Residual
 #&gt; Null Deviance: 455.8327 
-#&gt; Residual Deviance: 377.4414 
+#&gt; Residual Deviance: 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.attendance</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -325,28 +328,30 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; -2.1925  -1.1166  -0.3973   0.2964   2.8154  
 #&gt; 
 #&gt; Linear Model Coefficients:
-#&gt;                Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)      2.7146  0.1904   14.26  &lt; 2e-16 ***
-#&gt; gendermale      -0.2147  0.1171   -1.83    0.067 .  
-#&gt; math            -0.0063  0.0024   -2.65    0.008 ** 
-#&gt; progAcademic    -0.4253  0.1695   -2.51    0.012 *  
-#&gt; progVocational  -1.2539  0.1895   -6.62  3.7e-11 ***
+#&gt;                 Estimate   Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)     2.714645  0.190407  14.257  &lt; 2e-16 ***
+#&gt; gendermale     -0.214720  0.117148  -1.833  0.06682 .  
+#&gt; math           -0.006323  0.002386  -2.650  0.00804 ** 
+#&gt; progAcademic   -0.425322  0.169524  -2.509  0.01211 *  
+#&gt; progVocational -1.253896  0.189478  -6.618 3.65e-11 ***
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be  0.02024 )
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 0.02024)
 #&gt; 
 #&gt; 
 #&gt;     Null deviance: 455.83  on 313 degrees of freedom
 #&gt; Residual deviance: 377.44  on 309 degrees of freedom
 #&gt; 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>M.attendance</span>) <span class='co'># or gg_plot(M.attendance)</span></div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span> <span class='co'># or autoplot(M.attendance)</span>
+</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>### Ribeiro et al. (2013): Varying dispersion as a function of covariates</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sitophilus</span>)
-<span class='no'>M.sit</span> <span class='kw'>&lt;-</span> <span class='fu'>glm.cmp</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>ninsect</span> ~ <span class='no'>extract</span>, <span class='kw'>formula_nu</span> <span class='kw'>=</span> ~<span class='no'>extract</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>sitophilus</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.sit</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
+<span class='va'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.sit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -354,20 +359,20 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; -2.21084  -1.16849   0.07494   0.64152   1.72653  
 #&gt; 
 #&gt; Mean Model Coefficients:
-#&gt;               Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)     3.4500  0.0780   44.25   &lt;2e-16 ***
-#&gt; extractLeaf    -0.0064  0.1221   -0.05     0.96    
-#&gt; extractBranch  -0.0521  0.1234   -0.42     0.67    
-#&gt; extractSeed    -3.3547  0.3621   -9.26   &lt;2e-16 ***
+#&gt;                Estimate   Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)    3.449988  0.077974  44.245   &lt;2e-16 ***
+#&gt; extractLeaf   -0.006369  0.122139  -0.052    0.958    
+#&gt; extractBranch -0.052129  0.123387  -0.422    0.673    
+#&gt; extractSeed   -3.354677  0.362108  -9.264   &lt;2e-16 ***
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
 #&gt; Dispersion Model Coefficients:
 #&gt;               Estimate Std.Err Z value Pr(&gt;|z|)
-#&gt; (Intercept)     -0.665   0.457   -1.45     0.15
-#&gt; extractLeaf     -0.383   0.651   -0.59     0.56
-#&gt; extractBranch   -0.372   0.651   -0.57     0.57
-#&gt; extractSeed     -0.118   1.546   -0.08     0.94
+#&gt; (Intercept)    -0.6652  0.4573  -1.455    0.146
+#&gt; extractLeaf    -0.3831  0.6509  -0.589    0.556
+#&gt; extractBranch  -0.3724  0.6514  -0.572    0.567
+#&gt; extractSeed    -0.1176  1.5461  -0.076    0.939
 #&gt; 
 #&gt;     Null deviance: 257.211  on 39 degrees of freedom
 #&gt; Residual deviance:  41.679  on 32 degrees of freedom
@@ -391,7 +396,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

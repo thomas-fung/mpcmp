@@ -6,7 +6,7 @@ output: rmarkdown::html_vignette
 bibliography: library.bib
 fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Getting Started with the `mpcmp` package (under construction)}
+  %\VignetteIndexEntry{Getting Started with the `mpcmp` package}
   %\usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::knitr}
 editor_options: 

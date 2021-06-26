@@ -47,9 +47,9 @@
 
 
 <meta property="og:title" content="Cotton Bolls data set — cottonbolls" />
-<meta property="og:description" content="This data set gives the observed number of bolls produced by the cotton 
-plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
-to examine the effect of five defoliation levels (0" />
+<meta property="og:description" content="This data set gives the observed number of bolls produced by the cotton
+plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll;
+to examine the effect of five defoliation levels (0\" />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -82,7 +82,7 @@ to examine the effect of five defoliation levels (0" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@ to examine the effect of five defoliation levels (0" />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -136,17 +136,17 @@ to examine the effect of five defoliation levels (0" />
     </div>
 
     <div class="ref-description">
-    <p>This data set gives the observed number of bolls produced by the cotton 
-plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll; 
-to examine the effect of five defoliation levels (0<!-- %, 25%, 50%, 75% and 100%). --></p>
+    <p>This data set gives the observed number of bolls produced by the cotton
+plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll;
+to examine the effect of five defoliation levels (0\<!-- %, 25\\%, 50\\%, 75\\% and 100\\%). --></p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cottonbolls</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cottonbolls</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 125 observations on 4 variables.</p><dl'>
+    <p>A data frame with 125 observations on 4 variables.</p><dl>
 <dt>nc</dt><dd><p>number of bolls produced by two cotton plants at harvest</p></dd>
 <dt>stages</dt><dd><p>growth stage</p></dd>
 <dt>def</dt><dd><p>artificial defoliation level</p></dd>
@@ -156,21 +156,22 @@ to examine the effect of five defoliation levels (0<!-- %, 25%, 50%, 75% and 100
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>Supplementary Content of Zeviani et al. (2014): 
+    <p>Supplementary Content of Zeviani et al. (2014):
 <a href='http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014'>http://www.leg.ufpr.br/doku.php/publications:papercompanions:zeviani-jas2014</a></p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014). 
-The Gamma-count distribution in the analysis of experimental underdispersed data. 
+    <p>Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014).
+The Gamma-count distribution in the analysis of experimental underdispersed data.
 <em>Journal of Applied Statistics</em> <b>41</b>, 2616--26.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 373--375: Underdispersed Cotton bolls data</span>
 <span class='co'>### Model fitting for predictor V </span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cottonbolls</span>)
-<span class='no'>M.bolls</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>nc</span>~ <span class='fl'>1</span>+<span class='no'>stages</span>:<span class='no'>def</span>+<span class='no'>stages</span>:<span class='no'>def2</span>, <span class='kw'>data</span><span class='kw'>=</span> <span class='no'>cottonbolls</span>)
-<span class='no'>M.bolls</span></div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cottonbolls</span><span class='op'>)</span>
+<span class='va'>M.bolls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>nc</span><span class='op'>~</span> <span class='fl'>1</span><span class='op'>+</span><span class='va'>stages</span><span class='op'>:</span><span class='va'>def</span><span class='op'>+</span><span class='va'>stages</span><span class='op'>:</span><span class='va'>def2</span>, data<span class='op'>=</span> <span class='va'>cottonbolls</span><span class='op'>)</span>
+<span class='va'>M.bolls</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 #&gt; 
 #&gt; Linear Model Coefficients:
@@ -186,9 +187,10 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 #&gt; Dispersion (nu): 4.85
 #&gt; Degrees of Freedom: 124 Total (i.e. Null);  114 Residual
 #&gt; Null Deviance: 345.9363 
-#&gt; Residual Deviance: 125.2598 
+#&gt; Residual Deviance: 
 #&gt; AIC: 440.8229 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>M.bolls</span>)</div><div class='output co'>#&gt; 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.bolls</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 #&gt; 
 #&gt; Deviance Residuals: 
@@ -196,22 +198,22 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 #&gt; -2.29766  -0.68296  -0.04972   0.74987   2.74460  
 #&gt; 
 #&gt; Linear Model Coefficients:
-#&gt;                        Estimate Std.Err Z value Pr(&gt;|z|)    
-#&gt; (Intercept)              2.1896  0.0294   74.46  &lt; 2e-16 ***
-#&gt; stagesvegetative:def     0.4369  0.2397    1.82   0.0683 .  
-#&gt; stagesflower bud:def     0.2897  0.2358    1.23   0.2193    
-#&gt; stagesblossom:def       -1.2425  0.2832   -4.39  1.1e-05 ***
-#&gt; stagesfig:def            0.3648  0.2647    1.38   0.1682    
-#&gt; stagescotton boll:def    0.0089  0.2339    0.04   0.9695    
-#&gt; stagesvegetative:def2   -0.8052  0.2719   -2.96   0.0031 ** 
-#&gt; stagesflower bud:def2   -0.4878  0.2633   -1.85   0.0639 .  
-#&gt; stagesblossom:def2       0.6729  0.3196    2.11   0.0352 *  
-#&gt; stagesfig:def2          -1.3103  0.3170   -4.13  3.6e-05 ***
-#&gt; stagescotton boll:def2  -0.0200  0.2565   -0.08   0.9380    
+#&gt;                         Estimate   Std.Err Z value Pr(&gt;|z|)    
+#&gt; (Intercept)             2.189562  0.029407  74.456  &lt; 2e-16 ***
+#&gt; stagesvegetative:def    0.436854  0.239663   1.823  0.06834 .  
+#&gt; stagesflower bud:def    0.289708  0.235822   1.229  0.21926    
+#&gt; stagesblossom:def      -1.242507  0.283166  -4.388 1.14e-05 ***
+#&gt; stagesfig:def           0.364816  0.264720   1.378  0.16817    
+#&gt; stagescotton boll:def   0.008944  0.233866   0.038  0.96949    
+#&gt; stagesvegetative:def2  -0.805212  0.271949  -2.961  0.00307 ** 
+#&gt; stagesflower bud:def2  -0.487844  0.263290  -1.853  0.06390 .  
+#&gt; stagesblossom:def2      0.672864  0.319551   2.106  0.03523 *  
+#&gt; stagesfig:def2         -1.310267  0.316982  -4.134 3.57e-05 ***
+#&gt; stagescotton boll:def2 -0.019966  0.256498  -0.078  0.93795    
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
-#&gt; (Dispersion parameter for Mean-CMP estimated to be  4.852 )
+#&gt; (Dispersion parameter for Mean-CMP estimated to be 4.852)
 #&gt; 
 #&gt; 
 #&gt;     Null deviance: 345.94  on 124 degrees of freedom
@@ -235,7 +237,7 @@ The Gamma-count distribution in the analysis of experimental underdispersed data
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

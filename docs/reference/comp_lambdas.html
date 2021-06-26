@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Solve for Lambda for a Particular Mean Parametrized COM-Poisson Distribution — comp_lambdas" />
-<meta property="og:description" content="Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
-this function is used to find a lambda that can satisfy the mean constraint with a 
+<meta property="og:description" content="Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu,
+this function is used to find a lambda that can satisfy the mean constraint with a
 combination of bisection and Newton-Raphson updates. The function is also vectorized but
 will only update those that have not converged." />
 <meta property="og:image" content="/logo.svg" />
@@ -83,7 +83,7 @@ will only update those that have not converged." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@ will only update those that have not converged." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -137,33 +137,33 @@ will only update those that have not converged." />
     </div>
 
     <div class="ref-description">
-    <p>Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu, 
-this function is used to find a lambda that can satisfy the mean constraint with a 
+    <p>Given a particular mean parametrized COM-Poisson distribution i.e. mu and nu,
+this function is used to find a lambda that can satisfy the mean constraint with a
 combination of bisection and Newton-Raphson updates. The function is also vectorized but
 will only update those that have not converged.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comp_lambdas</span>(
-  <span class='no'>mu</span>,
-  <span class='no'>nu</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
-)
+    <pre class="usage"><span class='fu'>comp_lambdas</span><span class='op'>(</span>
+  <span class='va'>mu</span>,
+  <span class='va'>nu</span>,
+  lambdalb <span class='op'>=</span> <span class='fl'>1e-10</span>,
+  lambdaub <span class='op'>=</span> <span class='fl'>1000</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  lambdaint <span class='op'>=</span> <span class='fl'>1</span>,
+  summax <span class='op'>=</span> <span class='fl'>100</span>
+<span class='op'>)</span>
 
-<span class='fu'>comp_lambdas_fixed_ub</span>(
-  <span class='no'>mu</span>,
-  <span class='no'>nu</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>,
-  <span class='kw'>lambdaint</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>summax</span> <span class='kw'>=</span> <span class='fl'>100</span>
-)</pre>
+<span class='fu'>comp_lambdas_fixed_ub</span><span class='op'>(</span>
+  <span class='va'>mu</span>,
+  <span class='va'>nu</span>,
+  lambdalb <span class='op'>=</span> <span class='fl'>1e-10</span>,
+  lambdaub <span class='op'>=</span> <span class='fl'>1000</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  lambdaint <span class='op'>=</span> <span class='fl'>1</span>,
+  summax <span class='op'>=</span> <span class='fl'>100</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,13 +179,13 @@ searched for lambda(s).</p></td>
     </tr>
     <tr>
       <th>maxlambdaiter</th>
-      <td><p>numeric; the maximum number of iterations allowed to solve 
+      <td><p>numeric; the maximum number of iterations allowed to solve
 for lambda(s).</p></td>
     </tr>
     <tr>
       <th>tol</th>
-      <td><p>numeric; the convergence threshold. A lambda is said to satisfy the 
-mean constraint if the absolute difference between the calculated mean and the 
+      <td><p>numeric; the convergence threshold. A lambda is said to satisfy the
+mean constraint if the absolute difference between the calculated mean and the
 corresponding mu values is less than tol.</p></td>
     </tr>
     <tr>
@@ -201,10 +201,10 @@ corresponding mu values is less than tol.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Both <code>comp_lambdas</code> and <code>comp_lambdas_fixed_ub</code> returns the lambda value(s)
-that satisfies the mean constraint(s) as well as the current lambdaub value. 
-lambda value(s) returns by <code>comp_lambdas_fixed_ub</code> is bounded by the lambdaub 
-value. 
-<code>comp_lambdas</code> has the extra ability to scale up/down lambdaub to find the most 
+that satisfies the mean constraint(s) as well as the current lambdaub value.
+lambda value(s) returns by <code>comp_lambdas_fixed_ub</code> is bounded by the lambdaub
+value.
+<code>comp_lambdas</code> has the extra ability to scale up/down lambdaub to find the most
 appropriate lambda values.</p>
 
   </div>
@@ -222,7 +222,7 @@ appropriate lambda values.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

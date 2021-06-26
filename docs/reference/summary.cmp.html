@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary of COM-Poisson Model Fit — summary.cmp • mpcmp</title>
+<title>Summarizing COM-Poisson Model Fit — summary.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Summary of COM-Poisson Model Fit — summary.cmp" />
+<meta property="og:title" content="Summarizing COM-Poisson Model Fit — summary.cmp" />
 <meta property="og:description" content="summary method for class cmp." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -128,7 +128,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary of COM-Poisson Model Fit</h1>
+    <h1>Summarizing COM-Poisson Model Fit</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/summarize_extract.R'><code>R/summarize_extract.R</code></a></small>
     <div class="hidden name"><code>summary.cmp.Rd</code></div>
     </div>
@@ -138,7 +138,15 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cmp</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fl'>3L</span>, <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"digits"</span>) - <span class='fl'>3L</span>), <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for summary.cmp</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  digits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"digits"</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>3</span><span class='op'>)</span>,
+  signif.stars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"show.signif.stars"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,29 +156,50 @@
       <td><p>an object class 'cmp', obtained from a call to <code>glm.cmp</code>.</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>a result of the <em>default</em> method of <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>digits</th>
       <td><p>numeric; minimum number of significant digits to be used for most numbers.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other arguments passed to or from other methods  (currently unused).</p></td>
+      <th>signif.stars</th>
+      <td><p>logical. If TRUE, ‘significance stars’ are printed for each coefficient.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>summary.cmp</code> returns an object of class "summary.cmp", a list containing at least the following components:</p>
+<dt>call</dt><dd><p>the component from object.</p></dd>
+<dt>family</dt><dd><p>the component from object.</p></dd>
+<dt>deviance; residual_deviance</dt><dd><p>the component from object.</p></dd>
+<dt>df_residual</dt><dd><p>the component from object.</p></dd>
+<dt>df_null</dt><dd><p>the component from object.</p></dd>
+<dt>null_deviance</dt><dd><p>the component from object.</p></dd>
+<dt>deviance_resid</dt><dd><p>the deviance residuals: see residuals.cmp.</p></dd>
+<dt>coefficients</dt><dd><p>the matrix of coefficients, standard errors, z-values and p-values.</p></dd>
+<dt>df</dt><dd><p>a 3-vector of the rank of the model and the number of residual degrees of freedom, plus number of coefficients.</p></dd>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>summary.glm</code> tries to be smart about formatting the coefficients, standard errors 
-and gives 'significance stars'. The <code>coefficients</code> component of the result gives the 
-estimated coefficients and their estimated standard errors, together with their ratio. This 
+    <p><code>print.summary.glm</code> tries to be smart about formatting the coefficients, standard errors
+and gives 'significance stars'. The <code>coefficients</code> component of the result gives the
+estimated coefficients and their estimated standard errors, together with their ratio. This
 third column is labelled as <code>Z value</code> as the dispersion is fixed for this family. A
-forth column gives the two-tailed p-value corresponding to <code>Z value</code> based on 
+forth column gives the two-tailed p-value corresponding to <code>Z value</code> based on
 the asymptotic Normal reference distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='coef.cmp.html'>coef.cmp</a></code>, <code><a href='fitted.cmp.html'>fitted.cmp</a></code>, <code><a href='glm.cmp.html'>glm.cmp</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+    <pre class="examples"><div class='input'><span class='co'>## For examples see example(glm.cmp)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -187,7 +216,7 @@ the asymptotic Normal reference distribution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot — gg_plot • mpcmp</title>
+<title>Plot Diagnostic for a glm.cmp Object in ggplot style — autoplot.cmp • mpcmp</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,17 +46,9 @@
 
 
 
-<meta property="og:title" content="Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot — gg_plot" />
-<meta property="og:description" content="Eight plots (selectable by which) are currently available: 
-a plot of deviance residuals against fitted values, 
-a non-randomized PIT histogram, 
-a uniform Q-Q plot for non-randomized PIT, 
-a histogram of the normal randomized residuals, 
-a Q-Q plot of the normal randomized residuals, 
-a Scale-Location plot of sqrt(| residuals |) against fitted values
-a plot of Cook's distances versus row labels
-a plot of pearson residuals against leverage. 
-By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided." />
+<meta property="og:title" content="Plot Diagnostic for a glm.cmp Object in ggplot style — autoplot.cmp" />
+<meta property="og:description" content="autoplot uses ggplot2 to draw the diagnostic plots for a 'cmp' class object.
+gg_plot is an alias for it." />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -89,7 +81,7 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -108,7 +100,7 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -137,49 +129,54 @@ By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provi
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot</h1>
+    <h1>Plot Diagnostic for a <code>glm.cmp</code> Object in ggplot style</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/graphics_related.R'><code>R/graphics_related.R</code></a></small>
-    <div class="hidden name"><code>gg_plot.Rd</code></div>
+    <div class="hidden name"><code>autoplot.cmp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Eight plots (selectable by <code>which</code>) are currently available: 
-a plot of deviance residuals against fitted values, 
-a non-randomized PIT histogram, 
-a uniform Q-Q plot for non-randomized PIT, 
-a histogram of the normal randomized residuals, 
-a Q-Q plot of the normal randomized residuals, 
-a Scale-Location plot of sqrt(| residuals |) against fitted values
-a plot of Cook's distances versus row labels
-a plot of pearson residuals against leverage. 
-By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.</p>
+    <p><code>autoplot</code> uses ggplot2 to draw the diagnostic plots for a 'cmp' class object.
+<code>gg_plot</code> is an <em>alias</em> for it.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gg_plot</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span>),
-  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>output_as_ggplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='co'># S3 method for cmp</span>
+<span class='fu'>autoplot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  which <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span><span class='op'>)</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  ask <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output_as_ggplot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>gg_plot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  which <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span>, <span class='fl'>6L</span>, <span class='fl'>8L</span><span class='op'>)</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  ask <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  output_as_ggplot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>object</th>
       <td><p>an object class 'cmp' object, obtained from a call to <code>glm.cmp</code></p></td>
     </tr>
     <tr>
       <th>which</th>
-      <td><p>if a subset of plots is required, specify a subset of the numbers 1:8. 
+      <td><p>if a subset of plots is required, specify a subset of the numbers 1:8.
 See 'Details' below.</p></td>
     </tr>
     <tr>
       <th>bins</th>
-      <td><p>numeric; the number of bins shown in the PIT histogram or the 
+      <td><p>numeric; the number of bins shown in the PIT histogram or the
 PIT Q-Q plot.</p></td>
     </tr>
     <tr>
@@ -196,9 +193,13 @@ PIT Q-Q plot.</p></td>
     </tr>
     <tr>
       <th>output_as_ggplot</th>
-      <td><p>logical; if <code>TRUE</code>, the function would 
-return a list of <code>ggplot</code> objects; if <code>FALSE</code>, the 
+      <td><p>logical; if <code>TRUE</code>, the function would
+return a list of <code>ggplot</code> objects; if <code>FALSE</code>, the
 function would return an <code>ggarrange</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments passed to or from other methods (currently unused).</p></td>
     </tr>
     </table>
 
@@ -207,36 +208,48 @@ function would return an <code>ggarrange</code> object.</p></td>
     <p>return a list of <code>ggplot</code> objects or a <code>ggarrange</code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of 
-the absolute standardized deviance residuals (<em>sqrt|E|</em>) in order to diminish 
+    <p>Eight plots (selectable by <code>which</code>) are currently available:
+a plot of deviance residuals against fitted values,
+a non-randomized PIT histogram,
+a uniform Q-Q plot for non-randomized PIT,
+a histogram of the normal randomized residuals,
+a Q-Q plot of the normal randomized residuals,
+a Scale-Location plot of sqrt(| residuals |) against fitted values
+a plot of Cook's distances versus row labels
+a plot of pearson residuals against leverage.
+By default, four plots (number 1, 2, 6, and 8 from this list of plots) are provided.</p>
+<p>The 'Scale-Location' plot, also called 'Spread-Location' plot, takes the square root of
+the absolute standardized deviance residuals (<em>sqrt|E|</em>) in order to diminish
 skewness is much less skewed than than <em>|E|</em> for Gaussian zero-mean E.</p>
-<p>The 'Scale-Location' plot uses the standardized deviance residuals while the 
-Residual-Leverage plot uses the standardized pearson residuals. They are given as 
-<em>R[i]/sqrt(1-h.ii)</em> where h_ii are the diagonal entries of the hat matrix.</p>
-<p>The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5 
+<p>The 'Scale-Location' plot uses the standardized deviance residuals while the
+Residual-Leverage plot uses the standardized pearson residuals. They are given as
+\(R_i/\sqrt{1-h_{ii}}\) where \(h_{ii}\) are the diagonal entries of the hat matrix.</p>
+<p>The Residuals-Leverage plot shows contours of equal Cook's distance for values of 0.5
 and 1.</p>
-<p>There are two plots based on the non-randomized probability integral transformation (PIT) 
-using <code><a href='nrPIT.html'>compPIT</a></code>. These are a histogram and a uniform Q-Q plot. If the 
-model assumption is appropriate, these plots should reflect a sample obtained 
+<p>There are two plots based on the non-randomized probability integral transformation (PIT)
+using <code><a href='nrPIT.html'>compPIT</a></code>. These are a histogram and a uniform Q-Q plot. If the
+model assumption is appropriate, these plots should reflect a sample obtained
 from a uniform distribution.</p>
-<p>There are also two plots based on the normal randomized residuals calculated 
+<p>There are also two plots based on the normal randomized residuals calculated
 using <code><a href='rPIT.html'>compnormRandPIT</a></code>. These are a histogram and a normal Q-Q plot. If the model
 assumption is appropriate, these plots should reflect a sample obtained from a normal
 distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='nrPIT.html'>compPIT</a></code>, <code><a href='rPIT.html'>compnormRandPIT</a></code>, 
+    <div class='dont-index'><p><code><a href='nrPIT.html'>compPIT</a></code>, <code><a href='rPIT.html'>compnormRandPIT</a></code>,
 <code><a href='glm.cmp.html'>glm.cmp</a></code> and <code><a href='plot.cmp.html'>plot.cmp</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>takeoverbids</span>)
-<span class='no'>M.bids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span>(<span class='no'>numbids</span> ~ <span class='no'>leglrest</span> + <span class='no'>rearest</span> + <span class='no'>finrest</span> + <span class='no'>whtknght</span>
-    + <span class='no'>bidprem</span> + <span class='no'>insthold</span> + <span class='no'>size</span> + <span class='no'>sizesq</span> + <span class='no'>regulatn</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>takeoverbids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
+    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 
 <span class='co'>## The default plots are shown</span>
-<span class='fu'>gg_plot</span>(<span class='no'>M.bids</span>)</div><div class='img'><img src='gg_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>gg_plot</span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span> <span class='co'># or autoplot(M.bids)</span>
+</div><div class='img'><img src='autoplot.cmp-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## The plots for the non-randomized PIT </span>
-<span class='fu'>gg_plot</span>(<span class='no'>M.bids</span>, <span class='kw'>which</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))</div><div class='img'><img src='gg_plot-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>gg_plot</span><span class='op'>(</span><span class='va'>M.bids</span>, which <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># or autoplot(M.bids, which = c(2,3))</span>
+</div><div class='img'><img src='autoplot.cmp-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +265,7 @@ distribution.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

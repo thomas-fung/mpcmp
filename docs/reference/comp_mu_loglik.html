@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -137,16 +137,16 @@
     <p>A function to compute the log-likelihood of the COM-Poisson model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comp_mu_loglik</span>(<span class='no'>param</span>, <span class='no'>y</span>, <span class='no'>xx</span>, <span class='no'>offset</span>, <span class='no'>summax</span>)
+    <pre class="usage"><span class='fu'>comp_mu_loglik</span><span class='op'>(</span><span class='va'>param</span>, <span class='va'>y</span>, <span class='va'>xx</span>, <span class='va'>offset</span>, <span class='va'>summax</span><span class='op'>)</span>
 
-<span class='fu'>comp_mu_neg_loglik_log_nu_only</span>(<span class='no'>log_nu</span>, <span class='no'>mu</span>, <span class='no'>y</span>, <span class='no'>summax</span>)</pre>
+<span class='fu'>comp_mu_neg_loglik_log_nu_only</span><span class='op'>(</span><span class='va'>log_nu</span>, <span class='va'>mu</span>, <span class='va'>y</span>, <span class='va'>summax</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>param</th>
-      <td><p>numeric vector: the model coefficients &amp; the current value of <code>nu</code>. 
+      <td><p>numeric vector: the model coefficients &amp; the current value of <code>nu</code>.
 It is assumed that <code>nu</code> is in the last position of <code>param</code>.</p></td>
     </tr>
     <tr>
@@ -177,7 +177,7 @@ It is assumed that <code>nu</code> is in the last position of <code>param</code>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>comp_mu_loglik</code> returns the log-likelihood value of the COM-Poisson model based on Huang (2018).
+    <p><code>comp_mu_loglik</code> returns the log-likelihood value of the COM-Poisson model based on Huang (2017).
 <code>comp_mu_neg_loglik_log_nu_only</code> returns the negative log-likelihood value of the COM-Poisson model based on Ribeiro Jr et al. (2018)'s specification to use in conjunction with <code>optim</code>.</p>
 
   </div>
@@ -195,7 +195,7 @@ It is assumed that <code>nu</code> is in the last position of <code>param</code>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

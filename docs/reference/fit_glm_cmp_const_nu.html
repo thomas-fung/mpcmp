@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+<title>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with constant dispersion. — fit_glm_cmp_const_nu • mpcmp</title>
 
 <!-- favicons -->
@@ -47,10 +47,10 @@ Model with constant dispersion. — fit_glm_cmp_const_nu • mpcmp</title>
 
 
 
-<meta property="og:title" content="Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+<meta property="og:title" content="Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with constant dispersion. — fit_glm_cmp_const_nu" />
-<meta property="og:description" content="This is a workhorse function in which glm.cmp to call upon to fit a 
-mean-parametrized Conway-Maxwell Poisson generalized linear model with 
+<meta property="og:description" content="This is a workhorse function in which glm.cmp to call upon to fit a
+mean-parametrized Conway-Maxwell Poisson generalized linear model with
 constant dispersion." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -84,7 +84,7 @@ constant dispersion." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@ constant dispersion." />
   <a href="../news/index.html">Change log</a>
 </li>
 <li>
-  <a href="../articles/mpcmp.html">Blog</a>
+  <a href="../articles/mpcmp.html">Tutorial</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -132,28 +132,28 @@ constant dispersion." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear 
+    <h1>Fit a Mean Parametrized Conway-Maxwell Poisson Generalized Linear
 Model with constant dispersion.</h1>
     <small class="dont-index">Source: <a href='https://github.com/thomas-fung/mpcmp/blob/master/R/fit_glm_cmp_const_nu.R'><code>R/fit_glm_cmp_const_nu.R</code></a></small>
     <div class="hidden name"><code>fit_glm_cmp_const_nu.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a workhorse function in which glm.cmp to call upon to fit a 
-mean-parametrized Conway-Maxwell Poisson generalized linear model with 
+    <p>This is a workhorse function in which glm.cmp to call upon to fit a
+mean-parametrized Conway-Maxwell Poisson generalized linear model with
 constant dispersion.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_glm_cmp_const_nu</span>(
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>,
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='no'>offset</span>,
-  <span class='kw'>betastart</span> <span class='kw'>=</span> <span class='no'>betastart</span>,
-  <span class='kw'>lambdalb</span> <span class='kw'>=</span> <span class='no'>lambdalb</span>,
-  <span class='kw'>lambdaub</span> <span class='kw'>=</span> <span class='no'>lambdaub</span>,
-  <span class='kw'>maxlambdaiter</span> <span class='kw'>=</span> <span class='no'>maxlambdaiter</span>,
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='no'>tol</span>
-)</pre>
+    <pre class="usage"><span class='fu'>fit_glm_cmp_const_nu</span><span class='op'>(</span>
+  y <span class='op'>=</span> <span class='va'>y</span>,
+  X <span class='op'>=</span> <span class='va'>X</span>,
+  offset <span class='op'>=</span> <span class='va'>offset</span>,
+  betastart <span class='op'>=</span> <span class='va'>betastart</span>,
+  lambdalb <span class='op'>=</span> <span class='va'>lambdalb</span>,
+  lambdaub <span class='op'>=</span> <span class='va'>lambdaub</span>,
+  maxlambdaiter <span class='op'>=</span> <span class='va'>maxlambdaiter</span>,
+  tol <span class='op'>=</span> <span class='va'>tol</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,7 +168,7 @@ constant dispersion.</p>
     </tr>
     <tr>
       <th>offset, </th>
-      <td><p>this can be used to specify an *a priori* known component to be included 
+      <td><p>this can be used to specify an <em>a priori</em> known component to be included
 in the linear predictor for mean during fitting. This should be <code>NULL</code> or a numeric vector</p></td>
     </tr>
     <tr>
@@ -184,12 +184,12 @@ will scale up <code>lambdaub</code> accordingly.</p></td>
     </tr>
     <tr>
       <th>maxlambdaiter</th>
-      <td><p>numeric: the maximum number of iterations allowed to solve 
+      <td><p>numeric: the maximum number of iterations allowed to solve
 for lambda(s).</p></td>
     </tr>
     <tr>
       <th>tol</th>
-      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the 
+      <td><p>numeric: the convergence threshold. A lambda is said to satisfy the
 mean constraint if the absolute difference between the calculated mean and a fitted
 values is less than tol.</p></td>
     </tr>
@@ -200,7 +200,7 @@ values is less than tol.</p></td>
     <p>A fitted model object of class <code>cmp</code> similar to one obtained from <code>glm</code> or <code>glm.nb</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## For examples see example(glm.cmp)
+    <pre class="examples"><div class='input'><span class='co'>## For examples see example(glm.cmp)</span>
 
 </div></pre>
   </div>
@@ -218,7 +218,7 @@ values is less than tol.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
