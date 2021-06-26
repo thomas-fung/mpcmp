@@ -19,9 +19,8 @@ Extract the Design Matrix from a COM-Poisson Model Fit
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 model.matrix(M.attendance)
-
 \donttest{
 data(sitophilus)
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)

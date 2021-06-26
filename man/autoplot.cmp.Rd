@@ -90,14 +90,14 @@ distribution.
 }
 \examples{
 data(takeoverbids)
-M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 
 ## The default plots are shown
 gg_plot(M.bids) # or autoplot(M.bids)
 
-## The plots for the non-randomized PIT 
-gg_plot(M.bids, which = c(2,3)) # or autoplot(M.bids, which = c(2,3))
+## The plots for the non-randomized PIT
+gg_plot(M.bids, which = c(2, 3)) # or autoplot(M.bids, which = c(2,3))
 }
 \seealso{
 \code{\link{compPIT}}, \code{\link{compnormRandPIT}},

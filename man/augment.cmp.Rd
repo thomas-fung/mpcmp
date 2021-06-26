@@ -55,6 +55,6 @@ We are in the process of defining behaviours for models fit with various na.acti
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 augment(M.attendance)
 }

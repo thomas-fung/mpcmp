@@ -152,14 +152,16 @@ where \eqn{x_i} and \eqn{s_i} are some covariates.
 \examples{
 ### Huang (2017) Page 368--370: Overdispersed Attendance data
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 M.attendance
 summary(M.attendance)
-\donttest{plot(M.attendance) # or autoplot(M.attendance)
+\donttest{
+plot(M.attendance) # or autoplot(M.attendance)
 }
 
 ### Ribeiro et al. (2013): Varying dispersion as a function of covariates
-\donttest{data(sitophilus)
+\donttest{
+data(sitophilus)
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 summary(M.sit)
 }

@@ -165,7 +165,7 @@ American Naturalist</em>, <b>108</b>, 473--488.</p>
     <pre class="examples"><div class='input'><span class='co'>### Barbour &amp; Brown (1974): Overdispersed Fish data</span>
 <span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>fish</span><span class='op'>)</span>
-<span class='va'>M.fish</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>~</span> <span class='fl'>1</span><span class='op'>+</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>area</span><span class='op'>)</span>, data<span class='op'>=</span><span class='va'>fish</span><span class='op'>)</span>
+<span class='va'>M.fish</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>species</span> <span class='op'>~</span> <span class='fl'>1</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>area</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>fish</span><span class='op'>)</span>
 <span class='va'>M.fish</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = species ~ 1 + log(area), data = fish)

@@ -3,7 +3,7 @@ title: "Getting Started with the `mpcmp` package"
 author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: library.bib
+bibliography: "`r here::here('vignettes', 'library.bib')`"
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Getting Started with the `mpcmp` package}

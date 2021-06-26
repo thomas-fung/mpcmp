@@ -33,6 +33,6 @@ Tidy summarizes information about the components of a model. A model component m
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 tidy(M.attendance)
 }

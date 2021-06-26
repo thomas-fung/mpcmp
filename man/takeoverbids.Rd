@@ -43,11 +43,10 @@ Sáez-Castillo and Conde-Sánchez (2013).
 ### Huang (2017) Page 371--372: Underdispersed Takeover Bids data
 data(takeoverbids)
 M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 M.bids
 summary(M.bids)
-plot(M.bids) #or autoplot(M.bids)
-
+plot(M.bids) # or autoplot(M.bids)
 }
 \references{
 Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series

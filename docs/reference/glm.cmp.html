@@ -305,7 +305,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Huang (2017) Page 368--370: Overdispersed Attendance data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
-<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span><span class='va'>daysabs</span> <span class='op'>~</span> <span class='va'>gender</span> <span class='op'>+</span> <span class='va'>math</span> <span class='op'>+</span> <span class='va'>prog</span>, data <span class='op'>=</span> <span class='va'>attendance</span><span class='op'>)</span>
 <span class='va'>M.attendance</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = daysabs ~ gender + math + prog, data = attendance)
@@ -344,10 +344,12 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Residual deviance: 377.44  on 309 degrees of freedom
 #&gt; 
 #&gt; AIC: 1739.026 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span> <span class='co'># or autoplot(M.attendance)</span>
-</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span> <span class='co'># or autoplot(M.attendance)</span>
+</div><div class='img'><img src='glm.cmp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='glm.cmp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 
 <span class='co'>### Ribeiro et al. (2013): Varying dispersion as a function of covariates</span>
+<span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
 <span class='va'>M.sit</span> <span class='op'>&lt;-</span> <span class='fu'>glm.cmp</span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>M.sit</span><span class='op'>)</span>
@@ -378,7 +380,7 @@ dispersed counts. <em>Statistical Modelling</em> <b>17</b>, 359--380.</p>
 #&gt; Residual deviance:  41.679  on 32 degrees of freedom
 #&gt; 
 #&gt; AIC: 260.8279 
-#&gt; </div><div class='input'>
+#&gt; </div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>

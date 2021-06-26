@@ -24,28 +24,27 @@ parameters between the full and null models.
 ## Testing for the mean coefficients
 data(takeoverbids)
 
-## Fit full model 
-M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
-    
+## Fit full model
+M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
+
 ## Fit null model; without whtknght
-M.bids.null <- update(M.bids.full, .~.-whtknght)
-     
+M.bids.null <- update(M.bids.full, . ~ . - whtknght)
+
 ## Likelihood ratio test for the nested models
 cmplrtest(M.bids.full, M.bids.null) # order of objects is not important
 
 ## Testing for dispersion coefficients
-data(sitophilus) 
- M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
- 
+data(sitophilus)
+M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
+
 ## Fit null model; dropping extract from dispersion equation
- M.sit.null1 <- update(M.sit.full, formula_nu. = ~1)   
- cmplrtest(M.sit.null1, M.sit.full)
+M.sit.null1 <- update(M.sit.full, formula_nu. = ~1)
+cmplrtest(M.sit.null1, M.sit.full)
 
 ## Fit null model; using constant dispersion specification
-M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)   
+M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
 cmplrtest(M.sit.null2, M.sit.full)
-
 }
 \references{
 Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for

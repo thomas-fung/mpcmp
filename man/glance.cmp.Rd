@@ -34,6 +34,6 @@ Glance returns the same number of columns regardless of whether the model matrix
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 glance(M.attendance)
 }

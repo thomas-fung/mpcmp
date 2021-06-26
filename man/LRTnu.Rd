@@ -19,8 +19,8 @@ The test statistic has 1 degrees of freedom.
 }
 \examples{
 data(takeoverbids)
-M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 LRTnu(M.bids)
 }
 \references{

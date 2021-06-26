@@ -27,13 +27,12 @@ to examine the effect of five defoliation levels (0\\%, 25\\%, 50\\%, 75\\% and 
 }
 \examples{
 ### Huang (2017) Page 373--375: Underdispersed Cotton bolls data
-### Model fitting for predictor V 
+### Model fitting for predictor V
 
 data(cottonbolls)
-M.bolls <- glm.cmp(nc~ 1+stages:def+stages:def2, data= cottonbolls)
+M.bolls <- glm.cmp(nc ~ 1 + stages:def + stages:def2, data = cottonbolls)
 M.bolls
 summary(M.bolls)
-
 }
 \references{
 Zeviani, W.M., Riberio P.J. Jr., Bonat, W.H., Shimakura S.E. and Muniz J.A. (2014).

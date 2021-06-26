@@ -164,7 +164,7 @@ Model Fit</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>attendance</span><span class='op'>)</span>
-<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span><span class='op'>~</span> <span class='va'>gender</span><span class='op'>+</span><span class='va'>math</span><span class='op'>+</span><span class='va'>prog</span>, data<span class='op'>=</span><span class='va'>attendance</span><span class='op'>)</span>
+<span class='va'>M.attendance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>daysabs</span> <span class='op'>~</span> <span class='va'>gender</span> <span class='op'>+</span> <span class='va'>math</span> <span class='op'>+</span> <span class='va'>prog</span>, data <span class='op'>=</span> <span class='va'>attendance</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/vcov.html'>vcov</a></span><span class='op'>(</span><span class='va'>M.attendance</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                  (Intercept)    gendermale          math  progAcademic
 #&gt; (Intercept)     0.0362548681 -6.220521e-03 -2.500916e-04 -2.278626e-02
@@ -177,8 +177,7 @@ Model Fit</p>
 #&gt; gendermale      -5.111469e-04
 #&gt; math            -7.981397e-05
 #&gt; progAcademic     2.253264e-02
-#&gt; progVocational   3.590206e-02</div><div class='input'>
-</div></pre>
+#&gt; progVocational   3.590206e-02</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

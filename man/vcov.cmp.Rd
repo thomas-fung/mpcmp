@@ -21,7 +21,6 @@ Model Fit
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 vcov(M.attendance)
-
 }

@@ -27,24 +27,24 @@ identical to \code{update} in the \code{stats} package.
 # To update the mean regression formula
 data(takeoverbids)
 
-## Fit full model 
-M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+## Fit full model
+M.bids.full <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 M.bids.full
-        
+
 ## Dropping whtknght
-M.bids.null <- update(M.bids.full, .~.-whtknght)
+M.bids.null <- update(M.bids.full, . ~ . - whtknght)
 M.bids.null
 
 ## To update the dispersion regression formula
 data(sitophilus)
 
-## Fit full model 
+## Fit full model
 M.sit.full <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 M.sit.full
-        
+
 ## Dropping extract from the dispersion regression
-M.sit.null1 <- update(M.sit.full, formula_nu =  ~.-extract)
+M.sit.null1 <- update(M.sit.full, formula_nu = ~ . - extract)
 M.sit.null1
 
 ## To not regress on the dispersion at all

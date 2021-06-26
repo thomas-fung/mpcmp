@@ -41,7 +41,7 @@
 \code{summary} method for class \code{cmp}.
 }
 \details{
-\code{print.summary.glm} tries to be smart about formatting the coefficients, standard errors
+\code{print.summary.cmp} tries to be smart about formatting the coefficients, standard errors
 and gives 'significance stars'. The \code{coefficients} component of the result gives the
 estimated coefficients and their estimated standard errors, together with their ratio. This
 third column is labelled as \code{Z value} as the dispersion is fixed for this family. A

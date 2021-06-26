@@ -28,7 +28,7 @@ larger count data.
 ### Barbour & Brown (1974): Overdispersed Fish data
 \donttest{
 data(fish)
-M.fish <- glm.cmp(species~ 1+log(area), data=fish)
+M.fish <- glm.cmp(species ~ 1 + log(area), data = fish)
 M.fish
 summary(M.fish)
 }

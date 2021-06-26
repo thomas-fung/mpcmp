@@ -24,8 +24,7 @@ fitted model.
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 confint(M.attendance)
 confint(M.attendance, parm = "math", level = 0.9)
-
 }

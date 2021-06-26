@@ -188,7 +188,7 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 <span class='co'>### Huang (2017) Page 371--372: Underdispersed Takeover Bids data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 <span class='va'>M.bids</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span>
-    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span>
 <span class='va'>M.bids</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
@@ -236,9 +236,8 @@ Resistance <em>Review of Quantitative Finance and Accounting</em> <b>3</b>, 447-
 #&gt; Residual deviance: 131.20  on 116 degrees of freedom
 #&gt; 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span> <span class='co'>#or autoplot(M.bids)</span>
-</div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>M.bids</span><span class='op'>)</span> <span class='co'># or autoplot(M.bids)</span>
+</div><div class='img'><img src='takeoverbids-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='takeoverbids-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

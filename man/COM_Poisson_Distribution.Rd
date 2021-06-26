@@ -109,8 +109,8 @@ Conway-Maxwell-Poisson distribution with parameter \code{mu} and \code{nu}
 }
 \examples{
 dcomp(0:5, mu = 2, nu = 1.2)
-pcomp(5, mu=2, nu =1.2)
-p <- (1:9)/10
+pcomp(5, mu = 2, nu = 1.2)
+p <- (1:9) / 10
 qcomp(p, mu = 2, nu = 0.8)
 rcomp(10, mu = 2, nu = 0.7)
 }

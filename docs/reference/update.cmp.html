@@ -177,9 +177,9 @@ the call</p></td>
 <span class='co'># To update the mean regression formula</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>takeoverbids</span><span class='op'>)</span>
 
-<span class='co'>## Fit full model </span>
-<span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span> 
-    <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data<span class='op'>=</span><span class='va'>takeoverbids</span><span class='op'>)</span>
+<span class='co'>## Fit full model</span>
+<span class='va'>M.bids.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span><span class='va'>numbids</span> <span class='op'>~</span> <span class='va'>leglrest</span> <span class='op'>+</span> <span class='va'>rearest</span> <span class='op'>+</span> <span class='va'>finrest</span> <span class='op'>+</span> <span class='va'>whtknght</span>
+  <span class='op'>+</span> <span class='va'>bidprem</span> <span class='op'>+</span> <span class='va'>insthold</span> <span class='op'>+</span> <span class='va'>size</span> <span class='op'>+</span> <span class='va'>sizesq</span> <span class='op'>+</span> <span class='va'>regulatn</span>, data <span class='op'>=</span> <span class='va'>takeoverbids</span><span class='op'>)</span>
 <span class='va'>M.bids.full</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + whtknght + 
@@ -196,9 +196,9 @@ the call</p></td>
 #&gt; Null Deviance: 182.3906 
 #&gt; Residual Deviance: 
 #&gt; AIC: 382.1753 
-#&gt; </div><div class='input'>        
+#&gt; </div><div class='input'>
 <span class='co'>## Dropping whtknght</span>
-<span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span><span class='op'>~</span><span class='va'>.</span><span class='op'>-</span><span class='va'>whtknght</span><span class='op'>)</span>
+<span class='va'>M.bids.null</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.bids.full</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>whtknght</span><span class='op'>)</span>
 <span class='va'>M.bids.null</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = numbids ~ leglrest + rearest + finrest + bidprem + 
@@ -219,7 +219,7 @@ the call</p></td>
 <span class='co'>## To update the dispersion regression formula</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sitophilus</span><span class='op'>)</span>
 
-<span class='co'>## Fit full model </span>
+<span class='co'>## Fit full model</span>
 <span class='va'>M.sit.full</span> <span class='op'>&lt;-</span> <span class='fu'><a href='glm.cmp.html'>glm.cmp</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>ninsect</span> <span class='op'>~</span> <span class='va'>extract</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span><span class='va'>extract</span>, data <span class='op'>=</span> <span class='va'>sitophilus</span><span class='op'>)</span>
 <span class='va'>M.sit.full</span>
 </div><div class='output co'>#&gt; 
@@ -237,9 +237,9 @@ the call</p></td>
 #&gt; Null Deviance: 257.2108 
 #&gt; Residual Deviance: 
 #&gt; AIC: 260.8279 
-#&gt; </div><div class='input'>        
+#&gt; </div><div class='input'>
 <span class='co'>## Dropping extract from the dispersion regression</span>
-<span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span>  <span class='op'>~</span><span class='va'>.</span><span class='op'>-</span><span class='va'>extract</span><span class='op'>)</span>
+<span class='va'>M.sit.null1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>M.sit.full</span>, formula_nu <span class='op'>=</span> <span class='op'>~</span> <span class='va'>.</span> <span class='op'>-</span> <span class='va'>extract</span><span class='op'>)</span>
 <span class='va'>M.sit.null1</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call: glm.cmp(formula = ninsect ~ extract, formula_nu = ~1, data = sitophilus)

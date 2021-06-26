@@ -41,8 +41,8 @@ intervals. The vector of these values is returned by the function in the list el
 }
 \examples{
 data(takeoverbids)
-M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght 
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 compnormRandPIT(M.bids)
 }
 \references{

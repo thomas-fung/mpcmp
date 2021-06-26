@@ -45,7 +45,7 @@ This suite of functions provides the basic quantities which are used in forming 
 }
 \examples{
 data(attendance)
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 influence(M.attendance)
 hatvalues(M.attendance)
 rstandard(M.attendance, type = "pearson")
