@@ -174,7 +174,7 @@ obtained from a sample from the uniform distribution.</p>
 <p>This function aims to produce observations which instead resemble a sample from
 a normal distribution. Such a sample can then be examined by the usual tools for
 checking normality, such as histograms and normal Q-Q plots.</p>
-<p>For each of the intervals produced by <code>compPredProb</code>, a random uniform observation
+<p>For each of the intervals produced by <code>compnormRandPIT</code>, a random uniform observation
 is generated, which is then converted to a normal observation by applying the inverse
 standard normal distribution function (using <code>qnorm</code>). The vector of these values
 is returned by the function in the list element <code>rt</code>. In addition non-random
