@@ -1,5 +1,6 @@
-# mpcmp (development version)
-  * Export more functions to NAMESPACE as requested by @yangchino1. 
+# mpcmp 0.3.7
+  * Exported more functions to NAMESPACE as requested by @yangchino1. 
+  * Patched a bug in `predict.cmp` that failed to handle new data with factors in it. 
   
 # mpcmp 0.3.6
   * Added `autoplot` as an alias to `gg_plot`. Credit to Emi Tanaka  (@emitanaka) for this suggestion.
