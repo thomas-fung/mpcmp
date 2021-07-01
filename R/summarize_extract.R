@@ -432,8 +432,12 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
       pred <- list(fit = pred, se.fit = se)
     }
   } else {
-    mf <- model.frame(delete.response(object$terms_mu), data = newdata)
-    X <- model.matrix(delete.response(object$terms_mu), mf)
+    mf <- model.frame(delete.response(object$terms_mu),
+                      data = newdata, 
+                      xlev = object$xlevels_mu)
+    X <- model.matrix(delete.response(object$terms_mu), 
+                      mf,
+                      contrasts.arg = object$contrasts_mu)
     pred <- switch(type,
       link = X %*% object$coefficients,
       response = exp(X %*% object$coefficients)

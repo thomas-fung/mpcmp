@@ -30,7 +30,7 @@ This function aims to produce observations which instead resemble a sample from
 a normal distribution. Such a sample can then be examined by the usual tools for
 checking normality, such as histograms and normal Q-Q plots.
 
-For each of the intervals produced by \code{compPredProb}, a random uniform observation
+For each of the intervals produced by \code{compnormRandPIT}, a random uniform observation
 is generated, which is then converted to a normal observation by applying the inverse
 standard normal distribution function (using \code{qnorm}). The vector of these values
 is returned by the function in the list element \code{rt}. In addition non-random

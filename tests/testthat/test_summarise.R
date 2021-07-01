@@ -4,6 +4,16 @@ data("attendance")
 M.attendance <- glm.cmp(daysabs ~ gender + math + prog,
   data = attendance
 )
+newdataframe <- data.frame(
+  gender= "female", math = 70, prog = "Academic")
+pred1 <- predict(M.attendance, 
+                 newdata = newdataframe, 
+                 se.fit = TRUE)
+pred2 <- predict(M.attendance, 
+                 newdata = newdataframe, 
+                 type = "response",
+                 se.fit = TRUE)
+
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 
 test_that("Test residuals", {
@@ -141,4 +151,24 @@ test_that("Test broom", {
   expect_is(augment(M.attendance), class = "tbl_df")
   expect_length(augment(M.attendance), 9)
   expect_length(augment(M.sit), 9)
+})
+
+
+
+test_that("Test patching predict with new data", {
+  expect_equal( 
+    round(c(predict(M.attendance, newdata = newdataframe)),
+          5),
+    round(1.846711,5))
+  expect_equal(round(c(predict(M.attendance, 
+                  newdata = newdataframe, 
+                  type = "response")),
+        5), round(6.33894,5))
+  expect_length(predict(M.attendance, 
+                          newdata = newdataframe, 
+                          se.fit=TRUE), 2)
+  expect_equal(round(as.numeric(pred1$se.fit), 5), 
+               round(0.1172887,5))
+  expect_equal(round(as.numeric(pred2$se.fit), 5),
+               round(0.7434861,5))
 })

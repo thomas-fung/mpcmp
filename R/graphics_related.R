@@ -291,7 +291,7 @@ compPIT <- function(object, bins = 10) {
 #' a normal distribution. Such a sample can then be examined by the usual tools for
 #' checking normality, such as histograms and normal Q-Q plots.
 #'
-#' For each of the intervals produced by \code{compPredProb}, a random uniform observation
+#' For each of the intervals produced by \code{compnormRandPIT}, a random uniform observation
 #' is generated, which is then converted to a normal observation by applying the inverse
 #' standard normal distribution function (using \code{qnorm}). The vector of these values
 #' is returned by the function in the list element \code{rt}. In addition non-random
@@ -826,7 +826,7 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
     p[[show_count]] <- p_temp
     options(warn = 0)
   }
-  p_ggarrange <- ggarrange(plotlist = p, ncol = ncol, nrow = nrow)
+  p_ggarrange <- ggpubr::ggarrange(plotlist = p, ncol = ncol, nrow = nrow)
   if ((is.null(ncol) & is.null(nrow))) {
     print(p_ggarrange)
   } else if (class(p_ggarrange)[1] != "list") {

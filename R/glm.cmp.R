@@ -241,16 +241,18 @@ glm.cmp <- function(formula,
   out$call <- call
   out$formula <- formula
   if (is.null(formula_nu)) {
-    out$contrasts_mu <- out$formula_nu <- out$terms_nu <- out$model_nu <- NA
+    out$xlevels_nu <- out$contrasts_nu <- out$formula_nu <- out$terms_nu <- out$model_nu <- NA
   } else {
     out$formula_nu <- formula_nu
     out$terms_nu <- mt_nu
     out$model_nu <- mf_nu
-    out$contrasts_mu <- attr(S, "contrasts")
+    out$xlevels_nu <- .getXlevels(mt_nu, mf_nu)
+    out$contrasts_nu <- attr(S, "contrasts")
   }
   out$data <- data
   out$terms_mu <- mt_mu
   out$model_mu <- mf_mu
+  out$xlevels_mu <- .getXlevels(mt_mu, mf_mu)
   out$contrasts_mu <- attr(X, "contrasts")
   out$na.action <- attr(mf_mu, "na.action")
   return(out)
