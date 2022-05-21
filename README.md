@@ -8,7 +8,7 @@
 [![R build status](https://github.com/thomas-fung/mpcmp/workflows/R-CMD-check/badge.svg)](https://github.com/thomas-fung/mpcmp/actions)
 <!-- badges: end -->
 
-The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177%2F1471082X17697749).
+The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177/2F1471082X17697749).
 
 From version 0.3.0, `mpcmp` supports log-linear mean models, also allows one to incorporate regression being linked to the dispersion parameter.
 
@@ -43,7 +43,7 @@ A reference manual and some examples are available at [thomas-fung.github.io/mpc
 
 If you use this package to analyse your data, please use the following citation:
 
-- Fung, T., Alwan, A., Wishart, J. and Huang, A. (2021). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.7.
+- Fung, T., Alwan, A., Wishart, J. and Huang, A. (2022). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.8.
 
 From R you can use:
 

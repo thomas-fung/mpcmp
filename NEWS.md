@@ -1,3 +1,7 @@
+# mpcmp 0.3.8
+  * Fixed a few typos in `glm.cmp` documentation.
+  * Fixes for cran checks.
+
 # mpcmp 0.3.7
   * Exported more functions to NAMESPACE as requested by @yangchino1. 
   * Patched a bug in `predict.cmp` that failed to handle new data with factors in it. 

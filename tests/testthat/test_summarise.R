@@ -16,6 +16,11 @@ pred2 <- predict(M.attendance,
 
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 
+M.sit_summary_coef <- 
+  c(-1.455, -0.589, -0.572, -0.076)
+names(M.sit_summary_coef) <- 
+  c("(Intercept)", "extractLeaf",
+    "extractBranch", "extractSeed")
 test_that("Test residuals", {
   expect_equal(
     -0.264,
@@ -90,9 +95,8 @@ test_that("Test sumamry", {
   expect_is(summary(M.sit)$coef.table_beta, "matrix")
   expect_is(summary(M.sit)$coef.table_gamma, "matrix")
   expect_equal(
-    capture_output_lines(print(summary(M.sit)))[20],
-    "extractLeaf    -0.3831  0.6509  -0.589    0.556"
-  )
+    round(summary(M.sit)$coef.table_gamma[,3], 3),
+    M.sit_summary_coef)
 })
 
 test_that("Test rstandard", {
