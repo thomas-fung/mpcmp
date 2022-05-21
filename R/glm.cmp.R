@@ -37,11 +37,11 @@
 #'
 #' For the constant dispersion model, the model is
 #'
-#' \deqn{Y_i ~ CMP(\mu_i, \nu),}
+#' \deqn{Y_i \sim CMP(\mu_i, \nu),}
 #'
 #' where
 #'
-#' \deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
+#' \deqn{E(Y_i) = \mu_i = exp(x_i^{\top} \beta),}
 #'
 #' and \eqn{\nu > 0} is the dispersion parameter.
 #'
@@ -50,15 +50,15 @@
 #'
 #' For the varying dispersion model, the model is
 #'
-#' \deqn{Y_i ~ CMP(\mu_i, \nu_i),}
+#' \deqn{Y_i \sim CMP(\mu_i, \nu_i),}
 #'
 #' where
 #'
-#' \deqn{E(Y_i) = \mu_i = exp(x_i^T \beta),}
+#' \deqn{E(Y_i) = \mu_i = exp(x_i^{\top} \beta),}
 #'
 #' and dispersion parameters are model via
 #'
-#' \deqn{\nu_i = exp(s_i^T \gamma),}
+#' \deqn{\nu_i = exp(s_i^{\top} \gamma),}
 #'
 #' where \eqn{x_i} and \eqn{s_i} are some covariates.
 #' @return

@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // logZ_c
 NumericVector logZ_c(NumericVector log_lambda, NumericVector nu, int summax);
 RcppExport SEXP _mpcmp_logZ_c(SEXP log_lambdaSEXP, SEXP nuSEXP, SEXP summaxSEXP) {

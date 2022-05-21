@@ -35,9 +35,9 @@ To cite the mpcmp package in publications use:
   Models for Dispersed Counts Statistical Modelling, 17, 359-380. <URL
   http://journals.sagepub.com/doi/10.1177/1471082X17697749/.>
 
-  Fung, T., Alwan, A., Wishart, J. & Huang, A. (2020) mpcmp:
+  Fung, T., Alwan, A., Wishart, J. & Huang, A. (2021) mpcmp:
   Mean-parametrized Conway-Maxwell Poisson Regression. R package
-  version 0.3.6.9000. <URL https://CRAN.R-project.org/package=mpcmp/.>
+  version 0.3.7. <URL https://CRAN.R-project.org/package=mpcmp/.>
 
 To see these entries in BibTeX format, use 'print(<citation>,
 bibtex=TRUE)', 'toBibtex(.)', or set
