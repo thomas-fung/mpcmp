@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9001
-pkgdown_sha: 51268b0d9cb0588d7a6404a2b8ef4ee19c435e89
+pkgdown: 2.0.3.9000
+pkgdown_sha: 9dee019f9983b86585a77a3b1a1459b9f0390fe6
 articles:
   mpcmp: mpcmp.html
   people: people.html
-last_built: 2021-07-01T09:02Z
+last_built: 2022-05-21T03:00Z
 

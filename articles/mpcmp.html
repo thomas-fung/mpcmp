@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7</span>
       </span>
     </div>
 
@@ -92,24 +92,24 @@
       <h1 data-toc-skip>Getting Started with the <code>mpcmp</code> package</h1>
                         <h4 data-toc-skip class="author">Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang</h4>
             
-            <h4 data-toc-skip class="date">2021-07-01</h4>
+            <h4 data-toc-skip class="date">2022-05-21</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/thomas-fung/mpcmp/blob/master/vignettes/mpcmp.Rmd" class="external-link"><code>vignettes/mpcmp.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/thomas-fung/mpcmp/blob/HEAD/vignettes/mpcmp.Rmd" class="external-link"><code>vignettes/mpcmp.Rmd</code></a></small>
       <div class="hidden name"><code>mpcmp.Rmd</code></div>
 
     </div>
 
     
     
-<div id="intro" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intro" class="anchor" aria-hidden="true"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="intro">Introduction<a class="anchor" aria-label="anchor" href="#intro"></a>
+</h2>
 <p>Conway–Maxwell–Poisson (CMP or COM-Poisson) distributions have seen a recent resurgence in popularity for the analysis of dispersed counts (e.g., <span class="citation">Shmueli et al. (2005)</span>; <span class="citation">Lord, Guikema, and Geedipally (2008)</span>; <span class="citation">Lord, Geedipally, and Guikema (2010)</span>; <span class="citation">Sellers and Shmueli (2010)</span>; <span class="citation">Sellers and Premeaux (2020)</span>). Key features of CMP distributions include the ability to handle both over- and under-dispersion while containing the classical Poisson distribution as a special case. See the corresponding <a href="https://en.wikipedia.org/wiki/Conway%E2%80%93Maxwell%E2%80%93Poisson_distribution" class="external-link">Wikipedia</a> page for a quick summary or <span class="citation">Shmueli et al. (2005)</span> for a more detailed overview of the history, features and applications of CMP distributions.</p>
 <p>The R (<span class="citation">R Core Team (2020)</span>) <code>mpcmp</code> package of <span class="citation">Fung et al. (2020)</span> provides the functionality for estimating a mean-parametrized Conway-Maxwell-Poisson generalized linear models for dispersed count data. The package is available from the Comprehensive R Archive Network (CRAN) <a href="http://CRAN.R-project.org/package=mpcmp" class="external-link">here</a>. <span class="citation">Huang (2017)</span> provides the theoretical development of the model that this package bases on.</p>
 </div>
-<div id="cmpintro" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cmpintro" class="anchor" aria-hidden="true"></a>Conway-Maxwell-Poisson Distributions</h2>
+<div class="section level2">
+<h2 id="cmpintro">Conway-Maxwell-Poisson Distributions<a class="anchor" aria-label="anchor" href="#cmpintro"></a>
+</h2>
 <p>The CMP distribution was first used by <span class="citation">Conway and Maxwell (1962)</span> as a model for a queuing system with dependent service times. A random variable is said to have a (standard) CMP distribution with rate parameter <span class="math inline">\(\lambda\)</span> and dispersion parameter <span class="math inline">\(\nu\)</span> if its probability mass function (pmf) is given by <span class="math display">\[
 P(Y =y|\lambda,\nu)= \frac{\lambda^y}{(y!)^{\nu}}\frac{1}{Z(\lambda,\nu)}, \quad y =0,1,2,...,
 \]</span> where <span class="math display">\[
@@ -122,9 +122,9 @@ E(Y)  &amp;\approx \lambda^{\frac{1}{\nu}}-\frac{\nu-1}{2\nu}\quad  \text{and} \
 \]</span> and they can be particularly accurate for <span class="math inline">\(\nu\leq 1\)</span> or <span class="math inline">\(\lambda&gt;10^{\nu}\)</span> (see <span class="citation">Shmueli et al. (2005)</span>). If <span class="math inline">\(\nu &lt; 1\)</span>, CMP is overdispersed. In reverse, CMP is underdispersed when <span class="math inline">\(\nu&gt;1\)</span>. Here is a plot of the density for a few CMP distributions with mean <span class="math inline">\(\mu = 5\)</span>:</p>
 <p><img src="mpcmp_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 </div>
-<div id="glm" class="section level2">
-<h2 class="hasAnchor">
-<a href="#glm" class="anchor" aria-hidden="true"></a>Conway-Maxwell-Poisson Generalized Linear Models</h2>
+<div class="section level2">
+<h2 id="glm">Conway-Maxwell-Poisson Generalized Linear Models<a class="anchor" aria-label="anchor" href="#glm"></a>
+</h2>
 <p>As CMP is one of a few distributions that can handle both under- and over-dispersion, the aim is to extend the GLM formulation to the CMP case so that one can model the relationship between <span class="math inline">\(Y\)</span> and the predictors <span class="math inline">\(X\)</span>. Given a set of covariates <span class="math inline">\(X \in R^q\)</span>, <span class="citation">Sellers and Shmueli (2010)</span> proposed a GLM for count response <span class="math inline">\(Y\)</span> that can be specified via <span class="math display">\[
 Y|X ∼ CMP(\lambda,\nu), \quad \text{s.t.} \quad \log\lambda = X^{\top}\beta
 \]</span> where <span class="math inline">\(\beta \in R^q\)</span> is a vector of regression coefficients. This model, however, does not provide a closed-form relationship between <span class="math inline">\(E(Y)\)</span> and the linear predictor, making it incompatible with other commonly used log-linear models.</p>
@@ -143,17 +143,16 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 \nu = \exp(\tilde{X}^{\top}\gamma),
 \]</span> where <span class="math inline">\(\tilde{X}\)</span> is some covariates.</p>
 </div>
-<div id="the-mpcmp-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-mpcmp-package" class="anchor" aria-hidden="true"></a>The <code>mpcmp</code> package</h2>
+<div class="section level2">
+<h2 id="the-mpcmp-package">The <code>mpcmp</code> package<a class="anchor" aria-label="anchor" href="#the-mpcmp-package"></a>
+</h2>
 <p>The main modelling function in our <code>mpcmp</code> package is <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code>. The optimisation is done using Fisher Scoring updates to take advantage of the fact the CMP<span class="math inline">\(_{\mu}\)</span> belongs to the exponential family. Notice that this is a constrained optimisation problem as we have to maintain mean constraints at all times, which makes the implementation is a bit more challenging.</p>
 <p>The package implements similar methods to those related to <code>glm</code> objects. If you used <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> previously, you should feel right at home. Once a fitted model object has been obtained, there are assessor functions available to extract the coefficients (<code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>, or its alias <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coefficients()</a></code>), the fitted values (<code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted.values()</a></code>), the residuals (<code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code> or its alias <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">resid()</a></code>), the model frame (<code><a href="https://rdrr.io/r/stats/model.frame.html" class="external-link">model.frame()</a></code>), the number of observations (nobs()), the log-likelihood (<code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code>), and the AIC (<code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">AIC()</a></code>).</p>
 <p>You can also use <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> to obtain diagnostic plots of the fitted model.</p>
 <p>Let’s go through some examples to show you what our package can do!</p>
 </div>
-<div id="constant-overdispersion-example-attendance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#constant-overdispersion-example-attendance" class="anchor" aria-hidden="true"></a>Constant Overdispersion Example: <code>attendance</code>
+<div class="section level2">
+<h2 id="constant-overdispersion-example-attendance">Constant Overdispersion Example: <code>attendance</code><a class="anchor" aria-label="anchor" href="#constant-overdispersion-example-attendance"></a>
 </h2>
 <p>The <code>attendance</code> dataset (originally from <a href="https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/" class="external-link">https://stats.idre.ucla.edu/r/dae/negative-binomial-regression/</a>) examines the relationship between the number of days absent from school and the gender, maths score and academic program of 314 students from two urban high schools.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -212,14 +211,14 @@ E(Y|X) = \mu(X^{\top}\beta) = \exp(X^{\top}\beta).
 <p>The <code>mpcmp</code> package also supports <code>broom</code> <code>tidier</code> method.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">M.attendance</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="co">#&gt;   term           estimate std.error statistic  p.value</span>
-<span class="co">#&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 (Intercept)     2.71      0.190       14.3  4.05e-46</span>
-<span class="co">#&gt; 2 gendermale     -0.215     0.117       -1.83 6.68e- 2</span>
-<span class="co">#&gt; 3 math           -0.00632   0.00239     -2.65 8.04e- 3</span>
-<span class="co">#&gt; 4 progAcademic   -0.425     0.170       -2.51 1.21e- 2</span>
-<span class="co">#&gt; 5 progVocational -1.25      0.189       -6.62 3.65e-11</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> (Intercept)     2.71      0.190       14.3  4.05<span style="color: #949494;">e</span><span style="color: #BB0000;">-46</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> gendermale     -<span style="color: #BB0000;">0.215</span>     0.117       -<span style="color: #BB0000;">1.83</span> 6.68<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> math           -<span style="color: #BB0000;">0.006</span><span style="color: #BB0000; text-decoration: underline;">32</span>   0.002<span style="text-decoration: underline;">39</span>     -<span style="color: #BB0000;">2.65</span> 8.04<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> progAcademic   -<span style="color: #BB0000;">0.425</span>     0.170       -<span style="color: #BB0000;">2.51</span> 1.21<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> progVocational -<span style="color: #BB0000;">1.25</span>      0.189       -<span style="color: #BB0000;">6.62</span> 3.65<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span></span></code></pre></div>
 <p>This means “cmp” objects can take advantage of any packages that required <code>broom</code> support such as the <code>modelsummary</code> package:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">M_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">daysabs</span><span class="op">~</span> <span class="va">gender</span><span class="op">+</span><span class="va">math</span><span class="op">+</span><span class="va">prog</span>, data<span class="op">=</span><span class="va">attendance</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span>
@@ -274,13 +273,13 @@ Neg.Bin
 gendermale
 </td>
 <td style="text-align:center;">
--0.215
+−0.215
 </td>
 <td style="text-align:center;">
--0.242
+−0.242
 </td>
 <td style="text-align:center;">
--0.211
+−0.211
 </td>
 </tr>
 <tr>
@@ -301,13 +300,13 @@ gendermale
 math
 </td>
 <td style="text-align:center;">
--0.006
+−0.006
 </td>
 <td style="text-align:center;">
--0.007
+−0.007
 </td>
 <td style="text-align:center;">
--0.006
+−0.006
 </td>
 </tr>
 <tr>
@@ -328,13 +327,13 @@ math
 progAcademic
 </td>
 <td style="text-align:center;">
--0.425
+−0.425
 </td>
 <td style="text-align:center;">
--0.426
+−0.426
 </td>
 <td style="text-align:center;">
--0.425
+−0.425
 </td>
 </tr>
 <tr>
@@ -355,13 +354,13 @@ progAcademic
 progVocational
 </td>
 <td style="text-align:center;">
--1.254
+−1.254
 </td>
 <td style="text-align:center;">
--1.271
+−1.271
 </td>
 <td style="text-align:center;">
--1.253
+−1.253
 </td>
 </tr>
 <tr>
@@ -424,13 +423,26 @@ BIC
 Log.Lik.
 </td>
 <td style="text-align:center;">
--863.513
+−863.513
 </td>
 <td style="text-align:center;">
--1315.089
+−1315.089
 </td>
 <td style="text-align:center;">
--864.154
+−864.154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+2.38
+</td>
+<td style="text-align:center;">
+1.08
 </td>
 </tr>
 </tbody>
@@ -445,9 +457,8 @@ Log.Lik.
 <span class="co">#&gt; [21] tidy           update         vcov          </span>
 <span class="co">#&gt; see '?methods' for accessing help and source code</span></code></pre></div>
 </div>
-<div id="constant-underdispersion-example-takeoverbids" class="section level2">
-<h2 class="hasAnchor">
-<a href="#constant-underdispersion-example-takeoverbids" class="anchor" aria-hidden="true"></a>Constant Underdispersion Example: <code>takeoverbids</code>
+<div class="section level2">
+<h2 id="constant-underdispersion-example-takeoverbids">Constant Underdispersion Example: <code>takeoverbids</code><a class="anchor" aria-label="anchor" href="#constant-underdispersion-example-takeoverbids"></a>
 </h2>
 <p>One of the key strength of the CMP distribution is that it can handle underdispersion. Here is an example demonstrating that. A dataset from <span class="citation">Cameron and Johansson (1997)</span> that gives the number of bids received by 126 US firms that were successful targets of tender offers during the period 1978-85. The dataset comes with a set of explanatory variables such as defensive actions taken by management of target firm, firm-specific characteristics and intervention by federal regulators.</p>
 <p>If we fit a Poisson distribution to the marginal distribution of the number of bids, we have:</p>
@@ -467,19 +478,19 @@ Log.Lik.
 <code class="sourceCode R"><span class="va">M.bids</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glm.cmp.html">glm.cmp</a></span><span class="op">(</span><span class="va">numbids</span> <span class="op">~</span> <span class="va">leglrest</span> <span class="op">+</span> <span class="va">rearest</span> <span class="op">+</span> <span class="va">finrest</span> <span class="op">+</span> <span class="va">whtknght</span>
     <span class="op">+</span> <span class="va">bidprem</span> <span class="op">+</span> <span class="va">insthold</span> <span class="op">+</span> <span class="va">size</span> <span class="op">+</span> <span class="va">sizesq</span> <span class="op">+</span> <span class="va">regulatn</span>, data<span class="op">=</span><span class="va">takeoverbids</span><span class="op">)</span>
 <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">M.bids</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 5</span></span>
 <span class="co">#&gt;    term        estimate std.error statistic  p.value</span>
-<span class="co">#&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 (Intercept)  0.990     0.435       2.27  0.0230  </span>
-<span class="co">#&gt;  2 leglrest     0.268     0.123       2.18  0.0292  </span>
-<span class="co">#&gt;  3 rearest     -0.173     0.155      -1.12  0.263   </span>
-<span class="co">#&gt;  4 finrest      0.0677    0.174       0.388 0.698   </span>
-<span class="co">#&gt;  5 whtknght     0.481     0.132       3.65  0.000258</span>
-<span class="co">#&gt;  6 bidprem     -0.685     0.308      -2.23  0.0260  </span>
-<span class="co">#&gt;  7 insthold    -0.368     0.347      -1.06  0.289   </span>
-<span class="co">#&gt;  8 size         0.179     0.0476      3.77  0.000166</span>
-<span class="co">#&gt;  9 sizesq      -0.00758   0.00248    -3.05  0.00228 </span>
-<span class="co">#&gt; 10 regulatn    -0.0376    0.130      -0.288 0.773</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> (Intercept)  0.990     0.435       2.27  0.023<span style="text-decoration: underline;">0</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> leglrest     0.268     0.123       2.18  0.029<span style="text-decoration: underline;">2</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> rearest     -<span style="color: #BB0000;">0.173</span>     0.155      -<span style="color: #BB0000;">1.12</span>  0.263   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> finrest      0.067<span style="text-decoration: underline;">7</span>    0.174       0.388 0.698   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> whtknght     0.481     0.132       3.65  0.000<span style="text-decoration: underline;">258</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> bidprem     -<span style="color: #BB0000;">0.685</span>     0.308      -<span style="color: #BB0000;">2.23</span>  0.026<span style="text-decoration: underline;">0</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> insthold    -<span style="color: #BB0000;">0.368</span>     0.347      -<span style="color: #BB0000;">1.06</span>  0.289   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> size         0.179     0.047<span style="text-decoration: underline;">6</span>      3.77  0.000<span style="text-decoration: underline;">166</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> sizesq      -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">58</span>   0.002<span style="text-decoration: underline;">48</span>    -<span style="color: #BB0000;">3.05</span>  0.002<span style="text-decoration: underline;">28</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> regulatn    -<span style="color: #BB0000;">0.037</span><span style="color: #BB0000; text-decoration: underline;">6</span>    0.130      -<span style="color: #BB0000;">0.288</span> 0.773</span>
 <span class="fu"><a href="../reference/LRTnu.html">LRTnu</a></span><span class="op">(</span><span class="va">M.bids</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Likelihood ratio test for testing nu=1:</span>
@@ -497,12 +508,9 @@ Log.Lik.
     family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span>
 <span class="fu">modelsummary</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/modelsummary/reference/modelsummary.html" class="external-link">modelsummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mpcmp <span class="op">=</span> <span class="va">M.bids</span>, Poisson <span class="op">=</span> <span class="va">M.bids.pois</span><span class="op">)</span>,
                            statistic_vertical <span class="op">=</span> <span class="cn">FALSE</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument</span>
-<span class="co">#&gt; is deprecated and will be ignored. To display uncertainty estimates next to</span>
-<span class="co">#&gt; your coefficients, use a `glue` string in the `estimate` argument. See `?</span>
-<span class="co">#&gt; modelsummary`</span>
-<span class="co">#&gt; Warning: In version 0.8.0 of the `modelsummary` package, the default significance markers produced by the `stars=TRUE` argument were changed to be consistent with R's defaults.</span>
-<span class="co">#&gt; This warning is displayed once per session.</span></code></pre></div>
+<span class="co">#&gt; Warning: The `statistic_vertical` argument is deprecated and will be ignored. To</span>
+<span class="co">#&gt; display uncertainty estimates next to your coefficients, use a `glue` string in</span>
+<span class="co">#&gt; the `estimate` argument. See `?modelsummary`</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table table">
 <thead><tr>
 <th style="text-align:left;">
@@ -562,10 +570,10 @@ leglrest
 rearest
 </td>
 <td style="text-align:center;">
--0.173
+−0.173
 </td>
 <td style="text-align:center;">
--0.196
+−0.196
 </td>
 </tr>
 <tr>
@@ -625,10 +633,10 @@ whtknght
 bidprem
 </td>
 <td style="text-align:center;">
--0.685*
+−0.685*
 </td>
 <td style="text-align:center;">
--0.678+
+−0.678+
 </td>
 </tr>
 <tr>
@@ -646,10 +654,10 @@ bidprem
 insthold
 </td>
 <td style="text-align:center;">
--0.368
+−0.368
 </td>
 <td style="text-align:center;">
--0.362
+−0.362
 </td>
 </tr>
 <tr>
@@ -688,10 +696,10 @@ size
 sizesq
 </td>
 <td style="text-align:center;">
--0.008**
+−0.008**
 </td>
 <td style="text-align:center;">
--0.008*
+−0.008*
 </td>
 </tr>
 <tr>
@@ -709,10 +717,10 @@ sizesq
 regulatn
 </td>
 <td style="text-align:center;">
--0.038
+−0.038
 </td>
 <td style="text-align:center;">
--0.029
+−0.029
 </td>
 </tr>
 <tr>
@@ -763,10 +771,20 @@ BIC
 Log.Lik.
 </td>
 <td style="text-align:center;">
--180.088
+−180.088
 </td>
 <td style="text-align:center;">
--184.948
+−184.948
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.87
 </td>
 </tr>
 </tbody>
@@ -778,9 +796,8 @@ Log.Lik.
 </table>
 <p>If we compare the two models, we can see that the CMP<span class="math inline">\(_{\mu}\)</span> model fitted the data better. We can also see that all the estimated standard errors under CMP<span class="math inline">\(_{\mu}\)</span> model are smaller which in turn makes the p-values for both <code>leglrest</code> and <code>bidprem</code> to drop below 0.05 instead of 0.1 under the Poisson model.</p>
 </div>
-<div id="varying-dispersion-example-sitophilus" class="section level2">
-<h2 class="hasAnchor">
-<a href="#varying-dispersion-example-sitophilus" class="anchor" aria-hidden="true"></a>Varying Dispersion Example: <code>sitophilus</code>
+<div class="section level2">
+<h2 id="varying-dispersion-example-sitophilus">Varying Dispersion Example: <code>sitophilus</code><a class="anchor" aria-label="anchor" href="#varying-dispersion-example-sitophilus"></a>
 </h2>
 <p><span class="citation">Ribeiro et al. (2013)</span> carried out an experiment to assess the bioactivity of extracts from different parts (seeds, leaves and branches) of Annona mucosa (Annonaceae) to control Sitophilus zeamaus (Coleoptera: Curculionidae), a major pest of stored maize/corn in Brazil. This dataset can be found as part of the <code>cmpreg</code> package of <span class="citation">Elias Ribeiro Junior (2020)</span>.</p>
 <p>In this experiment:</p>
@@ -794,13 +811,13 @@ Log.Lik.
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sitophilus</span><span class="op">)</span>
 <span class="va">sitophilus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">extract</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ninsect</span><span class="op">)</span>, 
                                                sigma2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">ninsect</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;   extract    mu sigma2</span>
-<span class="co">#&gt;   &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Control  31.5  62.5 </span>
-<span class="co">#&gt; 2 Leaf     31.3  94.0 </span>
-<span class="co">#&gt; 3 Branch   29.9  88.8 </span>
-<span class="co">#&gt; 4 Seed      1.1   1.66</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Control  31.5  62.5 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Leaf     31.3  94.0 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Branch   29.9  88.8 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Seed      1.1   1.66</span></code></pre></div>
 <p>It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is the norm in a GLM, non-constant variances do not necessarily mean varying dispersions. Nonetheless, we will try to use the treatment to explain the dispersion in the data set. To do that we specify the <code>formula_nu</code> argument in the <code><a href="../reference/glm.cmp.html">glm.cmp()</a></code> function.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sitophilus</span><span class="op">)</span>
@@ -869,9 +886,9 @@ Log.Lik.
 <span class="co">#&gt; </span>
 <span class="co">#&gt; AIC: 253.2668</span></code></pre></div>
 </div>
-<div id="other-packages-for-fitting-conway-maxwell-poisson-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-packages-for-fitting-conway-maxwell-poisson-model" class="anchor" aria-hidden="true"></a>Other packages for fitting Conway-Maxwell Poisson Model</h2>
+<div class="section level2">
+<h2 id="other-packages-for-fitting-conway-maxwell-poisson-model">Other packages for fitting Conway-Maxwell Poisson Model<a class="anchor" aria-label="anchor" href="#other-packages-for-fitting-conway-maxwell-poisson-model"></a>
+</h2>
 <p>There are other <code>R</code> packages to deal with CMP models, and they all contribute to the writing and construction of this package.</p>
 <ul>
 <li>
@@ -889,9 +906,9 @@ Log.Lik.
 <code>glmmTMB</code>: Fit (among other) CMP models under a different mean-parametrization (includes zero-inflation, dispersion modelling and random effects) by <span class="citation">Brooks et al. (2017)</span>.</li>
 </ul>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references">
 <div id="ref-R-COMPoissonReg">
 <p>Andrew Raim &lt;andrew.raim@gmail.com&gt;, Kimberly Sellers Thomas Lotze &lt;thomas.lotze@thomaslotze.com&gt;. 2019. <em>COMPoissonReg: Conway-Maxwell Poisson (Com-Poisson) Regression</em>. <a href="https://CRAN.R-project.org/package=COMPoissonReg" class="external-link">https://CRAN.R-project.org/package=COMPoissonReg</a>.</p>
@@ -968,7 +985,7 @@ Log.Lik.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer>

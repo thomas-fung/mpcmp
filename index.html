@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mpcmp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7</span>
       </span>
     </div>
 
@@ -64,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/thomas-fung/mpcmp">
+  <a href="https://github.com/thomas-fung/mpcmp" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -88,50 +88,44 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="mpcmp-mean-parametrized-conway-maxwell-poisson-regression" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#mpcmp-mean-parametrized-conway-maxwell-poisson-regression" class="anchor" aria-hidden="true"></a>mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression</h1></div>
-</div>
-<div id="mpcmp-" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mpcmp-" class="anchor" aria-hidden="true"></a>mpcmp <img src="reference/figures/logo.svg" align="right" alt="" width="150">
+<div class="section level1"><div class="page-header"><h1 id="mpcmp-mean-parametrized-conway-maxwell-poisson-regression">mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression<a class="anchor" aria-label="anchor" href="#mpcmp-mean-parametrized-conway-maxwell-poisson-regression"></a>
+</h1></div></div>
+<div class="section level1">
+<h1 id="mpcmp-">mpcmp <img src="reference/figures/logo.svg" align="right" alt="" width="150"><a class="anchor" aria-label="anchor" href="#mpcmp-"></a>
 </h1>
 <!-- badges: start -->
-
 <p>The <code>mpcmp</code> package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of <a href="https://doi.org/10.1177%2F1471082X17697749" class="external-link">Huang (2017)</a>.</p>
 <p>From version 0.3.0, <code>mpcmp</code> supports log-linear mean models, also allows one to incorporate regression being linked to the dispersion parameter.</p>
 <p>Work is progressing to include a zero-inflated Conway-Maxwell-Poisson model.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
-<div id="stable-release-on-cran" class="section level3">
-<h3 class="hasAnchor">
-<a href="#stable-release-on-cran" class="anchor" aria-hidden="true"></a>Stable release on CRAN</h3>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="section level3">
+<h3 id="stable-release-on-cran">Stable release on CRAN<a class="anchor" aria-label="anchor" href="#stable-release-on-cran"></a>
+</h3>
 <p>The <strong><em>mpcmp</em></strong> package has been on <a href="https://cran.r-project.org/package=mpcmp" class="external-link">CRAN</a> since March 2019. You can install it from CRAN in the usual way:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb1-1"><a href="#cb1-1"></a>install.packages(<span class="st">"mpcmp"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>library(<span class="st">"mpcmp"</span>)</span></code></pre></div>
 </div>
-<div id="development-version-on-github" class="section level3">
-<h3 class="hasAnchor">
-<a href="#development-version-on-github" class="anchor" aria-hidden="true"></a>Development version on Github</h3>
+<div class="section level3">
+<h3 id="development-version-on-github">Development version on Github<a class="anchor" aria-label="anchor" href="#development-version-on-github"></a>
+</h3>
 <p>You can use the <strong>devtools</strong> package to install the development version of <strong>mpcmp</strong> from <a href="https://github.com/thomas-fung/mpcmp" class="external-link">GitHub</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># install.packages("devtools")</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">devtools::</span>install_github(<span class="st">"thomas-fung/mpcmp"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>library(mpcmp)</span></code></pre></div>
 </div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor" aria-hidden="true"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>A reference manual and some examples are available at <a href="https://thomas-fung.github.io/mpcmp/" class="external-link">thomas-fung.github.io/mpcmp</a></p>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>If you use this package to analyse your data, please use the following citation:</p>
-<ul>
-<li>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2021). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.7.</li>
-</ul>
+<ul><li>Fung, T., Alwan, A., Wishart, J. and Huang, A. (2021). mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.7.</li></ul>
 <p>From R you can use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><span id="cb3-1"><a href="#cb3-1"></a>citation(<span class="st">"mpcmp"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>toBibtex(citation(<span class="st">"mpcmp"</span>))</span></code></pre></div>
@@ -144,12 +138,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=mpcmp">https://​cloud.r-project.org/​package=mpcmp</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/thomas-fung/mpcmp/">https://​github.com/​thomas-fung/​mpcmp/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/thomas-fung/mpcmp/issues">https://​github.com/​thomas-fung/​mpcmp/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=mpcmp" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/thomas-fung/mpcmp/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/thomas-fung/mpcmp/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -157,7 +148,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
 </ul>
 </div>
 
@@ -165,16 +156,16 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing mpcmp</a></li>
+<li><a href="authors.html#citation">Citing mpcmp</a></li>
 </ul>
 </div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Thomas Fung <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2601-0728" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Thomas Fung <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2601-0728" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Aya Alwan <br><small class="roles"> Author </small>  </li>
-<li>Justin Wishart <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8235-1845" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Justin Wishart <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8235-1845" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Alan Huang <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
@@ -201,7 +192,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer>
