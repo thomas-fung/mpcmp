@@ -42,10 +42,10 @@
 #' M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
 #' cmplrtest(M.sit.null2, M.sit.full)
 cmplrtest <- function(object1, object2, digits = 3) {
-  if (class(object1) != "cmp") {
+  if (!inherits(object1, "cmp")) {
     stop("object1 must be an S3 object of class cmp.")
   }
-  if (class(object2) != "cmp") {
+  if (!inherits(object1, "cmp")) {
     stop("object2 must be an S3 object of class cmp.")
   }
   if (object1$const_nu != object2$const_nu) {

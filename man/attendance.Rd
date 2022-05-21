@@ -15,7 +15,7 @@ A data frame with 314 observations on 5 variables.
 }
 }
 \source{
-\url{https://stats.idre.ucla.edu/stat/stata/dae/nb_data.dta}
+\url{https://stats.oarc.ucla.edu/stat/stata/dae/nb_data.dta}
 }
 \usage{
 data(attendance)

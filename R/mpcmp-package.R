@@ -35,7 +35,7 @@ NULL
 #' @keywords datasets
 #' @usage
 #' data(attendance)
-#' @source \url{https://stats.idre.ucla.edu/stat/stata/dae/nb_data.dta}
+#' @source \url{https://stats.oarc.ucla.edu/stat/stata/dae/nb_data.dta}
 #' @examples
 #' ## For examples see example(glm.cmp)
 NULL
