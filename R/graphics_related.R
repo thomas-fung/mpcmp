@@ -390,7 +390,7 @@ compnormRandPIT <- function(object) {
 #' plot(M.bids)
 #'
 #' ## The plots for the non-randomized PIT
-#' # plot(M.bids, which = c(2,3))
+#' plot(M.bids, which = c(2,3))
 plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
                      bins = 10,
@@ -405,9 +405,9 @@ plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
   # plot 8 std pearson resid. vs leverage
   object <- x
   if (any(!(which %in% 1:8))) {
-    cat("The acceptable ragne for option 'which' is 1:8.\n")
-    cat("Anyting outside this range would be ignored.\n")
-    cat("Use ?plot.cmp to see which plots are available.\n")
+    warning("The acceptable ragne for option 'which' is 1:8.\n", 
+    "Anyting outside this range would be ignored.\n",
+    "Use ?plot.cmp to see which plots are available.\n")
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -616,9 +616,9 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
   # plot 8 std pearson resid. vs leverage
   x <- y <- linear_predictors <- index <- leg <- cook_level <- NULL
   if (any(!(which %in% 1:8))) {
-    cat("The acceptable ragne for option 'which' is 1:8.\n")
-    cat("Anyting outside this range would be ignored.\n")
-    cat("Use ?autoplot to see which plots are available.\n")
+    warning("The acceptable ragne for option 'which' is 1:8.\n",
+            "Anyting outside this range would be ignored.\n",
+            "Use ?autoplot to see which plots are available.\n")
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -747,7 +747,6 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
     p[[show_count]] <- p_temp
   }
   if (show[8L]) {
-    options(warn = -1)
     ylim <- extendrange(r = range(std_pear, na.rm = TRUE), f = 0.08)
     xlim <- extendrange(r = c(0, max(h, na.rm = TRUE)), f = 0.08)
     xmax <- min(0.99, xlim[2])
@@ -824,7 +823,6 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
       )
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
-    options(warn = 0)
   }
   p_ggarrange <- ggpubr::ggarrange(plotlist = p, ncol = ncol, nrow = nrow)
   if ((is.null(ncol) & is.null(nrow))) {

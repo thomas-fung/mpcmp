@@ -10,6 +10,9 @@ test_that("Test pcomp", {
     pcomp(1.5, mu = 1.5, lambda = 1.5, nu = 0.9),
     "specify 'mu' or 'lambda' but not both"
   )
+  expect_message(pcomp(2, nu= 1, lambda = 5), 
+                 c("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.")
+  ) #only testing the 1st element
 })
 
 
@@ -22,6 +25,9 @@ test_that("Test dcomp", {
     dcomp(1.5, mu = 1.5, lambda = 1.5, nu = 0.9),
     "specify 'mu' or 'lambda' but not both"
   )
+  expect_message(dcomp(2, nu= 1, lambda = 5), 
+                 c("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.")
+  ) #only testing the 1st element
 })
 
 test_that("Test qcomp", {
@@ -34,6 +40,9 @@ test_that("Test qcomp", {
     qcomp(1.5, mu = 1.5, lambda = 1.5, nu = 0.9),
     "specify 'mu' or 'lambda' but not both"
   )
+  expect_message(qcomp(0.5, nu= 1, lambda = 5), 
+                 c("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.")
+  ) #only testing the 1st element
 })
 
 test_that("Test rcomp", {
@@ -43,4 +52,7 @@ test_that("Test rcomp", {
     rcomp(20, mu = 1.5, lambda = 1.5, nu = 0.9),
     "specify 'mu' or 'lambda' but not both"
   )
+  expect_message(rcomp(5, nu= 1, lambda = 5), 
+                 c("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.")
+  ) #only testing the 1st element
 })

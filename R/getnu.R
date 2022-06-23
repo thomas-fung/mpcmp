@@ -32,7 +32,6 @@
 getnu <- function(param, y, xx, offset, llstart, fsscale = 1,
                   lambdalb = 1e-10, lambdaub = 1000, maxlambdaiter = 1e3, tol = 1e-6,
                   summax = 100) {
-  options(warn = 2)
   n <- length(y) # sample size
   q <- ncol(xx) # number of covariates
   nu_lb <- 1e-10
@@ -140,6 +139,5 @@ getnu <- function(param, y, xx, offset, llstart, fsscale = 1,
   obj$fsscale <- fsscale
   obj$iter <- iter
   obj$lambdaub <- lambdaub
-  options(warn = 0)
   return(obj)
 }
