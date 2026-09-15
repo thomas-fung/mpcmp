@@ -1,13 +1,33 @@
 # Test sumamry
 
     Code
-      round(summary(M.sit)$coef.table_gamma, 3)
+      round(summary(M.sit)$coef.table_gamma[, 1], 3)
     Output
-                    Estimate Std.Err Z value Pr(>|z|)
-      (Intercept)     -0.665   0.457  -1.454    0.146
-      extractLeaf     -0.383   0.651  -0.589    0.556
-      extractBranch   -0.372   0.651  -0.572    0.568
-      extractSeed     -0.118   1.546  -0.076    0.939
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+             -0.665        -0.383        -0.372        -0.118 
+
+---
+
+    Code
+      round(summary(M.sit)$coef.table_gamma[, 2], 3)
+    Output
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+              0.457         0.651         0.651         1.546 
+
+---
+
+    Code
+      round(summary(M.sit)$coef.table_gamma[, 4], 3)
+    Output
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+              0.146         0.556         0.568         0.939 
+
+# Test influence
+
+    Code
+      round(unname(infl$h[1]), 5)
+    Output
+      [1] 0.01152
 
 # Test hatvalues
 

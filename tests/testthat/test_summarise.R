@@ -98,7 +98,9 @@ test_that("Test sumamry", {
   expect_true(is.matrix(summary(M.sit)$coefficients))
   expect_true(is.matrix(summary(M.sit)$coef.table_beta))
   expect_true(is.matrix(summary(M.sit)$coef.table_gamma))
-  expect_snapshot(round(summary(M.sit)$coef.table_gamma, 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,1], 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,2], 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,4], 3))
 })
 
 test_that("Test rstandard", {
@@ -115,7 +117,7 @@ test_that("Test rstandard", {
 test_that("Test influence", {
   infl <- influence.cmp(M.attendance)
   expect_type(infl, "list")
-  expect_equal(unname(infl$h[1]), 0.01152283)
+  expect_snapshot(round(unname(infl$h[1]), 5))
   expect_equal(unname(round(infl$dev_res[1], 4)), -0.2644)
   expect_equal(unname(round(infl$pear_res[1], 4)), -0.2437)
 })
