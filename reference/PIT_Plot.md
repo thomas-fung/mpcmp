@@ -1,0 +1,135 @@
+# PIT Plots for a CMP Object
+
+Two plots for the non-randomized PIT are currently available for
+checking the distributional assumption of the fitted CMP model: the PIT
+histogram, and the uniform Q-Q plot for PIT.
+
+## Usage
+
+``` r
+histcompPIT(
+  object,
+  bins = 10,
+  line = TRUE,
+  colLine = "red",
+  colHist = "royal blue",
+  lwdLine = 2,
+  main = NULL,
+  ...
+)
+
+qqcompPIT(
+  object,
+  bins = 10,
+  col1 = "red",
+  col2 = "black",
+  lty1 = 1,
+  lty2 = 2,
+  type = "l",
+  main = NULL,
+  ...
+)
+```
+
+## Arguments
+
+- object:
+
+  an object class "cmp", obtained from a call to `glm.cmp`.
+
+- bins:
+
+  numeric; the number of bins shown in the PIT histogram or the PIT Q-Q
+  plot.
+
+- line:
+
+  logical; if `TRUE` (default), the line for displaying the standard
+  uniform distribution will be shown for the purpose of comparison.
+
+- colLine:
+
+  numeric or character: the colour of the line for comparison in PIT
+  histogram.
+
+- colHist:
+
+  numeric or character; the colour of the histogram for PIT.
+
+- lwdLine:
+
+  numeric; the line widths for the comparison line in PIT histogram.
+
+- main:
+
+  character string; a main title for the plot.
+
+- ...:
+
+  other arguments passed to plot.default and plot.ts.
+
+- col1:
+
+  numeric or character; the colour of the sample uniform Q-Q plot in
+  PIT.
+
+- col2:
+
+  numeric or character; the colour of the theoretical uniform Q-Q plot
+  in PIT.
+
+- lty1:
+
+  integer or character string: the line types for the sample uniform Q-Q
+  plot in PIT, see par(lty = .).
+
+- lty2:
+
+  an integer or character string: the line types for the theoretical
+  uniform Q-Q plot in PIT, see par(lty = .).
+
+- type:
+
+  1-character string; the type of plot for the sample uniform Q-Q plot
+  in PIT.
+
+## Value
+
+`histcompPIT` has no return value; it is called for its side effect of
+drawing the PIT histogram on the current graphics device.
+
+`qqcompPIT` draws the uniform Q-Q plot on the current graphics device
+and invisibly returns a list with components `sample` (the sample PIT
+quantiles) and `theoretical` (the corresponding theoretical uniform
+quantiles).
+
+## Details
+
+The histogram and the Q-Q plot are used to compare the fitted profile
+with a standard uniform distribution. If they match relatively well, it
+means the CMP distribution is appropriate for the data.
+
+The `gg_histcompPIT` and `gg_qqcompPIT` functions would provide the same
+two plots but in ggplot format.
+
+## References
+
+Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
+for count data. *Biometrics*, **65**, 1254–1261.
+
+Dunsmuir, W.T.M. and Scott, D.J. (2015). The `glarma` Package for
+Observation-Driven Time Series Regression of Counts. *Journal of
+Statistical Software*, **67**, 1–36.
+
+## See also
+
+[`gg_histcompPIT`](https://thomas-fung.github.io/mpcmp/reference/PIT_ggPlot.md),
+[`gg_qqcompPIT`](https://thomas-fung.github.io/mpcmp/reference/PIT_ggPlot.md),
+[`plot.cmp`](https://thomas-fung.github.io/mpcmp/reference/plot.cmp.md)
+and [`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html).
+
+## Examples
+
+``` r
+## For examples see example(plot.cmp)
+```
