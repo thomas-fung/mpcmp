@@ -276,7 +276,7 @@ confint.cmp <- function(object, parm, level = 0.95, ...) {
   a <- (1 - level) / 2
   a <- c(a, 1 - a)
   fac <- qnorm(a)
-  pct <- format.perc(a, 3)
+  pct <- format_perc(a, 3)
   ci <- array(NA_real_,
     dim = c(length(parm), 2L),
     dimnames = list(parm, pct)

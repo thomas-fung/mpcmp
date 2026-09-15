@@ -61,8 +61,7 @@ histcompPIT <- function(object, bins = 10, line = TRUE, colLine = "red", colHist
   height <- diff(PIT[, ncol(PIT)]) * bins
   if (max(height) > 2) {
     y.upper <- max(height) + 1 / (bins / 2)
-  }
-  else {
+  } else {
     y.upper <- 2
   }
   if (is.null(main)) {
@@ -314,7 +313,7 @@ compPIT <- function(object, bins = 10) {
 #' \item{rdMid}{the midpoints of the predictive probability intervals}
 #' @references
 #' Berkowitz, J. (2001). Testing density forecasts, with applications to risk management.
-#' \emph{Journal of Business \& Economic Statistics}, \bold{19}, 465--474.
+#' \emph{Journal of Business and Economic Statistics}, \bold{19}, 465--474.
 #'
 #' Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journal of
 #' Computational and Graphical Statistics}, \bold{5}, 236--244.
@@ -400,7 +399,7 @@ compnormRandPIT <- function(object) {
 #' plot(M.bids)
 #'
 #' ## The plots for the non-randomized PIT
-#' plot(M.bids, which = c(2,3))
+#' plot(M.bids, which = c(2, 3))
 plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
                      bins = 10,
@@ -415,9 +414,11 @@ plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
   # plot 8 std pearson resid. vs leverage
   object <- x
   if (any(!(which %in% 1:8))) {
-    warning("The acceptable ragne for option 'which' is 1:8.\n", 
-    "Anyting outside this range would be ignored.\n",
-    "Use ?plot.cmp to see which plots are available.\n")
+    warning(
+      "The acceptable ragne for option 'which' is 1:8.\n",
+      "Anyting outside this range would be ignored.\n",
+      "Use ?plot.cmp to see which plots are available.\n"
+    )
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -626,9 +627,11 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
   # plot 8 std pearson resid. vs leverage
   x <- y <- linear_predictors <- index <- leg <- cook_level <- NULL
   if (any(!(which %in% 1:8))) {
-    warning("The acceptable ragne for option 'which' is 1:8.\n",
-            "Anyting outside this range would be ignored.\n",
-            "Use ?autoplot to see which plots are available.\n")
+    warning(
+      "The acceptable ragne for option 'which' is 1:8.\n",
+      "Anyting outside this range would be ignored.\n",
+      "Use ?autoplot to see which plots are available.\n"
+    )
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -710,17 +713,18 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         formula = y ~ x, method = "loess", se = FALSE,
         colour = "red"
       ) +
-      geom_text(aes(
-        x = linear_predictors,
-        y = res, label = index
-      ),
-      hjust = "inward", vjust = "outward",
-      data = data.frame(
-        linear_predictors =
-          object$linear_predictors[index_res[1:3]],
-        res = res[index_res[1:3]],
-        index = index_res[1:3]
-      )
+      geom_text(
+        aes(
+          x = linear_predictors,
+          y = res, label = index
+        ),
+        hjust = "inward", vjust = "outward",
+        data = data.frame(
+          linear_predictors =
+            object$linear_predictors[index_res[1:3]],
+          res = res[index_res[1:3]],
+          index = index_res[1:3]
+        )
       )
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
@@ -742,16 +746,17 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         y = "Approx. Cook's distance"
       ) +
       ylim(0, max(cook) * 1.075) +
-      geom_text(aes(
-        x = index_cook, y = cook,
-        label = index
-      ),
-      vjust = "outward", data =
-        data.frame(
-          index_cook = index_cook[1:3],
-          cook = cook[index_cook[1:3]],
-          index = index_cook[1:3]
-        )
+      geom_text(
+        aes(
+          x = index_cook, y = cook,
+          label = index
+        ),
+        vjust = "outward", data =
+          data.frame(
+            index_cook = index_cook[1:3],
+            cook = cook[index_cook[1:3]],
+            index = index_cook[1:3]
+          )
       )
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
@@ -802,17 +807,18 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         show.legend = TRUE, linetype = 2,
         na.rm = TRUE
       ) +
-      geom_text(aes(
-        x = h, y = std_pear,
-        label = index
-      ),
-      hjust = "inward", vjust = "outward", data =
-        data.frame(
-          h = h[index_cook[1:3]],
-          std_pear = std_pear[index_cook[1:3]],
-          index = index_cook[1:3]
+      geom_text(
+        aes(
+          x = h, y = std_pear,
+          label = index
         ),
-      na.rm = TRUE
+        hjust = "inward", vjust = "outward", data =
+          data.frame(
+            h = h[index_cook[1:3]],
+            std_pear = std_pear[index_cook[1:3]],
+            index = index_cook[1:3]
+          ),
+        na.rm = TRUE
       ) +
       geom_text(aes(x = xlim, y = at_y, label = cook_level),
         data = data.frame(

@@ -4,22 +4,27 @@ M.attendance <- glm.cmp(daysabs ~ gender + math + prog,
   data = attendance
 )
 newdataframe <- data.frame(
-  gender= "female", math = 70, prog = "Academic")
-pred1 <- predict(M.attendance, 
-                 newdata = newdataframe, 
-                 se.fit = TRUE)
-pred2 <- predict(M.attendance, 
-                 newdata = newdataframe, 
-                 type = "response",
-                 se.fit = TRUE)
+  gender = "female", math = 70, prog = "Academic"
+)
+pred1 <- predict(M.attendance,
+  newdata = newdataframe,
+  se.fit = TRUE
+)
+pred2 <- predict(M.attendance,
+  newdata = newdataframe,
+  type = "response",
+  se.fit = TRUE
+)
 
 M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 
-M.sit_summary_coef <- 
+M.sit_summary_coef <-
   c(-1.455, -0.589, -0.572, -0.076)
-names(M.sit_summary_coef) <- 
-  c("(Intercept)", "extractLeaf",
-    "extractBranch", "extractSeed")
+names(M.sit_summary_coef) <-
+  c(
+    "(Intercept)", "extractLeaf",
+    "extractBranch", "extractSeed"
+  )
 test_that("Test residuals", {
   expect_equal(
     -0.264,
@@ -93,9 +98,7 @@ test_that("Test sumamry", {
   expect_true(is.matrix(summary(M.sit)$coefficients))
   expect_true(is.matrix(summary(M.sit)$coef.table_beta))
   expect_true(is.matrix(summary(M.sit)$coef.table_gamma))
-  expect_equal(
-    round(summary(M.sit)$coef.table_gamma[,3], 3),
-    M.sit_summary_coef)
+  expect_snapshot(summary(M.sit)$coef.table_gamma)
 })
 
 test_that("Test rstandard", {
@@ -123,7 +126,7 @@ test_that("Test hatvalues", {
 })
 
 test_that("Test cooks.distance", {
-  expect_equal(unname(cooks.distance.cmp(M.attendance)[1]), 0.0001400528)
+  expect_snapshot(cooks.distance.cmp(M.attendance))
   expect_length(cooks.distance.cmp(M.attendance), 314)
 })
 
@@ -157,21 +160,31 @@ test_that("Test broom", {
 })
 
 
-
 test_that("Test patching predict with new data", {
-  expect_equal( 
-    round(c(predict(M.attendance, newdata = newdataframe)),
-          5),
-    round(1.846711,5))
-  expect_equal(round(c(predict(M.attendance, 
-                  newdata = newdataframe, 
-                  type = "response")),
-        5), round(6.33894,5))
-  expect_length(predict(M.attendance, 
-                          newdata = newdataframe, 
-                          se.fit=TRUE), 2)
-  expect_equal(round(as.numeric(pred1$se.fit), 5), 
-               round(0.1172887,5))
-  expect_equal(round(as.numeric(pred2$se.fit), 5),
-               round(0.7434861,5))
+  expect_equal(
+    round(
+      c(predict(M.attendance, newdata = newdataframe)),
+      5
+    ),
+    round(1.846711, 5)
+  )
+  expect_equal(round(
+    c(predict(M.attendance,
+      newdata = newdataframe,
+      type = "response"
+    )),
+    5
+  ), round(6.33894, 5))
+  expect_length(predict(M.attendance,
+    newdata = newdataframe,
+    se.fit = TRUE
+  ), 2)
+  expect_equal(
+    round(as.numeric(pred1$se.fit), 5),
+    round(0.1172887, 5)
+  )
+  expect_equal(
+    round(as.numeric(pred2$se.fit), 5),
+    round(0.7434861, 5)
+  )
 })

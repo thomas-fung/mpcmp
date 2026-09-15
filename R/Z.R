@@ -57,7 +57,6 @@ Z <- function(lambda, nu, log.z = FALSE, summax) {
 }
 
 
-
 #' Calculate the Normalizing Constant in log scale for COM-Poisson distribution
 #'
 #' A function to approximate the normalizing constant for COM-Poisson distributions via

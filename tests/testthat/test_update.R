@@ -55,11 +55,11 @@ test_that("Test the confint function", {
   expect_true(is.matrix(confint.cmp(M.attendance)))
   expect_equal(
     colnames(confint.cmp(M.attendance)),
-    c("2.5 %", "97.5 %")
+    c("2.5%", "97.5%")
   )
   expect_equal(
     colnames(confint.cmp(M.attendance, parm = "math", level = 0.9)),
-    c("5 %", "95 %")
+    c("5%", "95%")
   )
   expect_length(confint.cmp(M.attendance, parm = "math", level = 0.9), 2)
 })

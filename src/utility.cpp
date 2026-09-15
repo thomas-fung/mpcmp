@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <Rmath.h>
 using namespace Rcpp;
 
 //' Calculate the Normalizing Constant in log scale for COM-Poisson distribution

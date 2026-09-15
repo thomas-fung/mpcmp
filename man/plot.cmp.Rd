@@ -72,7 +72,7 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 plot(M.bids)
 
 ## The plots for the non-randomized PIT
-plot(M.bids, which = c(2,3))
+plot(M.bids, which = c(2, 3))
 }
 \seealso{
 \code{\link{compPIT}}, \code{\link{compnormRandPIT}},

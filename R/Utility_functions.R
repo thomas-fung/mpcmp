@@ -60,12 +60,22 @@ as_augment_tibble <- function(data) {
 
 #' Imported from the stats package
 #' @keywords internal
-#' @exportS3Method
-format.perc <- function(probs, digits) {
-  paste(
-    format(100 * probs, trim = TRUE, scientific = FALSE, digits = digits),
-    "%"
-  )
+format_perc <- function(x, digits = max(2L, getOption("digits")), probability = TRUE,
+                        use.fC = length(x) < 100, ...) {
+  if (length(x)) {
+    if (probability) {
+      x <- 100 * x
+    }
+    ans <- paste0(if (use.fC) {
+      formatC(x, format = "fg", width = 1, digits = digits)
+    } else {
+      format(x, trim = TRUE, digits = digits, ...)
+    }, "%")
+    ans[is.na(x)] <- ""
+    ans
+  } else {
+    character(0)
+  }
 }
 
 #' Imported from the broom package

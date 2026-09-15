@@ -11,6 +11,7 @@ Coleoptera
 Conde
 Curculionidae
 Czado
+DeepWiki
 Demétrio
 Displayr
 Dunsmuir
@@ -25,6 +26,7 @@ Jacq
 Jaggia
 Lifecycle
 Muniz
+ORCID
 Parreira
 Poisson
 QOL
@@ -49,10 +51,8 @@ cmp
 cmpreg
 conf
 cran
-dae
 devtools
 doi
-edu
 frac
 fresh’
 fung
@@ -61,7 +61,6 @@ ggplot
 ggplots
 github
 glm
-idre
 infty
 int
 io
@@ -92,7 +91,6 @@ tibble
 tol
 travis
 ts
-ucla
 underdispersed
 underdispersion
 ylog

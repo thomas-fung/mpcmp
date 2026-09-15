@@ -47,7 +47,7 @@ compnormRandPIT(M.bids)
 }
 \references{
 Berkowitz, J. (2001). Testing density forecasts, with applications to risk management.
-\emph{Journal of Business \& Economic Statistics}, \bold{19}, 465--474.
+\emph{Journal of Business and Economic Statistics}, \bold{19}, 465--474.
 
 Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journal of
 Computational and Graphical Statistics}, \bold{5}, 236--244.

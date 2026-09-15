@@ -330,16 +330,17 @@ print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
       na.print = "NA", ...
     )
   }
-  cat("\n", apply(cbind(
-    paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
-    format(unlist(x[c("null_deviance", "residual_deviance")]),
-      digits = max(5L, digits + 1L)
-    ), " on",
-    format(unlist(x[c("df_null", "df_residuals")])),
-    "degrees of freedom\n"
-  ),
-  1L, paste,
-  collapse = " "
+  cat("\n", apply(
+    cbind(
+      paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
+      format(unlist(x[c("null_deviance", "residual_deviance")]),
+        digits = max(5L, digits + 1L)
+      ), " on",
+      format(unlist(x[c("df_null", "df_residuals")])),
+      "degrees of freedom\n"
+    ),
+    1L, paste,
+    collapse = " "
   ), sep = "")
   cat("\nAIC:", format(x$aic), "\n\n")
 }
@@ -445,11 +446,13 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
     }
   } else {
     mf <- model.frame(delete.response(object$terms_mu),
-                      data = newdata, 
-                      xlev = object$xlevels_mu)
-    X <- model.matrix(delete.response(object$terms_mu), 
-                      mf,
-                      contrasts.arg = object$contrasts_mu)
+      data = newdata,
+      xlev = object$xlevels_mu
+    )
+    X <- model.matrix(delete.response(object$terms_mu),
+      mf,
+      contrasts.arg = object$contrasts_mu
+    )
     pred <- switch(type,
       link = X %*% object$coefficients,
       response = exp(X %*% object$coefficients)
@@ -601,7 +604,6 @@ vcov.cmp <- function(object, ...) {
 }
 
 
-
 #' Glance at a(n) CMP model object
 #'
 #' Glance accepts a model object and returns a \code{tibble::tibble()} with exactly one row of model summaries. The summaries are typically goodness of fit measures, p-values for hypothesis tests on residuals, or model convergence information.
@@ -708,8 +710,7 @@ augment.cmp <- function(x, data = model.frame.cmp(x),
     )
     df$.fitted <- unname(pred_obj$fit)
     df$.se.fit <- unname(pred_obj$se.fit)
-  }
-  else {
+  } else {
     df$.fitted <- unname(predict(x, newdata, type = type.predict))
   }
   if (is.null(newdata)) {
