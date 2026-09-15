@@ -8,6 +8,7 @@
 [![R build status](https://github.com/thomas-fung/mpcmp/workflows/R-CMD-check/badge.svg)](https://github.com/thomas-fung/mpcmp/actions)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thomas-fung/mpcmp)
 [![Codecov test coverage](https://codecov.io/gh/thomas-fung/mpcmp/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/mpcmp)
+[![R-CMD-check](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177/2F1471082X17697749).
