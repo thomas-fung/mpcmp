@@ -49,7 +49,14 @@ residuals.cmp <- function(object, type = c("deviance", "pearson", "response"), .
 #' @name logLik.cmp
 logLik.cmp <- function(object, ...) {
   out <- object$maxl
-  attr(out, "df") <- length(object$coefficients) + 1
+  # Use the numeric rank(s) rather than length(object$coefficients), since
+  # the latter now includes NA entries for any aliased (rank-deficient)
+  # columns, which are not actually estimated parameters.
+  df <- object$rank + 1
+  if (!object$const_nu) {
+    df <- df + object$rank_nu
+  }
+  attr(out, "df") <- df
   class(out) <- "logLik.cmp"
   return(out)
 }
@@ -299,6 +306,8 @@ print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
       quantile(x$deviance_resid, na.rm = TRUE),
       c("Min", "1Q", "Median", "3Q", "Max")
     )
+  } else {
+    residuals_dev <- setNames(x$deviance_resid, seq_along(x$deviance_resid))
   }
   xx <- zapsmall(residuals_dev, digits + 1L)
   print.default(xx, digits = digits, na.print = "", print.gap = 2L)
@@ -384,7 +393,7 @@ print.cmp <- function(x, ...) {
   )
   cat(
     "\nNull Deviance:", x$null_deviance, "\nResidual Deviance:",
-    x$residuals_deviance, "\nAIC:", format(AIC(x)), "\n\n"
+    x$residual_deviance, "\nAIC:", format(AIC(x)), "\n\n"
   )
   invisible(x)
 }
@@ -437,9 +446,15 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
       response = object$fitted_values
     )
     if (se.fit) {
+      # object$x is the full design matrix; drop any aliased (NA-coefficient)
+      # columns before multiplying against variance_beta, which only spans
+      # the identifiable subset -- matches predict.lm()/predict.glm().
+      beta <- if (object$const_nu) object$coefficients else object$coefficients_beta
+      keep <- !is.na(beta)
+      Xk <- object$x[, keep, drop = FALSE]
       se <- switch(type,
-        link = sqrt(diag(object$x %*% object$variance_beta %*% t(object$x))),
-        response = sqrt(diag(object$x %*% object$variance_beta %*% t(object$x))) *
+        link = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))),
+        response = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))) *
           object$fitted_values
       )
       pred <- list(fit = pred, se.fit = se)
@@ -453,15 +468,26 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
       mf,
       contrasts.arg = object$contrasts_mu
     )
+    # The mean-model coefficients (named to match the columns of X); for a
+    # varying-dispersion fit these live in coefficients_beta rather than the
+    # combined coefficients vector.
+    beta <- if (object$const_nu) object$coefficients else object$coefficients_beta
+    # If X (and hence beta) is rank-deficient, aliased columns have a NA
+    # coefficient (as with glm()). Drop them from both X and beta before
+    # multiplying -- matching predict.lm()/predict.glm() -- so that
+    # predictions don't come out as NA for every observation.
+    keep <- !is.na(beta)
+    Xk <- X[, keep, drop = FALSE]
+    betak <- beta[keep]
     pred <- switch(type,
-      link = X %*% object$coefficients,
-      response = exp(X %*% object$coefficients)
+      link = Xk %*% betak,
+      response = exp(Xk %*% betak)
     )
     if (se.fit) {
       se <- switch(type,
         link =
-          sqrt(diag(X %*% object$variance_beta %*% t(X))),
-        response = sqrt(diag(X %*% object$variance_beta %*% t(X))) * pred
+          sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))),
+        response = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))) * pred
       )
       pred <- list(fit = t(pred)[1, ], se.fit = se)
     }

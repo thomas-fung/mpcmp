@@ -27,6 +27,14 @@
 #' @return
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 #'
+#' @details
+#' If \code{X} and/or \code{S} are not of full column rank, the aliased
+#' (linearly dependent) columns of each are dropped before fitting --
+#' identified via a pivoted QR decomposition, the same approach
+#' \code{\link[stats]{glm.fit}} uses -- and the corresponding coefficients
+#' are reported as \code{NA}, mirroring the behaviour of
+#' \code{\link[stats]{glm}} for rank-deficient designs.
+#'
 #' @examples
 #' ## For examples see example(glm.cmp)
 fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
@@ -34,28 +42,57 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
                                 gammastart = gammastart,
                                 lambdalb = lambdalb, lambdaub = lambdaub,
                                 maxlambdaiter = maxlambdaiter, tol = tol) {
+  X_full <- X
+  q1_full <- ncol(X_full) # number of covariates for mu, before rank check
+  S_full <- S
+  q2_full <- ncol(S_full) # number of covariates for nu, before rank check
   M0 <- stats::glm(y ~ -1 + X + offset(offset),
     start = betastart,
     family = stats::poisson()
   )
   offset <- M0$offset
-  beta0 <- stats::coef(M0)
   n <- length(y) # sample size
-  q1 <- ncol(X) # number of covariates for mu
-  q2 <- ncol(S) # number of covariates for nu
+  # Identify the identifiable (full-rank) columns of X, reusing the pivoted
+  # QR decomposition glm.fit() already computed for M0.
+  rank_x <- M0$rank
+  keep_x <- sort(M0$qr$pivot[seq_len(rank_x)])
+  if (rank_x < q1_full) {
+    warning(
+      "design matrix 'X' is rank-deficient (rank ", rank_x, " out of ",
+      q1_full, " column(s)); coefficient(s) for the aliased column(s) ",
+      "will be reported as NA, as with glm()."
+    )
+  }
+  X <- X_full[, keep_x, drop = FALSE] # full-rank subset used for fitting
+  beta0 <- stats::coef(M0)[keep_x]
+  q1 <- ncol(X) # number of identifiable covariates for mu
+  # Identify the identifiable (full-rank) columns of S via its own pivoted
+  # QR decomposition (there is no preliminary glm() fit for S to reuse).
+  qr_s <- qr(S_full)
+  rank_s <- qr_s$rank
+  keep_s <- sort(qr_s$pivot[seq_len(rank_s)])
+  if (rank_s < q2_full) {
+    warning(
+      "design matrix 'S' is rank-deficient (rank ", rank_s, " out of ",
+      q2_full, " column(s)); coefficient(s) for the aliased column(s) ",
+      "will be reported as NA, as with glm()."
+    )
+  }
+  S <- S_full[, keep_s, drop = FALSE] # full-rank subset used for fitting
+  q2 <- ncol(S) # number of identifiable covariates for nu
   summax <- ceiling(max(c(max(y) + 20 * sqrt(var(y)), 100)))
-  if (!is.null(gammastart) && q2 != length(gammastart)) {
+  if (!is.null(gammastart) && q2_full != length(gammastart)) {
     stop(paste(
-      "length of 'gammastart' should equal to", q2,
+      "length of 'gammastart' should equal to", q2_full,
       "\nand corresponding to initial coefs for ",
-      paste(colnames(S), collapse = ", ")
+      paste(colnames(S_full), collapse = ", ")
     ))
   } else if (is.null(gammastart)) {
     gamma0 <- rep(0, q2)
     nu0 <- rep(1, n)
     lambda0 <- mu0 <- M0$fitted.values
   } else {
-    gamma0 <- gammastart
+    gamma0 <- gammastart[keep_s]
     nu0 <- exp(t(S %*% gamma0)[1, ])
     mu0 <- M0$fitted.values
     lambda.ok <- comp_lambdas(mu0, nu0,
@@ -141,10 +178,10 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
     }
   }
   maxl <- ll_new # maximum loglikelihood achieved
-  beta <- param[1:q1] # estimated regression coefficients beta
+  beta <- param[1:q1] # estimated regression coefficients beta (identifiable subset)
   lambda <- param[(q1 + 1):(q1 + n)] # estimated rates (not generally useful)
   nu <- param[(q1 + n + 1):(q1 + 2 * n)] # estimate dispersion
-  gamma <- param[(q1 + 2 * n + 1):(q1 + 2 * n + q2)]
+  gamma <- param[(q1 + 2 * n + 1):(q1 + 2 * n + q2)] # identifiable subset
   log.Z <- logZ(log(lambda), nu, summax = summax)
   variances <- comp_variances(lambda, nu, log.Z = log.Z, summax = summax)
   eta <- t(X %*% beta)[1, ]
@@ -173,7 +210,7 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   se_gamma <- as.vector(sqrt(diag(variance_gamma)))
   Xtilde <- diag(fitted / sqrt(variances)) %*% as.matrix(X)
   h <- diag(Xtilde %*% solve(t(Xtilde) %*% Xtilde) %*% t(Xtilde))
-  df.residuals <- length(y) - length(beta) - length(gamma)
+  df.residuals <- length(y) - rank_x - rank_s
   if (df.residuals > 0) {
     indsat.deviance <- dcomp(y,
       mu = y, nu = nu, log.p = TRUE, lambdalb = min(lambdalb),
@@ -188,27 +225,46 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   } else {
     d.res <- rep(0, length(y))
   }
+  # Expand the identifiable coefficients/SEs back out to X_full's/S_full's
+  # original column order, inserting NA for any aliased column -- mirrors
+  # the coefficient vector returned by glm() for a rank-deficient fit.
+  beta_full <- rep(NA_real_, q1_full)
+  names(beta_full) <- colnames(X_full)
+  beta_full[keep_x] <- as.vector(beta)
+  se_beta_full <- rep(NA_real_, q1_full)
+  names(se_beta_full) <- colnames(X_full)
+  se_beta_full[keep_x] <- se_beta
+  gamma_full <- rep(NA_real_, q2_full)
+  names(gamma_full) <- colnames(S_full)
+  gamma_full[keep_s] <- as.vector(gamma)
+  se_gamma_full <- rep(NA_real_, q2_full)
+  names(se_gamma_full) <- colnames(S_full)
+  se_gamma_full[keep_s] <- se_gamma
   out <- list()
   out$const_nu <- FALSE
   out$y <- y
-  out$x <- X
+  # Store the full (un-reduced) design matrices, matching the convention of
+  # model.matrix.lm()/model.matrix.glm() -- callers such as predict.cmp()
+  # drop the aliased columns themselves, using the NA pattern in
+  # out$coefficients_beta/out$coefficients_gamma, before doing any matrix
+  # algebra with them.
+  out$x <- X_full
   out$nobs <- n
   out$iter <- iter
   out$family <-
     structure(list(family = "CMP(mu, nu)", link = "log"),
       class = "family"
     )
-  out$coefficients <- c(beta, gamma)
-  out$coefficients_beta <- beta
-  out$rank <- length(beta)
+  out$coefficients_beta <- beta_full
+  out$rank <- rank_x
   out$lambda <- lambda
   out$log_Z <- log.Z
   out$summax <- summax
   out$offset <- offset
   out$nu <- nu
-  out$coefficients_gamma <- gamma
-  out$rank_nu <- length(gamma)
-  out$s <- S
+  out$coefficients_gamma <- gamma_full
+  out$rank_nu <- rank_s
+  out$s <- S_full
   out$lambdaub <- lambdaub
   out$linear_predictors <- eta
   out$maxl <- maxl
@@ -221,8 +277,8 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   colnames(out$variance_beta) <- row.names(variance_beta)
   out$variance_gamma <- variance_gamma
   colnames(out$variance_gamma) <- row.names(variance_gamma)
-  out$se_beta <- se_beta
-  out$se_gamma <- se_gamma
+  out$se_beta <- se_beta_full
+  out$se_gamma <- se_gamma_full
   out$df_residuals <- df.residuals
   out$df_null <- n - 1
   out$null_deviance <- 2 * (sum(indsat.deviance) -
@@ -236,9 +292,11 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
       lambda = lambda, nu = nu,
       log.p = TRUE, summax = summax
     )))
-  names(out$coefficients_beta) <- labels(X)[[2]]
-  names(out$coefficients_gamma) <- labels(S)[[2]]
-  names(out$coefficients) <- c(paste0("beta_", names(out$coefficients_beta)), paste0("gamma_", names(out$coefficients_gamma)))
+  out$coefficients <- c(out$coefficients_beta, out$coefficients_gamma)
+  names(out$coefficients) <- c(
+    paste0("beta_", names(out$coefficients_beta)),
+    paste0("gamma_", names(out$coefficients_gamma))
+  )
   class(out) <- "cmp"
   return(out)
 }

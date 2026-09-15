@@ -24,20 +24,43 @@
 #' @return
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 #'
+#' @details
+#' If \code{X} is not of full column rank, the aliased (linearly dependent)
+#' columns are dropped before fitting -- identified via the same pivoted QR
+#' decomposition that \code{\link[stats]{glm.fit}} uses -- and the
+#' corresponding coefficients are reported as \code{NA}, mirroring the
+#' behaviour of \code{\link[stats]{glm}} for rank-deficient designs.
+#'
 #' @examples
 #' ## For examples see example(glm.cmp)
 fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
                                  betastart = betastart,
                                  lambdalb = lambdalb, lambdaub = lambdaub,
                                  maxlambdaiter = maxlambdaiter, tol = tol) {
+  X_full <- X
+  q_full <- ncol(X_full)
   M0 <- stats::glm(y ~ -1 + X + offset(offset),
     start = betastart, family = stats::poisson()
   )
   offset <- M0$offset
   n <- length(y) # sample size
-  q <- ncol(X) # number of covariates for mu
+  # Identify the identifiable (full-rank) columns of X using the pivoted QR
+  # decomposition already computed by glm.fit() for M0. Any column not among
+  # the first `rank_x` pivoted columns is aliased and is dropped from the
+  # fit; its coefficient is reported as NA at the end, as glm() would do.
+  rank_x <- M0$rank
+  keep_x <- sort(M0$qr$pivot[seq_len(rank_x)])
+  if (rank_x < q_full) {
+    warning(
+      "design matrix 'X' is rank-deficient (rank ", rank_x, " out of ",
+      q_full, " column(s)); coefficient(s) for the aliased column(s) ",
+      "will be reported as NA, as with glm()."
+    )
+  }
+  X <- X_full[, keep_x, drop = FALSE] # full-rank subset used for fitting
+  q <- ncol(X) # number of identifiable covariates for mu
   # starting values for optimization
-  beta0 <- stats::coef(M0)
+  beta0 <- stats::coef(M0)[keep_x]
   lambda0 <- mu0 <- M0$fitted.values
   nu_lb <- 1e-10
   summax <- ceiling(max(c(max(y) + 20 * sqrt(var(y)), 100)))
@@ -121,7 +144,7 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
     }
   }
   maxl <- ll_new # maximum loglikelihood achieved
-  beta <- param[1:q] # estimated regression coefficients beta
+  beta <- param[1:q] # estimated regression coefficients beta (identifiable subset)
   lambda <- param[(q + 1):(q + n)] # estimated rates (not generally useful)
   nu <- param[q + n + 1] # estimate dispersion
   precision_beta <- 0
@@ -140,7 +163,7 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   se_beta <- as.vector(sqrt(diag(variance_beta)))
   Xtilde <- diag(fitted / sqrt(variances)) %*% as.matrix(X)
   h <- diag(Xtilde %*% solve(t(Xtilde) %*% Xtilde) %*% t(Xtilde))
-  df_residuals <- length(y) - length(beta)
+  df_residuals <- length(y) - rank_x
   if (df_residuals > 0) {
     indsat_deviance <- dcomp(y,
       mu = y, nu = nu, log.p = TRUE, lambdalb = min(lambdalb),
@@ -155,10 +178,23 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   } else {
     d_res <- rep(0, length(y))
   }
+  # Expand the identifiable coefficients/SEs back out to X_full's original
+  # column order, inserting NA for any aliased column -- mirrors the
+  # coefficient vector returned by glm() for a rank-deficient fit.
+  beta_full <- rep(NA_real_, q_full)
+  names(beta_full) <- colnames(X_full)
+  beta_full[keep_x] <- as.vector(beta)
+  se_beta_full <- rep(NA_real_, q_full)
+  names(se_beta_full) <- colnames(X_full)
+  se_beta_full[keep_x] <- se_beta
   out <- list()
   out$const_nu <- TRUE
   out$y <- y
-  out$x <- X
+  # Store the full (un-reduced) design matrix, matching the convention of
+  # model.matrix.lm()/model.matrix.glm() -- callers such as predict.cmp()
+  # drop the aliased columns themselves, using the NA pattern in
+  # out$coefficients, before doing any matrix algebra with it.
+  out$x <- X_full
   out$family <-
     structure(list(
       family =
@@ -173,8 +209,8 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
     ), class = "family")
   out$nobs <- n
   out$iter <- iter
-  out$coefficients <- beta
-  out$rank <- length(beta)
+  out$coefficients <- beta_full
+  out$rank <- rank_x
   out$lambda <- lambda
   out$log_Z <- log.Z
   out$summax <- summax
@@ -190,7 +226,7 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
   out$d_res <- d_res
   out$variance_beta <- variance_beta
   colnames(out$variance_beta) <- row.names(variance_beta)
-  out$se_beta <- se_beta
+  out$se_beta <- se_beta_full
   out$df_residuals <- df_residuals
   out$df_null <- n - 1
   out$s <- NA
@@ -209,7 +245,6 @@ fit_glm_cmp_const_nu <- function(y = y, X = X, offset = offset,
       lambda = lambda, nu = nu,
       log.p = TRUE, summax = summax
     )))
-  names(out$coefficients) <- labels(X)[[2]]
   class(out) <- "cmp"
   return(out)
 }
