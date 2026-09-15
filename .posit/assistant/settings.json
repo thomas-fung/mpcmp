@@ -7,7 +7,8 @@
     "read": {
       "*.R": "allow",
       "*.cpp": "allow",
-      "*/DESCRIPTION": "allow"
+      "*/DESCRIPTION": "allow",
+      "*/CITATION": "allow"
     },
     "edit": {
       "*.R": "allow"

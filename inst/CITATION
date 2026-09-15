@@ -1,9 +1,9 @@
 citHeader("To cite the mpcmp package in publications use:")
 
-citEntry(
-  entry    = "Article",
+bibentry(
+  bibtype  = "Article",
   title    = "Mean-Parametrized {{Conway}}–{{Maxwell}}–{{Poisson}} Regression Models for Dispersed Counts",
-  author   = personList(as.person("Alan Huang")),
+  author   = c(as.person("Alan Huang")),
   journal  = "Statistical Modelling",
   year     = "2017",
   volume   = "17",
@@ -14,16 +14,16 @@ citEntry(
   "<URL https://journals.sagepub.com/doi/10.1177/1471082X17697749/.>")
 )
 
-citEntry(
-  entry    = "Manual",
+bibentry(
+  bibtype  = "Manual",
   title    = "mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression",
-  author   = personList(as.person("Thomas Fung"),
+  author   = c(as.person("Thomas Fung"),
   as.person("Aya Alwan"),
   as.person("Justin Wishart"),
   as.person("Alan Huang")
   ),
-  year     = "2022", 
-  note = "R package version 0.3.8.",
+  year     = "2026", 
+  note = "R package version 0.3.9.",
   url      = "https://CRAN.R-project.org/package=mpcmp",
   textVersion = paste("Fung, T., Alwan, A., Wishart, J. & Huang, A. (2022)", 
   "mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.3.8.",
