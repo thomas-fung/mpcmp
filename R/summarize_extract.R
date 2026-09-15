@@ -48,6 +48,7 @@ logLik.cmp <- function(object, ...) {
 }
 
 #' @rdname logLik.cmp
+#' @exportS3Method
 print.logLik.cmp <- function(x, ...) {
   cat("'log Lik. ' ", x, " (df=", attr(x, "df"), ")", sep = "")
 }

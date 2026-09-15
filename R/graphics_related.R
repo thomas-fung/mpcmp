@@ -169,7 +169,7 @@ gg_histcompPIT <-
     if (ref_line == TRUE) {
       p <- p + geom_hline(
         yintercept = 1, linetype = 2, colour = col_line,
-        size = size
+        linewidth = size
       )
     }
     return(p)
@@ -766,8 +766,8 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
       ) +
       xlim(xlim[1], xlim[2]) +
       ylim(ylim[1], ylim[2]) +
-      geom_hline(yintercept = 0, linetype = 3, colour = "#999999", size = 1.5) +
-      geom_vline(xintercept = 0, linetype = 3, colour = "#999999", size = 1.5) +
+      geom_hline(yintercept = 0, linetype = 3, colour = "#999999", linewidth = 1.5) +
+      geom_vline(xintercept = 0, linetype = 3, colour = "#999999", linewidth = 1.5) +
       stat_function(aes(colour = leg),
         fun = function(x) sqrt(rk * 0.5 * (1 - x) / x),
         xlim = c(0.01, xlim[2]),
