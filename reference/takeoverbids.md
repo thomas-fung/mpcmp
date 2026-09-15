@@ -123,7 +123,7 @@ M.bids
 #> Dispersion (nu): 1.75
 #> Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
 #> Null Deviance: 182.3906 
-#> Residual Deviance: 
+#> Residual Deviance: 131.2017 
 #> AIC: 382.1753 
 #> 
 summary(M.bids)

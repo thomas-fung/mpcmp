@@ -313,7 +313,7 @@ M.attendance
 #> Dispersion (nu): 0.0202
 #> Degrees of Freedom: 313 Total (i.e. Null);  309 Residual
 #> Null Deviance: 455.8326 
-#> Residual Deviance: 
+#> Residual Deviance: 377.4413 
 #> AIC: 1739.026 
 #> 
 summary(M.attendance)

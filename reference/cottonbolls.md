@@ -71,7 +71,7 @@ M.bolls
 #> Dispersion (nu): 4.85
 #> Degrees of Freedom: 124 Total (i.e. Null);  114 Residual
 #> Null Deviance: 345.9363 
-#> Residual Deviance: 
+#> Residual Deviance: 125.2598 
 #> AIC: 440.8229 
 #> 
 summary(M.bolls)

@@ -69,7 +69,7 @@ M.bids.full
 #> Dispersion (nu): 1.75
 #> Degrees of Freedom: 125 Total (i.e. Null);  116 Residual
 #> Null Deviance: 182.3906 
-#> Residual Deviance: 
+#> Residual Deviance: 131.2017 
 #> AIC: 382.1753 
 #> 
 
@@ -89,7 +89,7 @@ M.bids.null
 #> Dispersion (nu): 1.54
 #> Degrees of Freedom: 125 Total (i.e. Null);  117 Residual
 #> Null Deviance: 164.7208 
-#> Residual Deviance: 
+#> Residual Deviance: 131.8376 
 #> AIC: 393.8799 
 #> 
 
@@ -112,7 +112,7 @@ M.sit.full
 #> 
 #> Degrees of Freedom: 39 Total (i.e. Null);  32 Residual
 #> Null Deviance: 257.2108 
-#> Residual Deviance: 
+#> Residual Deviance: 41.67931 
 #> AIC: 260.8279 
 #> 
 
@@ -132,7 +132,7 @@ M.sit.null1
 #> 
 #> Degrees of Freedom: 39 Total (i.e. Null);  35 Residual
 #> Null Deviance: 234.4693 
-#> Residual Deviance: 
+#> Residual Deviance: 41.4078 
 #> AIC: 255.2668 
 #> 
 
@@ -149,7 +149,7 @@ M.sit.null2
 #> Dispersion (nu): 0.396
 #> Degrees of Freedom: 39 Total (i.e. Null);  36 Residual
 #> Null Deviance: 234.4696 
-#> Residual Deviance: 
+#> Residual Deviance: 41.40784 
 #> AIC: 253.2668 
 #> 
 ```

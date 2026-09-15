@@ -62,7 +62,7 @@ M.fish
 #> Dispersion (nu): 0.0184
 #> Degrees of Freedom: 69 Total (i.e. Null);  68 Residual
 #> Null Deviance: 101.6675 
-#> Residual Deviance: 
+#> Residual Deviance: 59.45133 
 #> AIC: 638.8532 
 #> 
 summary(M.fish)
