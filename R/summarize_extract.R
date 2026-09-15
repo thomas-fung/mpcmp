@@ -80,7 +80,7 @@ nobs.cmp <- function(object, ...) {
 #'
 #' A function calculating Akaike's Information Criterion (AIC) based on the log-likelihood
 #' value extracted from \code{\link{logLik.cmp}}, according to the formula
-#' \emph{-2*log-likelihood + k*npar}, where \emph{npar} represents the number of parameters
+#' \emph{-2\*log-likelihood + k\*npar}, where \emph{npar} represents the number of parameters
 #' in the fitted model, and \emph{k=2} for the usual AIC or \emph{k=log(n)} (\emph{n} being
 #' the number of observations) for the so-called BIC (Bayesian Information Criterion).
 #'
