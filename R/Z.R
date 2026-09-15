@@ -10,6 +10,9 @@
 #' @param log.z logical; if \code{TRUE}, normalising constant \eqn{Z} are returned as
 #' \eqn{log(Z)}.
 #' @param summax maximum number of terms to be considered in the truncated sum
+#' @return A numeric vector giving the (approximate) COM-Poisson normalizing
+#' constant \eqn{Z(\lambda, \nu)} (or its natural log if \code{log.z = TRUE}),
+#' recycled to the length of the longer of \code{lambda} and \code{nu}.
 #' @export
 Z <- function(lambda, nu, log.z = FALSE, summax) {
   # approximates normalizing constant for COMP distributions
@@ -54,7 +57,6 @@ Z <- function(lambda, nu, log.z = FALSE, summax) {
 }
 
 
-
 #' Calculate the Normalizing Constant in log scale for COM-Poisson distribution
 #'
 #' A function to approximate the normalizing constant for COM-Poisson distributions via
@@ -70,6 +72,9 @@ Z <- function(lambda, nu, log.z = FALSE, summax) {
 #' @param log_lambda rate parameter in log scale.
 #' @param nu dispersion parameter, straightly positive.
 #' @param summax maximum number of terms to be considered in the truncated sum.
+#' @return A numeric vector giving the (approximate) log of the COM-Poisson
+#' normalizing constant \eqn{\log Z(\lambda, \nu)}, recycled to the length of
+#' the longer of \code{log_lambda} and \code{nu}.
 #' @export
 #' @references
 #'  Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}:

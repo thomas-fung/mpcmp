@@ -1,8 +1,8 @@
 Package: mpcmp
 Type: Package
 Title: Mean-Parametrized Conway-Maxwell Poisson (COM-Poisson) Regression
-Version: 0.3.8
-Date: 2022-05-21
+Version: 0.3.9
+Date: 2026-09-15
 Authors@R: c(person("Thomas", "Fung", role = c("aut", "cre"),
          email = "thomas.fung.dr@gmail.com",
          comment =c(ORCID = "0000-0003-2601-0728")),
@@ -32,7 +32,6 @@ Imports:
 URL: https://github.com/thomas-fung/mpcmp
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
 Suggests: 
     knitr,
     rmarkdown,
@@ -42,11 +41,12 @@ Suggests:
     markdown (>= 1.1),
     tidyverse,
     modelsummary,
-    broom,
-    here
+    broom
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp
 Language: en-GB
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
+Config/testthat/edition: 3

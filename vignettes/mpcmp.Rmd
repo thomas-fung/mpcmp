@@ -3,7 +3,7 @@ title: "Getting Started with the `mpcmp` package"
 author: "Thomas Fung, Aya Alwan, Justin Wishart and Alan Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: "`r here::here('vignettes', 'library.bib')`"
+bibliography: "library.bib"
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Getting Started with the `mpcmp` package}
@@ -47,14 +47,18 @@ and they can be particularly accurate for $\nu\leq 1$ or $\lambda>10^{\nu}$ (see
 
 ```{r, echo=FALSE, message =FALSE}
 library(ggplot2)
-dat <- data.frame(x = rep(0:20, 3), 
-                  density = c(mpcmp::dcomp(0:20, 5, 0.2), mpcmp::dcomp(0:20, 5, 1), 
-                              mpcmp::dcomp(0:20, 5, 2)),
-                  nu = rep(c("nu = 0.5", "nu = 1", "nu = 1.5"), c(21, 21, 21)),
-                  yend = 0)
-ggplot(dat, aes(x=x, y= density, xend = x, yend= yend)) + 
-  geom_point()+
-  geom_segment() + 
+dat <- data.frame(
+  x = rep(0:20, 3),
+  density = c(
+    mpcmp::dcomp(0:20, 5, 0.2), mpcmp::dcomp(0:20, 5, 1),
+    mpcmp::dcomp(0:20, 5, 2)
+  ),
+  nu = rep(c("nu = 0.5", "nu = 1", "nu = 1.5"), c(21, 21, 21)),
+  yend = 0
+)
+ggplot(dat, aes(x = x, y = density, xend = x, yend = yend)) +
+  geom_point() +
+  geom_segment() +
   facet_wrap(~nu)
 ```
 
@@ -112,20 +116,21 @@ The `attendance` dataset (originally from [https://stats.idre.ucla.edu/r/dae/neg
 library(mpcmp)
 data(attendance)
 library(ggplot2)
-ggplot(attendance, aes(daysabs, fill = prog)) + geom_histogram(binwidth = 1) + 
+ggplot(attendance, aes(daysabs, fill = prog)) +
+  geom_histogram(binwidth = 1) +
   facet_grid(prog ~ ., margins = TRUE, scales = "free")
 ```
 
 It appears students enrolled into the General program tend to miss more days of school than those enrolled into the Academic or the Vocational program. There is some overdispersion in this dataset. We can use `glm.cmp()` to fit the mean-parametrized CMP model to try to account for that overdispersion. 
 
 ```{r}
-M.attendance <- glm.cmp(daysabs~ gender+math+prog, data=attendance)
+M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 summary(M.attendance)
 ```
 
 ```{r, echo=FALSE}
 beta <- abs(round(coef(M.attendance)[5], 3))
-mul_factor <- round(exp(beta),1)
+mul_factor <- round(exp(beta), 1)
 ```
 
 As `mpcmp` is directly comparable and compatible with other commonly used log-linear regression models for counts, interpreting parameters is straight forward. Our model estimates that students in the General program (the reference level) are expected to miss exp(+`r beta`) = `r mul_factor` times more days of school compared to students in the Vocational program.
@@ -151,11 +156,13 @@ tidy(M.attendance)
 ```
 This means "cmp" objects can take advantage of any packages that required `broom` support such as the `modelsummary` package: 
 ```{r}
-M_poisson <- glm(daysabs~ gender+math+prog, data=attendance, family = poisson)
-M_nb <- MASS::glm.nb(daysabs~ gender+math+prog, data=attendance)
-modelsummary::modelsummary(list(mpcmp = M.attendance, 
-                                Poisson = M_poisson, 
-                                Neg.Bin = M_nb))
+M_poisson <- glm(daysabs ~ gender + math + prog, data = attendance, family = poisson)
+M_nb <- MASS::glm.nb(daysabs ~ gender + math + prog, data = attendance)
+modelsummary::modelsummary(list(
+  mpcmp = M.attendance,
+  Poisson = M_poisson,
+  Neg.Bin = M_nb
+))
 ```
 
 We also implemented a bunch of commonly used methods for "cmp" objects: 
@@ -170,13 +177,17 @@ One of the key strength of the CMP distribution is that it can handle underdispe
 If we fit a Poisson distribution to the marginal distribution of the number of bids, we have:  
 ```{r}
 data("takeoverbids")
-ggplot(takeoverbids) + 
-  geom_bar(aes(x= numbids, y = ..count../sum(..count..)))+
-  geom_pointrange(aes(x = numbids,  
-                        y = dpois(numbids, mean(numbids)), 
-                        ymin = 0, 
-                        ymax = dpois(numbids, mean(numbids))),
-                  colour = "red") + 
+ggplot(takeoverbids) +
+  geom_bar(aes(x = numbids, y = ..count.. / sum(..count..))) +
+  geom_pointrange(
+    aes(
+      x = numbids,
+      y = dpois(numbids, mean(numbids)),
+      ymin = 0,
+      ymax = dpois(numbids, mean(numbids))
+    ),
+    colour = "red"
+  ) +
   labs(title = "Number of bids with Poisson fit", y = "Probability")
 ```
 We can see that the response variable is more concentrated than a Poisson fit, which is a sign of underdispersion. 
@@ -184,7 +195,7 @@ We can see that the response variable is more concentrated than a Poisson fit, w
 Here, we can use `glm.cmp()` to fit the mean-parametrized CMP model to try to account for that underdispersion. 
 ```{r}
 M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids)
+  + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 tidy(M.bids)
 LRTnu(M.bids)
 ```
@@ -192,11 +203,15 @@ From the likelihood ratio test, we can see that the dispersion parameter is sign
 
 We can also compare the results with a Poisson model.
 ```{r}
-M.bids.pois <- glm(numbids ~ leglrest + rearest + finrest + whtknght
-    + bidprem + insthold + size + sizesq + regulatn, data=takeoverbids,
-    family = poisson)
+M.bids.pois <- glm(
+  numbids ~ leglrest + rearest + finrest + whtknght
+    + bidprem + insthold + size + sizesq + regulatn,
+  data = takeoverbids,
+  family = poisson
+)
 modelsummary::modelsummary(list(mpcmp = M.bids, Poisson = M.bids.pois),
-                           statistic_vertical = FALSE, stars = TRUE)
+  statistic_vertical = FALSE, stars = TRUE
+)
 ```
 If we compare the two models, we can see that the CMP$_{\mu}$ model fitted the data better. We can also see that all the estimated standard errors under CMP$_{\mu}$ model are smaller which in turn makes the p-values for both `leglrest` and `bidprem` to drop below 0.05 instead of 0.1 under the Poisson model.
 
@@ -213,15 +228,19 @@ randomised with 10 replicates.
 ```{r, message = FALSE}
 library(tidyverse)
 data(sitophilus)
-sitophilus %>% group_by(extract) %>% summarise(mu = mean(ninsect), 
-                                               sigma2 = var(ninsect))
+sitophilus %>%
+  group_by(extract) %>%
+  summarise(
+    mu = mean(ninsect),
+    sigma2 = var(ninsect)
+  )
 ```
 
 It appears that the treatment may have some impact on both the mean and the variance of the number of progeny. Recall that non-constant variance is the norm in a GLM, non-constant variances do not necessarily mean varying dispersions. Nonetheless, we will try to use the treatment to explain the dispersion in the data set. To do that we specify the `formula_nu` argument in the `glm.cmp()` function. 
 
 ```{r}
 data(sitophilus)
-M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~ extract, data = sitophilus)
+M.sit <- glm.cmp(formula = ninsect ~ extract, formula_nu = ~extract, data = sitophilus)
 summary(M.sit)
 ```
 

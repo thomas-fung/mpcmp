@@ -1,0 +1,17 @@
+{
+  "permission": {
+    "bash": {
+      "Rscript *": "allow",
+      "tail *": "allow"
+    },
+    "read": {
+      "*.R": "allow",
+      "*.cpp": "allow",
+      "*/DESCRIPTION": "allow",
+      "*/CITATION": "allow"
+    },
+    "edit": {
+      "*.R": "allow"
+    }
+  }
+}

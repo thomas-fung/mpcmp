@@ -25,6 +25,10 @@ PIT Q-Q plot.}
 
 \item{...}{other arguments passed to or from other methods (currently unused).}
 }
+\value{
+\code{x} is returned invisibly; \code{plot.cmp} is called for its
+side effect of drawing diagnostic plots on the current graphics device.
+}
 \description{
 Eight plots (selectable by \code{which}) are currently available:
 a plot of deviance residuals against fitted values,
@@ -68,7 +72,7 @@ M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
 plot(M.bids)
 
 ## The plots for the non-randomized PIT
-# plot(M.bids, which = c(2,3))
+plot(M.bids, which = c(2, 3))
 }
 \seealso{
 \code{\link{compPIT}}, \code{\link{compnormRandPIT}},

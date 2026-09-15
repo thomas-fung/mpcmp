@@ -32,3 +32,4 @@ It is assumed that \code{nu} is in the last position of \code{param}.}
 \description{
 A function to compute the log-likelihood of the COM-Poisson model.
 }
+\keyword{internal}

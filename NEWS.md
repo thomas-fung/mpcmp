@@ -1,3 +1,9 @@
+# mpcmp 0.3.9
+  * Added missing `\value` documentation to Rd files for exported functions, methods and datasets that lacked it, per CRAN feedback.
+  * `cmplrtest()` now returns an object of class `"htest"` instead of printing results via `cat()`; the returned object is displayed via `print.htest()` and its statistic, degrees of freedom and p-value can be extracted directly.
+  * `LRTnu()` now returns an object of class `"htest"` instead of printing results via `cat()`; the returned object is displayed via `print.htest()` and its statistic, degrees of freedom, p-value and log-likelihoods can be extracted directly.
+  * `plot.cmp()` documentation example that was previously commented out is now runnable.
+
 # mpcmp 0.3.8
   * Fixed a few typos in `glm.cmp` documentation.
   * Fixes for cran checks.

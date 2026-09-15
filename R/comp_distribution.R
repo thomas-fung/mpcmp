@@ -97,8 +97,10 @@ dcomp <- function(x, mu, nu = 1, lambda, log.p = FALSE, lambdalb = 1e-10,
     mu <- comp_means(lambda, nu, summax = 500)
     if (missing(summax)) {
       summax <- ceiling(max(c(mu + 20 * sqrt(mu / nu), 100)))
-      message("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n", 
-      "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy.")
+      message(
+        "As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n",
+        "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy."
+      )
     }
   }
   # at a vector of yvalues
@@ -193,15 +195,16 @@ pcomp <- function(q, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
     if (missing(summax)) {
       mu <- comp_means(lambda, nu, summax = 500)
       summax <- ceiling(max(c(mu + 20 * sqrt(mu / nu), 100)))
-      message("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n", 
-              "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy.")
+      message(
+        "As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n",
+        "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy."
+      )
     }
   }
   for (i in 1:length(q)) {
     if ((mu[i] == 0 | lambda[i] == 0) && q[i] >= 0) {
       cdf[i] <- 1
-    }
-    else if (mu[i] < 0 | lambda[i] < 0 | nu[i] <= 0) {
+    } else if (mu[i] < 0 | lambda[i] < 0 | nu[i] <= 0) {
       cdf[i] <- NaN
       warn <- TRUE
     } else {
@@ -283,8 +286,10 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
     if (missing(summax)) {
       mu <- comp_means(lambda, nu, summax = 500)
       summax <- ceiling(max(c(mu + 20 * sqrt(mu / nu), 100)))
-      message("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n", 
-              "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy.")
+      message(
+        "As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n",
+        "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy."
+      )
     }
   }
   if (!lower.tail) {
@@ -296,8 +301,7 @@ qcomp <- function(p, mu, nu = 1, lambda, lower.tail = TRUE, log.p = FALSE,
   for (i in 1:length(p)) {
     if (mu[i] == 0 | lambda[i] == 0) {
       q[i] <- 0
-    }
-    else if (mu[i] < 0 | lambda[i] < 0 | nu[i] <= 0 | p[i] < 0 | p[i] > 1) {
+    } else if (mu[i] < 0 | lambda[i] < 0 | nu[i] <= 0 | p[i] < 0 | p[i] > 1) {
       q[i] <- NaN
       warn <- TRUE
     } else {
@@ -381,8 +385,10 @@ rcomp <- function(n, mu, nu = 1, lambda, lambdalb = 1e-10,
     if (missing(summax)) {
       mu <- comp_means(lambda, nu, summax = 500)
       summax <- ceiling(max(c(mu + 20 * sqrt(mu / nu), 100)))
-      message("As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n", 
-              "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy.")
+      message(
+        "As you do not specify mu nor summax, summax will be calculated based on, an estimated mu which is in turn calcualted by a truncated sum at 500.\n",
+        "If you believe the mean of the distribution is somewhat close to or above 500, you may want to do some experiment with comp_means() and specify summax instead to improve the accuracy."
+      )
     }
   }
   for (i in 1:n) {

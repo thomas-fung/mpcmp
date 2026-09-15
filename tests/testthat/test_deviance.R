@@ -1,4 +1,3 @@
-context("Deviance output")
 library(mpcmp)
 
 test_that("Testing attendance example", {
@@ -12,9 +11,10 @@ test_that("Testing attendance example", {
 
 test_that("Testing takeover example", {
   data(takeoverbids)
-  M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
-    + bidprem + insthold + size + sizesq + regulatn,
-  data = takeoverbids
+  M.bids <- glm.cmp(
+    numbids ~ leglrest + rearest + finrest + whtknght
+      + bidprem + insthold + size + sizesq + regulatn,
+    data = takeoverbids
   )
   expect_equal(round(AIC.cmp(M.bids), 3), 382.175)
   expect_equal(round(M.bids$null_deviance, 2), 182.39)

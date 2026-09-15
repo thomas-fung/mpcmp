@@ -16,6 +16,9 @@ A data frame with 70 observations on 4 variables.
 \usage{
 data(fish)
 }
+\value{
+A data frame with 70 rows and 4 variables.
+}
 \description{
 This data set gives the the number of fish species in lakes of the world; to examine the
 effect of the surface area of the lakes. The latitude of the lakes are also recorded.

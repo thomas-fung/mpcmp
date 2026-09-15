@@ -40,6 +40,17 @@
 
 \item{hat}{hat values \eqn{H[i,i]}, see default.}
 }
+\value{
+\code{influence.cmp} returns a list with components \code{hat} (the
+leverage values), \code{dev_res} (the deviance residuals) and
+\code{pear_res} (the Pearson residuals).
+
+\code{hatvalues.cmp} returns a numeric vector of leverage values.
+
+\code{rstandard.cmp} returns a numeric vector of standardized residuals.
+
+\code{cooks.distance.cmp} returns a numeric vector of Cook's distances.
+}
 \description{
 This suite of functions provides the basic quantities which are used in forming a wide variety of diagnostics for checking the quality of regression fits.
 }

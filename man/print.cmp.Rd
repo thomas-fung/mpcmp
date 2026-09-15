@@ -11,6 +11,10 @@
 
 \item{...}{other arguments passed to or from other methods  (currently unused).}
 }
+\value{
+\code{x} is returned invisibly; \code{print.cmp} is called for its
+side effect of printing the model summary to the console.
+}
 \description{
 \code{print} method for class \code{cmp}.
 }

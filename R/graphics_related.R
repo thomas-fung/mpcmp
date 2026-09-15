@@ -41,6 +41,14 @@
 #' @seealso
 #' \code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}},
 #' \code{\link{plot.cmp}} and \code{\link{autoplot}}.
+#' @return
+#' \code{histcompPIT} has no return value; it is called for its side effect
+#' of drawing the PIT histogram on the current graphics device.
+#'
+#' \code{qqcompPIT} draws the uniform Q-Q plot on the current graphics device
+#' and invisibly returns a list with components \code{sample} (the sample PIT
+#' quantiles) and \code{theoretical} (the corresponding theoretical uniform
+#' quantiles).
 #' @examples
 #' ## For examples see example(plot.cmp)
 #' @name PIT_Plot
@@ -53,8 +61,7 @@ histcompPIT <- function(object, bins = 10, line = TRUE, colLine = "red", colHist
   height <- diff(PIT[, ncol(PIT)]) * bins
   if (max(height) > 2) {
     y.upper <- max(height) + 1 / (bins / 2)
-  }
-  else {
+  } else {
     y.upper <- 2
   }
   if (is.null(main)) {
@@ -86,8 +93,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
   }
   plot(dummy.variable, qq.plot, lty = lty1, col = col1, xlim = c(0, 1), ylim = c(0, 1), type = type, xlab = "Theoretical", ylab = "Sample", main = main, ...)
   abline(0, 1, col = col2, lty = lty2)
-  list(sample = qq.plot, theoretical = dummy.variable)
-  invisible()
+  invisible(list(sample = qq.plot, theoretical = dummy.variable))
 }
 
 #' ggplot version of PIT Plots for a CMP Object
@@ -123,6 +129,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #'
 #' The \code{histcompPIT} and \code{qqcompPIT} functions
 #' would provide the same two plots but in base R format.
+#' @return A \code{ggplot} object.
 #' @references
 #' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
@@ -169,7 +176,7 @@ gg_histcompPIT <-
     if (ref_line == TRUE) {
       p <- p + geom_hline(
         yintercept = 1, linetype = 2, colour = col_line,
-        size = size
+        linewidth = size
       )
     }
     return(p)
@@ -306,7 +313,7 @@ compPIT <- function(object, bins = 10) {
 #' \item{rdMid}{the midpoints of the predictive probability intervals}
 #' @references
 #' Berkowitz, J. (2001). Testing density forecasts, with applications to risk management.
-#' \emph{Journal of Business \& Economic Statistics}, \bold{19}, 465--474.
+#' \emph{Journal of Business and Economic Statistics}, \bold{19}, 465--474.
 #'
 #' Dunn, P. K. and Smyth, G. K. (1996). Randomized quantile residuals. \emph{Journal of
 #' Computational and Graphical Statistics}, \bold{5}, 236--244.
@@ -381,6 +388,8 @@ compnormRandPIT <- function(object) {
 #' @seealso
 #' \code{\link{compPIT}}, \code{\link{compnormRandPIT}},
 #' \code{\link{glm.cmp}} and \code{\link{autoplot}}.
+#' @return \code{x} is returned invisibly; \code{plot.cmp} is called for its
+#' side effect of drawing diagnostic plots on the current graphics device.
 #' @examples
 #' data(takeoverbids)
 #' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
@@ -390,7 +399,7 @@ compnormRandPIT <- function(object) {
 #' plot(M.bids)
 #'
 #' ## The plots for the non-randomized PIT
-#' plot(M.bids, which = c(2,3))
+#' plot(M.bids, which = c(2, 3))
 plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
                      ask = prod(par("mfcol")) < length(which) && dev.interactive(),
                      bins = 10,
@@ -405,9 +414,11 @@ plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
   # plot 8 std pearson resid. vs leverage
   object <- x
   if (any(!(which %in% 1:8))) {
-    warning("The acceptable ragne for option 'which' is 1:8.\n", 
-    "Anyting outside this range would be ignored.\n",
-    "Use ?plot.cmp to see which plots are available.\n")
+    warning(
+      "The acceptable ragne for option 'which' is 1:8.\n",
+      "Anyting outside this range would be ignored.\n",
+      "Use ?plot.cmp to see which plots are available.\n"
+    )
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -530,7 +541,7 @@ plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
     )
     dev.flush()
   }
-  invisible()
+  invisible(object)
 }
 
 
@@ -616,9 +627,11 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
   # plot 8 std pearson resid. vs leverage
   x <- y <- linear_predictors <- index <- leg <- cook_level <- NULL
   if (any(!(which %in% 1:8))) {
-    warning("The acceptable ragne for option 'which' is 1:8.\n",
-            "Anyting outside this range would be ignored.\n",
-            "Use ?autoplot to see which plots are available.\n")
+    warning(
+      "The acceptable ragne for option 'which' is 1:8.\n",
+      "Anyting outside this range would be ignored.\n",
+      "Use ?autoplot to see which plots are available.\n"
+    )
   }
   show <- rep(FALSE, 8)
   show[which] <- TRUE
@@ -700,17 +713,18 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         formula = y ~ x, method = "loess", se = FALSE,
         colour = "red"
       ) +
-      geom_text(aes(
-        x = linear_predictors,
-        y = res, label = index
-      ),
-      hjust = "inward", vjust = "outward",
-      data = data.frame(
-        linear_predictors =
-          object$linear_predictors[index_res[1:3]],
-        res = res[index_res[1:3]],
-        index = index_res[1:3]
-      )
+      geom_text(
+        aes(
+          x = linear_predictors,
+          y = res, label = index
+        ),
+        hjust = "inward", vjust = "outward",
+        data = data.frame(
+          linear_predictors =
+            object$linear_predictors[index_res[1:3]],
+          res = res[index_res[1:3]],
+          index = index_res[1:3]
+        )
       )
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
@@ -732,16 +746,17 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         y = "Approx. Cook's distance"
       ) +
       ylim(0, max(cook) * 1.075) +
-      geom_text(aes(
-        x = index_cook, y = cook,
-        label = index
-      ),
-      vjust = "outward", data =
-        data.frame(
-          index_cook = index_cook[1:3],
-          cook = cook[index_cook[1:3]],
-          index = index_cook[1:3]
-        )
+      geom_text(
+        aes(
+          x = index_cook, y = cook,
+          label = index
+        ),
+        vjust = "outward", data =
+          data.frame(
+            index_cook = index_cook[1:3],
+            cook = cook[index_cook[1:3]],
+            index = index_cook[1:3]
+          )
       )
     show_count <- show_count + 1
     p[[show_count]] <- p_temp
@@ -766,8 +781,8 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
       ) +
       xlim(xlim[1], xlim[2]) +
       ylim(ylim[1], ylim[2]) +
-      geom_hline(yintercept = 0, linetype = 3, colour = "#999999", size = 1.5) +
-      geom_vline(xintercept = 0, linetype = 3, colour = "#999999", size = 1.5) +
+      geom_hline(yintercept = 0, linetype = 3, colour = "#999999", linewidth = 1.5) +
+      geom_vline(xintercept = 0, linetype = 3, colour = "#999999", linewidth = 1.5) +
       stat_function(aes(colour = leg),
         fun = function(x) sqrt(rk * 0.5 * (1 - x) / x),
         xlim = c(0.01, xlim[2]),
@@ -792,17 +807,18 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
         show.legend = TRUE, linetype = 2,
         na.rm = TRUE
       ) +
-      geom_text(aes(
-        x = h, y = std_pear,
-        label = index
-      ),
-      hjust = "inward", vjust = "outward", data =
-        data.frame(
-          h = h[index_cook[1:3]],
-          std_pear = std_pear[index_cook[1:3]],
-          index = index_cook[1:3]
+      geom_text(
+        aes(
+          x = h, y = std_pear,
+          label = index
         ),
-      na.rm = TRUE
+        hjust = "inward", vjust = "outward", data =
+          data.frame(
+            h = h[index_cook[1:3]],
+            std_pear = std_pear[index_cook[1:3]],
+            index = index_cook[1:3]
+          ),
+        na.rm = TRUE
       ) +
       geom_text(aes(x = xlim, y = at_y, label = cook_level),
         data = data.frame(
@@ -839,9 +855,33 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
   }
   if (!output_as_ggplot) {
     p <- p_ggarrange
+  } else {
+    class(p) <- c("cmp_autoplot_list", class(p))
+    attr(p, "ggarrange") <- p_ggarrange
   }
   return(invisible(p))
   invisible()
+}
+
+#' Print Method for a \code{cmp_autoplot_list} Object
+#'
+#' Re-displays the combined diagnostic plot produced by \code{\link{autoplot.cmp}}
+#' when \code{output_as_ggplot = TRUE}. This avoids the default list-print
+#' behaviour (\code{[[1]]}, \code{[[2]]}, ... headers with each plot printed
+#' separately) when the list of \code{ggplot} objects returned by
+#' \code{autoplot.cmp}/\code{gg_plot} is printed again, e.g. after being
+#' assigned to a variable.
+#'
+#' @param x an object of class \code{cmp_autoplot_list}, as returned by
+#' \code{\link{autoplot.cmp}} with \code{output_as_ggplot = TRUE}.
+#' @param ... other arguments passed to or from other methods (currently unused).
+#' @return \code{x} is returned invisibly; \code{print.cmp_autoplot_list} is
+#' called for its side effect of drawing the combined diagnostic plot on the
+#' current graphics device.
+#' @export
+print.cmp_autoplot_list <- function(x, ...) {
+  print(attr(x, "ggarrange"))
+  invisible(x)
 }
 
 
@@ -849,3 +889,7 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
 #' @aliases autoplot.cmp
 #' @export
 gg_plot <- autoplot.cmp
+
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot

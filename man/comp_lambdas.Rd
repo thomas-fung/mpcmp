@@ -58,3 +58,4 @@ this function is used to find a lambda that can satisfy the mean constraint with
 combination of bisection and Newton-Raphson updates. The function is also vectorized but
 will only update those that have not converged.
 }
+\keyword{internal}

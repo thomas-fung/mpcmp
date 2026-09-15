@@ -2,11 +2,13 @@
 % Please edit documentation in R/mpcmp-package.R
 \docType{package}
 \name{mpcmp-package}
-\alias{mpcmp-package}
 \alias{mpcmp}
+\alias{mpcmp-package}
 \title{Mean-parametrized Conway-Maxwell Poisson Regression}
 \description{
-Mean-parametrized Conway-Maxwell Poisson Regression
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
+A collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell-Poisson (COM-Poisson) regression model of Huang (2017).
 }
 \references{
 Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}:
@@ -15,4 +17,24 @@ Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.2.0.
 Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 }
-\keyword{package}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/thomas-fung/mpcmp}
+  \item Report bugs at \url{https://github.com/thomas-fung/mpcmp/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Thomas Fung \email{thomas.fung.dr@gmail.com} (\href{https://orcid.org/0000-0003-2601-0728}{ORCID})
+
+Authors:
+\itemize{
+  \item Thomas Fung \email{thomas.fung.dr@gmail.com} (\href{https://orcid.org/0000-0003-2601-0728}{ORCID})
+  \item Aya Alwan \email{aya.alwan@mq.edu.au}
+  \item Justin Wishart \email{justin.wishart@mq.edu.au} (\href{https://orcid.org/0000-0002-8235-1845}{ORCID})
+  \item Alan Huang \email{alan.huang@uq.edu.au}
+}
+
+}
+\keyword{internal}

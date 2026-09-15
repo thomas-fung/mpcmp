@@ -1,4 +1,3 @@
-context("Test Inference")
 library(mpcmp)
 data("takeoverbids")
 data("sitophilus")
@@ -20,17 +19,17 @@ test_that("Test updating the mean regression formula", {
 })
 
 test_that("Test cmplrtest function", {
-  expect_equal(
-    capture_output_lines(cmplrtest(M.bids.full, M.bids.null))[5],
-    "P-value:  0.000214 "
-  )
+  lrt <- cmplrtest(M.bids.full, M.bids.null)
+  expect_s3_class(lrt, "htest")
+  expect_equal(unname(lrt$parameter), 1)
+  expect_equal(round(lrt$p.value, 6), 0.000214)
 })
 
 test_that("Test LRTnu", {
-  expect_equal(
-    capture_output_lines(LRTnu(M.attendance))[8],
-    "P-value: < 2e-16"
-  )
+  lrt <- LRTnu(M.attendance)
+  expect_s3_class(lrt, "htest")
+  expect_equal(unname(lrt$parameter), 1)
+  expect_lt(lrt$p.value, 2e-16)
 })
 
 test_that("Test updating the dispersion regression formula", {
@@ -53,14 +52,14 @@ test_that("Test updating the dispersion regression formula", {
 })
 
 test_that("Test the confint function", {
-  expect_is(confint.cmp(M.attendance), class = "matrix")
+  expect_true(is.matrix(confint.cmp(M.attendance)))
   expect_equal(
     colnames(confint.cmp(M.attendance)),
-    c("2.5 %", "97.5 %")
+    c("2.5%", "97.5%")
   )
   expect_equal(
     colnames(confint.cmp(M.attendance, parm = "math", level = 0.9)),
-    c("5 %", "95 %")
+    c("5%", "95%")
   )
   expect_length(confint.cmp(M.attendance, parm = "math", level = 0.9), 2)
 })

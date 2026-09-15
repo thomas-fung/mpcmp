@@ -1,17 +1,13 @@
 #' Mean-parametrized Conway-Maxwell Poisson Regression
 #'
-#' @name mpcmp-package
-#' @aliases mpcmp
-#' @docType package
-#' @title Mean-parametrized Conway-Maxwell Poisson Regression
-#' @keywords package
 #' @references
 #' Fung, T., Alwan, A., Wishart, J. and Huang, A. (2019). \code{mpcmp}:
 #' Mean-parametrized Conway-Maxwell Poisson Regression. R package version 0.2.0.
 #'
 #' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #' Attendance data set
 #'
@@ -31,6 +27,7 @@ NULL
 #' \item{prog}{academic programme ('General', 'Academic' and 'Vocational')}
 #' }
 #'
+#' @return A data frame with 314 rows and 5 variables.
 #' @docType data
 #' @keywords datasets
 #' @usage
@@ -68,6 +65,7 @@ NULL
 #' for friendly third-party bid}
 #' \item{sizesq}{book value squared}
 #' }
+#' @return A data frame with 126 rows and 14 variables.
 #' @docType data
 #' @keywords datasets
 #' @usage
@@ -76,7 +74,7 @@ NULL
 #' Cameron, A.C. and Johansson, P. (1997). Count Data Regression Models using Series
 #' Expansions: with Applications. \emph{Journal of Applied Econometrics} \bold{12} 203--223.
 #'
-#' Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{http://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.
+#' Cameron, A.C. and Trivedi P.K. (1998). Regression analysis of count data, Cambridge University Press, \url{https://cameron.econ.ucdavis.edu/racd/racddata.html} chapter 5.
 #'
 #' Croissant Y (2011) Ecdat: Datasets for econometrics, R Package, version 0.1-6.1.
 #'
@@ -110,6 +108,7 @@ NULL
 #' \item{def}{artificial defoliation level}
 #' \item{def2}{square of def}
 #' }
+#' @return A data frame with 125 rows and 4 variables.
 #' @docType data
 #' @keywords datasets
 #' @usage data(cottonbolls)
@@ -148,6 +147,7 @@ NULL
 #' \item{area}{surface area (km squared) }
 #' \item{latitude}{latitude of the lakes}
 #' }
+#' @return A data frame with 70 rows and 4 variables.
 #' @docType data
 #' @keywords datasets
 #' @usage
@@ -184,6 +184,7 @@ NULL
 #' \item{extract}{the treatment used}
 #' \item{ninsect}{number emerged insects (progeny)}
 #' }
+#' @return A data frame with 40 rows and 2 variables.
 #' @docType data
 #' @keywords datasets
 #' @usage

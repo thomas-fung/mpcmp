@@ -11,6 +11,11 @@ is.wholenumber(x, tol = .Machine$double.eps^0.5)
 
 \item{tol}{numeric; precision level}
 }
+\value{
+A logical vector, the same length as \code{x}, indicating whether
+each element is (within tolerance \code{tol} of) a whole number.
+}
 \description{
 Test for integer/whole number vector
 }
+\keyword{internal}

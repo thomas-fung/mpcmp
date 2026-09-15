@@ -18,6 +18,10 @@
 \item{evaluate}{logical; if \code{TRUE} evaluate the new call otherwise simply return
 the call}
 }
+\value{
+If \code{evaluate = TRUE} (the default), the re-fitted model object of
+class \code{"cmp"}; otherwise the unevaluated call.
+}
 \description{
 \code{update} (i.e., \code{update.cmp}) will update and (by-default) re-fit a model. It is
 identical to \code{update} in the \code{stats} package.
