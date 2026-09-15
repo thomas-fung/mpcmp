@@ -42,8 +42,7 @@ Suggests:
     markdown (>= 1.1),
     tidyverse,
     modelsummary,
-    broom,
-    here
+    broom
 BugReports: https://github.com/thomas-fung/mpcmp/issues
 LinkingTo: 
     Rcpp

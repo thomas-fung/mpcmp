@@ -22,7 +22,7 @@
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
 #' @param summax maximum number of terms to be considered in the truncated sum
-#' @export
+#' @keywords internal
 #' @return
 #' List containing the following:
 #' \item{param}{the model coefficients & the updated \code{nu}}

@@ -44,3 +44,4 @@ via truncation.  The standard COM-Poisson parametrization is being used here.
 The lambda and nu values are recycled to match the length
 of the longer one and that would determine the length of the results.
 }
+\keyword{internal}

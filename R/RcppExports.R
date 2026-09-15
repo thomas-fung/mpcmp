@@ -20,7 +20,7 @@
 #' @references 
 #' Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
 #' Reparametrized COM-Poisson Regression Models. R package version 0.0.1.
-#' @export
+#' @keywords internal
 #' 
 logZ_c <- function(log_lambda, nu, summax) {
     .Call(`_mpcmp_logZ_c`, log_lambda, nu, summax)

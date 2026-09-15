@@ -14,3 +14,4 @@ is.wholenumber(x, tol = .Machine$double.eps^0.5)
 \description{
 Test for integer/whole number vector
 }
+\keyword{internal}

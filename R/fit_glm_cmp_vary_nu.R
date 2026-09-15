@@ -23,7 +23,7 @@
 #' @param tol numeric: the convergence threshold. A lambda is said to satisfy the
 #' mean constraint if the absolute difference between the calculated mean and a fitted
 #' values is less than tol.
-#' @export
+#' @keywords internal
 #' @return
 #' A fitted model object of class \code{cmp} similar to one obtained from \code{glm} or \code{glm.nb}.
 #'

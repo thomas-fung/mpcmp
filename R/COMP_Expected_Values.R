@@ -21,10 +21,10 @@
 #' \code{comp_variances_logfactorialy} gives the variance of \emph{log(Y!)}.
 #'
 #' @name comp_expected_values
+#' @keywords internal
 NULL
 
 #' @rdname comp_expected_values
-#' @export
 comp_mean_logfactorialy <- function(lambda, nu, log.Z, summax = 100) {
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.
@@ -45,7 +45,6 @@ comp_mean_logfactorialy <- function(lambda, nu, log.Z, summax = 100) {
 }
 
 #' @rdname comp_expected_values
-#' @export
 comp_mean_ylogfactorialy <- function(lambda, nu, log.Z, summax = 100) {
   # approximates mean by truncation of Ylog(Y!) for COMP distributions
   # lambda, nu are recycled to match the length of each other.
@@ -66,7 +65,6 @@ comp_mean_ylogfactorialy <- function(lambda, nu, log.Z, summax = 100) {
 }
 
 #' @rdname comp_expected_values
-#' @export
 comp_means <- function(lambda, nu, log.Z, summax = 100) {
   # approximates mean by truncation of COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.
@@ -88,7 +86,6 @@ comp_means <- function(lambda, nu, log.Z, summax = 100) {
 
 
 #' @rdname comp_expected_values
-#' @export
 comp_variances <- function(lambda, nu, log.Z, summax = 100) {
   # approximates normalizing constant by truncation for COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.
@@ -109,7 +106,6 @@ comp_variances <- function(lambda, nu, log.Z, summax = 100) {
 }
 
 #' @rdname comp_expected_values
-#' @export
 comp_variances_logfactorialy <- function(lambda, nu, log.Z, summax = 100) {
   # approximates normalizing constant by truncation for COMP distributions
   # lambda, nu, mu.bd are recycled to match the length of each other.

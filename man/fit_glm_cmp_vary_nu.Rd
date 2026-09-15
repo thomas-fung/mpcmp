@@ -55,3 +55,4 @@ varying dispersion.
 \examples{
 ## For examples see example(glm.cmp)
 }
+\keyword{internal}

@@ -17,3 +17,4 @@ Take a sequence of vector, matrix or data-frame arguments and combine them by co
 \code{CBIND} is used within the package over \code{cbind} to recycle the shorter
 arguments so that their number of rows would match.
 }
+\keyword{internal}

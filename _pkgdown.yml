@@ -42,21 +42,12 @@ reference:
   - exclude:
     contents:
       - mpcmp-package
-      - is.wholenumber
-      - CBIND
       - Z
-      - comp_expected_values
-      - comp_lambdas
-      - comp_mu_loglik
-      - getnu
       - PIT_Plot
       - PIT_ggPlot
       - nrPIT
       - rPIT
-      - fit_glm_cmp_const_nu
-      - fit_glm_cmp_vary_nu
       - logZ
-      - logZ_c
 
 navbar:
   title: "mpcmp"
