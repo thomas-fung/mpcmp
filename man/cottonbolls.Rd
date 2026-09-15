@@ -20,6 +20,9 @@ Supplementary Content of Zeviani et al. (2014):
 \usage{
 data(cottonbolls)
 }
+\value{
+A data frame with 125 rows and 4 variables.
+}
 \description{
 This data set gives the observed number of bolls produced by the cotton
 plants at five growth stages: vegetative, flower-bud, blossom, fig and cotton boll;

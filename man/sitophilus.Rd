@@ -14,6 +14,9 @@ A data frame with 40 observations on 2 variables.
 \usage{
 data(sitophilus)
 }
+\value{
+A data frame with 40 rows and 2 variables.
+}
 \description{
 Ribeiro et al. (2013) carried out an experiment to assess the bioactivity of extracts from different parts (seeds, leaves and branches) of Annona mucosa (Annonaceae) to control Sitophilus zeamais (Coleoptera: Curculionidae), a major pest of stored maize/corn in Brazil.
 }

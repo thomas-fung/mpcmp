@@ -12,6 +12,10 @@ CBIND(..., deparse.level = 1)
 \item{deparse.level}{integer; deparse.level = 0 constructs no labels,
 deparse.level = 1 (the default) or > 1 constructs labels from the arguments names.}
 }
+\value{
+A matrix formed by column-binding the (recycled) arguments; see
+\code{\link{cbind}}.
+}
 \description{
 Take a sequence of vector, matrix or data-frame arguments and combine them by columns.
 \code{CBIND} is used within the package over \code{cbind} to recycle the shorter

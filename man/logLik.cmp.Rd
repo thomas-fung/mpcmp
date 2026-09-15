@@ -16,6 +16,14 @@
 
 \item{x}{an object of class 'logLik.cmp', obtained from a call to \code{logLik.cmp}.}
 }
+\value{
+\code{logLik.cmp} returns an object of class \code{"logLik.cmp"}: the
+maximized log-likelihood value with a \code{"df"} attribute giving the
+number of estimated parameters, analogous to \code{\link[stats]{logLik}}.
+
+\code{print.logLik.cmp} is called for its side effect of printing and
+returns \code{x} invisibly.
+}
 \description{
 An accessor function used to extract the (maximized) log-likelihood from a 'cmp' object.
 }

@@ -16,6 +16,11 @@ Z(lambda, nu, log.z = FALSE, summax)
 
 \item{summax}{maximum number of terms to be considered in the truncated sum}
 }
+\value{
+A numeric vector giving the (approximate) COM-Poisson normalizing
+constant \eqn{Z(\lambda, \nu)} (or its natural log if \code{log.z = TRUE}),
+recycled to the length of the longer of \code{lambda} and \code{nu}.
+}
 \description{
 A function to approximate the normalizing constant for COM-Poisson distributions
 via truncation. The standard COM-Poisson parametrization is being used here.

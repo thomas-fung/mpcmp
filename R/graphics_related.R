@@ -41,6 +41,14 @@
 #' @seealso
 #' \code{\link{gg_histcompPIT}}, \code{\link{gg_qqcompPIT}},
 #' \code{\link{plot.cmp}} and \code{\link{autoplot}}.
+#' @return
+#' \code{histcompPIT} has no return value; it is called for its side effect
+#' of drawing the PIT histogram on the current graphics device.
+#'
+#' \code{qqcompPIT} draws the uniform Q-Q plot on the current graphics device
+#' and invisibly returns a list with components \code{sample} (the sample PIT
+#' quantiles) and \code{theoretical} (the corresponding theoretical uniform
+#' quantiles).
 #' @examples
 #' ## For examples see example(plot.cmp)
 #' @name PIT_Plot
@@ -86,8 +94,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
   }
   plot(dummy.variable, qq.plot, lty = lty1, col = col1, xlim = c(0, 1), ylim = c(0, 1), type = type, xlab = "Theoretical", ylab = "Sample", main = main, ...)
   abline(0, 1, col = col2, lty = lty2)
-  list(sample = qq.plot, theoretical = dummy.variable)
-  invisible()
+  invisible(list(sample = qq.plot, theoretical = dummy.variable))
 }
 
 #' ggplot version of PIT Plots for a CMP Object
@@ -123,6 +130,7 @@ qqcompPIT <- function(object, bins = 10, col1 = "red", col2 = "black", lty1 = 1,
 #'
 #' The \code{histcompPIT} and \code{qqcompPIT} functions
 #' would provide the same two plots but in base R format.
+#' @return A \code{ggplot} object.
 #' @references
 #' Czado, C., Gneiting, T. and Held, L. (2009). Predictive model assessment
 #' for count data. \emph{Biometrics}, \strong{65}, 1254--1261.
@@ -381,6 +389,8 @@ compnormRandPIT <- function(object) {
 #' @seealso
 #' \code{\link{compPIT}}, \code{\link{compnormRandPIT}},
 #' \code{\link{glm.cmp}} and \code{\link{autoplot}}.
+#' @return \code{x} is returned invisibly; \code{plot.cmp} is called for its
+#' side effect of drawing diagnostic plots on the current graphics device.
 #' @examples
 #' data(takeoverbids)
 #' M.bids <- glm.cmp(numbids ~ leglrest + rearest + finrest + whtknght
@@ -530,7 +540,7 @@ plot.cmp <- function(x, which = c(1L, 2L, 6L, 8L),
     )
     dev.flush()
   }
-  invisible()
+  invisible(object)
 }
 
 

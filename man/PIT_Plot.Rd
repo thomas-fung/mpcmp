@@ -61,6 +61,15 @@ Q-Q plot in PIT, see par(lty = .).}
 
 \item{type}{1-character string; the type of plot for the sample uniform Q-Q plot in PIT.}
 }
+\value{
+\code{histcompPIT} has no return value; it is called for its side effect
+of drawing the PIT histogram on the current graphics device.
+
+\code{qqcompPIT} draws the uniform Q-Q plot on the current graphics device
+and invisibly returns a list with components \code{sample} (the sample PIT
+quantiles) and \code{theoretical} (the corresponding theoretical uniform
+quantiles).
+}
 \description{
 Two plots for the non-randomized PIT are currently available for checking the
 distributional assumption of the fitted CMP model: the PIT histogram, and

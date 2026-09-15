@@ -13,6 +13,17 @@ cmplrtest(object1, object2, digits = 3)
 
 \item{digits}{numeric; minimum number of significant digits to be used for most numbers.}
 }
+\value{
+An object of class \code{"htest"} (see \code{\link[stats]{t.test}} for the
+generic structure), with components:
+\item{statistic}{the likelihood ratio test statistic.}
+\item{parameter}{the degrees of freedom for the test statistic.}
+\item{p.value}{the p-value for the test.}
+\item{method}{a character string describing the test.}
+\item{data.name}{a character string giving the names of the two model objects compared.}
+Printing the returned object (e.g. via automatic printing at the console)
+displays a formatted summary of the test.
+}
 \description{
 Perform a likelihood ratio chi-squared test between nested COM-Poisson models.
 The test statistics is calculated as \emph{2*(llik- llik_0)}. The test statistics

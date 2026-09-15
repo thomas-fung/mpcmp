@@ -20,17 +20,17 @@ test_that("Test updating the mean regression formula", {
 })
 
 test_that("Test cmplrtest function", {
-  expect_equal(
-    capture_output_lines(cmplrtest(M.bids.full, M.bids.null))[5],
-    "P-value:  0.000214 "
-  )
+  lrt <- cmplrtest(M.bids.full, M.bids.null)
+  expect_s3_class(lrt, "htest")
+  expect_equal(unname(lrt$parameter), 1)
+  expect_equal(round(lrt$p.value, 6), 0.000214)
 })
 
 test_that("Test LRTnu", {
-  expect_equal(
-    capture_output_lines(LRTnu(M.attendance))[8],
-    "P-value: < 2e-16"
-  )
+  lrt <- LRTnu(M.attendance)
+  expect_s3_class(lrt, "htest")
+  expect_equal(unname(lrt$parameter), 1)
+  expect_lt(lrt$p.value, 2e-16)
 })
 
 test_that("Test updating the dispersion regression formula", {

@@ -17,6 +17,9 @@ using namespace Rcpp;
 //' @param summax maximum number of terms to be considered in the truncated sum.
 //' @useDynLib mpcmp, .registration = TRUE
 //' @importFrom Rcpp sourceCpp
+//' @return A numeric vector giving the (approximate) log of the COM-Poisson
+//' normalizing constant \eqn{\log Z(\lambda, \nu)} for each element of
+//' \code{log_lambda} and \code{nu}.
 //' @references 
 //' Ribeiro Jr, E. E., Zeviani, W. M., Demétrio, C. G. B. (2019) \code{cmpreg}: 
 //' Reparametrized COM-Poisson Regression Models. R package version 0.0.1.

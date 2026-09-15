@@ -50,6 +50,9 @@ uniform Q-Q plot in PIT, see ggplot2::linetype.}
 \item{lty2}{an integer or character string: the line types for the theoretical uniform
 Q-Q plot in PIT, see ggplot2::linetype.}
 }
+\value{
+A \code{ggplot} object.
+}
 \description{
 Two plots for the non-randomized PIT are currently available for checking the
 distributional assumption of the fitted CMP model: the PIT histogram, and

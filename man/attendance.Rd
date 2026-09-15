@@ -20,6 +20,9 @@ A data frame with 314 observations on 5 variables.
 \usage{
 data(attendance)
 }
+\value{
+A data frame with 314 rows and 5 variables.
+}
 \description{
 This data set gives the number of days absent
 from high school and the gender, maths score (standardized score out of 100) and

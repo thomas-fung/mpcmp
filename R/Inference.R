@@ -11,6 +11,16 @@
 #' @param digits numeric; minimum number of significant digits to be used for most numbers.
 #' @import stats
 #' @export
+#' @return
+#' An object of class \code{"htest"} (see \code{\link[stats]{t.test}} for the
+#' generic structure), with components:
+#' \item{statistic}{the likelihood ratio test statistic.}
+#' \item{parameter}{the degrees of freedom for the test statistic.}
+#' \item{p.value}{the p-value for the test.}
+#' \item{method}{a character string describing the test.}
+#' \item{data.name}{a character string giving the names of the two model objects compared.}
+#' Printing the returned object (e.g. via automatic printing at the console)
+#' displays a formatted summary of the test.
 #' @references
 #' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
@@ -42,10 +52,13 @@
 #' M.sit.null2 <- update(M.sit.full, formula_nu. = NULL)
 #' cmplrtest(M.sit.null2, M.sit.full)
 cmplrtest <- function(object1, object2, digits = 3) {
+  data.name <- paste(
+    deparse(substitute(object1)), "vs.", deparse(substitute(object2))
+  )
   if (!inherits(object1, "cmp")) {
     stop("object1 must be an S3 object of class cmp.")
   }
-  if (!inherits(object1, "cmp")) {
+  if (!inherits(object2, "cmp")) {
     stop("object2 must be an S3 object of class cmp.")
   }
   if (object1$const_nu != object2$const_nu) {
@@ -74,15 +87,16 @@ cmplrtest <- function(object1, object2, digits = 3) {
     df <- -df
   }
   pval <- 1 - pchisq(ttest, df)
-  if (pval < 2e-16) {
-    pval <- "< 2e-16"
-  } else {
-    pval <- signif(pval, digits)
-  }
-  cat("\nLikelihood ratio test for testing both COM-Poisson models are equivalent\n")
-  cat("LRT-statistic: ", signif(ttest, digits), "\n")
-  cat("Chi-sq degrees of freedom: ", df, "\n")
-  cat("P-value: ", pval, "\n")
+  structure(
+    list(
+      statistic = c("LR statistic" = signif(ttest, digits)),
+      parameter = c(df = df),
+      p.value = pval,
+      method = "Likelihood ratio test for testing both COM-Poisson models are equivalent",
+      data.name = data.name
+    ),
+    class = "htest"
+  )
 }
 
 #' Likelihood Ratio Test for nu = 1 of a COM-Poisson model
@@ -97,6 +111,18 @@ cmplrtest <- function(object1, object2, digits = 3) {
 #'
 #' @import stats
 #' @export
+#' @return
+#' An object of class \code{"htest"} (see \code{\link[stats]{t.test}} for the
+#' generic structure), with components:
+#' \item{statistic}{the likelihood ratio test statistic.}
+#' \item{parameter}{the degrees of freedom for the test statistic (always 1).}
+#' \item{p.value}{the p-value for the test.}
+#' \item{estimate}{the log-likelihood of the fitted mean-CMP model and of the
+#' corresponding Poisson model.}
+#' \item{method}{a character string describing the test.}
+#' \item{data.name}{a character string giving the name of the model object.}
+#' Printing the returned object (e.g. via automatic printing at the console)
+#' displays a formatted summary of the test.
 #' @references
 #' Huang, A. (2017). Mean-parametrized Conway-Maxwell-Poisson regression models for
 #' dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
@@ -106,6 +132,7 @@ cmplrtest <- function(object1, object2, digits = 3) {
 #'   + bidprem + insthold + size + sizesq + regulatn, data = takeoverbids)
 #' LRTnu(M.bids)
 LRTnu <- function(object, digits = 3) {
+  data.name <- deparse(substitute(object))
   L1 <- object$maxl
   L2 <- as.vector(logLik(glm(object$formula,
     data = object$data,
@@ -113,18 +140,20 @@ LRTnu <- function(object, digits = 3) {
   )))
   ttest <- 2 * (L1 - L2)
   pval <- 1 - pchisq(ttest, 1)
-  if (pval < 2e-16) {
-    pval <- "< 2e-16"
-  }
-  else {
-    pval <- signif(pval, digits)
-  }
-  cat("\nLikelihood ratio test for testing nu=1:\n\n")
-  cat("Log-Likelihood for Mean-CMP(", signif(object$nu), "): ", signif(L1, digits), "\n", sep = "")
-  cat("Log-Likelihood for Poisson: ", signif(L2, digits), "\n", sep = "")
-  cat("LRT-statistic: ", signif(ttest, digits), "\n", sep = "")
-  cat("Chi-sq degrees of freedom: ", 1, "\n", sep = "")
-  cat("P-value: ", pval, "\n", sep = "")
+  structure(
+    list(
+      statistic = c("LR statistic" = signif(ttest, digits)),
+      parameter = c(df = 1),
+      p.value = pval,
+      estimate = c(
+        "log-lik for Mean-CMP" = signif(L1, digits),
+        "log-lik for Poisson" = signif(L2, digits)
+      ),
+      method = "Likelihood ratio test for testing nu = 1",
+      data.name = data.name
+    ),
+    class = "htest"
+  )
 }
 
 
@@ -141,6 +170,9 @@ LRTnu <- function(object, digits = 3) {
 #' the call
 #' @import stats
 #' @export
+#' @return
+#' If \code{evaluate = TRUE} (the default), the re-fitted model object of
+#' class \code{"cmp"}; otherwise the unevaluated call.
 #' @seealso \code{\link{glm.cmp}}, \code{\link{update.formula}}, \code{\link{cmplrtest}}.
 #'
 #' @examples

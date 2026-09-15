@@ -30,6 +30,9 @@ Journal of Applied Econometrics data archive: \url{http://qed.econ.queensu.ca/ja
 \usage{
 data(takeoverbids)
 }
+\value{
+A data frame with 126 rows and 14 variables.
+}
 \description{
 This data set gives the number of bids received by 126 US firms that were successful
 targets of tender offers during the period 1978--1985, along with some explanatory

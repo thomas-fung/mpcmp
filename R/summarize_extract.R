@@ -38,6 +38,13 @@ residuals.cmp <- function(object, type = c("deviance", "pearson", "response"), .
 #'
 #' @seealso
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
+#' @return
+#' \code{logLik.cmp} returns an object of class \code{"logLik.cmp"}: the
+#' maximized log-likelihood value with a \code{"df"} attribute giving the
+#' number of estimated parameters, analogous to \code{\link[stats]{logLik}}.
+#'
+#' \code{print.logLik.cmp} is called for its side effect of printing and
+#' returns \code{x} invisibly.
 #' @export
 #' @name logLik.cmp
 logLik.cmp <- function(object, ...) {
@@ -51,6 +58,7 @@ logLik.cmp <- function(object, ...) {
 #' @exportS3Method
 print.logLik.cmp <- function(x, ...) {
   cat("'log Lik. ' ", x, " (df=", attr(x, "df"), ")", sep = "")
+  invisible(x)
 }
 
 #' Extract the Number of Observation from a COM-Poisson Model Fit
@@ -348,6 +356,8 @@ print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
 #' @details
 #' \code{print.cmp} can be used to print a short summary of object class 'cmp'.
 #'
+#' @return \code{x} is returned invisibly; \code{print.cmp} is called for its
+#' side effect of printing the model summary to the console.
 #' @seealso
 #' \code{\link{summary.cmp}}, \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}.
 #' @examples
@@ -375,6 +385,7 @@ print.cmp <- function(x, ...) {
     "\nNull Deviance:", x$null_deviance, "\nResidual Deviance:",
     x$residuals_deviance, "\nAIC:", format(AIC(x)), "\n\n"
   )
+  invisible(x)
 }
 
 
@@ -728,6 +739,16 @@ augment.cmp <- function(x, data = model.frame.cmp(x),
 #' @param hat hat values \eqn{H[i,i]}, see default.
 #' @param ... other arguments passed to or from other methods  (currently unused).
 #'
+#' @return
+#' \code{influence.cmp} returns a list with components \code{hat} (the
+#' leverage values), \code{dev_res} (the deviance residuals) and
+#' \code{pear_res} (the Pearson residuals).
+#'
+#' \code{hatvalues.cmp} returns a numeric vector of leverage values.
+#'
+#' \code{rstandard.cmp} returns a numeric vector of standardized residuals.
+#'
+#' \code{cooks.distance.cmp} returns a numeric vector of Cook's distances.
 #' @examples
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)

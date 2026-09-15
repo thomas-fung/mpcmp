@@ -11,6 +11,19 @@ LRTnu(object, digits = 3)
 
 \item{digits}{numeric; minimum number of significant digits to be used for most numbers.}
 }
+\value{
+An object of class \code{"htest"} (see \code{\link[stats]{t.test}} for the
+generic structure), with components:
+\item{statistic}{the likelihood ratio test statistic.}
+\item{parameter}{the degrees of freedom for the test statistic (always 1).}
+\item{p.value}{the p-value for the test.}
+\item{estimate}{the log-likelihood of the fitted mean-CMP model and of the
+corresponding Poisson model.}
+\item{method}{a character string describing the test.}
+\item{data.name}{a character string giving the name of the model object.}
+Printing the returned object (e.g. via automatic printing at the console)
+displays a formatted summary of the test.
+}
 \description{
 Perform a likelihood ratio chi-squared test for nu = 1 of a COM-Poisson model.
 The test statistics is calculated as \emph{2*(llik- llik_0)} where \emph{llik} and
