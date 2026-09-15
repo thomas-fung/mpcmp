@@ -849,9 +849,33 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
   }
   if (!output_as_ggplot) {
     p <- p_ggarrange
+  } else {
+    class(p) <- c("cmp_autoplot_list", class(p))
+    attr(p, "ggarrange") <- p_ggarrange
   }
   return(invisible(p))
   invisible()
+}
+
+#' Print Method for a \code{cmp_autoplot_list} Object
+#'
+#' Re-displays the combined diagnostic plot produced by \code{\link{autoplot.cmp}}
+#' when \code{output_as_ggplot = TRUE}. This avoids the default list-print
+#' behaviour (\code{[[1]]}, \code{[[2]]}, ... headers with each plot printed
+#' separately) when the list of \code{ggplot} objects returned by
+#' \code{autoplot.cmp}/\code{gg_plot} is printed again, e.g. after being
+#' assigned to a variable.
+#'
+#' @param x an object of class \code{cmp_autoplot_list}, as returned by
+#' \code{\link{autoplot.cmp}} with \code{output_as_ggplot = TRUE}.
+#' @param ... other arguments passed to or from other methods (currently unused).
+#' @return \code{x} is returned invisibly; \code{print.cmp_autoplot_list} is
+#' called for its side effect of drawing the combined diagnostic plot on the
+#' current graphics device.
+#' @export
+print.cmp_autoplot_list <- function(x, ...) {
+  print(attr(x, "ggarrange"))
+  invisible(x)
 }
 
 
@@ -859,3 +883,7 @@ autoplot.cmp <- function(object, which = c(1L, 2L, 6L, 8L), bins = 10,
 #' @aliases autoplot.cmp
 #' @export
 gg_plot <- autoplot.cmp
+
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
