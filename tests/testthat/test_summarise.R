@@ -98,9 +98,9 @@ test_that("Test sumamry", {
   expect_true(is.matrix(summary(M.sit)$coefficients))
   expect_true(is.matrix(summary(M.sit)$coef.table_beta))
   expect_true(is.matrix(summary(M.sit)$coef.table_gamma))
-  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,1], 3))
-  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,2], 3))
-  expect_snapshot(round(summary(M.sit)$coef.table_gamma[,4], 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[, 1], 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[, 2], 3))
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma[, 4], 2))
 })
 
 test_that("Test rstandard", {

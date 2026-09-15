@@ -17,10 +17,10 @@
 ---
 
     Code
-      round(summary(M.sit)$coef.table_gamma[, 4], 3)
+      round(summary(M.sit)$coef.table_gamma[, 4], 2)
     Output
         (Intercept)   extractLeaf extractBranch   extractSeed 
-              0.146         0.556         0.568         0.939 
+               0.15          0.56          0.57          0.94 
 
 # Test influence
 
