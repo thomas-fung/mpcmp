@@ -80,7 +80,13 @@ cmplrtest <- function(object1, object2, digits = 3) {
   }
   L1 <- object1$maxl
   L2 <- object2$maxl
-  df <- length(object1$coefficients) - length(object2$coefficients)
+  # Count only the estimated (non-aliased) coefficients -- length() on the
+  # coefficients vector would over-count when a model's design is
+  # rank-deficient, since aliased columns are reported as NA there.
+  n_est_coef <- function(object) {
+    object$rank + if (!object$const_nu) object$rank_nu else 0
+  }
+  df <- n_est_coef(object1) - n_est_coef(object2)
   ttest <- 2 * (L1 - L2)
   if (df < 0) {
     ttest <- -ttest
