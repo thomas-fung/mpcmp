@@ -1,4 +1,3 @@
-context("Test Graphics")
 library(mpcmp)
 data("attendance")
 M.attendance <- glm.cmp(daysabs ~ gender + math + prog,

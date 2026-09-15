@@ -1,4 +1,3 @@
-context("Test Summarise and Extract info from CMP object")
 library(mpcmp)
 data("attendance")
 M.attendance <- glm.cmp(daysabs ~ gender + math + prog,
@@ -87,13 +86,13 @@ test_that("Test sumamry", {
     capture_output_lines(print(summary(M.attendance)))[24],
     "AIC: 1739.026 "
   )
-  expect_is(summary(M.attendance)$coefficients, "matrix")
+  expect_true(is.matrix(summary(M.attendance)$coefficients))
   expect_vector(as.vector(summary(M.attendance)$coefficients),
     ptype = numeric(), size = 20
   )
-  expect_is(summary(M.sit)$coefficients, "matrix")
-  expect_is(summary(M.sit)$coef.table_beta, "matrix")
-  expect_is(summary(M.sit)$coef.table_gamma, "matrix")
+  expect_true(is.matrix(summary(M.sit)$coefficients))
+  expect_true(is.matrix(summary(M.sit)$coef.table_beta))
+  expect_true(is.matrix(summary(M.sit)$coef.table_gamma))
   expect_equal(
     round(summary(M.sit)$coef.table_gamma[,3], 3),
     M.sit_summary_coef)
@@ -112,7 +111,7 @@ test_that("Test rstandard", {
 
 test_that("Test influence", {
   infl <- influence.cmp(M.attendance)
-  expect_is(infl, class = "list")
+  expect_type(infl, "list")
   expect_equal(unname(infl$h[1]), 0.01152283)
   expect_equal(unname(round(infl$dev_res[1], 4)), -0.2644)
   expect_equal(unname(round(infl$pear_res[1], 4)), -0.2437)
@@ -129,8 +128,8 @@ test_that("Test cooks.distance", {
 })
 
 test_that("Test vcov", {
-  expect_is(vcov(M.attendance), class = "matrix")
-  expect_is(vcov(M.sit), class = "list")
+  expect_true(is.matrix(vcov(M.attendance)))
+  expect_type(vcov(M.sit), "list")
 })
 
 test_that("Test broom", {
@@ -149,10 +148,10 @@ test_that("Test broom", {
     )
   )
   expect_length(glance(M.attendance), 8)
-  expect_is(glance(M.attendance), class = "tbl_df")
+  expect_s3_class(glance(M.attendance), "tbl_df")
   expect_length(glance(M.sit), 8)
-  expect_is(glance(M.sit), class = "tbl_df")
-  expect_is(augment(M.attendance), class = "tbl_df")
+  expect_s3_class(glance(M.sit), "tbl_df")
+  expect_s3_class(augment(M.attendance), "tbl_df")
   expect_length(augment(M.attendance), 9)
   expect_length(augment(M.sit), 9)
 })

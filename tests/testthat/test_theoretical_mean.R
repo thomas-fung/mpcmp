@@ -1,5 +1,3 @@
-context("Testing mean approximation")
-
 library(mpcmp)
 
 test_that("Testing theoretical against numerical mean", {

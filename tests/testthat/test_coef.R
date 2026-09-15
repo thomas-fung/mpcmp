@@ -1,4 +1,3 @@
-context("Test estimated coefficients")
 library(mpcmp)
 
 test_that("Test the estimated coefficients from the attendance dataset", {

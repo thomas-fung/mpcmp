@@ -1,4 +1,3 @@
-context("Test CMP distribution related functions")
 library(mpcmp)
 
 test_that("Test pcomp", {

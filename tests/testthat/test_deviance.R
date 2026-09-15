@@ -1,4 +1,3 @@
-context("Deviance output")
 library(mpcmp)
 
 test_that("Testing attendance example", {

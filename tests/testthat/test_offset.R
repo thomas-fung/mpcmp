@@ -1,4 +1,3 @@
-context("Test adding an offset term")
 library(mpcmp)
 
 test_that("Test adding an offset term", {

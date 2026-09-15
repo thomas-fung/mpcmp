@@ -6,7 +6,8 @@
     },
     "read": {
       "*.R": "allow",
-      "*.cpp": "allow"
+      "*.cpp": "allow",
+      "*/DESCRIPTION": "allow"
     },
     "edit": {
       "*.R": "allow"

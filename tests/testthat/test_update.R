@@ -1,4 +1,3 @@
-context("Test Inference")
 library(mpcmp)
 data("takeoverbids")
 data("sitophilus")
@@ -53,7 +52,7 @@ test_that("Test updating the dispersion regression formula", {
 })
 
 test_that("Test the confint function", {
-  expect_is(confint.cmp(M.attendance), class = "matrix")
+  expect_true(is.matrix(confint.cmp(M.attendance)))
   expect_equal(
     colnames(confint.cmp(M.attendance)),
     c("2.5 %", "97.5 %")
