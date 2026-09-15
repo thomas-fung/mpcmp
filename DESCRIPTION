@@ -29,7 +29,7 @@ Imports:
     rlang,
     stringr,
     purrr
-URL: https://github.com/thomas-fung/mpcmp
+URL: https://github.com/thomas-fung/mpcmp, https://thomas-fung.github.io/mpcmp/
 Encoding: UTF-8
 LazyData: true
 Suggests: 

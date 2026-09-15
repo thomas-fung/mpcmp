@@ -21,6 +21,7 @@ dispersed counts. \emph{Statistical Modelling} \bold{17}, 359--380.
 Useful links:
 \itemize{
   \item \url{https://github.com/thomas-fung/mpcmp}
+  \item \url{https://thomas-fung.github.io/mpcmp/}
   \item Report bugs at \url{https://github.com/thomas-fung/mpcmp/issues}
 }
 
