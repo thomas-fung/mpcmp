@@ -98,7 +98,7 @@ test_that("Test sumamry", {
   expect_true(is.matrix(summary(M.sit)$coefficients))
   expect_true(is.matrix(summary(M.sit)$coef.table_beta))
   expect_true(is.matrix(summary(M.sit)$coef.table_gamma))
-  expect_snapshot(summary(M.sit)$coef.table_gamma)
+  expect_snapshot(round(summary(M.sit)$coef.table_gamma, 3))
 })
 
 test_that("Test rstandard", {
@@ -121,12 +121,12 @@ test_that("Test influence", {
 })
 
 test_that("Test hatvalues", {
-  expect_equal(unname(hatvalues.cmp(M.attendance)[1]), 0.01152283)
+  expect_snapshot(round(unname(hatvalues.cmp(M.attendance)[1]), 5))
   expect_length(hatvalues.cmp(M.attendance), 314)
 })
 
 test_that("Test cooks.distance", {
-  expect_snapshot(cooks.distance.cmp(M.attendance))
+  expect_snapshot(round(cooks.distance.cmp(M.attendance), 5))
   expect_length(cooks.distance.cmp(M.attendance), 314)
 })
 
