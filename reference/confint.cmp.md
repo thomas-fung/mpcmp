@@ -45,12 +45,12 @@ data(attendance)
 M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 confint(M.attendance)
 #>                       2.5%        97.5%
-#> (Intercept)     2.34145408  3.087836370
-#> gendermale     -0.44432500  0.014885310
+#> (Intercept)     2.34145406  3.087836298
+#> gendermale     -0.44432495  0.014885329
 #> math           -0.01099927 -0.001646776
-#> progAcademic   -0.75758416 -0.093060252
-#> progVocational -1.62526643 -0.882524649
+#> progAcademic   -0.75758416 -0.093060290
+#> progVocational -1.62526637 -0.882524629
 confint(M.attendance, parm = "math", level = 0.9)
 #>               5%          95%
-#> math -0.01024745 -0.002398593
+#> math -0.01024745 -0.002398592
 ```

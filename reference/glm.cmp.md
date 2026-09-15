@@ -330,7 +330,7 @@ summary(M.attendance)
 #> gendermale     -0.214720  0.117148  -1.833  0.06682 .  
 #> math           -0.006323  0.002386  -2.650  0.00804 ** 
 #> progAcademic   -0.425322  0.169525  -2.509  0.01211 *  
-#> progVocational -1.253896  0.189478  -6.618 3.65e-11 ***
+#> progVocational -1.253895  0.189478  -6.618 3.65e-11 ***
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
@@ -375,7 +375,7 @@ summary(M.sit)
 #>               Estimate Std.Err Z value Pr(>|z|)
 #> (Intercept)    -0.6652  0.4573  -1.455    0.146
 #> extractLeaf    -0.3831  0.6509  -0.589    0.556
-#> extractBranch  -0.3724  0.6514  -0.572    0.568
+#> extractBranch  -0.3724  0.6514  -0.572    0.567
 #> extractSeed    -0.1176  1.5461  -0.076    0.939
 #> 
 #>     Null deviance: 257.211  on 39 degrees of freedom
