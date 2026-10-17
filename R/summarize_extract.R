@@ -13,7 +13,11 @@
 #' Residuals extracted from the object \code{object}.
 #' @seealso
 #' \code{\link{coef.cmp}}, \code{\link{fitted.cmp}}, \code{\link{glm.cmp}}
-residuals.cmp <- function(object, type = c("deviance", "pearson", "response"), ...) {
+residuals.cmp <- function(
+  object,
+  type = c("deviance", "pearson", "response"),
+  ...
+) {
   type <- match.arg(type)
   y <- object$y
   mu <- object$fitted_values
@@ -21,7 +25,8 @@ residuals.cmp <- function(object, type = c("deviance", "pearson", "response"), .
   lambda <- object$lambda
   log.Z <- object$log_Z
   summax <- object$summax
-  res <- switch(type,
+  res <- switch(
+    type,
     deviance = object$d_res,
     pearson = (y - mu) / sqrt(comp_variances(lambda, nu, log.Z, summax)),
     response = y - mu
@@ -227,7 +232,9 @@ summary.cmp <- function(object, ...) {
     p.value_beta <- 2 * pnorm(-abs(statistic_beta))
     coef.table_beta <-
       cbind(
-        estimate_beta, std.error_beta, statistic_beta,
+        estimate_beta,
+        std.error_beta,
+        statistic_beta,
         p.value_beta
       )
     dimnames(coef.table_beta) <-
@@ -241,7 +248,9 @@ summary.cmp <- function(object, ...) {
     p.value_gamma <- 2 * pnorm(-abs(statistic_gamma))
     coef.table_gamma <-
       cbind(
-        estimate_gamma, std.error_gamma, statistic_gamma,
+        estimate_gamma,
+        std.error_gamma,
+        statistic_gamma,
         p.value_gamma
       )
     dimnames(coef.table_gamma) <-
@@ -249,28 +258,41 @@ summary.cmp <- function(object, ...) {
         names(estimate_gamma),
         c("Estimate", "Std.Err", "Z value", "Pr(>|z|)")
       )
-    coef.table <- cbind(parameter, rbind(
+    # Keep coef.table purely numeric so downstream printing (printCoefmat)
+    # and coercion (tidy) work; the mu/nu labelling lives in `parameter`.
+    coef.table <- rbind(
       coef.table_beta,
       coef.table_gamma
-    ))
+    )
   }
   keep <- match(
     c(
-      "call", "const_nu", "terms_mu", "terms_nu", "nu",
-      "family", "residual_deviance", "deviance",
-      "contrasts", "df_residuals", "null_deviance",
-      "df_null", "iter", "na.action"
-    ), names(object),
+      "call",
+      "const_nu",
+      "terms_mu",
+      "terms_nu",
+      "nu",
+      "family",
+      "residual_deviance",
+      "deviance",
+      "contrasts",
+      "df_residuals",
+      "null_deviance",
+      "df_null",
+      "iter",
+      "na.action"
+    ),
+    names(object),
     0L
   )
   ans <- c(
     object[keep],
     list(
-      deviance_resid =
-        residuals(object, type = "deviance"),
+      deviance_resid = residuals(object, type = "deviance"),
       coefficients = coef.table,
       df = c(
-        object$rank, object$df_residuals,
+        object$rank,
+        object$df_residuals,
         length(object$coefficients)
       ),
       aic = AIC.cmp(object),
@@ -282,6 +304,7 @@ summary.cmp <- function(object, ...) {
     ans <- c(
       ans,
       list(
+        parameter = parameter,
         coef.table_beta = coef.table_beta,
         coef.table_gamma = coef.table_gamma
       )
@@ -294,9 +317,15 @@ summary.cmp <- function(object, ...) {
 
 #' @rdname summary.cmp
 #' @export
-print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
-                              signif.stars = getOption("show.signif.stars"), ...) {
-  cat("\nCall: ", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+print.summary.cmp <- function(
+  x,
+  digits = max(3, getOption("digits") - 3),
+  signif.stars = getOption("show.signif.stars"),
+  ...
+) {
+  cat(
+    "\nCall: ",
+    paste(deparse(x$call), sep = "\n", collapse = "\n"),
     "\n",
     sep = ""
   )
@@ -313,44 +342,59 @@ print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
   print.default(xx, digits = digits, na.print = "", print.gap = 2L)
   if (x$const_nu) {
     cat("\nLinear Model Coefficients:\n")
-    printCoefmat(x$coefficients,
+    printCoefmat(
+      x$coefficients,
       digits = digits,
       signif.stars = signif.stars,
-      na.print = "NA", ...
+      na.print = "NA",
+      ...
     )
   } else {
     cat("\nMean Model Coefficients:\n")
-    printCoefmat(x$coef.table_beta,
+    printCoefmat(
+      x$coef.table_beta,
       digits = digits,
       signif.stars = signif.stars,
-      na.print = "NA", ...
+      na.print = "NA",
+      ...
     )
   }
   if (x$const_nu) {
-    cat("\n(Dispersion parameter for Mean-CMP estimated to be ",
-      signif(x$nu, digits), ")\n\n",
+    cat(
+      "\n(Dispersion parameter for Mean-CMP estimated to be ",
+      signif(x$nu, digits),
+      ")\n\n",
       sep = ""
     )
   } else {
     cat("\nDispersion Model Coefficients:\n")
-    printCoefmat(x$coef.table_gamma,
+    printCoefmat(
+      x$coef.table_gamma,
       digits = digits,
       signif.stars = signif.stars,
-      na.print = "NA", ...
+      na.print = "NA",
+      ...
     )
   }
-  cat("\n", apply(
-    cbind(
-      paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
-      format(unlist(x[c("null_deviance", "residual_deviance")]),
-        digits = max(5L, digits + 1L)
-      ), " on",
-      format(unlist(x[c("df_null", "df_residuals")])),
-      "degrees of freedom\n"
+  cat(
+    "\n",
+    apply(
+      cbind(
+        paste(format(c("Null", "Residual"), justify = "right"), "deviance:"),
+        format(
+          unlist(x[c("null_deviance", "residual_deviance")]),
+          digits = max(5L, digits + 1L)
+        ),
+        " on",
+        format(unlist(x[c("df_null", "df_residuals")])),
+        "degrees of freedom\n"
+      ),
+      1L,
+      paste,
+      collapse = " "
     ),
-    1L, paste,
-    collapse = " "
-  ), sep = "")
+    sep = ""
+  )
   cat("\nAIC:", format(x$aic), "\n\n")
 }
 
@@ -373,27 +417,49 @@ print.summary.cmp <- function(x, digits = max(3, getOption("digits") - 3),
 #' @examples
 #' ## For examples see example(glm.cmp)
 print.cmp <- function(x, ...) {
-  cat("\nCall: ", paste(deparse(x$call), sep = "\n", collapse = "\n"),
+  cat(
+    "\nCall: ",
+    paste(deparse(x$call), sep = "\n", collapse = "\n"),
     "\n",
     sep = ""
   )
   if (x$const_nu) {
     cat("\nLinear Model Coefficients:\n")
-    print.default(format(signif(x$coefficients, 5)), print.gap = 2, quote = FALSE)
+    print.default(
+      format(signif(x$coefficients, 5)),
+      print.gap = 2,
+      quote = FALSE
+    )
     cat("\nDispersion (nu):", signif(x$nu, 3))
   } else {
     cat("\nMean Model Coefficients:\n")
-    print.default(format(signif(x$coefficients_beta, 3)), print.gap = 2, quote = FALSE)
+    print.default(
+      format(signif(x$coefficients_beta, 3)),
+      print.gap = 2,
+      quote = FALSE
+    )
     cat("\nDispersion Model Coefficients:\n")
-    print.default(format(signif(x$coefficients_gamma, 3)), print.gap = 2, quote = FALSE)
+    print.default(
+      format(signif(x$coefficients_gamma, 3)),
+      print.gap = 2,
+      quote = FALSE
+    )
   }
   cat(
-    "\nDegrees of Freedom:", x$df_null, "Total (i.e. Null); ",
-    x$df_residuals, "Residual"
+    "\nDegrees of Freedom:",
+    x$df_null,
+    "Total (i.e. Null); ",
+    x$df_residuals,
+    "Residual"
   )
   cat(
-    "\nNull Deviance:", x$null_deviance, "\nResidual Deviance:",
-    x$residual_deviance, "\nAIC:", format(AIC(x)), "\n\n"
+    "\nNull Deviance:",
+    x$null_deviance,
+    "\nResidual Deviance:",
+    x$residual_deviance,
+    "\nAIC:",
+    format(AIC(x)),
+    "\n\n"
   )
   invisible(x)
 }
@@ -437,11 +503,17 @@ print.cmp <- function(x, ...) {
 #'   sizesq = .1^2
 #' )
 #' predict(M.bids, se.fit = TRUE, newdata = newdataframe, type = "response")
-predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link", "response"),
-                        ...) {
+predict.cmp <- function(
+  object,
+  newdata = NULL,
+  se.fit = FALSE,
+  type = c("link", "response"),
+  ...
+) {
   type <- match.arg(type)
   if (is.null(newdata)) {
-    pred <- switch(type,
+    pred <- switch(
+      type,
       link = object$linear_predictors,
       response = object$fitted_values
     )
@@ -449,10 +521,15 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
       # object$x is the full design matrix; drop any aliased (NA-coefficient)
       # columns before multiplying against variance_beta, which only spans
       # the identifiable subset -- matches predict.lm()/predict.glm().
-      beta <- if (object$const_nu) object$coefficients else object$coefficients_beta
+      beta <- if (object$const_nu) {
+        object$coefficients
+      } else {
+        object$coefficients_beta
+      }
       keep <- !is.na(beta)
       Xk <- object$x[, keep, drop = FALSE]
-      se <- switch(type,
+      se <- switch(
+        type,
         link = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))),
         response = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))) *
           object$fitted_values
@@ -460,18 +537,24 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
       pred <- list(fit = pred, se.fit = se)
     }
   } else {
-    mf <- model.frame(delete.response(object$terms_mu),
+    mf <- model.frame(
+      delete.response(object$terms_mu),
       data = newdata,
       xlev = object$xlevels_mu
     )
-    X <- model.matrix(delete.response(object$terms_mu),
+    X <- model.matrix(
+      delete.response(object$terms_mu),
       mf,
       contrasts.arg = object$contrasts_mu
     )
     # The mean-model coefficients (named to match the columns of X); for a
     # varying-dispersion fit these live in coefficients_beta rather than the
     # combined coefficients vector.
-    beta <- if (object$const_nu) object$coefficients else object$coefficients_beta
+    beta <- if (object$const_nu) {
+      object$coefficients
+    } else {
+      object$coefficients_beta
+    }
     # If X (and hence beta) is rank-deficient, aliased columns have a NA
     # coefficient (as with glm()). Drop them from both X and beta before
     # multiplying -- matching predict.lm()/predict.glm() -- so that
@@ -479,14 +562,11 @@ predict.cmp <- function(object, newdata = NULL, se.fit = FALSE, type = c("link",
     keep <- !is.na(beta)
     Xk <- X[, keep, drop = FALSE]
     betak <- beta[keep]
-    pred <- switch(type,
-      link = Xk %*% betak,
-      response = exp(Xk %*% betak)
-    )
+    pred <- switch(type, link = Xk %*% betak, response = exp(Xk %*% betak))
     if (se.fit) {
-      se <- switch(type,
-        link =
-          sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))),
+      se <- switch(
+        type,
+        link = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))),
         response = sqrt(diag(Xk %*% object$variance_beta %*% t(Xk))) * pred
       )
       pred <- list(fit = t(pred)[1, ], se.fit = se)
@@ -561,21 +641,32 @@ generics::augment
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 #' tidy(M.attendance)
-tidy.cmp <- function(x, conf.int = FALSE, conf.level = 0.95,
-                     exponentiate = FALSE, ...) {
-  ret <- tibble::as_tibble(summary.cmp(x)$coefficients,
-    rownames = "term"
-  )
+tidy.cmp <- function(
+  x,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+) {
+  summ <- summary.cmp(x)
+  ret <- tibble::as_tibble(summ$coefficients, rownames = "term")
   if (x$const_nu) {
     colnames(ret) <- c(
-      "term", "estimate", "std.error", "statistic",
+      "term",
+      "estimate",
+      "std.error",
+      "statistic",
       "p.value"
     )
   } else {
-    ret[, c(1, 2)] <- ret[, c(2, 1)]
+    ret <- tibble::add_column(ret, parameter = summ$parameter, .before = 1)
     colnames(ret) <- c(
-      "parameter", "term", "estimate", "std.error",
-      "statistic", "p.value"
+      "parameter",
+      "term",
+      "estimate",
+      "std.error",
+      "statistic",
+      "p.value"
     )
   }
   if (conf.int) {
@@ -589,12 +680,12 @@ tidy.cmp <- function(x, conf.int = FALSE, conf.level = 0.95,
       ci$term <- ret$term
       ci <- tibble::add_column(ci, ret$parameter, .before = 1)
       colnames(ci) <- c(
-        "parameter", "term", "conf.low",
+        "parameter",
+        "term",
+        "conf.low",
         "conf.high"
       )
-      ret <- dplyr::left_join(ret, ci,
-        by = c("parameter", "term")
-      )
+      ret <- dplyr::left_join(ret, ci, by = c("parameter", "term"))
     }
   }
   if (exponentiate) {
@@ -661,12 +752,15 @@ vcov.cmp <- function(object, ...) {
 #' glance(M.attendance)
 glance.cmp <- function(x, ...) {
   as_glance_tibble(
-    null.deviance = x$null_deviance, df.null = x$df_null,
-    logLik = as.numeric(logLik.cmp(x)), AIC = AIC.cmp(x),
+    null.deviance = x$null_deviance,
+    df.null = x$df_null,
+    logLik = as.numeric(logLik.cmp(x)),
+    AIC = AIC.cmp(x),
     BIC = AIC.cmp(x, k = log(x$nobs)),
     deviance = x$deviance,
     df.residual = x$df_residuals,
-    nobs = x$nobs, na_types = "rirrrrii"
+    nobs = x$nobs,
+    na_types = "rirrrrii"
   )
 }
 
@@ -709,11 +803,15 @@ glance.cmp <- function(x, ...) {
 #' data(attendance)
 #' M.attendance <- glm.cmp(daysabs ~ gender + math + prog, data = attendance)
 #' augment(M.attendance)
-augment.cmp <- function(x, data = model.frame.cmp(x),
-                        newdata = NULL,
-                        type.predict = c("link", "response"),
-                        type.residuals = c("deviance", "pearson", "response"),
-                        se_fit = FALSE, ...) {
+augment.cmp <- function(
+  x,
+  data = model.frame.cmp(x),
+  newdata = NULL,
+  type.predict = c("link", "response"),
+  type.residuals = c("deviance", "pearson", "response"),
+  se_fit = FALSE,
+  ...
+) {
   type.predict <- rlang::arg_match(type.predict)
   type.residuals <- rlang::arg_match(type.residuals)
   df <- if (is.null(newdata)) {
@@ -730,10 +828,7 @@ augment.cmp <- function(x, data = model.frame.cmp(x),
     df <- as_augment_tibble(tibble::add_column(df$model_mu, df$model_nu))
   }
   if (se_fit) {
-    pred_obj <- predict.cmp(x, newdata,
-      type = type.predict,
-      se.fit = TRUE
-    )
+    pred_obj <- predict.cmp(x, newdata, type = type.predict, se.fit = TRUE)
     df$.fitted <- unname(pred_obj$fit)
     df$.se.fit <- unname(pred_obj$se.fit)
   } else {
@@ -744,7 +839,11 @@ augment.cmp <- function(x, data = model.frame.cmp(x),
       {
         infl <- influence.cmp(x)
         df$.resid <- unname(residuals.cmp(x, type = type.residuals))
-        df$.std.resid <- unname(rstandard.cmp(x, infl = infl, type = type.residuals))
+        df$.std.resid <- unname(rstandard.cmp(
+          x,
+          infl = infl,
+          type = type.residuals
+        ))
         df$.hat <- unname(infl$hat)
         df$.cooksd <- unname(cooks.distance.cmp(x, infl = infl))
       },
@@ -806,13 +905,14 @@ hatvalues.cmp <- function(model, ...) {
 
 #' @rdname regression.diagnostic.cmp
 #' @export
-rstandard.cmp <- function(model, infl = influence.cmp(model),
-                          type = c("deviance", "pearson"), ...) {
+rstandard.cmp <- function(
+  model,
+  infl = influence.cmp(model),
+  type = c("deviance", "pearson"),
+  ...
+) {
   type <- match.arg(type)
-  res <- switch(type,
-    pearson = infl$pear_res,
-    infl$dev_res
-  )
+  res <- switch(type, pearson = infl$pear_res, infl$dev_res)
   res <- res / sqrt(1 - infl$hat)
   res[is.infinite(res)] <- NaN
   res
@@ -820,9 +920,13 @@ rstandard.cmp <- function(model, infl = influence.cmp(model),
 
 #' @rdname regression.diagnostic.cmp
 #' @export
-cooks.distance.cmp <- function(model, infl = influence(model),
-                               res = infl$pear_res,
-                               hat = infl$hat, ...) {
+cooks.distance.cmp <- function(
+  model,
+  infl = influence(model),
+  res = infl$pear_res,
+  hat = infl$hat,
+  ...
+) {
   rk <- model$rank
   h <- model$leverage
   std.pear <- res / sqrt(1 - h)
