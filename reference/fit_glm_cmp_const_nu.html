@@ -11,7 +11,7 @@ constant dispersion."><meta property="og:image" content="https://thomas-fung.git
 
     <a class="navbar-brand me-2" href="../index.html">mpcmp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,6 +103,14 @@ values is less than tol.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A fitted model object of class <code>cmp</code> similar to one obtained from <code>glm</code> or <code>glm.nb</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>If <code>X</code> is not of full column rank, the aliased (linearly dependent)
+columns are dropped before fitting – identified via the same pivoted QR
+decomposition that <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm.fit</a></code> uses – and the
+corresponding coefficients are reported as <code>NA</code>, mirroring the
+behaviour of <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></code> for rank-deficient designs.</p>
     </div>
 
     <div class="section level2">

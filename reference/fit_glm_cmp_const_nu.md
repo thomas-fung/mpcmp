@@ -63,6 +63,15 @@ fit_glm_cmp_const_nu(
 A fitted model object of class `cmp` similar to one obtained from `glm`
 or `glm.nb`.
 
+## Details
+
+If `X` is not of full column rank, the aliased (linearly dependent)
+columns are dropped before fitting – identified via the same pivoted QR
+decomposition that [`glm.fit`](https://rdrr.io/r/stats/glm.html) uses –
+and the corresponding coefficients are reported as `NA`, mirroring the
+behaviour of [`glm`](https://rdrr.io/r/stats/glm.html) for
+rank-deficient designs.
+
 ## Examples
 
 ``` r
