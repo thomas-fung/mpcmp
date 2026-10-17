@@ -1,7 +1,5 @@
 # mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression
 
-# mpcmp
-
 The `mpcmp` package provides a collection of functions for estimation,
 testing and diagnostic checking for the mean-parametrized Conway-Maxwell
 Poisson (COM-Poisson) regression model for under- and over-dispersed
