@@ -1,14 +1,13 @@
-# mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression
+# mpcmp: Mean-parametrized Conway-Maxwell Poisson Regression <img src="man/figures/logo.svg" align="right" alt="" width="150"/>
 
-# mpcmp <img src="man/figures/logo.svg" align ="right" alt="" width ="150"/>
 <!-- badges: start -->
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build status](https://travis-ci.org/thomas-fung/mpcmp.svg?branch=master)](https://travis-ci.org/thomas-fung/mpcmp)
-[![Codecov test coverage](https://codecov.io/gh/thomas-fung/mpcmp/branch/master/graph/badge.svg)](https://codecov.io/gh/thomas-fung/mpcmp?branch=master)
-[![R build status](https://github.com/thomas-fung/mpcmp/workflows/R-CMD-check/badge.svg)](https://github.com/thomas-fung/mpcmp/actions)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thomas-fung/mpcmp)
-[![Codecov test coverage](https://codecov.io/gh/thomas-fung/mpcmp/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/mpcmp)
+[![CRAN status](https://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/thomas-fung/mpcmp/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/mpcmp)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thomas-fung/mpcmp)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/mpcmp)](https://cran.r-project.org/package=mpcmp)
+[![pkgdown](https://img.shields.io/badge/pkgdown-docs-blue.svg)](https://thomas-fung.github.io/mpcmp/)
 <!-- badges: end -->
 
 The `mpcmp` package provides a collection of functions for estimation, testing and diagnostic checking for the mean-parametrized Conway-Maxwell Poisson (COM-Poisson) regression model for under- and over-dispersed count data of [Huang (2017)](https://doi.org/10.1177/2F1471082X17697749).
