@@ -1,8 +1,8 @@
 ## Test environments
 * local R installation, R 4.6.1
-* ubuntu 16.04, Windows, macOS (on GitHub Actions), R (devel, release, oldrel)
+* ubuntu-latest (devel), ubuntu-latest (release), ubuntu-latest (oldrel-1), Windows-latest (release), macOS-latest (release) via GitHub Actions, R (devel, release, oldrel)
 * win-builder (devel and release) 
-* rhub:check (debian-clang-devel, debian-gcc-devel)
+* rhub:check (ubuntu-clang, ubuntu-gcc12, ubuntu-next)
 
 ## R CMD check results 
 

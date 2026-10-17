@@ -4,6 +4,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/mpcmp)](https://cran.r-project.org/package=mpcmp)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/mpcmp/actions/workflows/R-CMD-check.yaml)
+[![R-hub](https://github.com/thomas-fung/mpcmp/actions/workflows/rhub.yaml/badge.svg)](https://github.com/thomas-fung/mpcmp/actions/workflows/rhub.yaml)
 [![Codecov test coverage](https://codecov.io/gh/thomas-fung/mpcmp/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/mpcmp)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thomas-fung/mpcmp)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/mpcmp)](https://cran.r-project.org/package=mpcmp)
