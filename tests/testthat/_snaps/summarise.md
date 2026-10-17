@@ -1,3 +1,41 @@
+# Test sumamry
+
+    Code
+      round(summary(M.sit)$coef.table_gamma[, 1], 3)
+    Output
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+             -0.665        -0.383        -0.372        -0.118 
+
+---
+
+    Code
+      round(summary(M.sit)$coef.table_gamma[, 2], 3)
+    Output
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+              0.457         0.651         0.651         1.546 
+
+---
+
+    Code
+      round(summary(M.sit)$coef.table_gamma[, 4], 2)
+    Output
+        (Intercept)   extractLeaf extractBranch   extractSeed 
+               0.15          0.56          0.57          0.94 
+
+# Test influence
+
+    Code
+      round(unname(infl$h[1]), 5)
+    Output
+      [1] 0.01152
+
+# Test hatvalues
+
+    Code
+      round(unname(hatvalues.cmp(M.attendance)[1]), 5)
+    Output
+      [1] 0.01152
+
 # Test cooks.distance
 
     Code
