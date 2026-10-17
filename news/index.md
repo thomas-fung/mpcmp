@@ -1,5 +1,54 @@
 # Changelog
 
+## mpcmp 0.4.0
+
+### Bug fixes
+
+- [`glm.cmp()`](https://thomas-fung.github.io/mpcmp/reference/glm.cmp.md)
+  now handles rank-deficient design matrices gracefully.
+- Fixed an error when using the `gammastart` argument
+  ([\#11](https://github.com/thomas-fung/mpcmp/issues/11)).
+- In the varying dispersion case, the coefficient table in the
+  [`summary()`](https://rdrr.io/r/base/summary.html) output contained
+  character columns instead of numeric ones; this has been fixed
+  ([\#13](https://github.com/thomas-fung/mpcmp/issues/13)).
+- Fixed a documentation issue where the `cottonbolls` dataset
+  description was cut off due to an unescaped `%`.
+
+### Improvements
+
+- [`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html)
+  is now re-exported from `ggplot2`, and a
+  [`print()`](https://rdrr.io/r/base/print.html) method was added for
+  `cmp_autoplot_list` objects.
+- Added a
+  [`print.logLik.cmp()`](https://thomas-fung.github.io/mpcmp/reference/logLik.cmp.md)
+  S3 method.
+- Updated `ggplot2` code to use the `linewidth` aesthetic instead of the
+  deprecated `size` for lines.
+- Renamed `format.perc()` to
+  [`format_perc()`](https://thomas-fung.github.io/mpcmp/reference/format_perc.md)
+  to avoid clashing with an S3 method defined elsewhere.
+- Internal helper functions are no longer exported.
+- Fixed escaped asterisks in the `AIC` documentation formula.
+- Updated the package `CITATION` to use
+  [`bibentry()`](https://rdrr.io/r/utils/bibentry.html) format and
+  secure URLs.
+- README refreshed: updated badges and switched installation
+  instructions to `pak`.
+
+### Testing and infrastructure
+
+- Upgraded to testthat edition 3 and updated test syntax accordingly.
+- Added snapshot tests for
+  [`summary()`](https://rdrr.io/r/base/summary.html),
+  [`influence()`](https://rdrr.io/r/stats/lm.influence.html),
+  [`hatvalues()`](https://rdrr.io/r/stats/influence.measures.html) and
+  [`cooks.distance()`](https://rdrr.io/r/stats/influence.measures.html).
+- Adjusted tolerances in unit tests to account for numerical differences
+  between operating systems.
+- Migrated to rhub v2, now run via GitHub Actions.
+
 ## mpcmp 0.3.9
 
 - Added missing `\value` documentation to Rd files for exported
