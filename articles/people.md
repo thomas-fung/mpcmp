@@ -24,9 +24,9 @@ citation("mpcmp")
       Models for Dispersed Counts Statistical Modelling, 17, 359-380. <URL
       https://journals.sagepub.com/doi/10.1177/1471082X17697749/.>
 
-      Fung, T., Alwan, A., Wishart, J. & Huang, A. (2022) mpcmp:
+      Fung, T., Alwan, A., Wishart, J. & Huang, A. (2026) mpcmp:
       Mean-parametrized Conway-Maxwell Poisson Regression. R package
-      version 0.3.8. <URL https://CRAN.R-project.org/package=mpcmp/.>
+      version 0.4.0. <URL https://CRAN.R-project.org/package=mpcmp/.>
 
     To see these entries in BibTeX format, use 'print(<citation>,
     bibtex=TRUE)', 'toBibtex(.)', or set
