@@ -23,8 +23,8 @@ The ***mpcmp*** package has been on
 can install it from CRAN in the usual way:
 
 ``` s
-install.packages("mpcmp")
-library("mpcmp")
+# install.packages("pak")
+pak::pak("mpcmp")
 ```
 
 ### Development version on Github
@@ -33,8 +33,8 @@ You can use the **devtools** package to install the development version
 of **mpcmp** from [GitHub](https://github.com/thomas-fung/mpcmp):
 
 ``` s
-# install.packages("devtools")
-devtools::install_github("thomas-fung/mpcmp")
+# install.packages("pak")
+pak::pak("thomas-fung/mpcmp")
 library(mpcmp)
 ```
 
