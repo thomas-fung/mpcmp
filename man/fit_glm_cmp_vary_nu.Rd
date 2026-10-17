@@ -52,6 +52,14 @@ This is a workhorse function in which glm.cmp to call upon to fit a
 mean-parametrized Conway-Maxwell Poisson generalized linear model with
 varying dispersion.
 }
+\details{
+If \code{X} and/or \code{S} are not of full column rank, the aliased
+(linearly dependent) columns of each are dropped before fitting --
+identified via a pivoted QR decomposition, the same approach
+\code{\link[stats]{glm.fit}} uses -- and the corresponding coefficients
+are reported as \code{NA}, mirroring the behaviour of
+\code{\link[stats]{glm}} for rank-deficient designs.
+}
 \examples{
 ## For examples see example(glm.cmp)
 }

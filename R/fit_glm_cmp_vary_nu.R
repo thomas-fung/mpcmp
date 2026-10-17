@@ -37,16 +37,24 @@
 #'
 #' @examples
 #' ## For examples see example(glm.cmp)
-fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
-                                betastart = betastart,
-                                gammastart = gammastart,
-                                lambdalb = lambdalb, lambdaub = lambdaub,
-                                maxlambdaiter = maxlambdaiter, tol = tol) {
+fit_glm_cmp_vary_nu <- function(
+  y = y,
+  X = X,
+  S = S,
+  offset = offset,
+  betastart = betastart,
+  gammastart = gammastart,
+  lambdalb = lambdalb,
+  lambdaub = lambdaub,
+  maxlambdaiter = maxlambdaiter,
+  tol = tol
+) {
   X_full <- X
   q1_full <- ncol(X_full) # number of covariates for mu, before rank check
   S_full <- S
   q2_full <- ncol(S_full) # number of covariates for nu, before rank check
-  M0 <- stats::glm(y ~ -1 + X + offset(offset),
+  M0 <- stats::glm(
+    y ~ -1 + X + offset(offset),
     start = betastart,
     family = stats::poisson()
   )
@@ -58,8 +66,11 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   keep_x <- sort(M0$qr$pivot[seq_len(rank_x)])
   if (rank_x < q1_full) {
     warning(
-      "design matrix 'X' is rank-deficient (rank ", rank_x, " out of ",
-      q1_full, " column(s)); coefficient(s) for the aliased column(s) ",
+      "design matrix 'X' is rank-deficient (rank ",
+      rank_x,
+      " out of ",
+      q1_full,
+      " column(s)); coefficient(s) for the aliased column(s) ",
       "will be reported as NA, as with glm()."
     )
   }
@@ -73,8 +84,11 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   keep_s <- sort(qr_s$pivot[seq_len(rank_s)])
   if (rank_s < q2_full) {
     warning(
-      "design matrix 'S' is rank-deficient (rank ", rank_s, " out of ",
-      q2_full, " column(s)); coefficient(s) for the aliased column(s) ",
+      "design matrix 'S' is rank-deficient (rank ",
+      rank_s,
+      " out of ",
+      q2_full,
+      " column(s)); coefficient(s) for the aliased column(s) ",
       "will be reported as NA, as with glm()."
     )
   }
@@ -83,7 +97,8 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   summax <- ceiling(max(c(max(y) + 20 * sqrt(var(y)), 100)))
   if (!is.null(gammastart) && q2_full != length(gammastart)) {
     stop(paste(
-      "length of 'gammastart' should equal to", q2_full,
+      "length of 'gammastart' should equal to",
+      q2_full,
       "\nand corresponding to initial coefs for ",
       paste(colnames(S_full), collapse = ", ")
     ))
@@ -95,11 +110,16 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
     gamma0 <- gammastart[keep_s]
     nu0 <- exp(t(S %*% gamma0)[1, ])
     mu0 <- M0$fitted.values
-    lambda.ok <- comp_lambdas(mu0, nu0,
+    lambda0 <- (mu0 + (nu0 - 1) / (2 * nu0))^(nu0)
+    lambda.ok <- comp_lambdas(
+      mu0,
+      nu0,
       lambdalb = lambdalb,
-      lambdaub = min(lambdaub, max(lambdaold * 2)),
-      maxlambdaiter = maxlambdaiter, tol = tol,
-      lambdaint = lambdaold, summax = summax
+      lambdaub = min(lambdaub, max(lambda0 * 2)),
+      maxlambdaiter = maxlambdaiter,
+      tol = tol,
+      lambdaint = lambda0,
+      summax = summax
     )
     lambda0 <- lambda.ok$lambda
     lambdaub <- lambda.ok$lambdaub
@@ -108,8 +128,11 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   param <- c(beta0, lambda0, nu0, gamma0)
   # computing log-likelihood
   ll_new <- comp_mu_loglik(
-    param = param, y = y, xx = X,
-    offset = offset, summax
+    param = param,
+    y = y,
+    xx = X,
+    offset = offset,
+    summax
   )
   ll_old <- min(ll_new / 2, ll_new * 2)
   iter <- 0
@@ -132,28 +155,43 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
     z <- etaold + (y - muold) / muold
     beta <- solve(t(X) %*% W %*% X) %*% t(X) %*% W %*% z
     Aterm <- (ylogfactorialy - muold * logfactorialy)
-    update_score <- ((Aterm * (y - muold) / variances - lgamma(y + 1) + logfactorialy) * nuold) %*% S
+    update_score <- ((Aterm *
+      (y - muold) /
+      variances -
+      lgamma(y + 1) +
+      logfactorialy) *
+      nuold) %*%
+      S
     update_info_matrix <- matrix(0, nrow = q2, ncol = q2)
     for (i in 1:n) {
       update_info_matrix <- update_info_matrix +
-        ((-(Aterm[i])^2 / variances[i] + variances_logfactorialy[i]) * nuold[i]^2) * S[i, ] %*% t(S[i, ])
+        ((-(Aterm[i])^2 / variances[i] + variances_logfactorialy[i]) *
+          nuold[i]^2) *
+          S[i, ] %*% t(S[i, ])
     }
     gamma <- gammaold + update_score %*% solve(update_info_matrix)
     nu <- exp(t(S %*% t(gamma))[1, ])
     eta <- t(X %*% beta)[1, ]
     mu <- exp(eta + offset)
-    lambda.ok <- comp_lambdas(mu, nu,
+    lambda.ok <- comp_lambdas(
+      mu,
+      nu,
       lambdalb = lambdalb,
       lambdaub = min(lambdaub, max(lambdaold * 2)),
-      maxlambdaiter = maxlambdaiter, tol = tol,
-      lambdaint = lambdaold, summax = summax
+      maxlambdaiter = maxlambdaiter,
+      tol = tol,
+      lambdaint = lambdaold,
+      summax = summax
     )
     lambda <- lambda.ok$lambda
     lambdaub <- lambda.ok$lambdaub
     param <- c(beta, lambda, nu, gamma)
     ll_new <- comp_mu_loglik(
-      param = param, y = y, xx = X,
-      offset = offset, summax
+      param = param,
+      y = y,
+      xx = X,
+      offset = offset,
+      summax
     )
     nhalf <- 0
     while (ll_new < ll_old && nhalf <= 20 && max(gamma - gammaold) > 1e-6) {
@@ -163,17 +201,25 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
       mu <- exp(eta + offset)
       gamma <- (gamma + gammaold) / 2
       nu <- exp(t(S %*% t(gamma))[1, ])
-      lambda.ok <- comp_lambdas(mu, nu,
-        lambdalb = lambdalb, lambdaub = lambdaub,
-        maxlambdaiter = maxlambdaiter, tol = tol,
-        lambdaint = lambdaold, summax = summax
+      lambda.ok <- comp_lambdas(
+        mu,
+        nu,
+        lambdalb = lambdalb,
+        lambdaub = lambdaub,
+        maxlambdaiter = maxlambdaiter,
+        tol = tol,
+        lambdaint = lambdaold,
+        summax = summax
       )
       lambda <- lambda.ok$lambda
       lambdaub <- lambda.ok$lambdaub
       param <- c(beta, lambda, nu, gamma)
       ll_new <- comp_mu_loglik(
-        param = param, y = y, xx = X,
-        offset = offset, summax
+        param = param,
+        y = y,
+        xx = X,
+        offset = offset,
+        summax
       )
     }
   }
@@ -192,7 +238,8 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   }
   precision_beta <- 0
   for (i in 1:n) {
-    precision_beta <- precision_beta + fitted[i]^2 * X[i, ] %*% t(X[i, ]) / variances[i]
+    precision_beta <- precision_beta +
+      fitted[i]^2 * X[i, ] %*% t(X[i, ]) / variances[i]
   }
   variance_beta <- solve(precision_beta)
   se_beta <- as.vector(sqrt(diag(variance_beta)))
@@ -204,7 +251,8 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   update_info_matrix <- matrix(0, nrow = q2, ncol = q2)
   for (i in 1:n) {
     update_info_matrix <- update_info_matrix +
-      ((-(Aterm[i])^2 / variances[i] + variances_logfactorialy[i]) * nu[i]^2) * (S[i, ] %*% t(S[i, ]))
+      ((-(Aterm[i])^2 / variances[i] + variances_logfactorialy[i]) * nu[i]^2) *
+        (S[i, ] %*% t(S[i, ]))
   }
   variance_gamma <- solve(update_info_matrix)
   se_gamma <- as.vector(sqrt(diag(variance_gamma)))
@@ -212,15 +260,20 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   h <- diag(Xtilde %*% solve(t(Xtilde) %*% Xtilde) %*% t(Xtilde))
   df.residuals <- length(y) - rank_x - rank_s
   if (df.residuals > 0) {
-    indsat.deviance <- dcomp(y,
-      mu = y, nu = nu, log.p = TRUE, lambdalb = min(lambdalb),
-      lambdaub = lambdaub, maxlambdaiter = maxlambdaiter,
-      tol = tol, summax = summax
+    indsat.deviance <- dcomp(
+      y,
+      mu = y,
+      nu = nu,
+      log.p = TRUE,
+      lambdalb = min(lambdalb),
+      lambdaub = lambdaub,
+      maxlambdaiter = maxlambdaiter,
+      tol = tol,
+      summax = summax
     )
-    indred.deviance <- 2 * (indsat.deviance - dcomp(y,
-      nu = nu, lambda = lambda,
-      log.p = TRUE, summax = summax
-    ))
+    indred.deviance <- 2 *
+      (indsat.deviance -
+        dcomp(y, nu = nu, lambda = lambda, log.p = TRUE, summax = summax))
     d.res <- sign(y - fitted) * sqrt(abs(indred.deviance))
   } else {
     d.res <- rep(0, length(y))
@@ -252,9 +305,7 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   out$nobs <- n
   out$iter <- iter
   out$family <-
-    structure(list(family = "CMP(mu, nu)", link = "log"),
-      class = "family"
-    )
+    structure(list(family = "CMP(mu, nu)", link = "log"), class = "family")
   out$coefficients_beta <- beta_full
   out$rank <- rank_x
   out$lambda <- lambda
@@ -281,17 +332,20 @@ fit_glm_cmp_vary_nu <- function(y = y, X = X, S = S, offset = offset,
   out$se_gamma <- se_gamma_full
   out$df_residuals <- df.residuals
   out$df_null <- n - 1
-  out$null_deviance <- 2 * (sum(indsat.deviance) -
-    sum(dcomp(y,
-      mu = mean(y), nu = nu, log.p = TRUE,
-      summax = summax, lambdalb = min(lambdalb),
-      lambdaub = max(lambdaub)
-    )))
-  out$deviance <- out$residual_deviance <- 2 * (sum(indsat.deviance) -
-    sum(dcomp(y,
-      lambda = lambda, nu = nu,
-      log.p = TRUE, summax = summax
-    )))
+  out$null_deviance <- 2 *
+    (sum(indsat.deviance) -
+      sum(dcomp(
+        y,
+        mu = mean(y),
+        nu = nu,
+        log.p = TRUE,
+        summax = summax,
+        lambdalb = min(lambdalb),
+        lambdaub = max(lambdaub)
+      )))
+  out$deviance <- out$residual_deviance <- 2 *
+    (sum(indsat.deviance) -
+      sum(dcomp(y, lambda = lambda, nu = nu, log.p = TRUE, summax = summax)))
   out$coefficients <- c(out$coefficients_beta, out$coefficients_gamma)
   names(out$coefficients) <- c(
     paste0("beta_", names(out$coefficients_beta)),
