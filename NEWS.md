@@ -1,3 +1,27 @@
+# mpcmp 0.4.0
+
+## Bug fixes
+  * `glm.cmp()` now handles rank-deficient design matrices gracefully.
+  * Fixed an error when using the `gammastart` argument (#11).
+  * In the varying dispersion case, the coefficient table in the `summary()` output contained character columns instead of numeric ones; this has been fixed (#13).
+  * Fixed a documentation issue where the `cottonbolls` dataset description was cut off due to an unescaped `%`.
+
+## Improvements
+  * `autoplot()` is now re-exported from `ggplot2`, and a `print()` method was added for `cmp_autoplot_list` objects.
+  * Added a `print.logLik.cmp()` S3 method.
+  * Updated `ggplot2` code to use the `linewidth` aesthetic instead of the deprecated `size` for lines.
+  * Renamed `format.perc()` to `format_perc()` to avoid clashing with an S3 method defined elsewhere.
+  * Internal helper functions are no longer exported.
+  * Fixed escaped asterisks in the `AIC` documentation formula.
+  * Updated the package `CITATION` to use `bibentry()` format and secure URLs.
+  * README refreshed: updated badges and switched installation instructions to `pak`.
+
+## Testing and infrastructure
+  * Upgraded to testthat edition 3 and updated test syntax accordingly.
+  * Added snapshot tests for `summary()`, `influence()`, `hatvalues()` and `cooks.distance()`.
+  * Adjusted tolerances in unit tests to account for numerical differences between operating systems.
+  * Migrated to rhub v2, now run via GitHub Actions.
+
 # mpcmp 0.3.9
   * Added missing `\value` documentation to Rd files for exported functions, methods and datasets that lacked it, per CRAN feedback.
   * `cmplrtest()` now returns an object of class `"htest"` instead of printing results via `cat()`; the returned object is displayed via `print.htest()` and its statistic, degrees of freedom and p-value can be extracted directly.
