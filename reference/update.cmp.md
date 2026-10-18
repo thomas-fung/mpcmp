@@ -112,7 +112,7 @@ M.sit.full
 #> 
 #> Degrees of Freedom: 39 Total (i.e. Null);  32 Residual
 #> Null Deviance: 257.2108 
-#> Residual Deviance: 41.67931 
+#> Residual Deviance: 41.67932 
 #> AIC: 260.8279 
 #> 
 
@@ -131,8 +131,8 @@ M.sit.null1
 #>      -0.927  
 #> 
 #> Degrees of Freedom: 39 Total (i.e. Null);  35 Residual
-#> Null Deviance: 234.4693 
-#> Residual Deviance: 41.4078 
+#> Null Deviance: 234.4692 
+#> Residual Deviance: 41.40778 
 #> AIC: 255.2668 
 #> 
 
